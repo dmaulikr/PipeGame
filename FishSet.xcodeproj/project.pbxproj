@@ -11,6 +11,7 @@
 		1688E1DF16AB55CB008C2B58 /* PuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DE16AB55CB008C2B58 /* PuzzleLayer.m */; };
 		1688E1E116AB59B3008C2B58 /* Puzzles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1E016AB59B3008C2B58 /* Puzzles.plist */; };
 		1688E1E416AB5EC4008C2B58 /* GameTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1E316AB5EC4008C2B58 /* GameTypes.m */; };
+		1688E1E716AB6319008C2B58 /* DataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1E616AB6319008C2B58 /* DataUtils.m */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -147,6 +148,8 @@
 		1688E1E016AB59B3008C2B58 /* Puzzles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Puzzles.plist; path = Resources/Puzzles.plist; sourceTree = "<group>"; };
 		1688E1E216AB5EC4008C2B58 /* GameTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameTypes.h; path = Utils/GameTypes.h; sourceTree = "<group>"; };
 		1688E1E316AB5EC4008C2B58 /* GameTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameTypes.m; path = Utils/GameTypes.m; sourceTree = "<group>"; };
+		1688E1E516AB6319008C2B58 /* DataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataUtils.h; path = Utils/DataUtils.h; sourceTree = "<group>"; };
+		1688E1E616AB6319008C2B58 /* DataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataUtils.m; path = Utils/DataUtils.m; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* FishSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -438,6 +441,8 @@
 				1688E1DB16AB527F008C2B58 /* GridUtils.m */,
 				1688E1E216AB5EC4008C2B58 /* GameTypes.h */,
 				1688E1E316AB5EC4008C2B58 /* GameTypes.m */,
+				1688E1E516AB6319008C2B58 /* DataUtils.h */,
+				1688E1E616AB6319008C2B58 /* DataUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1071,6 +1076,7 @@
 				1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */,
 				1688E1DF16AB55CB008C2B58 /* PuzzleLayer.m in Sources */,
 				1688E1E416AB5EC4008C2B58 /* GameTypes.m in Sources */,
+				1688E1E716AB6319008C2B58 /* DataUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
