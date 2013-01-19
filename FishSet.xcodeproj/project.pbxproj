@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16AF000316AB19A80000D5F3 /* SessionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AF000216AB19A80000D5F3 /* SessionLayer.m */; };
-		16AFFFF916AB18BD0000D5F3 /* MoonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AFFFF816AB18BD0000D5F3 /* MoonController.m */; };
-		16AFFFFC16AB19170000D5F3 /* Moon.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AFFFFB16AB19170000D5F3 /* Moon.m */; };
-		16AFFFFF16AB19360000D5F3 /* MoonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AFFFFE16AB19360000D5F3 /* MoonView.m */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -140,14 +136,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		16AF000116AB19A80000D5F3 /* SessionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionLayer.h; sourceTree = "<group>"; };
-		16AF000216AB19A80000D5F3 /* SessionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionLayer.m; sourceTree = "<group>"; };
-		16AFFFF716AB18BD0000D5F3 /* MoonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonController.h; sourceTree = "<group>"; };
-		16AFFFF816AB18BD0000D5F3 /* MoonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonController.m; sourceTree = "<group>"; };
-		16AFFFFA16AB19170000D5F3 /* Moon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Moon.h; sourceTree = "<group>"; };
-		16AFFFFB16AB19170000D5F3 /* Moon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Moon.m; sourceTree = "<group>"; };
-		16AFFFFD16AB19360000D5F3 /* MoonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonView.h; sourceTree = "<group>"; };
-		16AFFFFE16AB19360000D5F3 /* MoonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonView.m; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* FishSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -435,8 +423,6 @@
 		16AF000016AB19840000D5F3 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
-				16AF000116AB19A80000D5F3 /* SessionLayer.h */,
-				16AF000216AB19A80000D5F3 /* SessionLayer.m */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -444,8 +430,6 @@
 		16AFFFF316AB17C20000D5F3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				16AFFFF716AB18BD0000D5F3 /* MoonController.h */,
-				16AFFFF816AB18BD0000D5F3 /* MoonController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -453,8 +437,6 @@
 		16AFFFF416AB17C20000D5F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				16AFFFFA16AB19170000D5F3 /* Moon.h */,
-				16AFFFFB16AB19170000D5F3 /* Moon.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -462,8 +444,6 @@
 		16AFFFF516AB17C20000D5F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				16AFFFFD16AB19360000D5F3 /* MoonView.h */,
-				16AFFFFE16AB19360000D5F3 /* MoonView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1061,10 +1041,6 @@
 				16CAF3FF16AA1268001E3266 /* AppDelegate.m in Sources */,
 				16CAF40216AA1268001E3266 /* HelloWorldLayer.m in Sources */,
 				16CAF40516AA1268001E3266 /* IntroLayer.m in Sources */,
-				16AFFFF916AB18BD0000D5F3 /* MoonController.m in Sources */,
-				16AFFFFC16AB19170000D5F3 /* Moon.m in Sources */,
-				16AFFFFF16AB19360000D5F3 /* MoonView.m in Sources */,
-				16AF000316AB19A80000D5F3 /* SessionLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
