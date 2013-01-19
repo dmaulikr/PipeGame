@@ -32,4 +32,7 @@ GridCoordMake(const NSInteger x, const NSInteger y)
 // grid coordinate for absolute position on a grid (any position inside a grid unit)
 + (GridCoord) gridCoordForAbsolutePosition:(CGPoint)position unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
 
+// draws grid lines, call in layer's draw method
++ (void)drawGridWithSize:(GridCoord)gridSize unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
+
 @end
