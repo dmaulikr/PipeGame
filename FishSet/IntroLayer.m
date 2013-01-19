@@ -6,7 +6,6 @@
 //  Copyright __MyCompanyName__ 2013. All rights reserved.
 //
 
-
 // Import the interfaces
 #import "IntroLayer.h"
 #import "HelloWorldLayer.h"
