@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DB16AB527F008C2B58 /* GridUtils.m */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -136,6 +137,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1688E1DA16AB527F008C2B58 /* GridUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridUtils.h; path = Utils/GridUtils.h; sourceTree = "<group>"; };
+		1688E1DB16AB527F008C2B58 /* GridUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridUtils.m; path = Utils/GridUtils.m; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* FishSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -420,6 +423,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1688E1D916AB51A2008C2B58 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1688E1DA16AB527F008C2B58 /* GridUtils.h */,
+				1688E1DB16AB527F008C2B58 /* GridUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		16AF000016AB19840000D5F3 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +496,7 @@
 		16CAF28516AA1265001E3266 /* FishSet */ = {
 			isa = PBXGroup;
 			children = (
+				1688E1D916AB51A2008C2B58 /* Utils */,
 				16AF000016AB19840000D5F3 /* Layers */,
 				16AFFFF316AB17C20000D5F3 /* Controllers */,
 				16AFFFF416AB17C20000D5F3 /* Model */,
@@ -1041,6 +1054,7 @@
 				16CAF3FF16AA1268001E3266 /* AppDelegate.m in Sources */,
 				16CAF40216AA1268001E3266 /* HelloWorldLayer.m in Sources */,
 				16CAF40516AA1268001E3266 /* IntroLayer.m in Sources */,
+				1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
