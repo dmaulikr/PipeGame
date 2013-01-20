@@ -4,17 +4,21 @@
 <array>
 	<dict>
 		<key>entry direction</key>
-		<integer>4</integer>
-		<key>entry point</key>
-		<array>
+		<integer>2</integer>
+		<key>entry coord</key>
+		<dict>
+			<key>x</key>
 			<integer>1</integer>
-			<integer>1</integer>
-		</array>
+			<key>y</key>
+			<integer>5</integer>
+		</dict>
 		<key>size</key>
-		<array>
+		<dict>
+			<key>x</key>
+			<integer>4</integer>
+			<key>y</key>
 			<integer>5</integer>
-			<integer>5</integer>
-		</array>
+		</dict>
 	</dict>
 </array>
 </plist>

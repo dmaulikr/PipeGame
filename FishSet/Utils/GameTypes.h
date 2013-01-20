@@ -13,6 +13,6 @@ typedef enum
     kDirectionNone,
     kDirectionUp,
     kDirectionRight,
-    kDirectionLeft,
-    kDirectionDown
+    kDirectionDown,
+    kDirectionLeft
 } kDirection;

@@ -9,7 +9,11 @@
 #import "DataUtils.h"
 
 static NSString *const kPuzzlesPlist = @"Puzzles";
-
+static NSString *const kPuzzlesPlistEntryCoordX = @"entry coord.x";
+static NSString *const kPuzzlesPlistEntryCoordY = @"entry coord.y";
+static NSString *const kPuzzlesPlistEntryDirection =@"entry direction";
+static NSString *const kPuzzlesPlistSizeX = @"size.x";
+static NSString *const kPuzzlesPlistSizeY = @"size.y";
 
 @implementation DataUtils
 
@@ -60,5 +64,30 @@ static NSString *const kPuzzlesPlist = @"Puzzles";
     return puzzle;
 }
 
+// entry coordinate for puzzle
++ (GridCoord)puzzleEntryCoord:(NSUInteger)puzzleNumber
+{
+    NSDictionary *puzzle = [DataUtils puzzleData:puzzleNumber];
+    NSNumber *x = [puzzle valueForKeyPath:kPuzzlesPlistEntryCoordX];
+    NSNumber *y = [puzzle valueForKeyPath:kPuzzlesPlistEntryCoordX];
+    return GridCoordMake([x intValue], [y intValue]);
+}
+
+// entry coordinate for puzzle
++ (GridCoord)puzzleSize:(NSUInteger)puzzleNumber
+{
+    NSDictionary *puzzle = [DataUtils puzzleData:puzzleNumber];
+    NSNumber *x = [puzzle valueForKeyPath:kPuzzlesPlistSizeX];
+    NSNumber *y = [puzzle valueForKeyPath:kPuzzlesPlistSizeY];
+    return GridCoordMake([x intValue], [y intValue]);
+}
+
+// direction hand enters puzzle, value 'right' would mean it enters to the right coming from the left side of a cell
++ (kDirection)puzzleEntryDireciton:(NSUInteger)puzzleNumber
+{
+    NSDictionary *puzzle = [DataUtils puzzleData:puzzleNumber];
+    NSNumber *direction = [puzzle valueForKeyPath:kPuzzlesPlistEntryDirection];
+    return [direction intValue];
+}
 
 @end

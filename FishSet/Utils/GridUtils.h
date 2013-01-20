@@ -17,7 +17,7 @@ typedef struct
 
 // helper function to create a GridCoord
 static inline GridCoord
-GridCoordMake(const NSInteger x, const NSInteger y)
+GridCoordMake(const int x, const int y)
 {
 	GridCoord gridCoord = {x, y};
 	return gridCoord;

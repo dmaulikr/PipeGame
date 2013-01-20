@@ -6,8 +6,15 @@
 //
 //
 
-#import "CCLayer.h"
+#import "cocos2d.h"
+#import "GridUtils.h"
 
 @interface PuzzleLayer : CCLayer
+
+@property (assign) GridCoord gridSize;
+@property (assign) CGPoint gridOrigin;
+
+// puzzles defined in Puzzles.plist
++ (CCScene *)sceneWithPuzzle:(int)puzzle;
 
 @end
