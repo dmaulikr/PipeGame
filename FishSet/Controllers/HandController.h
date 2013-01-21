@@ -15,5 +15,6 @@
 @property (assign) kDirection facing;
 
 - (id)initWithContentSize:(CGSize)size;
+- (void)setDirectionFacing:(kDirection)direction;
 
 @end

@@ -39,7 +39,8 @@
         _handEntryCoord = [DataUtils puzzleEntryCoord:puzzle];
         _handConroller.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
         [self addChild:_handConroller];
-        
+                
+        [_handConroller setDirectionFacing:[DataUtils puzzleEntryDireciton:puzzle]];
     }
     return self;
 }
