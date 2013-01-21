@@ -69,7 +69,7 @@ static NSString *const kPuzzlesPlistSizeY = @"size.y";
 {
     NSDictionary *puzzle = [DataUtils puzzleData:puzzleNumber];
     NSNumber *x = [puzzle valueForKeyPath:kPuzzlesPlistEntryCoordX];
-    NSNumber *y = [puzzle valueForKeyPath:kPuzzlesPlistEntryCoordX];
+    NSNumber *y = [puzzle valueForKeyPath:kPuzzlesPlistEntryCoordY];
     return GridCoordMake([x intValue], [y intValue]);
 }
 

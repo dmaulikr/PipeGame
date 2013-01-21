@@ -13,6 +13,8 @@
 		1688E1E416AB5EC4008C2B58 /* GameTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1E316AB5EC4008C2B58 /* GameTypes.m */; };
 		1688E1E716AB6319008C2B58 /* DataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1E616AB6319008C2B58 /* DataUtils.m */; };
 		1688E1EA16AC61B8008C2B58 /* GameConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1E916AC61B8008C2B58 /* GameConstants.m */; };
+		1688E1ED16ACB2B8008C2B58 /* HandController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1EC16ACB2B8008C2B58 /* HandController.m */; };
+		1688E1EF16ACBB90008C2B58 /* handSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1EE16ACBB90008C2B58 /* handSprite.png */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -153,6 +155,9 @@
 		1688E1E616AB6319008C2B58 /* DataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataUtils.m; path = Utils/DataUtils.m; sourceTree = "<group>"; };
 		1688E1E816AC61B8008C2B58 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Utils/GameConstants.h; sourceTree = "<group>"; };
 		1688E1E916AC61B8008C2B58 /* GameConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameConstants.m; path = Utils/GameConstants.m; sourceTree = "<group>"; };
+		1688E1EB16ACB2B8008C2B58 /* HandController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandController.h; sourceTree = "<group>"; };
+		1688E1EC16ACB2B8008C2B58 /* HandController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandController.m; sourceTree = "<group>"; };
+		1688E1EE16ACBB90008C2B58 /* handSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handSprite.png; path = Resources/handSprite.png; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* FishSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -464,6 +469,8 @@
 		16AFFFF316AB17C20000D5F3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1688E1EB16ACB2B8008C2B58 /* HandController.h */,
+				1688E1EC16ACB2B8008C2B58 /* HandController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -539,6 +546,7 @@
 		16CAF28616AA1265001E3266 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1688E1EE16ACBB90008C2B58 /* handSprite.png */,
 				16CAF28716AA1265001E3266 /* Default.png */,
 				16CAF28916AA1265001E3266 /* Default-Landscape~ipad.png */,
 				16CAF28B16AA1265001E3266 /* fps_images.png */,
@@ -964,6 +972,7 @@
 				16CAF29F16AA1265001E3266 /* iTunesArtwork in Resources */,
 				16CAF3DD16AA1268001E3266 /* ChangeLog in Resources */,
 				1688E1E116AB59B3008C2B58 /* Puzzles.plist in Resources */,
+				1688E1EF16ACBB90008C2B58 /* handSprite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1083,6 +1092,7 @@
 				1688E1E416AB5EC4008C2B58 /* GameTypes.m in Sources */,
 				1688E1E716AB6319008C2B58 /* DataUtils.m in Sources */,
 				1688E1EA16AC61B8008C2B58 /* GameConstants.m in Sources */,
+				1688E1ED16ACB2B8008C2B58 /* HandController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
