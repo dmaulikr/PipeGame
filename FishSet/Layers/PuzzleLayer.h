@@ -19,6 +19,8 @@
 @property (nonatomic, strong) HandController *handConroller;
 @property (assign) GridCoord handEntryCoord;
 
+@property (assign) GridCoord moveTo;
+
 // puzzles defined in Puzzles.plist
 + (CCScene *)sceneWithPuzzle:(int)puzzle;
 

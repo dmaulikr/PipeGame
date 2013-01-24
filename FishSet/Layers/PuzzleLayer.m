@@ -39,7 +39,7 @@
         _handEntryCoord = [DataUtils puzzleEntryCoord:puzzle];
         _handConroller.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
         [self addChild:_handConroller];
-                
+        
         [_handConroller setDirectionFacing:[DataUtils puzzleEntryDireciton:puzzle]];
     }
     return self;
@@ -70,9 +70,21 @@
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
-    GridCoord touchCoord = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
+    self.moveTo = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
     
-    NSLog(@"touch coord: %i, %i", touchCoord.x, touchCoord.y);
+    if ([self isPathFreeBetweenStart:[self handCoord] end:self.moveTo]) {
+        
+        CCCallFunc *completion = [CCCallFunc actionWithTarget:self selector:@selector(move)];
+        
+        kDirection shouldFace = [GridUtils directionFromStart:[self handCoord] end:self.moveTo];
+        
+        if (shouldFace != self.handConroller.facing) {
+            [self.handConroller rotate:shouldFace withCompletion:completion];
+        }
+        else {
+            [self move];
+        }
+    }
     
     return NO;
 }
@@ -81,5 +93,52 @@
 {
 
 }
+
+#pragma mark - moving 
+
+- (void)move
+{
+    CGPoint destination = [GridUtils absolutePositionForGridCoord:self.moveTo unitSize:kSizeGridUnit origin:self.gridOrigin];
+    
+    int steps = [GridUtils numberOfStepsBetweenStart:[self handCoord] end:self.moveTo];
+    NSLog(@"steps: %i", steps);
+    
+    id actionMove = [CCMoveTo actionWithDuration:((float)steps / (float)self.handConroller.cellsPerSecond) position:destination];
+    [self.handConroller runAction:actionMove];
+}
+
+
+#pragma mark - helpers
+
+- (GridCoord)handCoord
+{
+    return [GridUtils gridCoordForAbsolutePosition:self.handConroller.position unitSize:kSizeGridUnit origin:self.gridOrigin];
+}
+
+- (BOOL)isPathFreeBetweenStart:(GridCoord)start end:(GridCoord)end
+{
+    // movement along y 
+    if (start.x == end.x) {
+        // needs implementation
+        return YES;
+    }
+    // movement along x 
+    else if (start.y == end.y) {
+        // needs implementation
+        return YES;
+    }
+    // non-linear movement not allowed.
+    else {
+        return NO;
+    }
+}
+
+
+         
+        
+         
+
+                         
+                         
 
 @end
