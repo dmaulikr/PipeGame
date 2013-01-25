@@ -79,7 +79,7 @@
         kDirection shouldFace = [GridUtils directionFromStart:[self handCoord] end:self.moveTo];
         
         if (shouldFace != self.handConroller.facing) {
-            [self.handConroller rotate:shouldFace withCompletion:completion];
+            [self.handConroller rotateToFacing:shouldFace withCompletion:completion];
         }
         else {
             [self move];

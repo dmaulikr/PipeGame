@@ -38,19 +38,16 @@ static int const kSpeedCellsPerSecond = 10;
     self.facing = direction;
 }
 
-- (void)rotate:(kDirection)direction withCompletion:(CCCallFunc *)completion
+- (void)rotateToFacing:(kDirection)direction withCompletion:(CCCallFunc *)completion
 {
-    float angleDegrees = [SpriteUtils degreesForDirection:direction];
-    float angleRadians = CC_DEGREES_TO_RADIANS(angleDegrees);
-    float cocosAngle = angleDegrees;
-    float rotateSpeed = .5 / M_PI;
-    float rotateDuration = fabs(angleRadians * rotateSpeed);
-    
     self.facing = direction;
 
+    float angleDegrees = fabs([SpriteUtils degreesForDirection:direction]);
+    float rotateDuration = .1;
+    
     [self.handSprite runAction:
      [CCSequence actions:
-      [CCRotateTo actionWithDuration:rotateDuration angle:cocosAngle],
+      [CCRotateTo actionWithDuration:rotateDuration angle:angleDegrees],
       completion,
       nil]
      ];

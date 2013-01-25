@@ -19,7 +19,7 @@
 
 - (id)initWithContentSize:(CGSize)size;
 - (void)setDirectionFacing:(kDirection)direction;
-- (void)rotate:(kDirection)direction withCompletion:(CCCallFunc *)completion;
+- (void)rotateToFacing:(kDirection)direction withCompletion:(CCCallFunc *)completion;
 
 
 @end
