@@ -16,6 +16,9 @@
 		1688E1ED16ACB2B8008C2B58 /* HandController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1EC16ACB2B8008C2B58 /* HandController.m */; };
 		1688E1EF16ACBB90008C2B58 /* handSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1EE16ACBB90008C2B58 /* handSprite.png */; };
 		1688E1F216ACD7D5008C2B58 /* SpriteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */; };
+		168F7D1716B24DC20064C7E3 /* ArmController.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F7D1616B24DC10064C7E3 /* ArmController.m */; };
+		168F7D1E16B25D4A0064C7E3 /* armUnit.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F7D1D16B25D4A0064C7E3 /* armUnit.png */; };
+		169319EE16B426EC00203E09 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 169319ED16B426EC00203E09 /* pew-pew-lei.caf */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -161,6 +164,10 @@
 		1688E1EE16ACBB90008C2B58 /* handSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handSprite.png; path = Resources/handSprite.png; sourceTree = "<group>"; };
 		1688E1F016ACD7D4008C2B58 /* SpriteUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteUtils.h; path = Utils/SpriteUtils.h; sourceTree = "<group>"; };
 		1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpriteUtils.m; path = Utils/SpriteUtils.m; sourceTree = "<group>"; };
+		168F7D1516B24DC10064C7E3 /* ArmController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArmController.h; sourceTree = "<group>"; };
+		168F7D1616B24DC10064C7E3 /* ArmController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArmController.m; sourceTree = "<group>"; };
+		168F7D1D16B25D4A0064C7E3 /* armUnit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = armUnit.png; path = Resources/armUnit.png; sourceTree = "<group>"; };
+		169319ED16B426EC00203E09 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "pew-pew-lei.caf"; path = "Resources/pew-pew-lei.caf"; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* FishSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -476,6 +483,8 @@
 			children = (
 				1688E1EB16ACB2B8008C2B58 /* HandController.h */,
 				1688E1EC16ACB2B8008C2B58 /* HandController.m */,
+				168F7D1516B24DC10064C7E3 /* ArmController.h */,
+				168F7D1616B24DC10064C7E3 /* ArmController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -551,6 +560,8 @@
 		16CAF28616AA1265001E3266 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				169319ED16B426EC00203E09 /* pew-pew-lei.caf */,
+				168F7D1D16B25D4A0064C7E3 /* armUnit.png */,
 				1688E1EE16ACBB90008C2B58 /* handSprite.png */,
 				16CAF28716AA1265001E3266 /* Default.png */,
 				16CAF28916AA1265001E3266 /* Default-Landscape~ipad.png */,
@@ -978,6 +989,8 @@
 				16CAF3DD16AA1268001E3266 /* ChangeLog in Resources */,
 				1688E1E116AB59B3008C2B58 /* Puzzles.plist in Resources */,
 				1688E1EF16ACBB90008C2B58 /* handSprite.png in Resources */,
+				168F7D1E16B25D4A0064C7E3 /* armUnit.png in Resources */,
+				169319EE16B426EC00203E09 /* pew-pew-lei.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1099,6 +1112,7 @@
 				1688E1EA16AC61B8008C2B58 /* GameConstants.m in Sources */,
 				1688E1ED16ACB2B8008C2B58 /* HandController.m in Sources */,
 				1688E1F216ACD7D5008C2B58 /* SpriteUtils.m in Sources */,
+				168F7D1716B24DC20064C7E3 /* ArmController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

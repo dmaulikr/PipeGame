@@ -7,7 +7,6 @@
 //
 
 #import "HandController.h"
-
 #import "SpriteUtils.h"
 
 static NSString *const kImageNameHandSprite = @"handSprite.png";
@@ -51,6 +50,11 @@ static int const kSpeedCellsPerSecond = 10;
       completion,
       nil]
      ];
+}
+
+- (BOOL)didHandChangeCells
+{
+    
 }
 
 @end

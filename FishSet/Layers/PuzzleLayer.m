@@ -11,6 +11,7 @@
 #import "GameConstants.h"
 #import "DataUtils.h"
 #import "HandController.h"
+#import "ArmController.h"
 
 @implementation PuzzleLayer
 
@@ -33,16 +34,30 @@
         [self setIsTouchEnabled:YES];
         
         _gridSize = [DataUtils puzzleSize:puzzle];
-        _gridOrigin = CGPointMake(100, 100);
+        _gridOrigin = [PuzzleLayer sharedGridOrigin];
         
+        // hand
         _handConroller = [[HandController alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
         _handEntryCoord = [DataUtils puzzleEntryCoord:puzzle];
         _handConroller.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
         [self addChild:_handConroller];
         
         [_handConroller setDirectionFacing:[DataUtils puzzleEntryDireciton:puzzle]];
+        
+        // arm
+        _armController = [[ArmController alloc] init];
+        [self addChild:_armController];
+        
+        
     }
     return self;
+}
+
+#pragma mark - globals
+
++ (CGPoint)sharedGridOrigin
+{
+    return CGPointMake(100, 100);
 }
 
 #pragma mark - scene management
@@ -132,13 +147,5 @@
         return NO;
     }
 }
-
-
-         
-        
-         
-
-                         
-                         
 
 @end

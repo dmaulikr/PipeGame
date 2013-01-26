@@ -17,6 +17,7 @@
 @property (assign) int cellsPerSecond;
 @property (assign) GridCoord moveTo;
 
+
 - (id)initWithContentSize:(CGSize)size;
 - (void)setDirectionFacing:(kDirection)direction;
 - (void)rotateToFacing:(kDirection)direction withCompletion:(CCCallFunc *)completion;

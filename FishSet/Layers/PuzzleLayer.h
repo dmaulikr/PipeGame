@@ -10,6 +10,7 @@
 
 #import "GridUtils.h"
 @class HandController;
+@class ArmController;
 
 @interface PuzzleLayer : CCLayer
 
@@ -17,11 +18,15 @@
 @property (assign) CGPoint gridOrigin;
 
 @property (nonatomic, strong) HandController *handConroller;
+@property (nonatomic, strong) ArmController *armController;
 @property (assign) GridCoord handEntryCoord;
 
 @property (assign) GridCoord moveTo;
 
 // puzzles defined in Puzzles.plist
 + (CCScene *)sceneWithPuzzle:(int)puzzle;
+
++ (CGPoint)sharedGridOrigin;
+
 
 @end
