@@ -7,10 +7,14 @@
 //
 
 #import "HandController.h"
+
 #import "SpriteUtils.h"
+#import "GridUtils.h"
+#import "GameConstants.h"
+#import "PuzzleLayer.h"
 
 static NSString *const kImageNameHandSprite = @"handSprite.png";
-static int const kSpeedCellsPerSecond = 10;
+static float const kSpeedCellsPerSecond = 10.0;
 
 @implementation HandController
 
@@ -29,6 +33,11 @@ static int const kSpeedCellsPerSecond = 10;
         _cellsPerSecond = kSpeedCellsPerSecond;
     }
     return self;
+}
+
+- (GridCoord)cell
+{
+    return [GridUtils gridCoordForAbsolutePosition:self.position unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
 }
 
 - (void)setDirectionFacing:(kDirection)direction
@@ -52,9 +61,24 @@ static int const kSpeedCellsPerSecond = 10;
      ];
 }
 
-- (BOOL)didHandChangeCells
+- (void)movePath
 {
-    
+    [self moveFromStart:self.moveFromCell toEnd:self.moveToCell];
 }
+
+- (void)moveFromStart:(GridCoord)start toEnd:(GridCoord)end
+{
+    CGPoint destination = [GridUtils absolutePositionForGridCoord:end unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+    int steps = [GridUtils numberOfStepsBetweenStart:start end:end];
+    id actionMove = [CCMoveTo actionWithDuration:((float)steps / self.cellsPerSecond) position:destination];
+    [self runAction:actionMove];
+}
+
+
+
+
+
+
+
 
 @end

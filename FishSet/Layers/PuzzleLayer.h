@@ -14,18 +14,20 @@
 
 @interface PuzzleLayer : CCLayer
 
+// grid
 @property (assign) GridCoord gridSize;
 @property (assign) CGPoint gridOrigin;
 
+// game objects
 @property (nonatomic, strong) HandController *handConroller;
-@property (nonatomic, strong) ArmController *armController;
-@property (assign) GridCoord handEntryCoord;
 
-@property (assign) GridCoord moveTo;
+// 
+@property (assign) GridCoord handEntryCoord;
 
 // puzzles defined in Puzzles.plist
 + (CCScene *)sceneWithPuzzle:(int)puzzle;
 
+// absolute position where the bottom left  of the grid begins
 + (CGPoint)sharedGridOrigin;
 
 

@@ -11,7 +11,9 @@
 #import "GameConstants.h"
 #import "DataUtils.h"
 #import "HandController.h"
-#import "ArmController.h"
+
+static NSString *const kImageArmUnit = @"armUnit.png";
+
 
 @implementation PuzzleLayer
 
@@ -85,19 +87,20 @@
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
-    self.moveTo = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
     
-    if ([self isPathFreeBetweenStart:[self handCoord] end:self.moveTo]) {
+    // touch a cell to move to it's position if path is free and in a line
+    self.handConroller.moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
+    self.handConroller.moveFromCell = self.handConroller.cell;
+    
+    if ([self isPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
         
-        CCCallFunc *completion = [CCCallFunc actionWithTarget:self selector:@selector(move)];
-        
-        kDirection shouldFace = [GridUtils directionFromStart:[self handCoord] end:self.moveTo];
-        
+        kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:self.handConroller.moveToCell];
         if (shouldFace != self.handConroller.facing) {
+            CCCallFunc *completion = [CCCallFunc actionWithTarget:self.handConroller selector:@selector(movePath)];
             [self.handConroller rotateToFacing:shouldFace withCompletion:completion];
         }
         else {
-            [self move];
+            [self.handConroller movePath];
         }
     }
     
@@ -109,26 +112,8 @@
 
 }
 
-#pragma mark - moving 
-
-- (void)move
-{
-    CGPoint destination = [GridUtils absolutePositionForGridCoord:self.moveTo unitSize:kSizeGridUnit origin:self.gridOrigin];
-    
-    int steps = [GridUtils numberOfStepsBetweenStart:[self handCoord] end:self.moveTo];
-    NSLog(@"steps: %i", steps);
-    
-    id actionMove = [CCMoveTo actionWithDuration:((float)steps / (float)self.handConroller.cellsPerSecond) position:destination];
-    [self.handConroller runAction:actionMove];
-}
-
 
 #pragma mark - helpers
-
-- (GridCoord)handCoord
-{
-    return [GridUtils gridCoordForAbsolutePosition:self.handConroller.position unitSize:kSizeGridUnit origin:self.gridOrigin];
-}
 
 - (BOOL)isPathFreeBetweenStart:(GridCoord)start end:(GridCoord)end
 {
@@ -147,5 +132,33 @@
         return NO;
     }
 }
+
+
+
+
+
+
+// dropped in from arm controller
+
+- (NSInteger)keyForCell:(GridCoord)cell
+{
+    return [[NSString stringWithFormat:@"1%i%i", cell.x, cell.y] intValue];
+}
+
+- (void)addCell:(GridCoord)cell
+{
+    CCSprite *cellSprite = [CCSprite spriteWithFile:kImageArmUnit];
+    cellSprite.position = [GridUtils absolutePositionForGridCoord:cell unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+    [self addChild:cellSprite z:0 tag:[self keyForCell:cell]];
+}
+
+- (void)removeCell:(GridCoord)cell
+{
+    CCSprite *cellSprite = (CCSprite *)[self getChildByTag:[self keyForCell:cell]];
+    if (cellSprite != nil) {
+        [cellSprite removeFromParentAndCleanup:YES];
+    }
+}
+
 
 @end
