@@ -33,6 +33,15 @@
     return GridCoordMake(x, y);
 }
 
+// absolute position made for sprite (anchor point middle) on a grid for grid coordinate
++ (CGPoint) absoluteSpritePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin
+{
+    CGFloat x = ((coord.x - 1) * unitSize) + origin.x;
+    CGFloat y = ((coord.y - 1) * unitSize) + origin.y;
+    return CGPointMake(x + unitSize/2, y + unitSize/2);
+}
+
+
 #pragma mark - drawing
 
 // draws grid lines, call in layer's draw method
@@ -105,6 +114,11 @@
     return kDirectionNone;
 }
 
+// checks for gridcoords as same coordinate
++ (BOOL)isCell:(GridCoord)firstCell equalToCell:(GridCoord)secondCell
+{
+    return ((firstCell.x == secondCell.x) && (firstCell.y == secondCell.y));
+}
 
 
 

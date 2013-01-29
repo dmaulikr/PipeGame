@@ -31,6 +31,7 @@ static float const kSpeedCellsPerSecond = 10.0;
         
         _facing = kDirectionNone;
         _cellsPerSecond = kSpeedCellsPerSecond;
+        _isMoving = NO;
     }
     return self;
 }
@@ -67,14 +68,20 @@ static float const kSpeedCellsPerSecond = 10.0;
 }
 
 - (void)moveFromStart:(GridCoord)start toEnd:(GridCoord)end
-{
+{    
+    self.isMoving = YES;
     CGPoint destination = [GridUtils absolutePositionForGridCoord:end unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
     int steps = [GridUtils numberOfStepsBetweenStart:start end:end];
     id actionMove = [CCMoveTo actionWithDuration:((float)steps / self.cellsPerSecond) position:destination];
-    [self runAction:actionMove];
+    id actionMoveFinished = [CCCallFunc actionWithTarget:self selector:@selector(moveFinished)];
+    
+    [self runAction:[CCSequence actions:actionMove, actionMoveFinished, nil]];
 }
 
-
+- (void)moveFinished
+{
+    self.isMoving = NO;
+}
 
 
 

@@ -37,6 +37,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         
         _gridSize = [DataUtils puzzleSize:puzzle];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
+        _cellsBlocked = [NSMutableArray array];
         
         // hand
         _handConroller = [[HandController alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
@@ -45,14 +46,25 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         [self addChild:_handConroller];
         
         [_handConroller setDirectionFacing:[DataUtils puzzleEntryDireciton:puzzle]];
+        _lastHandCell = _handEntryCoord;
         
         // arm
-        _armController = [[ArmController alloc] init];
-        [self addChild:_armController];
+        _armUnits = [NSMutableDictionary dictionary];
         
+        // schedule game tick
+        [self schedule:@selector(gameTick:) interval:1.0/60.0 repeat:-1 delay:0];
         
     }
     return self;
+}
+
+- (void)gameTick:(ccTime)dt
+{
+    // add a arm unit when hand crosses cell
+    if ([self doesHandCrossCell]) {
+        [self addArmUnitAtCell:self.lastHandCell];
+        self.lastHandCell = self.handConroller.cell;
+    }
 }
 
 #pragma mark - globals
@@ -103,7 +115,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
             [self.handConroller movePath];
         }
     }
-    
     return NO;
 }
 
@@ -114,6 +125,11 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 
 #pragma mark - helpers
+
+- (NSString *)objectKeyForCell:(GridCoord)cell
+{
+    return [NSString stringWithFormat:@"%i%i", cell.x, cell.y];
+}
 
 - (BOOL)isPathFreeBetweenStart:(GridCoord)start end:(GridCoord)end
 {
@@ -133,32 +149,32 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     }
 }
 
+#pragma mark - hand
 
-
-
-
-
-// dropped in from arm controller
-
-- (NSInteger)keyForCell:(GridCoord)cell
+- (BOOL)doesHandCrossCell
 {
-    return [[NSString stringWithFormat:@"1%i%i", cell.x, cell.y] intValue];
+    return ([GridUtils isCell:self.handConroller.cell equalToCell:self.lastHandCell] == NO);
 }
 
-- (void)addCell:(GridCoord)cell
+#pragma mark - arm
+
+- (void)addArmUnitAtCell:(GridCoord)cell
 {
     CCSprite *cellSprite = [CCSprite spriteWithFile:kImageArmUnit];
-    cellSprite.position = [GridUtils absolutePositionForGridCoord:cell unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
-    [self addChild:cellSprite z:0 tag:[self keyForCell:cell]];
+    cellSprite.position = [GridUtils absoluteSpritePositionForGridCoord:cell unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+    [self addChild:cellSprite z:0];
+    
+    [self.armUnits setObject:cellSprite forKey:[self objectKeyForCell:cell]];
+    [self.cellsBlocked addObject:[self objectKeyForCell:cell]];
 }
 
-- (void)removeCell:(GridCoord)cell
-{
-    CCSprite *cellSprite = (CCSprite *)[self getChildByTag:[self keyForCell:cell]];
-    if (cellSprite != nil) {
-        [cellSprite removeFromParentAndCleanup:YES];
-    }
-}
+
+
+
+
+
+
+
 
 
 @end
