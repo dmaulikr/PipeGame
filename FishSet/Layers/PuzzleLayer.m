@@ -11,6 +11,7 @@
 #import "GameConstants.h"
 #import "DataUtils.h"
 #import "HandController.h"
+#import "GridUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 
@@ -104,7 +105,22 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     self.handConroller.moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
     self.handConroller.moveFromCell = self.handConroller.cell;
     
-    if ([self isPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
+    if ([GridUtils isCell:self.handConroller.moveToCell equalToCell:self.handConroller.moveFromCell] == NO) {
+        if ([self isLinearPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
+            
+            kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:self.handConroller.moveToCell];
+            if (shouldFace != self.handConroller.facing) {
+                CCCallFunc *completion = [CCCallFunc actionWithTarget:self.handConroller selector:@selector(movePath)];
+                [self.handConroller rotateToFacing:shouldFace withCompletion:completion];
+            }
+            else {
+                [self.handConroller movePath];
+            }
+        }
+        return NO;
+    }
+    
+    if ([self isLinearPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
         
         kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:self.handConroller.moveToCell];
         if (shouldFace != self.handConroller.facing) {
@@ -124,37 +140,13 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 }
 
 
-#pragma mark - helpers
-
-- (NSString *)objectKeyForCell:(GridCoord)cell
-{
-    return [NSString stringWithFormat:@"%i%i", cell.x, cell.y];
-}
-
-- (BOOL)isPathFreeBetweenStart:(GridCoord)start end:(GridCoord)end
-{
-    // movement along y 
-    if (start.x == end.x) {
-        // needs implementation
-        return YES;
-    }
-    // movement along x 
-    else if (start.y == end.y) {
-        // needs implementation
-        return YES;
-    }
-    // non-linear movement not allowed.
-    else {
-        return NO;
-    }
-}
-
 #pragma mark - hand
 
 - (BOOL)doesHandCrossCell
 {
     return ([GridUtils isCell:self.handConroller.cell equalToCell:self.lastHandCell] == NO);
 }
+
 
 #pragma mark - arm
 
@@ -169,10 +161,64 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 }
 
 
+#pragma mark - helpers
 
+- (NSString *)objectKeyForCell:(GridCoord)cell
+{
+    return [NSString stringWithFormat:@"%i%i", cell.x, cell.y];
+}
 
+- (BOOL)isLinearPathFreeBetweenStart:(GridCoord)start end:(GridCoord)end
+{
+    // check one cell for blocked
+    if ([self isCellBlocked:start]) {
+        return NO;
+    }
+    // base case - if we reach the end of the path with no obstructions, it's a valid move
+    if ([GridUtils isCell:start equalToCell:end]) {
+        return YES;
+    }
+    
+    GridCoord newStart;
+    if (start.x == end.x) {
+        if (start.y > end.y) {
+            newStart = GridCoordMake(start.x, start.y - 1);
+        }
+        else if (start.y < end.y) {
+            newStart = GridCoordMake(start.x, start.y + 1);
+        }
+        else {
+            return NO;
+        }
+    }
+    else if (start.y == end.y) {
+        if (start.x > end.x) {
+            newStart = GridCoordMake(start.x - 1, start.y);
+        }
+        else if (start.x < end.x) {
+            newStart = GridCoordMake(start.x + 1, start.y);
+        }
+        else {
+            return NO;
+        }
+    }
+        
+    else {
+        return NO;
+    }
+    return [self isLinearPathFreeBetweenStart:newStart end:end];
+}
 
-
+- (BOOL)isCellBlocked:(GridCoord)cell
+{
+    NSString *key = [self objectKeyForCell:cell];
+    for (NSString *storedKey in self.cellsBlocked) {
+        if ([key isEqualToString:storedKey]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
 
 
