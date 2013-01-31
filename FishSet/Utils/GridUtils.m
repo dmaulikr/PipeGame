@@ -110,7 +110,6 @@
         }
     }
     
-    // if none of above cases are true, move is invalid
     return kDirectionNone;
 }
 
@@ -150,6 +149,26 @@
             block(cell);
         }
     } 
+}
+
++ (GridCoord)stepInDirection:(kDirection)direction fromCell:(GridCoord)cell
+{
+    if (direction == kDirectionUp) {
+        return GridCoordMake(cell.x, cell.y + 1);
+    }
+    else if (direction == kDirectionRight) {
+        return GridCoordMake(cell.x + 1, cell.y);
+    }
+    else if (direction == kDirectionDown) {
+        return GridCoordMake(cell.x, cell.y - 1);
+    }
+    else if (direction == kDirectionLeft) {
+        return GridCoordMake(cell.x - 1, cell.y);
+    }
+    else {
+        NSLog(@"warning: unrecognized direction");
+        return cell;
+    }
 }
 
 

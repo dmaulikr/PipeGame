@@ -62,6 +62,8 @@ GridCoordMake(const int x, const int y)
                           secondCell:(GridCoord)secondCell
                                block:(void (^)(GridCoord cell))block;
 
++ (GridCoord)stepInDirection:(kDirection)direction fromCell:(GridCoord)cell;
+
 
 
 @end

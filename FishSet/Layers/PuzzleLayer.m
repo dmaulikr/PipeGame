@@ -151,34 +151,16 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         return YES;
     }
     
-    GridCoord newStart;
-    if (start.x == end.x) {
-        if (start.y > end.y) {
-            newStart = GridCoordMake(start.x, start.y - 1);
-        }
-        else if (start.y < end.y) {
-            newStart = GridCoordMake(start.x, start.y + 1);
-        }
-        else {
-            return NO;
-        }
-    }
-    else if (start.y == end.y) {
-        if (start.x > end.x) {
-            newStart = GridCoordMake(start.x - 1, start.y);
-        }
-        else if (start.x < end.x) {
-            newStart = GridCoordMake(start.x + 1, start.y);
-        }
-        else {
-            return NO;
-        }
-    }
-        
-    else {
+    // check for invalid direction
+    kDirection direction = [GridUtils directionFromStart:start end:end];
+    if (direction == kDirectionNone) {
         return NO;
     }
-    return [self isLinearPathFreeBetweenStart:newStart end:end];
+    // recursive call with next cell
+    else {
+        GridCoord newStart = [GridUtils stepInDirection:direction fromCell:start];
+        return [self isLinearPathFreeBetweenStart:newStart end:end];
+    }
 }
 
 - (BOOL)isCellBlocked:(GridCoord)cell
