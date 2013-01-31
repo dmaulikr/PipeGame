@@ -28,7 +28,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     return scene;
 }
 
-
 - (id)initWithPuzzle:(int)puzzle 
 {
     self = [super init];
@@ -51,22 +50,10 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         
         // arm
         _armUnits = [NSMutableDictionary dictionary];
-        
-        // schedule game tick
-        [self schedule:@selector(gameTick:) interval:1.0/60.0 repeat:-1 delay:0];
-        
     }
     return self;
 }
 
-- (void)gameTick:(ccTime)dt
-{
-    // add a arm unit when hand crosses cell
-    if ([self doesHandCrossCell]) {
-        [self addArmUnitAtCell:self.lastHandCell];
-        self.lastHandCell = self.handConroller.cell;
-    }
-}
 
 #pragma mark - globals
 
@@ -74,6 +61,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 {
     return CGPointMake(100, 100);
 }
+
 
 #pragma mark - scene management
 
@@ -86,6 +74,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
+
 # pragma mark - draw
 
 - (void)draw
@@ -94,6 +83,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     ccDrawColor4F(0.5f, 0.5f, 0.5f, 1.0f);
     [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:_gridOrigin];
 }
+
 
 # pragma mark - targeted touch delegate
 
@@ -108,18 +98,17 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     if ([GridUtils isCell:self.handConroller.moveToCell equalToCell:self.handConroller.moveFromCell] == NO) {
         if ([self isLinearPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
             
+            // arm units
+            [GridUtils performBlockBetweenFirstCell:self.handConroller.moveFromCell secondCell:self.handConroller.moveToCell block:^(GridCoord cell) {
+                if ([GridUtils isCell:cell equalToCell:self.handConroller.moveToCell] == NO) {
+                    [self addArmUnitAtCell:cell];
+                }
+            }];
             
-            
-            
-            
+            // hand sprite
             kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:self.handConroller.moveToCell];
-            if (shouldFace != self.handConroller.facing) {
-                CCCallFunc *completion = [CCCallFunc actionWithTarget:self.handConroller selector:@selector(movePath)];
-                [self.handConroller rotateToFacing:shouldFace withCompletion:completion];
-            }
-            else {
-                [self.handConroller movePath];
-            }
+            [self.handConroller setDirectionFacing:shouldFace];
+            self.handConroller.position = [GridUtils absolutePositionForGridCoord:self.handConroller.moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];            
         }
     }
     return YES;
@@ -128,14 +117,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
 
-}
-
-
-#pragma mark - hand
-
-- (BOOL)doesHandCrossCell
-{
-    return ([GridUtils isCell:self.handConroller.cell equalToCell:self.lastHandCell] == NO);
 }
 
 

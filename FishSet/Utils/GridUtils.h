@@ -57,5 +57,11 @@ GridCoordMake(const int x, const int y)
 // checks for gridcoords as same coordinate
 + (BOOL)isCell:(GridCoord)cell equalToCell:(GridCoord)cell;
 
+// iterate between a path strictly up/down or left/right performing block with cell
++ (void)performBlockBetweenFirstCell:(GridCoord)firstCell
+                          secondCell:(GridCoord)secondCell
+                               block:(void (^)(GridCoord cell))block;
+
+
 
 @end

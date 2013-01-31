@@ -14,7 +14,6 @@
 #import "PuzzleLayer.h"
 
 static NSString *const kImageNameHandSprite = @"handSprite.png";
-static float const kSpeedCellsPerSecond = 10.0;
 
 @implementation HandController
 
@@ -30,8 +29,6 @@ static float const kSpeedCellsPerSecond = 10.0;
         [self addChild:_handSprite];
         
         _facing = kDirectionNone;
-        _cellsPerSecond = kSpeedCellsPerSecond;
-        _isMoving = NO;
     }
     return self;
 }
@@ -46,46 +43,5 @@ static float const kSpeedCellsPerSecond = 10.0;
     self.handSprite.rotation = [SpriteUtils degreesForDirection:direction];
     self.facing = direction;
 }
-
-- (void)rotateToFacing:(kDirection)direction withCompletion:(CCCallFunc *)completion
-{
-    self.facing = direction;
-
-    float angleDegrees = fabs([SpriteUtils degreesForDirection:direction]);
-    float rotateDuration = .1;
-    
-    [self.handSprite runAction:
-     [CCSequence actions:
-      [CCRotateTo actionWithDuration:rotateDuration angle:angleDegrees],
-      completion,
-      nil]
-     ];
-}
-
-- (void)movePath
-{
-    [self moveFromStart:self.moveFromCell toEnd:self.moveToCell];
-}
-
-- (void)moveFromStart:(GridCoord)start toEnd:(GridCoord)end
-{    
-    self.isMoving = YES;
-    CGPoint destination = [GridUtils absolutePositionForGridCoord:end unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
-    int steps = [GridUtils numberOfStepsBetweenStart:start end:end];
-    id actionMove = [CCMoveTo actionWithDuration:((float)steps / self.cellsPerSecond) position:destination];
-    id actionMoveFinished = [CCCallFunc actionWithTarget:self selector:@selector(moveFinished)];
-    
-    [self runAction:[CCSequence actions:actionMove, actionMoveFinished, nil]];
-}
-
-- (void)moveFinished
-{
-    self.isMoving = NO;
-}
-
-
-
-
-
 
 @end
