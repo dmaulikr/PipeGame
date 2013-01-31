@@ -108,6 +108,10 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     if ([GridUtils isCell:self.handConroller.moveToCell equalToCell:self.handConroller.moveFromCell] == NO) {
         if ([self isLinearPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
             
+            
+            
+            
+            
             kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:self.handConroller.moveToCell];
             if (shouldFace != self.handConroller.facing) {
                 CCCallFunc *completion = [CCCallFunc actionWithTarget:self.handConroller selector:@selector(movePath)];
@@ -117,21 +121,8 @@ static NSString *const kImageArmUnit = @"armUnit.png";
                 [self.handConroller movePath];
             }
         }
-        return NO;
     }
-    
-    if ([self isLinearPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
-        
-        kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:self.handConroller.moveToCell];
-        if (shouldFace != self.handConroller.facing) {
-            CCCallFunc *completion = [CCCallFunc actionWithTarget:self.handConroller selector:@selector(movePath)];
-            [self.handConroller rotateToFacing:shouldFace withCompletion:completion];
-        }
-        else {
-            [self.handConroller movePath];
-        }
-    }
-    return NO;
+    return YES;
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
