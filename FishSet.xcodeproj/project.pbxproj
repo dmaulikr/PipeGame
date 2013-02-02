@@ -567,13 +567,6 @@
 			path = Layers;
 			sourceTree = "<group>";
 		};
-		16AFFFF516AB17C20000D5F3 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		16CAF26416AA1264001E3266 = {
 			isa = PBXGroup;
 			children = (
@@ -613,7 +606,6 @@
 				1634ED8816BD746000DA7D79 /* Nodes */,
 				1688E1D916AB51A2008C2B58 /* Utils */,
 				16AF000016AB19840000D5F3 /* Layers */,
-				16AFFFF516AB17C20000D5F3 /* Views */,
 				16CAF3FD16AA1268001E3266 /* AppDelegate.h */,
 				16CAF3FE16AA1268001E3266 /* AppDelegate.m */,
 				16CAF28616AA1265001E3266 /* Resources */,
