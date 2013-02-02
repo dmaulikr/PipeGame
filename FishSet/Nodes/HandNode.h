@@ -10,7 +10,7 @@
 #import "GameTypes.h"
 #import "GridUtils.h"
 
-@interface HandController : CCNode
+@interface HandNode : CCNode
 
 @property (nonatomic, strong) CCSprite *handSprite;
 @property (assign) kDirection facing;

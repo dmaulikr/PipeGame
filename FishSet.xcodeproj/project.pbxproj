@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1634ED8B16BD746000DA7D79 /* HandController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634ED8A16BD746000DA7D79 /* HandController.m */; };
+		1634ED8B16BD746000DA7D79 /* HandNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634ED8A16BD746000DA7D79 /* HandNode.m */; };
 		1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DB16AB527F008C2B58 /* GridUtils.m */; };
 		1688E1DF16AB55CB008C2B58 /* PuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DE16AB55CB008C2B58 /* PuzzleLayer.m */; };
 		1688E1E116AB59B3008C2B58 /* Puzzles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1E016AB59B3008C2B58 /* Puzzles.plist */; };
@@ -147,8 +147,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1634ED8916BD746000DA7D79 /* HandController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandController.h; sourceTree = "<group>"; };
-		1634ED8A16BD746000DA7D79 /* HandController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandController.m; sourceTree = "<group>"; };
+		1634ED8916BD746000DA7D79 /* HandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandNode.h; sourceTree = "<group>"; };
+		1634ED8A16BD746000DA7D79 /* HandNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandNode.m; sourceTree = "<group>"; };
 		1688E1DA16AB527F008C2B58 /* GridUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridUtils.h; path = Utils/GridUtils.h; sourceTree = "<group>"; };
 		1688E1DB16AB527F008C2B58 /* GridUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridUtils.m; path = Utils/GridUtils.m; sourceTree = "<group>"; };
 		1688E1DD16AB55CB008C2B58 /* PuzzleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleLayer.h; sourceTree = "<group>"; };
@@ -452,8 +452,8 @@
 		1634ED8816BD746000DA7D79 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				1634ED8916BD746000DA7D79 /* HandController.h */,
-				1634ED8A16BD746000DA7D79 /* HandController.m */,
+				1634ED8916BD746000DA7D79 /* HandNode.h */,
+				1634ED8A16BD746000DA7D79 /* HandNode.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -1098,7 +1098,7 @@
 				1688E1E716AB6319008C2B58 /* DataUtils.m in Sources */,
 				1688E1EA16AC61B8008C2B58 /* GameConstants.m in Sources */,
 				1688E1F216ACD7D5008C2B58 /* SpriteUtils.m in Sources */,
-				1634ED8B16BD746000DA7D79 /* HandController.m in Sources */,
+				1634ED8B16BD746000DA7D79 /* HandNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

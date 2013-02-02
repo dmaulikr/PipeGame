@@ -6,7 +6,7 @@
 //
 //
 
-#import "HandController.h"
+#import "HandNode.h"
 
 #import "SpriteUtils.h"
 #import "GridUtils.h"
@@ -15,7 +15,7 @@
 
 static NSString *const kImageNameHandSprite = @"handSprite.png";
 
-@implementation HandController
+@implementation HandNode
 
 - (id)initWithContentSize:(CGSize)size
 {

@@ -10,7 +10,7 @@
 
 #import "GameConstants.h"
 #import "DataUtils.h"
-#import "HandController.h"
+#import "HandNode.h"
 #import "GridUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
@@ -40,7 +40,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _cellsBlocked = [NSMutableArray array];
         
         // hand
-        _handConroller = [[HandController alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
+        _handConroller = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
         _handEntryCoord = [DataUtils puzzleEntryCoord:puzzle];
         _handConroller.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
         [self addChild:_handConroller];

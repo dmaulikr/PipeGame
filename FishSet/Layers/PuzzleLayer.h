@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 
 #import "GridUtils.h"
-@class HandController;
+@class HandNode;
 @class ArmController;
 
 @interface PuzzleLayer : CCLayer
@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *cellsBlocked;
 
 // hand and arm 
-@property (nonatomic, strong) HandController *handConroller;
+@property (nonatomic, strong) HandNode *handConroller;
 @property (assign) GridCoord handEntryCoord;
 @property (assign) GridCoord lastHandCell;
 
