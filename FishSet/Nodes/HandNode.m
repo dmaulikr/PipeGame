@@ -34,11 +34,6 @@ static NSString *const kImageNameHandSprite = @"handSprite.png";
     return self;
 }
 
-- (GridCoord)cell
-{
-    return [GridUtils gridCoordForAbsolutePosition:self.position unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
-}
-
 - (void)setDirectionFacing:(kDirection)direction
 {
     self.handSprite.rotation = [SpriteUtils degreesForDirection:direction];

@@ -9,14 +9,13 @@
 #import "cocos2d.h"
 #import "GameTypes.h"
 #import "GridUtils.h"
+#import "CCNode+Utils.h"
 
-@interface HandNode : CCNode
+@interface HandNode : CCNode 
 
 @property (nonatomic, strong) CCSprite *handSprite;
 @property (assign) kDirection facing;
 @property (assign) kDirection lastFacing;
-
-@property (readonly) GridCoord cell;
 @property (assign) GridCoord moveFromCell;
 @property (assign) GridCoord moveToCell;
 

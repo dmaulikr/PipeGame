@@ -91,7 +91,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 {
     CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
     
-    // touch a cell to move to it's position if path is free and in a line
+    // touch a cell to move to its position if path is free and in a line
     self.handConroller.moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
     self.handConroller.moveFromCell = self.handConroller.cell;
     
