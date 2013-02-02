@@ -7,7 +7,6 @@
 //
 
 #import "cocos2d.h"
-#import "GameTypes.h"
 #import "GridUtils.h"
 #import "CCNode+Utils.h"
 

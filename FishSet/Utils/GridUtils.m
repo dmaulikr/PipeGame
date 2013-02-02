@@ -7,7 +7,6 @@
 //
 
 #import "GridUtils.h"
-
 #import "CCDrawingPrimitives.h"
 
 @implementation GridUtils
@@ -122,31 +121,32 @@
 // iterate between a path strictly up/down or left/right performing block with cell
 + (void)performBlockBetweenFirstCell:(GridCoord)firstCell
                           secondCell:(GridCoord)secondCell
-                               block:(void (^)(GridCoord cell))block
+                               block:(void (^)(GridCoord cell, kDirection direction))block
 {
     kDirection movingDirection = [GridUtils directionFromStart:firstCell end:secondCell];
     if (movingDirection == kDirectionUp) {
         for (int y = firstCell.y; y <= secondCell.y; y++) {
             GridCoord cell = GridCoordMake(firstCell.x, y);
-            block(cell);
+            block(cell, movingDirection);
         }
     }
     else if (movingDirection == kDirectionRight) {
         for (int x = firstCell.x; x <= secondCell.x; x++) {
             GridCoord cell = GridCoordMake(x, firstCell.y);
-            block(cell);
+            block(cell, movingDirection);
         }
     }
     else if (movingDirection == kDirectionDown) {
-        for (int y = secondCell.y; y <= firstCell.y; y++) {
+        for (int y = firstCell.y; y >= secondCell.y; y--) {
+
             GridCoord cell = GridCoordMake(firstCell.x, y);
-            block(cell);
+            block(cell, movingDirection);
         }
     }
     else if (movingDirection == kDirectionLeft) {
-        for (int x = secondCell.x; x <= firstCell.x; x++) {
+        for (int x = firstCell.x; x >= secondCell.x; x--) {
             GridCoord cell = GridCoordMake(x, firstCell.y);
-            block(cell);
+            block(cell, movingDirection);
         }
     } 
 }
@@ -168,6 +168,23 @@
     else {
         NSLog(@"warning: unrecognized direction");
         return cell;
+    }
+}
+
++ (kDirection)oppositeDirection:(kDirection)direction
+{
+    switch (direction) {
+        case kDirectionDown:
+            return kDirectionUp;
+        case kDirectionUp:
+            return kDirectionDown;
+        case kDirectionLeft:
+            return kDirectionRight;
+        case kDirectionRight:
+            return kDirectionLeft;
+        default:
+            NSLog(@"warning: invalid direction given, returning kDirectionNone");
+            return kDirectionNone;
     }
 }
 

@@ -19,7 +19,7 @@ NSString *const kImageNameArmDownLeft = @"arm_corner_SW.png";
 NSString *const kImageNameArmDownRight = @"arm_corner_SE.png";
 NSString *const kImageNameArmUpLeft = @"arm_corner_NW.png";
 NSString *const kImageNameArmUpRight = @"arm_corner_NE.png";
-NSString *const kImageNameArmBottomTop = @"arm_straight_vertical.png";
+NSString *const kImageNameArmDownUp = @"arm_straight_vertical.png";
 NSString *const kImageNameArmLeftRight = @"arm_straight_horizontal.png";
 
 // hand
@@ -35,7 +35,7 @@ NSString *const kImageNameHand = @"arm_hand_N.png";
     [[CCTextureCache sharedTextureCache] addImage:kImageNameArmDownRight];
     [[CCTextureCache sharedTextureCache] addImage:kImageNameArmUpLeft];
     [[CCTextureCache sharedTextureCache] addImage:kImageNameArmUpRight];
-    [[CCTextureCache sharedTextureCache] addImage:kImageNameArmBottomTop];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameArmDownUp];
     [[CCTextureCache sharedTextureCache] addImage:kImageNameArmLeftRight];
     
     // hand

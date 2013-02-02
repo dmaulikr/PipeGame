@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GameTypes.h"
+#import "GameConstants.h"
 
 typedef struct
 {
@@ -60,9 +60,11 @@ GridCoordMake(const int x, const int y)
 // iterate between a path strictly up/down or left/right performing block with cell
 + (void)performBlockBetweenFirstCell:(GridCoord)firstCell
                           secondCell:(GridCoord)secondCell
-                               block:(void (^)(GridCoord cell))block;
+                               block:(void (^)(GridCoord cell, kDirection direction))block;
 
 + (GridCoord)stepInDirection:(kDirection)direction fromCell:(GridCoord)cell;
+
++ (kDirection)oppositeDirection:(kDirection)direction;
 
 
 

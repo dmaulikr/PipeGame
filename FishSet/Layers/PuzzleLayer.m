@@ -7,11 +7,12 @@
 //
 
 #import "PuzzleLayer.h"
-
 #import "GameConstants.h"
 #import "DataUtils.h"
+#import "ArmNode.h"
 #import "HandNode.h"
 #import "GridUtils.h"
+#import "TextureUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 
@@ -45,11 +46,14 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _handConroller.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
         [self addChild:_handConroller];
         
-        [_handConroller setDirectionFacing:[DataUtils puzzleEntryDireciton:puzzle]];
+        kDirection entryDirection = [DataUtils puzzleEntryDirection:puzzle];
+        [_handConroller setDirectionFacing:entryDirection];
         _lastHandCell = _handEntryCoord;
         
-        // arm
-        _armUnits = [NSMutableDictionary dictionary];
+        _handEntersFrom = [GridUtils oppositeDirection:entryDirection];
+        
+        // stack of arm nodes
+        _armNodes = [NSMutableArray array];
     }
     return self;
 }
@@ -95,13 +99,17 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     self.handConroller.moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
     self.handConroller.moveFromCell = self.handConroller.cell;
     
+//    NSLog(@"move to cell: %i, %i; move from cell: %i, %i", self.handConroller.moveToCell.x, self.handConroller.moveToCell.y, self.handConroller.moveFromCell.x, self.handConroller.moveFromCell.y);
+
+    
     if ([GridUtils isCell:self.handConroller.moveToCell equalToCell:self.handConroller.moveFromCell] == NO) {
         if ([self isLinearPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
             
             // arm units
-            [GridUtils performBlockBetweenFirstCell:self.handConroller.moveFromCell secondCell:self.handConroller.moveToCell block:^(GridCoord cell) {
+            [GridUtils performBlockBetweenFirstCell:self.handConroller.moveFromCell secondCell:self.handConroller.moveToCell block:^(GridCoord cell, kDirection direction) {
+                
                 if ([GridUtils isCell:cell equalToCell:self.handConroller.moveToCell] == NO) {
-                    [self addArmUnitAtCell:cell];
+                    [self addArmNodeAtCell:cell movingDirection:direction];
                 }
             }];
             
@@ -122,14 +130,26 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 #pragma mark - arm
 
-- (void)addArmUnitAtCell:(GridCoord)cell
-{
-    CCSprite *cellSprite = [CCSprite spriteWithFile:kImageArmUnit];
-    cellSprite.position = [GridUtils absoluteSpritePositionForGridCoord:cell unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
-    [self addChild:cellSprite z:0];
+- (void)addArmNodeAtCell:(GridCoord)cell movingDirection:(kDirection)direction
+{  
+    ArmNode *newArmNode;
+    if ([self.armNodes count] > 0) {
+        ArmNode *lastArmNode = [self.armNodes lastObject];
+        kDirection firstExit = [GridUtils directionFromStart:cell end:[lastArmNode cell]];
+        
+//        NSLog(@"cell: %i, %i; last cell: %i, %i", cell.x, cell.y, [lastArmNode cell].x, [lastArmNode cell].y);
+//        NSLog(@"first exit: %i", firstExit);
+        
+        newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction];
+    }
+    else {
+        newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction];
+    }
     
-    [self.armUnits setObject:cellSprite forKey:[self objectKeyForCell:cell]];
+    [self addChild:newArmNode];
+    [self.armNodes addObject:newArmNode];
     [self.cellsBlocked addObject:[self objectKeyForCell:cell]];
+
 }
 
 

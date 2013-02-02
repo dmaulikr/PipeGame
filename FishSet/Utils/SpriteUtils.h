@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GameTypes.h"
+#import "GameConstants.h"
+
 @class CCSprite;
 
 @interface SpriteUtils : NSObject

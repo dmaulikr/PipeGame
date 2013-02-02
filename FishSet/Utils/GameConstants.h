@@ -8,4 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum
+{
+    kDirectionNone,
+    kDirectionUp,
+    kDirectionRight,
+    kDirectionDown,
+    kDirectionLeft
+} kDirection;
+
 FOUNDATION_EXPORT CGFloat const kSizeGridUnit;

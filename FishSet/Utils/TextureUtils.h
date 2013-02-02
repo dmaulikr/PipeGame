@@ -18,7 +18,7 @@ FOUNDATION_EXPORT NSString *const kImageNameArmDownLeft;
 FOUNDATION_EXPORT NSString *const kImageNameArmDownRight;
 FOUNDATION_EXPORT NSString *const kImageNameArmUpLeft;
 FOUNDATION_EXPORT NSString *const kImageNameArmUpRight;
-FOUNDATION_EXPORT NSString *const kImageNameArmBottomTop;
+FOUNDATION_EXPORT NSString *const kImageNameArmDownUp;
 FOUNDATION_EXPORT NSString *const kImageNameArmLeftRight;
 
 // hand

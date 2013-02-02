@@ -83,7 +83,7 @@ static NSString *const kPuzzlesPlistSizeY = @"size.y";
 }
 
 // direction hand enters puzzle, value 'right' would mean it enters to the right coming from the left side of a cell
-+ (kDirection)puzzleEntryDireciton:(NSUInteger)puzzleNumber
++ (kDirection)puzzleEntryDirection:(NSUInteger)puzzleNumber
 {
     NSDictionary *puzzle = [DataUtils puzzleData:puzzleNumber];
     NSNumber *direction = [puzzle valueForKeyPath:kPuzzlesPlistEntryDirection];

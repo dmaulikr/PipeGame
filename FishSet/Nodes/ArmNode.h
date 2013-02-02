@@ -9,14 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GridUtils.h"
+#import "CCNode+Utils.h"
 
 typedef enum
 {
-    kArmExitsDownLeft = 0,
+    kArmExitsNone = 0,
+    kArmExitsDownLeft,
     kArmExitsDownRight,
     kArmExitsUpLeft,
     kArmExitsUpRight,
-    kArmExitsBottomTop,
+    kArmExitsDownUp,
     kArmExitsLeftRight,
 } kArmExits;
 
@@ -24,6 +26,6 @@ typedef enum
 
 @property (nonatomic, strong) CCSprite *sprite;
     
-- (id)initWithTextureKey:(NSString *)key cell:(GridCoord)cell;
+- (id)initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit;
 
 @end

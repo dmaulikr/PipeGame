@@ -25,8 +25,9 @@
 @property (nonatomic, strong) HandNode *handConroller;
 @property (assign) GridCoord handEntryCoord;
 @property (assign) GridCoord lastHandCell;
+@property (assign) kDirection handEntersFrom;
 
-@property (nonatomic, strong) NSMutableDictionary *armUnits;
+@property (nonatomic, strong) NSMutableArray *armNodes;
 
 // puzzles defined in Puzzles.plist
 + (CCScene *)sceneWithPuzzle:(int)puzzle;
