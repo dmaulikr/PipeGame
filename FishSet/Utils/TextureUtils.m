@@ -23,7 +23,7 @@ NSString *const kImageNameArmDownUp = @"arm_straight_vertical.png";
 NSString *const kImageNameArmLeftRight = @"arm_straight_horizontal.png";
 
 // hand
-NSString *const kImageNameHand = @"arm_hand_N.png";
+NSString *const kImageNameHand = @"arm_hand_S.png";
 
 
 #pragma mark - methods

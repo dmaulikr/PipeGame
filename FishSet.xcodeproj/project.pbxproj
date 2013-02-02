@@ -14,7 +14,6 @@
 		1634EDAE16BD7D0000DA7D79 /* arm_corner_NW.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9816BD7D0000DA7D79 /* arm_corner_NW.png */; };
 		1634EDAF16BD7D0000DA7D79 /* arm_corner_SE.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9916BD7D0000DA7D79 /* arm_corner_SE.png */; };
 		1634EDB016BD7D0000DA7D79 /* arm_corner_SW.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9A16BD7D0000DA7D79 /* arm_corner_SW.png */; };
-		1634EDB116BD7D0000DA7D79 /* arm_hand_N.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9B16BD7D0000DA7D79 /* arm_hand_N.png */; };
 		1634EDB216BD7D0000DA7D79 /* arm_straight_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9C16BD7D0000DA7D79 /* arm_straight_horizontal.png */; };
 		1634EDB316BD7D0000DA7D79 /* arm_straight_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9D16BD7D0000DA7D79 /* arm_straight_vertical.png */; };
 		1634EDB416BD7D0000DA7D79 /* pipe_3way_E.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9E16BD7D0000DA7D79 /* pipe_3way_E.png */; };
@@ -42,6 +41,7 @@
 		1688E1F216ACD7D5008C2B58 /* SpriteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */; };
 		168F7D1E16B25D4A0064C7E3 /* armUnit.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F7D1D16B25D4A0064C7E3 /* armUnit.png */; };
 		169319EE16B426EC00203E09 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 169319ED16B426EC00203E09 /* pew-pew-lei.caf */; };
+		16966B4016BDAEBE003007FB /* arm_hand_S.png in Resources */ = {isa = PBXBuildFile; fileRef = 16966B3F16BDAEBE003007FB /* arm_hand_S.png */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -181,7 +181,6 @@
 		1634ED9816BD7D0000DA7D79 /* arm_corner_NW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_corner_NW.png; sourceTree = "<group>"; };
 		1634ED9916BD7D0000DA7D79 /* arm_corner_SE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_corner_SE.png; sourceTree = "<group>"; };
 		1634ED9A16BD7D0000DA7D79 /* arm_corner_SW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_corner_SW.png; sourceTree = "<group>"; };
-		1634ED9B16BD7D0000DA7D79 /* arm_hand_N.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_hand_N.png; sourceTree = "<group>"; };
 		1634ED9C16BD7D0000DA7D79 /* arm_straight_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_straight_horizontal.png; sourceTree = "<group>"; };
 		1634ED9D16BD7D0000DA7D79 /* arm_straight_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_straight_vertical.png; sourceTree = "<group>"; };
 		1634ED9E16BD7D0000DA7D79 /* pipe_3way_E.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipe_3way_E.png; sourceTree = "<group>"; };
@@ -215,6 +214,7 @@
 		1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpriteUtils.m; path = Utils/SpriteUtils.m; sourceTree = "<group>"; };
 		168F7D1D16B25D4A0064C7E3 /* armUnit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = armUnit.png; path = Resources/armUnit.png; sourceTree = "<group>"; };
 		169319ED16B426EC00203E09 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "pew-pew-lei.caf"; path = "Resources/pew-pew-lei.caf"; sourceTree = "<group>"; };
+		16966B3F16BDAEBE003007FB /* arm_hand_S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_hand_S.png; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* FishSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -513,11 +513,11 @@
 		1634ED9616BD7D0000DA7D79 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				16966B3F16BDAEBE003007FB /* arm_hand_S.png */,
 				1634ED9716BD7D0000DA7D79 /* arm_corner_NE.png */,
 				1634ED9816BD7D0000DA7D79 /* arm_corner_NW.png */,
 				1634ED9916BD7D0000DA7D79 /* arm_corner_SE.png */,
 				1634ED9A16BD7D0000DA7D79 /* arm_corner_SW.png */,
-				1634ED9B16BD7D0000DA7D79 /* arm_hand_N.png */,
 				1634ED9C16BD7D0000DA7D79 /* arm_straight_horizontal.png */,
 				1634ED9D16BD7D0000DA7D79 /* arm_straight_vertical.png */,
 				1634ED9E16BD7D0000DA7D79 /* pipe_3way_E.png */,
@@ -1067,7 +1067,6 @@
 				1634EDAE16BD7D0000DA7D79 /* arm_corner_NW.png in Resources */,
 				1634EDAF16BD7D0000DA7D79 /* arm_corner_SE.png in Resources */,
 				1634EDB016BD7D0000DA7D79 /* arm_corner_SW.png in Resources */,
-				1634EDB116BD7D0000DA7D79 /* arm_hand_N.png in Resources */,
 				1634EDB216BD7D0000DA7D79 /* arm_straight_horizontal.png in Resources */,
 				1634EDB316BD7D0000DA7D79 /* arm_straight_vertical.png in Resources */,
 				1634EDB416BD7D0000DA7D79 /* pipe_3way_E.png in Resources */,
@@ -1085,6 +1084,7 @@
 				1634EDC016BD7D0000DA7D79 /* pipe_dead_W.png in Resources */,
 				1634EDC116BD7D0000DA7D79 /* pipe_straight_horizontal.png in Resources */,
 				1634EDC216BD7D0000DA7D79 /* pipe_straight_vertical.png in Resources */,
+				16966B4016BDAEBE003007FB /* arm_hand_S.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

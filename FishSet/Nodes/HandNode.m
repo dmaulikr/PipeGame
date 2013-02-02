@@ -12,8 +12,7 @@
 #import "GridUtils.h"
 #import "GameConstants.h"
 #import "PuzzleLayer.h"
-
-static NSString *const kImageNameHandSprite = @"handSprite.png";
+#import "TextureUtils.h"
 
 @implementation HandNode
 
@@ -24,12 +23,11 @@ static NSString *const kImageNameHandSprite = @"handSprite.png";
         
         self.contentSize = size;
         
-        _handSprite = [CCSprite spriteWithFile:kImageNameHandSprite];
+        _handSprite = [SpriteUtils spriteWithTextureKey:kImageNameHand];
         _handSprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
         [self addChild:_handSprite];
         
         _facing = kDirectionNone;
-        _lastFacing = kDirectionNone;
     }
     return self;
 }
