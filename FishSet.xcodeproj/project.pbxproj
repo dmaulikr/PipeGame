@@ -42,6 +42,7 @@
 		168F7D1E16B25D4A0064C7E3 /* armUnit.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F7D1D16B25D4A0064C7E3 /* armUnit.png */; };
 		169319EE16B426EC00203E09 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 169319ED16B426EC00203E09 /* pew-pew-lei.caf */; };
 		16966B4016BDAEBE003007FB /* arm_hand_S.png in Resources */ = {isa = PBXBuildFile; fileRef = 16966B3F16BDAEBE003007FB /* arm_hand_S.png */; };
+		16966B4316BDB453003007FB /* CellObjectLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 16966B4216BDB453003007FB /* CellObjectLibrary.m */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -215,6 +216,8 @@
 		168F7D1D16B25D4A0064C7E3 /* armUnit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = armUnit.png; path = Resources/armUnit.png; sourceTree = "<group>"; };
 		169319ED16B426EC00203E09 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "pew-pew-lei.caf"; path = "Resources/pew-pew-lei.caf"; sourceTree = "<group>"; };
 		16966B3F16BDAEBE003007FB /* arm_hand_S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_hand_S.png; sourceTree = "<group>"; };
+		16966B4116BDB453003007FB /* CellObjectLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellObjectLibrary.h; path = Utils/CellObjectLibrary.h; sourceTree = "<group>"; };
+		16966B4216BDB453003007FB /* CellObjectLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellObjectLibrary.m; path = Utils/CellObjectLibrary.m; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* FishSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -555,6 +558,8 @@
 				1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */,
 				1634EDC316BD7FA300DA7D79 /* TextureUtils.h */,
 				1634EDC416BD7FA300DA7D79 /* TextureUtils.m */,
+				16966B4116BDB453003007FB /* CellObjectLibrary.h */,
+				16966B4216BDB453003007FB /* CellObjectLibrary.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1208,6 +1213,7 @@
 				1634ED8E16BD76B000DA7D79 /* ArmNode.m in Sources */,
 				1634ED9116BD76FD00DA7D79 /* CCNode+Utils.m in Sources */,
 				1634EDC516BD7FA300DA7D79 /* TextureUtils.m in Sources */,
+				16966B4316BDB453003007FB /* CellObjectLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

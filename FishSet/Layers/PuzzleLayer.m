@@ -13,6 +13,7 @@
 #import "HandNode.h"
 #import "GridUtils.h"
 #import "TextureUtils.h"
+#import "CellObjectLibrary.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 
@@ -39,6 +40,10 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _gridSize = [DataUtils puzzleSize:puzzle];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
         _cellsBlocked = [NSMutableArray array];
+        
+        // cell object library
+        _cellObjectLibrary = [[CellObjectLibrary alloc] initWithGridSize:_gridSize];
+        
         
         // hand
         _handConroller = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
@@ -193,8 +198,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     }
     return NO;
 }
-
-
 
 
 @end

@@ -7,10 +7,10 @@
 //
 
 #import "cocos2d.h"
-
 #import "GridUtils.h"
 @class HandNode;
 @class ArmController;
+@class CellObjectLibrary;
 
 @interface PuzzleLayer : CCLayer
 
@@ -20,6 +20,8 @@
 
 // grid coordinate keys of cells blocking hand movement
 @property (nonatomic, strong) NSMutableArray *cellsBlocked;
+
+@property (nonatomic, strong) CellObjectLibrary *cellObjectLibrary;
 
 // hand and arm 
 @property (nonatomic, strong) HandNode *handConroller;

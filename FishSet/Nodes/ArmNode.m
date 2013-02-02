@@ -100,7 +100,6 @@
             return kArmExitsUpLeft;
         }
     }
-    
     NSLog(@"warning: invalid set of exits given, returning kArmExitsNone");
     return kArmExitsNone;
 }
