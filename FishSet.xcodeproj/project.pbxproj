@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1634ED8B16BD746000DA7D79 /* HandController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634ED8A16BD746000DA7D79 /* HandController.m */; };
 		1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DB16AB527F008C2B58 /* GridUtils.m */; };
 		1688E1DF16AB55CB008C2B58 /* PuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DE16AB55CB008C2B58 /* PuzzleLayer.m */; };
 		1688E1E116AB59B3008C2B58 /* Puzzles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1E016AB59B3008C2B58 /* Puzzles.plist */; };
 		1688E1E416AB5EC4008C2B58 /* GameTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1E316AB5EC4008C2B58 /* GameTypes.m */; };
 		1688E1E716AB6319008C2B58 /* DataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1E616AB6319008C2B58 /* DataUtils.m */; };
 		1688E1EA16AC61B8008C2B58 /* GameConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1E916AC61B8008C2B58 /* GameConstants.m */; };
-		1688E1ED16ACB2B8008C2B58 /* HandController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1EC16ACB2B8008C2B58 /* HandController.m */; };
 		1688E1EF16ACBB90008C2B58 /* handSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1EE16ACBB90008C2B58 /* handSprite.png */; };
 		1688E1F216ACD7D5008C2B58 /* SpriteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */; };
 		168F7D1E16B25D4A0064C7E3 /* armUnit.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F7D1D16B25D4A0064C7E3 /* armUnit.png */; };
@@ -147,6 +147,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1634ED8916BD746000DA7D79 /* HandController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandController.h; sourceTree = "<group>"; };
+		1634ED8A16BD746000DA7D79 /* HandController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandController.m; sourceTree = "<group>"; };
 		1688E1DA16AB527F008C2B58 /* GridUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridUtils.h; path = Utils/GridUtils.h; sourceTree = "<group>"; };
 		1688E1DB16AB527F008C2B58 /* GridUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridUtils.m; path = Utils/GridUtils.m; sourceTree = "<group>"; };
 		1688E1DD16AB55CB008C2B58 /* PuzzleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleLayer.h; sourceTree = "<group>"; };
@@ -158,8 +160,6 @@
 		1688E1E616AB6319008C2B58 /* DataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataUtils.m; path = Utils/DataUtils.m; sourceTree = "<group>"; };
 		1688E1E816AC61B8008C2B58 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Utils/GameConstants.h; sourceTree = "<group>"; };
 		1688E1E916AC61B8008C2B58 /* GameConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameConstants.m; path = Utils/GameConstants.m; sourceTree = "<group>"; };
-		1688E1EB16ACB2B8008C2B58 /* HandController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandController.h; sourceTree = "<group>"; };
-		1688E1EC16ACB2B8008C2B58 /* HandController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandController.m; sourceTree = "<group>"; };
 		1688E1EE16ACBB90008C2B58 /* handSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handSprite.png; path = Resources/handSprite.png; sourceTree = "<group>"; };
 		1688E1F016ACD7D4008C2B58 /* SpriteUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteUtils.h; path = Utils/SpriteUtils.h; sourceTree = "<group>"; };
 		1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpriteUtils.m; path = Utils/SpriteUtils.m; sourceTree = "<group>"; };
@@ -449,6 +449,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1634ED8816BD746000DA7D79 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				1634ED8916BD746000DA7D79 /* HandController.h */,
+				1634ED8A16BD746000DA7D79 /* HandController.m */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
 		1688E1D916AB51A2008C2B58 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,22 +482,6 @@
 				1688E1DE16AB55CB008C2B58 /* PuzzleLayer.m */,
 			);
 			path = Layers;
-			sourceTree = "<group>";
-		};
-		16AFFFF316AB17C20000D5F3 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				1688E1EB16ACB2B8008C2B58 /* HandController.h */,
-				1688E1EC16ACB2B8008C2B58 /* HandController.m */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		16AFFFF416AB17C20000D5F3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		16AFFFF516AB17C20000D5F3 /* Views */ = {
@@ -534,10 +527,9 @@
 		16CAF28516AA1265001E3266 /* FishSet */ = {
 			isa = PBXGroup;
 			children = (
+				1634ED8816BD746000DA7D79 /* Nodes */,
 				1688E1D916AB51A2008C2B58 /* Utils */,
 				16AF000016AB19840000D5F3 /* Layers */,
-				16AFFFF316AB17C20000D5F3 /* Controllers */,
-				16AFFFF416AB17C20000D5F3 /* Model */,
 				16AFFFF516AB17C20000D5F3 /* Views */,
 				16CAF3FD16AA1268001E3266 /* AppDelegate.h */,
 				16CAF3FE16AA1268001E3266 /* AppDelegate.m */,
@@ -1105,8 +1097,8 @@
 				1688E1E416AB5EC4008C2B58 /* GameTypes.m in Sources */,
 				1688E1E716AB6319008C2B58 /* DataUtils.m in Sources */,
 				1688E1EA16AC61B8008C2B58 /* GameConstants.m in Sources */,
-				1688E1ED16ACB2B8008C2B58 /* HandController.m in Sources */,
 				1688E1F216ACD7D5008C2B58 /* SpriteUtils.m in Sources */,
+				1634ED8B16BD746000DA7D79 /* HandController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

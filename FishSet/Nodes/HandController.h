@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) CCSprite *handSprite;
 @property (assign) kDirection facing;
+@property (assign) kDirection lastFacing;
 
 @property (readonly) GridCoord cell;
 @property (assign) GridCoord moveFromCell;

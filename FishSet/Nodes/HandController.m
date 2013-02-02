@@ -29,6 +29,7 @@ static NSString *const kImageNameHandSprite = @"handSprite.png";
         [self addChild:_handSprite];
         
         _facing = kDirectionNone;
+        _lastFacing = kDirectionNone;
     }
     return self;
 }
