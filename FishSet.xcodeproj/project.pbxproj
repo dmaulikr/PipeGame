@@ -167,8 +167,6 @@
 		16CAF3F716AA1268001E3266 /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 16CAF3F616AA1268001E3266 /* vec4.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		16CAF3FC16AA1268001E3266 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CAF3FB16AA1268001E3266 /* main.m */; };
 		16CAF3FF16AA1268001E3266 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CAF3FE16AA1268001E3266 /* AppDelegate.m */; };
-		16CAF40216AA1268001E3266 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CAF40116AA1268001E3266 /* HelloWorldLayer.m */; };
-		16CAF40516AA1268001E3266 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CAF40416AA1268001E3266 /* IntroLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -476,10 +474,6 @@
 		16CAF3FB16AA1268001E3266 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16CAF3FD16AA1268001E3266 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		16CAF3FE16AA1268001E3266 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		16CAF40016AA1268001E3266 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		16CAF40116AA1268001E3266 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
-		16CAF40316AA1268001E3266 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
-		16CAF40416AA1268001E3266 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,10 +616,6 @@
 				16AFFFF516AB17C20000D5F3 /* Views */,
 				16CAF3FD16AA1268001E3266 /* AppDelegate.h */,
 				16CAF3FE16AA1268001E3266 /* AppDelegate.m */,
-				16CAF40016AA1268001E3266 /* HelloWorldLayer.h */,
-				16CAF40116AA1268001E3266 /* HelloWorldLayer.m */,
-				16CAF40316AA1268001E3266 /* IntroLayer.h */,
-				16CAF40416AA1268001E3266 /* IntroLayer.m */,
 				16CAF28616AA1265001E3266 /* Resources */,
 				16CAF2A016AA1265001E3266 /* libs */,
 				16CAF3F916AA1268001E3266 /* Supporting Files */,
@@ -1202,8 +1192,6 @@
 				16CAF3F716AA1268001E3266 /* vec4.c in Sources */,
 				16CAF3FC16AA1268001E3266 /* main.m in Sources */,
 				16CAF3FF16AA1268001E3266 /* AppDelegate.m in Sources */,
-				16CAF40216AA1268001E3266 /* HelloWorldLayer.m in Sources */,
-				16CAF40516AA1268001E3266 /* IntroLayer.m in Sources */,
 				1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */,
 				1688E1DF16AB55CB008C2B58 /* PuzzleLayer.m in Sources */,
 				1688E1E716AB6319008C2B58 /* DataUtils.m in Sources */,
