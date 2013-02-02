@@ -8,9 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "GridUtils.h"
 
-@interface ArmNode : CCNode {
+typedef enum
+{
+    kArmExitsDownLeft = 0,
+    kArmExitsDownRight,
+    kArmExitsUpLeft,
+    kArmExitsUpRight,
+    kArmExitsBottomTop,
+    kArmExitsLeftRight,
+} kArmExits;
+
+@interface ArmNode : CCNode
+
+@property (nonatomic, strong) CCSprite *sprite;
     
-}
+- (id)initWithTextureKey:(NSString *)key cell:(GridCoord)cell;
 
 @end

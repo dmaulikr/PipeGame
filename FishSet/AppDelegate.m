@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "PuzzleLayer.h"
+#import "TextureUtils.h"
 
 @implementation AppController
 
@@ -75,7 +76,8 @@
 
     
     
-    
+    // load textures
+    [TextureUtils loadTextures];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [PuzzleLayer sceneWithPuzzle:0]];

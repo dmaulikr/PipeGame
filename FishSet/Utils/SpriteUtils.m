@@ -7,6 +7,7 @@
 //
 
 #import "SpriteUtils.h"
+#import "cocos2d.h"
 
 @implementation SpriteUtils
 
@@ -27,5 +28,16 @@
     NSLog(@"warning: %i is an invalid direciton, returning 0.0f", direction);
     return 0.0f;
 }
+
++ (void)switchImageForSprite:(CCSprite *)sprite textureKey:(NSString *)key
+{
+    [sprite setTexture:[[CCTextureCache sharedTextureCache] textureForKey:key]];
+}
+
++ (CCSprite *)spriteWithTextureKey:(NSString *)key
+{
+    return [CCSprite spriteWithTexture:[[CCTextureCache sharedTextureCache] textureForKey:key]];
+}
+
 
 @end

@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "GameTypes.h"
+@class CCSprite;
 
 @interface SpriteUtils : NSObject
 
 + (float)degreesForDirection:(kDirection)direction;
++ (void)switchImageForSprite:(CCSprite *)sprite textureKey:(NSString *)key;
++ (CCSprite *)spriteWithTextureKey:(NSString *)key;
 
 @end
