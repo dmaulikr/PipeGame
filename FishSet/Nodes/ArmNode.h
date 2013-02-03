@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "CellNode.h"
 #import "GridUtils.h"
-#import "CCNode+Utils.h"
 
 typedef enum
 {
@@ -22,7 +21,7 @@ typedef enum
     kArmExitsLeftRight,
 } kArmExits;
 
-@interface ArmNode : CCNode
+@interface ArmNode : CellNode
 
 @property (nonatomic, strong) CCSprite *sprite;
     

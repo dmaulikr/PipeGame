@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1634ED8B16BD746000DA7D79 /* HandNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634ED8A16BD746000DA7D79 /* HandNode.m */; };
 		1634ED8E16BD76B000DA7D79 /* ArmNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634ED8D16BD76B000DA7D79 /* ArmNode.m */; };
-		1634ED9116BD76FD00DA7D79 /* CCNode+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634ED9016BD76FD00DA7D79 /* CCNode+Utils.m */; };
 		1634EDAD16BD7D0000DA7D79 /* arm_corner_NE.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9716BD7D0000DA7D79 /* arm_corner_NE.png */; };
 		1634EDAE16BD7D0000DA7D79 /* arm_corner_NW.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9816BD7D0000DA7D79 /* arm_corner_NW.png */; };
 		1634EDAF16BD7D0000DA7D79 /* arm_corner_SE.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634ED9916BD7D0000DA7D79 /* arm_corner_SE.png */; };
@@ -32,6 +31,7 @@
 		1634EDC116BD7D0000DA7D79 /* pipe_straight_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634EDAB16BD7D0000DA7D79 /* pipe_straight_horizontal.png */; };
 		1634EDC216BD7D0000DA7D79 /* pipe_straight_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634EDAC16BD7D0000DA7D79 /* pipe_straight_vertical.png */; };
 		1634EDC516BD7FA300DA7D79 /* TextureUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634EDC416BD7FA300DA7D79 /* TextureUtils.m */; };
+		165910C316BEFED900F09546 /* CellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 165910C216BEFED900F09546 /* CellNode.m */; };
 		1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DB16AB527F008C2B58 /* GridUtils.m */; };
 		1688E1DF16AB55CB008C2B58 /* PuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DE16AB55CB008C2B58 /* PuzzleLayer.m */; };
 		1688E1E116AB59B3008C2B58 /* Puzzles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1E016AB59B3008C2B58 /* Puzzles.plist */; };
@@ -174,8 +174,6 @@
 		1634ED8A16BD746000DA7D79 /* HandNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandNode.m; sourceTree = "<group>"; };
 		1634ED8C16BD76B000DA7D79 /* ArmNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArmNode.h; sourceTree = "<group>"; };
 		1634ED8D16BD76B000DA7D79 /* ArmNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArmNode.m; sourceTree = "<group>"; };
-		1634ED8F16BD76FD00DA7D79 /* CCNode+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CCNode+Utils.h"; path = "Utils/CCNode+Utils.h"; sourceTree = "<group>"; };
-		1634ED9016BD76FD00DA7D79 /* CCNode+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CCNode+Utils.m"; path = "Utils/CCNode+Utils.m"; sourceTree = "<group>"; };
 		1634ED9716BD7D0000DA7D79 /* arm_corner_NE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_corner_NE.png; sourceTree = "<group>"; };
 		1634ED9816BD7D0000DA7D79 /* arm_corner_NW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_corner_NW.png; sourceTree = "<group>"; };
 		1634ED9916BD7D0000DA7D79 /* arm_corner_SE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_corner_SE.png; sourceTree = "<group>"; };
@@ -199,6 +197,8 @@
 		1634EDAC16BD7D0000DA7D79 /* pipe_straight_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipe_straight_vertical.png; sourceTree = "<group>"; };
 		1634EDC316BD7FA300DA7D79 /* TextureUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureUtils.h; path = Utils/TextureUtils.h; sourceTree = "<group>"; };
 		1634EDC416BD7FA300DA7D79 /* TextureUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureUtils.m; path = Utils/TextureUtils.m; sourceTree = "<group>"; };
+		165910C116BEFED900F09546 /* CellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellNode.h; sourceTree = "<group>"; };
+		165910C216BEFED900F09546 /* CellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellNode.m; sourceTree = "<group>"; };
 		1688E1DA16AB527F008C2B58 /* GridUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridUtils.h; path = Utils/GridUtils.h; sourceTree = "<group>"; };
 		1688E1DB16AB527F008C2B58 /* GridUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridUtils.m; path = Utils/GridUtils.m; sourceTree = "<group>"; };
 		1688E1DD16AB55CB008C2B58 /* PuzzleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleLayer.h; sourceTree = "<group>"; };
@@ -503,6 +503,8 @@
 				1634ED8A16BD746000DA7D79 /* HandNode.m */,
 				1634ED8C16BD76B000DA7D79 /* ArmNode.h */,
 				1634ED8D16BD76B000DA7D79 /* ArmNode.m */,
+				165910C116BEFED900F09546 /* CellNode.h */,
+				165910C216BEFED900F09546 /* CellNode.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -540,8 +542,6 @@
 		1688E1D916AB51A2008C2B58 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1634ED8F16BD76FD00DA7D79 /* CCNode+Utils.h */,
-				1634ED9016BD76FD00DA7D79 /* CCNode+Utils.m */,
 				1688E1DA16AB527F008C2B58 /* GridUtils.h */,
 				1688E1DB16AB527F008C2B58 /* GridUtils.m */,
 				1688E1E516AB6319008C2B58 /* DataUtils.h */,
@@ -1191,9 +1191,9 @@
 				1688E1F216ACD7D5008C2B58 /* SpriteUtils.m in Sources */,
 				1634ED8B16BD746000DA7D79 /* HandNode.m in Sources */,
 				1634ED8E16BD76B000DA7D79 /* ArmNode.m in Sources */,
-				1634ED9116BD76FD00DA7D79 /* CCNode+Utils.m in Sources */,
 				1634EDC516BD7FA300DA7D79 /* TextureUtils.m in Sources */,
 				16966B4316BDB453003007FB /* CellObjectLibrary.m in Sources */,
+				165910C316BEFED900F09546 /* CellNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

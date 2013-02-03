@@ -8,6 +8,10 @@
 
 #import "CellObjectLibrary.h"
 
+static NSString *const kLibKeyHand = @"hand";
+static NSString *const kLibKeyArm = @"arm";
+static NSString *const kLibKeyPipe = @"pipe";
+
 @implementation CellObjectLibrary
 
 - (id)initWithGridSize:(GridCoord)size
@@ -32,7 +36,7 @@
 
 - (void)addObjectToLibrary:(id)object cell:(GridCoord)cell
 {
-    NSMutableArray *objects = [self objectListForCell:cell];
+    NSMutableArray *objects = [self objectsForCell:cell];
     if ([objects containsObject:object] == NO) {
         [objects addObject:object];
         [self.objectLibrary setObject:objects forKey:[self objectKeyForCell:cell]];
@@ -41,14 +45,14 @@
 
 - (void)removeObjectFromLibrary:(id)object cell:(GridCoord)cell
 {
-    NSMutableArray *objects = [self objectListForCell:cell];
+    NSMutableArray *objects = [self objectsForCell:cell];
     if ([objects containsObject:object]) {
         [objects removeObject:object];
         [self.objectLibrary setObject:objects forKey:[self objectKeyForCell:cell]];
     }
 }
 
-- (NSMutableArray *)objectListForCell:(GridCoord)cell
+- (NSMutableArray *)objectsForCell:(GridCoord)cell
 {
     return [self.objectLibrary objectForKey:[self objectKeyForCell:cell]];
 }

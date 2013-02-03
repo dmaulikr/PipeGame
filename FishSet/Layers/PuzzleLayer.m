@@ -130,7 +130,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     // handle for touch within grid
     if ([GridUtils isCellInBounds:touchCell gridSize:self.gridSize]) {
         
-
         // touch a cell to move to its position if path is free and in a line
         GridCoord moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
         
@@ -149,9 +148,10 @@ static NSString *const kImageArmUnit = @"armUnit.png";
                 kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:moveToCell];
                 [self.handConroller setDirectionFacing:shouldFace];
                 self.handConroller.position = [GridUtils absolutePositionForGridCoord:moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                
+                return YES;
             }
         }
-        return YES;
     }
     return NO;
 }
@@ -171,13 +171,18 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction];
     }
     
+    // need to add as child, to the armNodes stack and to the cell object library
     [self addChild:newArmNode];
     [self.armNodes addObject:newArmNode];
-    
-    
     [self.cellObjectLibrary addObjectToLibrary:newArmNode cell:cell];
-
 }
+
+//- (void)removeArmNodesFromCell:(GridCoord)cell
+//{
+//    NSArray *objects = [self.cellObjectLibrary objectListForCell:cell];
+//    
+//    
+//}
 
 
 #pragma mark - helpers
@@ -212,8 +217,8 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 - (BOOL)isCellBlocked:(GridCoord)cell
 {
-    NSMutableArray *objects = [self.cellObjectLibrary objectListForCell:cell];
-    for (CCNode *node in objects) {
+    NSMutableArray *objects = [self.cellObjectLibrary objectsForCell:cell];
+    for (CellNode *node in objects) {
         if (node.shouldBlockMovement) {
             return YES;
         }

@@ -16,6 +16,6 @@
 - (id)initWithGridSize:(GridCoord)size;
 - (void)addObjectToLibrary:(id)object cell:(GridCoord)cell;
 - (void)removeObjectFromLibrary:(id)object cell:(GridCoord)cell;
-- (NSMutableArray *)objectListForCell:(GridCoord)cell;
+- (NSMutableArray *)objectsForCell:(GridCoord)cell;
 
 @end

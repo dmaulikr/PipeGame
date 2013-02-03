@@ -6,11 +6,10 @@
 //
 //
 
-#import "cocos2d.h"
+#import "CellNode.h"
 #import "GridUtils.h"
-#import "CCNode+Utils.h"
 
-@interface HandNode : CCNode 
+@interface HandNode : CellNode
 
 @property (nonatomic, strong) CCSprite *handSprite;
 @property (assign) kDirection facing;
