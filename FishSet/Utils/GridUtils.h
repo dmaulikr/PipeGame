@@ -30,12 +30,12 @@ GridCoordMake(const int x, const int y)
     
 }
 
-#pragma mark - coord to position conversions
+#pragma mark - conversions
 
-// absolute center position on a grid for grid coordinate
+// absolute position on a grid for grid coordinate, bottom left
 + (CGPoint) absolutePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
 
-// grid coordinate for absolute position on a grid (any position inside a grid unit)
+// grid coordinate for absolute position on a grid
 + (GridCoord) gridCoordForAbsolutePosition:(CGPoint)position unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
 
 // absolute position made for sprite (anchor point middle) on a grid for grid coordinate
@@ -46,26 +46,34 @@ GridCoordMake(const int x, const int y)
 // draws grid lines, call in layer's draw method
 + (void)drawGridWithSize:(GridCoord)gridSize unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
 
-#pragma mark - compare
+#pragma mark - distance
 
 // number of cell steps to get from starting coord to ending coord, no diagonal path allowed
 + (int)numberOfStepsBetweenStart:(GridCoord)start end:(GridCoord)end;
 
+#pragma mark - directions
+
 // direction by comparing starting coord and ending coord, no diagonal path allowed
 + (kDirection)directionFromStart:(GridCoord)start end:(GridCoord)end;
 
++ (kDirection)oppositeDirection:(kDirection)direction;
+
++ (GridCoord)stepInDirection:(kDirection)direction fromCell:(GridCoord)cell;
+
+
+#pragma mark - compare
+
 // checks for gridcoords as same coordinate
-+ (BOOL)isCell:(GridCoord)cell equalToCell:(GridCoord)cell;
++ (BOOL)isCell:(GridCoord)firstCell equalToCell:(GridCoord)secondCell;
+
++ (BOOL)isCellInBounds:(GridCoord)cell gridSize:(GridCoord)size;
+
+#pragma mark - perform
 
 // iterate between a path strictly up/down or left/right performing block with cell
 + (void)performBlockBetweenFirstCell:(GridCoord)firstCell
                           secondCell:(GridCoord)secondCell
                                block:(void (^)(GridCoord cell, kDirection direction))block;
-
-+ (GridCoord)stepInDirection:(kDirection)direction fromCell:(GridCoord)cell;
-
-+ (kDirection)oppositeDirection:(kDirection)direction;
-
 
 
 @end

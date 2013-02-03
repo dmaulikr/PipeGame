@@ -14,7 +14,8 @@
     
 }
 
-#pragma mark - coord to position conversions
+
+#pragma mark - conversions
 
 // absolute position on a grid for grid coordinate, bottom left
 + (CGPoint) absolutePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin
@@ -68,7 +69,8 @@
     }
 }
 
-#pragma mark - compare 
+
+#pragma mark - distance
 
 // number of cell steps to get from starting coord to ending coord, no diagonal path allowed
 + (int)numberOfStepsBetweenStart:(GridCoord)start end:(GridCoord)end
@@ -86,6 +88,9 @@
         return 0;
     }
 }
+
+
+#pragma mark - directions
 
 // direction by comparing starting coord and ending coord, no diagonal path allowed
 + (kDirection)directionFromStart:(GridCoord)start end:(GridCoord)end
@@ -112,11 +117,58 @@
     return kDirectionNone;
 }
 
++ (kDirection)oppositeDirection:(kDirection)direction
+{
+    switch (direction) {
+        case kDirectionDown:
+            return kDirectionUp;
+        case kDirectionUp:
+            return kDirectionDown;
+        case kDirectionLeft:
+            return kDirectionRight;
+        case kDirectionRight:
+            return kDirectionLeft;
+        default:
+            NSLog(@"warning: invalid direction given, returning kDirectionNone");
+            return kDirectionNone;
+    }
+}
+
++ (GridCoord)stepInDirection:(kDirection)direction fromCell:(GridCoord)cell
+{
+    if (direction == kDirectionUp) {
+        return GridCoordMake(cell.x, cell.y + 1);
+    }
+    else if (direction == kDirectionRight) {
+        return GridCoordMake(cell.x + 1, cell.y);
+    }
+    else if (direction == kDirectionDown) {
+        return GridCoordMake(cell.x, cell.y - 1);
+    }
+    else if (direction == kDirectionLeft) {
+        return GridCoordMake(cell.x - 1, cell.y);
+    }
+    else {
+        NSLog(@"warning: unrecognized direction");
+        return cell;
+    }
+}
+
+
+#pragma mark - compare
+
 // checks for gridcoords as same coordinate
 + (BOOL)isCell:(GridCoord)firstCell equalToCell:(GridCoord)secondCell
 {
     return ((firstCell.x == secondCell.x) && (firstCell.y == secondCell.y));
 }
+
++ (BOOL)isCellInBounds:(GridCoord)cell gridSize:(GridCoord)size
+{
+    return (cell.x > 0 && cell.x <= size.x && cell.y > 0 && cell.y <= size.y);
+}
+
+#pragma mark - perform
 
 // iterate between a path strictly up/down or left/right performing block with cell
 + (void)performBlockBetweenFirstCell:(GridCoord)firstCell
@@ -149,43 +201,6 @@
             block(cell, movingDirection);
         }
     } 
-}
-
-+ (GridCoord)stepInDirection:(kDirection)direction fromCell:(GridCoord)cell
-{
-    if (direction == kDirectionUp) {
-        return GridCoordMake(cell.x, cell.y + 1);
-    }
-    else if (direction == kDirectionRight) {
-        return GridCoordMake(cell.x + 1, cell.y);
-    }
-    else if (direction == kDirectionDown) {
-        return GridCoordMake(cell.x, cell.y - 1);
-    }
-    else if (direction == kDirectionLeft) {
-        return GridCoordMake(cell.x - 1, cell.y);
-    }
-    else {
-        NSLog(@"warning: unrecognized direction");
-        return cell;
-    }
-}
-
-+ (kDirection)oppositeDirection:(kDirection)direction
-{
-    switch (direction) {
-        case kDirectionDown:
-            return kDirectionUp;
-        case kDirectionUp:
-            return kDirectionDown;
-        case kDirectionLeft:
-            return kDirectionRight;
-        case kDirectionRight:
-            return kDirectionLeft;
-        default:
-            NSLog(@"warning: invalid direction given, returning kDirectionNone");
-            return kDirectionNone;
-    }
 }
 
 
