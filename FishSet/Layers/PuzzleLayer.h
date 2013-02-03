@@ -31,6 +31,9 @@
 
 @property (nonatomic, strong) NSMutableArray *armNodes;
 
+// touch
+@property (assign) GridCoord cellFromLastTouch;
+
 // puzzles defined in Puzzles.plist
 + (CCScene *)sceneWithPuzzle:(int)puzzle;
 

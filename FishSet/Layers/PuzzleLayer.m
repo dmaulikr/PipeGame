@@ -104,6 +104,34 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
     GridCoord touchCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
     
+    BOOL didHandleGridTouch = [self tryGridTouchAtPosition:touchPosition cell:touchCell];
+    if (didHandleGridTouch) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
+    GridCoord touchCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
+    
+    if ([GridUtils isCell:self.cellFromLastTouch equalToCell:touchCell] == NO) {
+        self.cellFromLastTouch = touchCell;
+        [self tryGridTouchAtPosition:touchPosition cell:touchCell];
+    }  
+}
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+
+}
+
+#pragma mark - handle grid touch
+
+- (BOOL)tryGridTouchAtPosition:(CGPoint)touchPosition cell:(GridCoord)touchCell
+{
     // handle for touch within grid
     if ([GridUtils isCellInBounds:touchCell gridSize:self.gridSize]) {
         
@@ -125,16 +153,12 @@ static NSString *const kImageArmUnit = @"armUnit.png";
                 // hand sprite
                 kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:self.handConroller.moveToCell];
                 [self.handConroller setDirectionFacing:shouldFace];
-                self.handConroller.position = [GridUtils absolutePositionForGridCoord:self.handConroller.moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];            
+                self.handConroller.position = [GridUtils absolutePositionForGridCoord:self.handConroller.moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];
             }
         }
+        return YES;
     }
-    return YES;
-}
-
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
-{
-
+    return NO;
 }
 
 
