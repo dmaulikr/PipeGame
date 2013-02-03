@@ -14,8 +14,6 @@
 
 @property (nonatomic, strong) CCSprite *handSprite;
 @property (assign) kDirection facing;
-@property (assign) GridCoord moveFromCell;
-@property (assign) GridCoord moveToCell;
 
 - (id)initWithContentSize:(CGSize)size;
 - (void)setDirectionFacing:(kDirection)direction;

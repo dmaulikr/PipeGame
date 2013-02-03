@@ -135,25 +135,25 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     // handle for touch within grid
     if ([GridUtils isCellInBounds:touchCell gridSize:self.gridSize]) {
         
+
         // touch a cell to move to its position if path is free and in a line
-        self.handConroller.moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
-        self.handConroller.moveFromCell = self.handConroller.cell;
+        GridCoord moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
         
-        if ([GridUtils isCell:self.handConroller.moveToCell equalToCell:self.handConroller.moveFromCell] == NO) {
-            if ([self isLinearPathFreeBetweenStart:self.handConroller.moveFromCell end:self.handConroller.moveToCell]) {
+        if ([GridUtils isCell:moveToCell equalToCell:self.handConroller.cell] == NO) {
+            if ([self isLinearPathFreeBetweenStart:self.handConroller.cell end:moveToCell]) {
                 
                 // arm units
-                [GridUtils performBlockBetweenFirstCell:self.handConroller.moveFromCell secondCell:self.handConroller.moveToCell block:^(GridCoord cell, kDirection direction) {
+                [GridUtils performBlockBetweenFirstCell:self.handConroller.cell secondCell:moveToCell block:^(GridCoord cell, kDirection direction) {
                     
-                    if ([GridUtils isCell:cell equalToCell:self.handConroller.moveToCell] == NO) {
+                    if ([GridUtils isCell:cell equalToCell:moveToCell] == NO) {
                         [self addArmNodeAtCell:cell movingDirection:direction];
                     }
                 }];
                 
                 // hand sprite
-                kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:self.handConroller.moveToCell];
+                kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:moveToCell];
                 [self.handConroller setDirectionFacing:shouldFace];
-                self.handConroller.position = [GridUtils absolutePositionForGridCoord:self.handConroller.moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                self.handConroller.position = [GridUtils absolutePositionForGridCoord:moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];
             }
         }
         return YES;
