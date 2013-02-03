@@ -12,22 +12,31 @@
 #import "SpriteUtils.h"
 #import "PuzzleLayer.h"
 
+NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
+
 @implementation ArmNode
 
 - (id)initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit
 {
     self = [super init];
     if (self) {
-        self.contentSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
         
+        // size, position
+        self.contentSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
+        self.position = [GridUtils absolutePositionForGridCoord:cell unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+        
+        // setup for sending notifications
+        self.shouldSendPGTouchNotifications = YES;
+        self.pgTouchNotification = kPGNotificationArmNodeTouched;
+        
+        // setup sprite with correct image 
         kArmExits exits = [self armExitsTypeForFirstExit:firstExit secondExit:secondExit];
         NSString *textureKey = [self textureKeyForArmExits:exits];
-        
         _sprite = [SpriteUtils spriteWithTextureKey:textureKey];
         _sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
         [self addChild:_sprite];
         
-        self.position = [GridUtils absolutePositionForGridCoord:cell unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+        
     }
     return self;
 }

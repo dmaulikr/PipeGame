@@ -21,6 +21,9 @@ typedef enum
     kArmExitsLeftRight,
 } kArmExits;
 
+FOUNDATION_EXPORT NSString *const kPGNotificationArmNodeTouched;
+
+
 @interface ArmNode : CellNode
 
 @property (nonatomic, strong) CCSprite *sprite;

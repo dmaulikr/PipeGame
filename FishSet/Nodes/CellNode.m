@@ -10,7 +10,17 @@
 #import "GameConstants.h"
 #import "PuzzleLayer.h"
 
+
 @implementation CellNode
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _shouldSendPGTouchNotifications = NO;
+    }
+    return self;
+}
 
 - (GridCoord)cell
 {
@@ -27,8 +37,9 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    
     if ([self containsTouch:touch]) {
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.pgTouchNotification object:self];
         return YES;
     }
     return NO;
@@ -48,6 +59,7 @@
 
 - (BOOL)containsTouch:(UITouch *)touch
 {
+    // instead of bounding box we must use custom rect w/ origin (0, 0) because the touch is relative to our node origin
     CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
     CGRect rect = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
     if (CGRectContainsPoint(rect, touchPosition)) {

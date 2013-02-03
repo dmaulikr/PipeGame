@@ -9,7 +9,11 @@
 #import "cocos2d.h"
 #import "GridUtils.h"
 
+
 @interface CellNode : CCNode <CCTargetedTouchDelegate>
+
+@property (assign) BOOL shouldSendPGTouchNotifications;
+@property (copy) NSString *pgTouchNotification;
 
 - (GridCoord)cell;
 - (BOOL)shouldBlockMovement;

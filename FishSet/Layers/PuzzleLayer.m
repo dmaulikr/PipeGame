@@ -57,10 +57,17 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         
         // stack of arm nodes
         _armNodes = [NSMutableArray array];
+        
+        
     }
     return self;
 }
 
+- (void)registerWithNotifications
+{
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(handleArmNodeTouched:) name:kPGNotificationArmNodeTouched object:nil];
+}
 
 #pragma mark - globals
 
@@ -75,10 +82,12 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 -(void) onEnterTransitionDidFinish
 {
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
+    [self registerWithNotifications];
 }
 -(void) onExit
 {
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -154,6 +163,15 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         }
     }
     return NO;
+}
+
+
+#pragma mark - handle cell nodes touched
+
+- (void)handleArmNodeTouched:(NSNotification *)notification
+{
+    ArmNode *armNode = (ArmNode *)notification.object;
+    NSLog(@"\narm node touched: %i, %i", [armNode cell].x, [armNode cell].y);
 }
 
 
