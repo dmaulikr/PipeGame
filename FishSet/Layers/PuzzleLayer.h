@@ -18,9 +18,7 @@
 @property (assign) GridCoord gridSize;
 @property (assign) CGPoint gridOrigin;
 
-// grid coordinate keys of cells blocking hand movement
-@property (nonatomic, strong) NSMutableArray *cellsBlocked;
-
+// list of game objects at each cell
 @property (nonatomic, strong) CellObjectLibrary *cellObjectLibrary;
 
 // hand and arm 

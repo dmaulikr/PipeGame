@@ -20,7 +20,6 @@
 {
     self = [super init];
     if (self) {
-        
         self.contentSize = size;
         
         _handSprite = [SpriteUtils spriteWithTextureKey:kImageNameHand];

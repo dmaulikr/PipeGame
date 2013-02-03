@@ -12,5 +12,6 @@
 @interface CCNode (Utils)
 
 - (GridCoord)cell;
+- (BOOL)shouldBlockMovement;
 
 @end

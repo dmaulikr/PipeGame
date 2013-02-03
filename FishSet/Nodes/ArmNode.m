@@ -18,7 +18,6 @@
 {
     self = [super init];
     if (self) {
-        
         self.contentSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
         
         kArmExits exits = [self armExitsTypeForFirstExit:firstExit secondExit:secondExit];
@@ -32,6 +31,15 @@
     }
     return self;
 }
+
+#pragma mark - CCNode+Utils
+
+- (BOOL)shouldBlockMovement
+{
+    return YES;
+}
+
+#pragma mark - image key
 
 - (NSString *)textureKeyForArmExits:(kArmExits)exits
 {

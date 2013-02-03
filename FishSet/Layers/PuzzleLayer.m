@@ -40,13 +40,8 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _gridSize = [DataUtils puzzleSize:puzzle];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
         
-        
-        // TODO: replace with cell object lib
-        _cellsBlocked = [NSMutableArray array];
-        
         // cell object library
         _cellObjectLibrary = [[CellObjectLibrary alloc] initWithGridSize:_gridSize];
-        
         
         // hand
         _handConroller = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
@@ -181,7 +176,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     
     
     [self.cellObjectLibrary addObjectToLibrary:newArmNode cell:cell];
-//    [self.cellsBlocked addObject:[self objectKeyForCell:cell]];
 
 }
 
@@ -219,10 +213,8 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 - (BOOL)isCellBlocked:(GridCoord)cell
 {
     NSMutableArray *objects = [self.cellObjectLibrary objectListForCell:cell];
-    for (id obj in objects) {
-        
-        // add to this as we have more classes that block
-        if ([obj isKindOfClass:[ArmNode class]]) {
+    for (CCNode *node in objects) {
+        if (node.shouldBlockMovement) {
             return YES;
         }
     }

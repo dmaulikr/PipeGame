@@ -17,4 +17,10 @@
     return [GridUtils gridCoordForAbsolutePosition:self.position unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
 }
 
+// implementing class should overwrite to return YES
+- (BOOL)shouldBlockMovement
+{
+    return NO;
+}
+
 @end
