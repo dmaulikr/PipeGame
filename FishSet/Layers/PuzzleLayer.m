@@ -44,13 +44,13 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _cellObjectLibrary = [[CellObjectLibrary alloc] initWithGridSize:_gridSize];
         
         // hand
-        _handConroller = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
+        _handNode = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
         _handEntryCoord = [DataUtils puzzleEntryCoord:puzzle];
-        _handConroller.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
-        [self addChild:_handConroller];
+        _handNode.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
+        [self addChild:_handNode];
         
         kDirection entryDirection = [DataUtils puzzleEntryDirection:puzzle];
-        [_handConroller setDirectionFacing:entryDirection];
+        [_handNode setDirectionFacing:entryDirection];
         _lastHandCell = _handEntryCoord;
         
         _handEntersFrom = [GridUtils oppositeDirection:entryDirection];
@@ -142,11 +142,11 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         // touch a cell to move to its position if path is free and in a line
         GridCoord moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
         
-        if ([GridUtils isCell:moveToCell equalToCell:self.handConroller.cell] == NO) {
-            if ([self isLinearPathFreeBetweenStart:self.handConroller.cell end:moveToCell]) {
+        if ([GridUtils isCell:moveToCell equalToCell:self.handNode.cell] == NO) {
+            if ([self isLinearPathFreeBetweenStart:self.handNode.cell end:moveToCell]) {
                 
                 // arm units
-                [GridUtils performBlockBetweenFirstCell:self.handConroller.cell secondCell:moveToCell block:^(GridCoord cell, kDirection direction) {
+                [GridUtils performBlockBetweenFirstCell:self.handNode.cell secondCell:moveToCell block:^(GridCoord cell, kDirection direction) {
                     
                     if ([GridUtils isCell:cell equalToCell:moveToCell] == NO) {
                         [self addArmNodeAtCell:cell movingDirection:direction];
@@ -154,9 +154,9 @@ static NSString *const kImageArmUnit = @"armUnit.png";
                 }];
                 
                 // hand sprite
-                kDirection shouldFace = [GridUtils directionFromStart:self.handConroller.cell end:moveToCell];
-                [self.handConroller setDirectionFacing:shouldFace];
-                self.handConroller.position = [GridUtils absolutePositionForGridCoord:moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                kDirection shouldFace = [GridUtils directionFromStart:self.handNode.cell end:moveToCell];
+                [self.handNode setDirectionFacing:shouldFace];
+                self.handNode.position = [GridUtils absolutePositionForGridCoord:moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];
                 
                 return YES;
             }
@@ -170,8 +170,24 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 - (void)handleArmNodeTouched:(NSNotification *)notification
 {
-    ArmNode *armNode = (ArmNode *)notification.object;
-    NSLog(@"\narm node touched: %i, %i", [armNode cell].x, [armNode cell].y);
+    ArmNode *nodeTouched = (ArmNode *)notification.object;
+    CGPoint nodePosition = nodeTouched.position;
+    int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
+    
+    // move hand and rotate to correct direction
+    self.handNode.position = nodePosition;
+    kDirection shouldFace;
+    if (touchedIndex > 0) {
+        ArmNode *newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 1];
+        shouldFace = [GridUtils directionFromStart:[newLastArmNode cell] end:[nodeTouched cell]];
+    }
+    else {
+        shouldFace = [GridUtils oppositeDirection:self.handEntersFrom];
+    }
+    [self.handNode setDirectionFacing:shouldFace];
+    
+    // remove arm nodes
+    [self removeArmNodesFromIndex:touchedIndex];
 }
 
 
@@ -195,20 +211,20 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     [self.cellObjectLibrary addObjectToLibrary:newArmNode cell:cell];
 }
 
-//- (void)removeArmNodesFromCell:(GridCoord)cell
-//{
-//    NSArray *objects = [self.cellObjectLibrary objectListForCell:cell];
-//    
-//    
-//}
+- (void)removeArmNodesFromIndex:(int)removeFromIndex
+{
+    int lastIndex = [self.armNodes count] - 1;
+    for (int i = lastIndex; i >= removeFromIndex; i--) {
+        ArmNode *removeArmNode = (ArmNode *)[self.armNodes objectAtIndex:i];
+        GridCoord removeArmCell = [removeArmNode cell];
+        [self.cellObjectLibrary removeObjectFromLibrary:removeArmNode cell:removeArmCell];
+        [self.armNodes removeLastObject];
+        [self removeChild:removeArmNode cleanup:YES];
+    }
+}
 
 
 #pragma mark - helpers
-
-- (NSString *)objectKeyForCell:(GridCoord)cell
-{
-    return [NSString stringWithFormat:@"%i%i", cell.x, cell.y];
-}
 
 - (BOOL)isLinearPathFreeBetweenStart:(GridCoord)start end:(GridCoord)end
 {

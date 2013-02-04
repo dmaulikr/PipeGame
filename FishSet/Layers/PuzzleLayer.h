@@ -22,7 +22,7 @@
 @property (nonatomic, strong) CellObjectLibrary *cellObjectLibrary;
 
 // hand and arm 
-@property (nonatomic, strong) HandNode *handConroller;
+@property (nonatomic, strong) HandNode *handNode;
 @property (assign) GridCoord handEntryCoord;
 @property (assign) GridCoord lastHandCell;
 @property (assign) kDirection handEntersFrom;
