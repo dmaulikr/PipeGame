@@ -113,7 +113,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         return YES;
     }
     
-    return NO;
+    return YES;
 }
 
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event

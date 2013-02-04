@@ -35,8 +35,6 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
         _sprite = [SpriteUtils spriteWithTextureKey:textureKey];
         _sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
         [self addChild:_sprite];
-        
-        
     }
     return self;
 }
