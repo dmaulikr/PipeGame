@@ -9,9 +9,12 @@
 #import "CellNode.h"
 #import "GridUtils.h"
 
+FOUNDATION_EXPORT NSString *const kPGNotificationHandNodeTouched;
+
+
 @interface HandNode : CellNode
 
-@property (nonatomic, strong) CCSprite *handSprite;
+@property (nonatomic, strong) CCSprite *sprite;
 @property (assign) kDirection facing;
 
 - (id)initWithContentSize:(CGSize)size;

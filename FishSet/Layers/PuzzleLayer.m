@@ -54,6 +54,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _lastHandCell = _handEntryCoord;
         
         _handEntersFrom = [GridUtils oppositeDirection:entryDirection];
+        _isHandNodeSelected = NO;
         
         // stack of arm nodes
         _armNodes = [NSMutableArray array];
@@ -66,10 +67,10 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 - (void)registerWithNotifications
 {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    
     [notificationCenter addObserver:self selector:@selector(handleArmNodeTouched:) name:kPGNotificationArmNodeTouched object:nil];
+    [notificationCenter addObserver:self selector:@selector(handleHandNodeTouched:) name:kPGNotificationHandNodeTouched object:nil];
 }
-
-#pragma mark - globals
 
 + (CGPoint)sharedGridOrigin
 {
@@ -105,14 +106,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
-    GridCoord touchCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
-    
-    BOOL didHandleGridTouch = [self tryGridTouchAtPosition:touchPosition cell:touchCell];
-    if (didHandleGridTouch) {
-        return YES;
-    }
-    
     return YES;
 }
 
@@ -121,16 +114,50 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
     GridCoord touchCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
     
-    if ([GridUtils isCell:self.cellFromLastTouch equalToCell:touchCell] == NO) {
-        self.cellFromLastTouch = touchCell;
-        [self tryGridTouchAtPosition:touchPosition cell:touchCell];
-    }  
+    if (self.isHandNodeSelected) {
+        if ([GridUtils isCell:self.cellFromLastTouch equalToCell:touchCell] == NO) {
+            self.cellFromLastTouch = touchCell;
+            [self tryGridTouchAtPosition:touchPosition cell:touchCell];
+        }
+    }
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-
+    self.handNode.sprite.color = ccc3(255, 255, 255);
+    self.isHandNodeSelected = NO;
 }
+
+#pragma mark - cell node touches
+
+- (void)handleHandNodeTouched:(NSNotification *)notification
+{
+    self.handNode.sprite.color = ccc3(150, 255, 150);
+    self.isHandNodeSelected = YES;
+}
+
+- (void)handleArmNodeTouched:(NSNotification *)notification
+{
+    ArmNode *nodeTouched = (ArmNode *)notification.object;
+    CGPoint nodePosition = nodeTouched.position;
+    int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
+    
+    // move hand and rotate to correct direction
+    self.handNode.position = nodePosition;
+    kDirection shouldFace;
+    if (touchedIndex > 0) {
+        ArmNode *newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 1];
+        shouldFace = [GridUtils directionFromStart:[newLastArmNode cell] end:[nodeTouched cell]];
+    }
+    else {
+        shouldFace = [GridUtils oppositeDirection:self.handEntersFrom];
+    }
+    [self.handNode setDirectionFacing:shouldFace];
+    
+    // remove arm nodes
+    [self removeArmNodesFromIndex:touchedIndex];
+}
+
 
 #pragma mark - handle grid touch
 
@@ -166,32 +193,10 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 }
 
 
-#pragma mark - handle cell nodes touched
-
-- (void)handleArmNodeTouched:(NSNotification *)notification
-{
-    ArmNode *nodeTouched = (ArmNode *)notification.object;
-    CGPoint nodePosition = nodeTouched.position;
-    int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
-    
-    // move hand and rotate to correct direction
-    self.handNode.position = nodePosition;
-    kDirection shouldFace;
-    if (touchedIndex > 0) {
-        ArmNode *newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 1];
-        shouldFace = [GridUtils directionFromStart:[newLastArmNode cell] end:[nodeTouched cell]];
-    }
-    else {
-        shouldFace = [GridUtils oppositeDirection:self.handEntersFrom];
-    }
-    [self.handNode setDirectionFacing:shouldFace];
-    
-    // remove arm nodes
-    [self removeArmNodesFromIndex:touchedIndex];
-}
 
 
-#pragma mark - arm
+
+#pragma mark - arm 
 
 - (void)addArmNodeAtCell:(GridCoord)cell movingDirection:(kDirection)direction
 {  
@@ -222,6 +227,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         [self removeChild:removeArmNode cleanup:YES];
     }
 }
+
 
 
 #pragma mark - helpers

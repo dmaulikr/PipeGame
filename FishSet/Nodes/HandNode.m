@@ -14,6 +14,9 @@
 #import "PuzzleLayer.h"
 #import "TextureUtils.h"
 
+NSString *const kPGNotificationHandNodeTouched = @"HandNodeTouched";
+
+
 @implementation HandNode
 
 - (id)initWithContentSize:(CGSize)size
@@ -22,9 +25,13 @@
     if (self) {
         self.contentSize = size;
         
-        _handSprite = [SpriteUtils spriteWithTextureKey:kImageNameHand];
-        _handSprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
-        [self addChild:_handSprite];
+        _sprite = [SpriteUtils spriteWithTextureKey:kImageNameHand];
+        _sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
+        [self addChild:_sprite];
+        
+        // setup for sending notifications
+        self.shouldSendPGTouchNotifications = YES;
+        self.pgTouchNotification = kPGNotificationHandNodeTouched;
         
         _facing = kDirectionNone;
     }
@@ -33,7 +40,7 @@
 
 - (void)setDirectionFacing:(kDirection)direction
 {
-    self.handSprite.rotation = [SpriteUtils degreesForDirection:direction];
+    self.sprite.rotation = [SpriteUtils degreesForDirection:direction];
     self.facing = direction;
 }
 

@@ -23,11 +23,12 @@
 
 // hand and arm 
 @property (nonatomic, strong) HandNode *handNode;
+@property (nonatomic, strong) NSMutableArray *armNodes;
 @property (assign) GridCoord handEntryCoord;
 @property (assign) GridCoord lastHandCell;
 @property (assign) kDirection handEntersFrom;
+@property (assign) BOOL isHandNodeSelected;
 
-@property (nonatomic, strong) NSMutableArray *armNodes;
 
 // touch
 @property (assign) GridCoord cellFromLastTouch;

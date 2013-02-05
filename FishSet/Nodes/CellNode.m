@@ -27,23 +27,13 @@
     return [GridUtils gridCoordForAbsolutePosition:self.position unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
 }
 
-// implementing class should overwrite to return YES if they want to block arm movement
 - (BOOL)shouldBlockMovement
 {
     return NO;
 }
 
-#pragma mark - targeted touch delegate
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    
-    if ([self containsTouch:touch]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:self.pgTouchNotification object:self];
-        return YES;
-    }
-    return NO;
-}
+#pragma mark - setup / teardown
 
 - (void)onEnter
 {
@@ -56,6 +46,21 @@
 	[[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 	[super onExit];
 }
+
+
+#pragma mark - targeted touch delegate
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if ([self containsTouch:touch] && self.shouldSendPGTouchNotifications) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.pgTouchNotification object:self];
+        return YES;
+    }
+    return NO;
+}
+
+
+#pragma mark - touch utils
 
 - (BOOL)containsTouch:(UITouch *)touch
 {
