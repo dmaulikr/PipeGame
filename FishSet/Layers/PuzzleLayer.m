@@ -14,6 +14,7 @@
 #import "GridUtils.h"
 #import "TextureUtils.h"
 #import "CellObjectLibrary.h"
+#import "ColorUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 
@@ -74,7 +75,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 + (CGPoint)sharedGridOrigin
 {
-    return CGPointMake(100, 100);
+    return CGPointMake(0, 0);
 }
 
 
@@ -124,16 +125,18 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    self.handNode.sprite.color = ccc3(255, 255, 255);
-    self.isHandNodeSelected = NO;
+    if (self.isHandNodeSelected == YES) {
+        self.isHandNodeSelected = NO;
+        [self tintHandAndArm:ccWHITE];
+    }
 }
 
 #pragma mark - cell node touches
 
 - (void)handleHandNodeTouched:(NSNotification *)notification
 {
-    self.handNode.sprite.color = ccc3(150, 255, 150);
     self.isHandNodeSelected = YES;
+    [self tintHandAndArm:[ColorUtils tintArmSelected]];
 }
 
 - (void)handleArmNodeTouched:(NSNotification *)notification
@@ -159,7 +162,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 }
 
 
-#pragma mark - handle grid touch
+#pragma mark - hand
 
 - (BOOL)tryGridTouchAtPosition:(CGPoint)touchPosition cell:(GridCoord)touchCell
 {
@@ -192,11 +195,16 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     return NO;
 }
 
+- (void)tintHandAndArm:(ccColor3B)color
+{
+    self.handNode.sprite.color = color;
+    for (ArmNode *arm in self.armNodes) {
+        arm.sprite.color = color;
+    }
+}
 
 
-
-
-#pragma mark - arm 
+#pragma mark - arm
 
 - (void)addArmNodeAtCell:(GridCoord)cell movingDirection:(kDirection)direction
 {  
@@ -208,6 +216,10 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     }
     else {
         newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction];
+    }
+    
+    if (self.isHandNodeSelected) {
+        newArmNode.sprite.color = [ColorUtils tintArmSelected];
     }
     
     // need to add as child, to the armNodes stack and to the cell object library
@@ -227,7 +239,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         [self removeChild:removeArmNode cleanup:YES];
     }
 }
-
 
 
 #pragma mark - helpers

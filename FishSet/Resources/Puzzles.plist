@@ -4,20 +4,20 @@
 <array>
 	<dict>
 		<key>entry direction</key>
-		<integer>1</integer>
+		<integer>2</integer>
 		<key>entry coord</key>
 		<dict>
 			<key>x</key>
 			<integer>1</integer>
 			<key>y</key>
-			<integer>1</integer>
+			<integer>7</integer>
 		</dict>
 		<key>size</key>
 		<dict>
 			<key>x</key>
-			<integer>6</integer>
+			<integer>10</integer>
 			<key>y</key>
-			<integer>5</integer>
+			<integer>7</integer>
 		</dict>
 	</dict>
 </array>

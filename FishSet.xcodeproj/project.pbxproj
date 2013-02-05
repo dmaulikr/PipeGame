@@ -32,6 +32,7 @@
 		1634EDC216BD7D0000DA7D79 /* pipe_straight_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 1634EDAC16BD7D0000DA7D79 /* pipe_straight_vertical.png */; };
 		1634EDC516BD7FA300DA7D79 /* TextureUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634EDC416BD7FA300DA7D79 /* TextureUtils.m */; };
 		165910C316BEFED900F09546 /* CellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 165910C216BEFED900F09546 /* CellNode.m */; };
+		1668332116C0BB7400ECA3EC /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1668332016C0BB7400ECA3EC /* ColorUtils.m */; };
 		1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DB16AB527F008C2B58 /* GridUtils.m */; };
 		1688E1DF16AB55CB008C2B58 /* PuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DE16AB55CB008C2B58 /* PuzzleLayer.m */; };
 		1688E1E116AB59B3008C2B58 /* Puzzles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1E016AB59B3008C2B58 /* Puzzles.plist */; };
@@ -199,6 +200,8 @@
 		1634EDC416BD7FA300DA7D79 /* TextureUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureUtils.m; path = Utils/TextureUtils.m; sourceTree = "<group>"; };
 		165910C116BEFED900F09546 /* CellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellNode.h; sourceTree = "<group>"; };
 		165910C216BEFED900F09546 /* CellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellNode.m; sourceTree = "<group>"; };
+		1668331F16C0BB7400ECA3EC /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorUtils.h; path = Utils/ColorUtils.h; sourceTree = "<group>"; };
+		1668332016C0BB7400ECA3EC /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtils.m; path = Utils/ColorUtils.m; sourceTree = "<group>"; };
 		1688E1DA16AB527F008C2B58 /* GridUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridUtils.h; path = Utils/GridUtils.h; sourceTree = "<group>"; };
 		1688E1DB16AB527F008C2B58 /* GridUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridUtils.m; path = Utils/GridUtils.m; sourceTree = "<group>"; };
 		1688E1DD16AB55CB008C2B58 /* PuzzleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleLayer.h; sourceTree = "<group>"; };
@@ -554,6 +557,8 @@
 				1634EDC416BD7FA300DA7D79 /* TextureUtils.m */,
 				16966B4116BDB453003007FB /* CellObjectLibrary.h */,
 				16966B4216BDB453003007FB /* CellObjectLibrary.m */,
+				1668331F16C0BB7400ECA3EC /* ColorUtils.h */,
+				1668332016C0BB7400ECA3EC /* ColorUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1194,6 +1199,7 @@
 				1634EDC516BD7FA300DA7D79 /* TextureUtils.m in Sources */,
 				16966B4316BDB453003007FB /* CellObjectLibrary.m in Sources */,
 				165910C316BEFED900F09546 /* CellNode.m in Sources */,
+				1668332116C0BB7400ECA3EC /* ColorUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
