@@ -33,6 +33,8 @@
 		1634EDC516BD7FA300DA7D79 /* TextureUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1634EDC416BD7FA300DA7D79 /* TextureUtils.m */; };
 		165910C316BEFED900F09546 /* CellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 165910C216BEFED900F09546 /* CellNode.m */; };
 		1668332116C0BB7400ECA3EC /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1668332016C0BB7400ECA3EC /* ColorUtils.m */; };
+		166C24A816C5C9DD00A86FE2 /* pipeTileset1.png in Resources */ = {isa = PBXBuildFile; fileRef = 166C24A716C5C9DD00A86FE2 /* pipeTileset1.png */; };
+		166C24AA16C6BCDD00A86FE2 /* pipeTileset1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 166C24A916C6BCDD00A86FE2 /* pipeTileset1.tmx */; };
 		1688E1DC16AB527F008C2B58 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DB16AB527F008C2B58 /* GridUtils.m */; };
 		1688E1DF16AB55CB008C2B58 /* PuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1DE16AB55CB008C2B58 /* PuzzleLayer.m */; };
 		1688E1E116AB59B3008C2B58 /* Puzzles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1E016AB59B3008C2B58 /* Puzzles.plist */; };
@@ -41,6 +43,7 @@
 		1688E1EF16ACBB90008C2B58 /* handSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 1688E1EE16ACBB90008C2B58 /* handSprite.png */; };
 		1688E1F216ACD7D5008C2B58 /* SpriteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */; };
 		168F7D1E16B25D4A0064C7E3 /* armUnit.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F7D1D16B25D4A0064C7E3 /* armUnit.png */; };
+		1690EA7516C233A000DCB655 /* PipeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1690EA7416C233A000DCB655 /* PipeNode.m */; };
 		169319EE16B426EC00203E09 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 169319ED16B426EC00203E09 /* pew-pew-lei.caf */; };
 		16966B4016BDAEBE003007FB /* arm_hand_S.png in Resources */ = {isa = PBXBuildFile; fileRef = 16966B3F16BDAEBE003007FB /* arm_hand_S.png */; };
 		16966B4316BDB453003007FB /* CellObjectLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 16966B4216BDB453003007FB /* CellObjectLibrary.m */; };
@@ -202,6 +205,8 @@
 		165910C216BEFED900F09546 /* CellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellNode.m; sourceTree = "<group>"; };
 		1668331F16C0BB7400ECA3EC /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorUtils.h; path = Utils/ColorUtils.h; sourceTree = "<group>"; };
 		1668332016C0BB7400ECA3EC /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtils.m; path = Utils/ColorUtils.m; sourceTree = "<group>"; };
+		166C24A716C5C9DD00A86FE2 /* pipeTileset1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipeTileset1.png; sourceTree = "<group>"; };
+		166C24A916C6BCDD00A86FE2 /* pipeTileset1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = pipeTileset1.tmx; path = Resources/pipeTileset1.tmx; sourceTree = "<group>"; };
 		1688E1DA16AB527F008C2B58 /* GridUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridUtils.h; path = Utils/GridUtils.h; sourceTree = "<group>"; };
 		1688E1DB16AB527F008C2B58 /* GridUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridUtils.m; path = Utils/GridUtils.m; sourceTree = "<group>"; };
 		1688E1DD16AB55CB008C2B58 /* PuzzleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleLayer.h; sourceTree = "<group>"; };
@@ -215,6 +220,8 @@
 		1688E1F016ACD7D4008C2B58 /* SpriteUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteUtils.h; path = Utils/SpriteUtils.h; sourceTree = "<group>"; };
 		1688E1F116ACD7D5008C2B58 /* SpriteUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpriteUtils.m; path = Utils/SpriteUtils.m; sourceTree = "<group>"; };
 		168F7D1D16B25D4A0064C7E3 /* armUnit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = armUnit.png; path = Resources/armUnit.png; sourceTree = "<group>"; };
+		1690EA7316C233A000DCB655 /* PipeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeNode.h; sourceTree = "<group>"; };
+		1690EA7416C233A000DCB655 /* PipeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeNode.m; sourceTree = "<group>"; };
 		169319ED16B426EC00203E09 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "pew-pew-lei.caf"; path = "Resources/pew-pew-lei.caf"; sourceTree = "<group>"; };
 		16966B3F16BDAEBE003007FB /* arm_hand_S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_hand_S.png; sourceTree = "<group>"; };
 		16966B4116BDB453003007FB /* CellObjectLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellObjectLibrary.h; path = Utils/CellObjectLibrary.h; sourceTree = "<group>"; };
@@ -508,6 +515,8 @@
 				1634ED8D16BD76B000DA7D79 /* ArmNode.m */,
 				165910C116BEFED900F09546 /* CellNode.h */,
 				165910C216BEFED900F09546 /* CellNode.m */,
+				1690EA7316C233A000DCB655 /* PipeNode.h */,
+				1690EA7416C233A000DCB655 /* PipeNode.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -515,6 +524,7 @@
 		1634ED9616BD7D0000DA7D79 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				166C24A716C5C9DD00A86FE2 /* pipeTileset1.png */,
 				16966B3F16BDAEBE003007FB /* arm_hand_S.png */,
 				1634ED9716BD7D0000DA7D79 /* arm_corner_NE.png */,
 				1634ED9816BD7D0000DA7D79 /* arm_corner_NW.png */,
@@ -623,6 +633,7 @@
 		16CAF28616AA1265001E3266 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				166C24A916C6BCDD00A86FE2 /* pipeTileset1.tmx */,
 				1634ED9616BD7D0000DA7D79 /* images */,
 				169319ED16B426EC00203E09 /* pew-pew-lei.caf */,
 				168F7D1D16B25D4A0064C7E3 /* armUnit.png */,
@@ -1077,6 +1088,8 @@
 				1634EDC116BD7D0000DA7D79 /* pipe_straight_horizontal.png in Resources */,
 				1634EDC216BD7D0000DA7D79 /* pipe_straight_vertical.png in Resources */,
 				16966B4016BDAEBE003007FB /* arm_hand_S.png in Resources */,
+				166C24A816C5C9DD00A86FE2 /* pipeTileset1.png in Resources */,
+				166C24AA16C6BCDD00A86FE2 /* pipeTileset1.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1200,6 +1213,7 @@
 				16966B4316BDB453003007FB /* CellObjectLibrary.m in Sources */,
 				165910C316BEFED900F09546 /* CellNode.m in Sources */,
 				1668332116C0BB7400ECA3EC /* ColorUtils.m in Sources */,
+				1690EA7516C233A000DCB655 /* PipeNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

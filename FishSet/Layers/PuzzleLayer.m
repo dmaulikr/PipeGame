@@ -61,6 +61,20 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _armNodes = [NSMutableArray array];
         
         
+        // testing tile maps
+        //////////////////////////////////////////////////////////////////////////////////////////
+        CCTMXTiledMap *tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"pipeTileset1.tmx"];
+        [self addChild:tileMap z:-1];
+        
+        CCTMXLayer *tileLayer1 = [tileMap layerNamed:@"Tile Layer 1"];
+        CGPoint tileCoord = [GridUtils tiledCoordForPosition:CGPointMake(234, 111) tileMap:tileMap origin:_gridOrigin];
+        int tileGid = [tileLayer1 tileGIDAt:tileCoord];
+        if (tileGid) {
+            NSDictionary *properties = [tileMap propertiesForGID:tileGid];
+            NSLog(@"properties for gid %i: %@: ", tileGid, properties);
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////
+
     }
     return self;
 }

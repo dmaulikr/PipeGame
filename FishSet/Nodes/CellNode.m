@@ -10,8 +10,8 @@
 #import "GameConstants.h"
 #import "PuzzleLayer.h"
 
-
 @implementation CellNode
+
 
 - (id)init
 {

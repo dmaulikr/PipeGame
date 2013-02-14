@@ -18,7 +18,6 @@ static NSString *const kLibKeyPipe = @"pipe";
 {
     self = [super init];
     if (self) {
-        
         _objectLibrary = [NSMutableDictionary dictionary];
         for (int x = 1; x <= size.x; x++) {
             for (int y = 1; y <= size.y; y++) {

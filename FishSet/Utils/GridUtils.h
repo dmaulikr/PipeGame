@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GameConstants.h"
+#import "cocos2d.h"
 
 typedef struct
 {
@@ -40,6 +41,14 @@ GridCoordMake(const int x, const int y)
 
 // absolute position made for sprite (anchor point middle) on a grid for grid coordinate
 + (CGPoint) absoluteSpritePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
+
+#pragma mark - tiled map editor
+
+// translate position to tiled grid coordinate, with origin in top left and 0 based indexing
++ (GridCoord)tiledGridCoordForPosition:(CGPoint)position tileMap:(CCTMXTiledMap *)tileMap origin:(CGPoint)origin;
+
+// cocos2d tiled extension objects take coords in CGPoint form
++ (CGPoint)tiledCoordForPosition:(CGPoint)position tileMap:(CCTMXTiledMap *)tileMap origin:(CGPoint)origin;
 
 #pragma mark - drawing
 

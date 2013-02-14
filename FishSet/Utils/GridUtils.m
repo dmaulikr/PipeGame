@@ -9,6 +9,7 @@
 #import "GridUtils.h"
 #import "CCDrawingPrimitives.h"
 
+
 @implementation GridUtils
 {
     
@@ -18,7 +19,7 @@
 #pragma mark - conversions
 
 // absolute position on a grid for grid coordinate, bottom left
-+ (CGPoint) absolutePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin
++ (CGPoint)absolutePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin
 {
     CGFloat x = ((coord.x - 1) * unitSize) + origin.x;
     CGFloat y = ((coord.y - 1) * unitSize) + origin.y;
@@ -26,21 +27,39 @@
 }
 
 // grid coordinate for absolute position on a grid
-+ (GridCoord) gridCoordForAbsolutePosition:(CGPoint)position unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
++ (GridCoord)gridCoordForAbsolutePosition:(CGPoint)position unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
 {
-    NSInteger x = floorf((position.x - origin.x) / unitSize) + 1;
-    NSInteger y = floorf((position.y - origin.y) / unitSize) + 1;
+    int x = floorf((position.x - origin.x) / unitSize) + 1;
+    int y = floorf((position.y - origin.y) / unitSize) + 1;
     return GridCoordMake(x, y);
 }
 
 // absolute position made for sprite (anchor point middle) on a grid for grid coordinate
-+ (CGPoint) absoluteSpritePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin
++ (CGPoint)absoluteSpritePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin
 {
     CGFloat x = ((coord.x - 1) * unitSize) + origin.x;
     CGFloat y = ((coord.y - 1) * unitSize) + origin.y;
     return CGPointMake(x + unitSize/2, y + unitSize/2);
 }
 
+# pragma mark - tiled map editor 
+
+// translate position to tiled grid coordinate, with origin in top left and 0 based indexing
++ (GridCoord)tiledGridCoordForPosition:(CGPoint)position tileMap:(CCTMXTiledMap *)tileMap origin:(CGPoint)origin
+{
+    if (tileMap.tileSize.width != tileMap.tileSize.height) {
+        NSLog(@"warning: tileMap tileSize is not square");
+    }
+    GridCoord coord = [GridUtils gridCoordForAbsolutePosition:position unitSize:(tileMap.tileSize.width / 2) origin:origin];
+    return GridCoordMake(coord.x - 1, tileMap.mapSize.height - coord.y);
+}
+
+// cocos2d tiled extension objects take coords in CGPoint form
++ (CGPoint)tiledCoordForPosition:(CGPoint)position tileMap:(CCTMXTiledMap *)tileMap origin:(CGPoint)origin
+{
+    GridCoord coord = [GridUtils tiledGridCoordForPosition:position tileMap:tileMap origin:origin];
+    return CGPointMake(coord.x, coord.y);
+}
 
 #pragma mark - drawing
 
