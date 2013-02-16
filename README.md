@@ -1,4 +1,4 @@
-FishSet
-=======
+Pipe Puzzle Game
+© Eric Erschwinder, John Saba
 
-2 Player Fish Collecting Game iPad - Eric Ehrnschwender &amp; John Saba
+First Implementation
