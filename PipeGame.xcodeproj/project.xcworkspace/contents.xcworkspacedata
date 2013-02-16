@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:FishSet.xcodeproj">
+      location = "self:PipeGame.xcodeproj">
    </FileRef>
 </Workspace>
