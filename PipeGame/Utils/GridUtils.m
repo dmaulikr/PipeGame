@@ -42,7 +42,14 @@
     return CGPointMake(x + unitSize/2, y + unitSize/2);
 }
 
+
 # pragma mark - tiled map editor 
+
+
++ (GridCoord)tiledGridCoordForGameGridCoord:(GridCoord)coord tileMapHeight:(CGFloat)height
+{
+    return GridCoordMake(coord.x - 1, height - coord.y);
+}
 
 // translate position to tiled grid coordinate, with origin in top left and 0 based indexing
 + (GridCoord)tiledGridCoordForPosition:(CGPoint)position tileMap:(CCTMXTiledMap *)tileMap origin:(CGPoint)origin
@@ -51,7 +58,7 @@
         NSLog(@"warning: tileMap tileSize is not square");
     }
     GridCoord coord = [GridUtils gridCoordForAbsolutePosition:position unitSize:(tileMap.tileSize.width / 2) origin:origin];
-    return GridCoordMake(coord.x - 1, tileMap.mapSize.height - coord.y);
+    return [self tiledGridCoordForGameGridCoord:coord tileMapHeight:tileMap.mapSize.height];
 }
 
 // cocos2d tiled extension objects take coords in CGPoint form
@@ -60,6 +67,7 @@
     GridCoord coord = [GridUtils tiledGridCoordForPosition:position tileMap:tileMap origin:origin];
     return CGPointMake(coord.x, coord.y);
 }
+
 
 #pragma mark - drawing
 
@@ -173,6 +181,23 @@
     }
 }
 
++ (NSString *)directionStringForDirection:(kDirection)direction
+{
+    switch (direction) {
+        case kDirectionUp:
+            return @"up";
+        case kDirectionRight:
+            return @"right";
+        case kDirectionDown:
+            return @"down";
+        case kDirectionLeft:
+            return @"left";
+        default:
+            NSLog(@"warning: unrecognized direction");
+            return nil;
+    }
+}
+
 
 #pragma mark - compare
 
@@ -186,6 +211,7 @@
 {
     return (cell.x > 0 && cell.x <= size.x && cell.y > 0 && cell.y <= size.y);
 }
+
 
 #pragma mark - perform
 

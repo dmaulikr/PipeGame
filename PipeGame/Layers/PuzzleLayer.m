@@ -41,6 +41,10 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _gridSize = [DataUtils puzzleSize:puzzle];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
         
+        // tile map
+        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"pipeTileset1.tmx"];
+        [self addChild:_tileMap];
+        
         // cell object library
         _cellObjectLibrary = [[CellObjectLibrary alloc] initWithGridSize:_gridSize];
         
@@ -61,18 +65,26 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _armNodes = [NSMutableArray array];
         
         
+        
+        
+        
+        
         // testing tile maps
         //////////////////////////////////////////////////////////////////////////////////////////
-        CCTMXTiledMap *tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"pipeTileset1.tmx"];
-        [self addChild:tileMap z:-1];
         
-        CCTMXLayer *tileLayer1 = [tileMap layerNamed:@"Tile Layer 1"];
-        CGPoint tileCoord = [GridUtils tiledCoordForPosition:CGPointMake(234, 111) tileMap:tileMap origin:_gridOrigin];
-        int tileGid = [tileLayer1 tileGIDAt:tileCoord];
-        if (tileGid) {
-            NSDictionary *properties = [tileMap propertiesForGID:tileGid];
-            NSLog(@"properties for gid %i: %@: ", tileGid, properties);
-        }
+//        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"pipeTileset1.tmx"];
+//        [self addChild:_tileMap z:1];
+        
+//        CCTMXTiledMap *tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"pipeTileset1.tmx"];
+//        [self addChild:tileMap z:-1];
+//        CCTMXLayer *tileLayer1 = [tileMap layerNamed:@"Tile Layer 1"];
+//        
+//        CGPoint tileCoord = [GridUtils tiledCoordForPosition:CGPointMake(234, 111) tileMap:tileMap origin:_gridOrigin];
+//        int tileGid = [tileLayer1 tileGIDAt:tileCoord];
+//        if (tileGid) {
+//            NSDictionary *properties = [tileMap propertiesForGID:tileGid];
+//            NSLog(@"properties for gid %i: %@: ", tileGid, properties);
+//        }
         //////////////////////////////////////////////////////////////////////////////////////////
 
     }
@@ -259,25 +271,44 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 - (BOOL)isLinearPathFreeBetweenStart:(GridCoord)start end:(GridCoord)end
 {
-    // check one cell for blocked
-    if ([self isCellBlocked:start]) {
-        return NO;
-    }
     // base case - if we reach the end of the path with no obstructions, it's a valid move
-    if ([GridUtils isCell:start equalToCell:end]) {
+    if ([GridUtils isCell:start equalToCell:end] && ([self isCellBlocked:start] == NO)) {
         return YES;
     }
     
-    // check for invalid direction
+    // if path has not reached the end, check for valid direction, cell blocked, and pipe exits
     kDirection direction = [GridUtils directionFromStart:start end:end];
-    if (direction == kDirectionNone) {
+    if (direction == kDirectionNone || [self isCellBlocked:start] || ([self canExitCell:start movingDirection:direction] == NO)) {
         return NO;
     }
-    // recursive call with next cell
+    
+    // path has not reached the end and is stil free, recursive call with next cell
     else {
         GridCoord newStart = [GridUtils stepInDirection:direction fromCell:start];
         return [self isLinearPathFreeBetweenStart:newStart end:end];
     }
+}
+
+- (BOOL)canExitCell:(GridCoord)cell movingDirection:(kDirection)direction
+{
+    CCTMXLayer *tileLayer1 = [self.tileMap layerNamed:@"Tile Layer 1"];
+    
+    GridCoord tileCoord = [GridUtils tiledGridCoordForGameGridCoord:cell tileMapHeight:self.tileMap.mapSize.height];
+    
+    int tileGid = [tileLayer1 tileGIDAt:CGPointMake(tileCoord.x, tileCoord.y)];
+    if (tileGid) {
+        NSDictionary *properties = [self.tileMap propertiesForGID:tileGid];
+        
+        NSString *directionString = [GridUtils directionStringForDirection:direction];
+        NSNumber *canMove = [properties objectForKey:directionString];
+        if (canMove) {
+            if ([canMove boolValue]) {
+                return YES;
+            }
+        }
+    }
+
+    return NO;
 }
 
 - (BOOL)isCellBlocked:(GridCoord)cell

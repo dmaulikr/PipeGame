@@ -44,6 +44,8 @@ GridCoordMake(const int x, const int y)
 
 #pragma mark - tiled map editor
 
++ (GridCoord)tiledGridCoordForGameGridCoord:(GridCoord)coord tileMapHeight:(CGFloat)height;
+
 // translate position to tiled grid coordinate, with origin in top left and 0 based indexing
 + (GridCoord)tiledGridCoordForPosition:(CGPoint)position tileMap:(CCTMXTiledMap *)tileMap origin:(CGPoint)origin;
 
@@ -69,6 +71,7 @@ GridCoordMake(const int x, const int y)
 
 + (GridCoord)stepInDirection:(kDirection)direction fromCell:(GridCoord)cell;
 
++ (NSString *)directionStringForDirection:(kDirection)direction;
 
 #pragma mark - compare
 

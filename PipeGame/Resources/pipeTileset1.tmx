@@ -58,6 +58,14 @@
     <property name="up" value="0"/>
    </properties>
   </tile>
+  <tile id="14">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
   <tile id="15">
    <properties>
     <property name="down" value="0"/>
@@ -128,4 +136,5 @@
    eJxjYEAAViCWAGIONJoPivmBWB6IxdAwshoFIOZFkxdAkkc2C6QWAHq8Aho=
   </data>
  </layer>
+ <objectgroup name="Object Layer 1" width="8" height="4"/>
 </map>

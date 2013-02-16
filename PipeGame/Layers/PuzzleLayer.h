@@ -18,6 +18,9 @@
 @property (assign) GridCoord gridSize;
 @property (assign) CGPoint gridOrigin;
 
+// tilemap
+@property (nonatomic, strong) CCTMXTiledMap *tileMap;
+
 // list of game objects at each cell
 @property (nonatomic, strong) CellObjectLibrary *cellObjectLibrary;
 
@@ -28,7 +31,6 @@
 @property (assign) GridCoord lastHandCell;
 @property (assign) kDirection handEntersFrom;
 @property (assign) BOOL isHandNodeSelected;
-
 
 // touch
 @property (assign) GridCoord cellFromLastTouch;
