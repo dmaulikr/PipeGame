@@ -15,6 +15,7 @@
 #import "TextureUtils.h"
 #import "CellObjectLibrary.h"
 #import "ColorUtils.h"
+#import "CCTMXTiledMap+Utils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 
@@ -66,27 +67,8 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         
         
         
+        [self findMetaObjects];
         
-        
-        
-        // testing tile maps
-        //////////////////////////////////////////////////////////////////////////////////////////
-        
-//        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"pipeTileset1.tmx"];
-//        [self addChild:_tileMap z:1];
-        
-//        CCTMXTiledMap *tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"pipeTileset1.tmx"];
-//        [self addChild:tileMap z:-1];
-//        CCTMXLayer *tileLayer1 = [tileMap layerNamed:@"Tile Layer 1"];
-//        
-//        CGPoint tileCoord = [GridUtils tiledCoordForPosition:CGPointMake(234, 111) tileMap:tileMap origin:_gridOrigin];
-//        int tileGid = [tileLayer1 tileGIDAt:tileCoord];
-//        if (tileGid) {
-//            NSDictionary *properties = [tileMap propertiesForGID:tileGid];
-//            NSLog(@"properties for gid %i: %@: ", tileGid, properties);
-//        }
-        //////////////////////////////////////////////////////////////////////////////////////////
-
     }
     return self;
 }
@@ -291,7 +273,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 - (BOOL)canExitCell:(GridCoord)cell movingDirection:(kDirection)direction
 {
-    CCTMXLayer *tileLayer1 = [self.tileMap layerNamed:@"Tile Layer 1"];
+    CCTMXLayer *tileLayer1 = [self.tileMap layerNamed:@"pipes1"];
     
     GridCoord tileCoord = [GridUtils tiledGridCoordForGameGridCoord:cell tileMapHeight:self.tileMap.mapSize.height];
     
@@ -309,6 +291,15 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     }
 
     return NO;
+}
+
+- (void)findMetaObjects
+{
+    GridCoord spawnCoord = [self.tileMap gridCoordForObjectNamed:@"spawn" groupName:@"meta"];
+    NSLog(@"spawnCoord: %i, %i", spawnCoord.x, spawnCoord.y);
+    
+    GridCoord testingCoord = [self.tileMap gridCoordForObjectNamed:@"testing" groupName:@"meta"];
+    NSLog(@"testingCoord: %i, %i", testingCoord.x, testingCoord.y);
 }
 
 - (BOOL)isCellBlocked:(GridCoord)cell

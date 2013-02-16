@@ -175,6 +175,7 @@
 		16D29B9316CF0D0F00C73947 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF116CF0D0F00C73947 /* GridUtils.m */; };
 		16D29B9416CF0D0F00C73947 /* SpriteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF316CF0D0F00C73947 /* SpriteUtils.m */; };
 		16D29B9516CF0D0F00C73947 /* TextureUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF516CF0D0F00C73947 /* TextureUtils.m */; };
+		16D29B9B16D0021200C73947 /* CCTMXTiledMap+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29B9A16D0021200C73947 /* CCTMXTiledMap+Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -488,6 +489,8 @@
 		16D29AF316CF0D0F00C73947 /* SpriteUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteUtils.m; sourceTree = "<group>"; };
 		16D29AF416CF0D0F00C73947 /* TextureUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureUtils.h; sourceTree = "<group>"; };
 		16D29AF516CF0D0F00C73947 /* TextureUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureUtils.m; sourceTree = "<group>"; };
+		16D29B9916D0021200C73947 /* CCTMXTiledMap+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCTMXTiledMap+Utils.h"; sourceTree = "<group>"; };
+		16D29B9A16D0021200C73947 /* CCTMXTiledMap+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCTMXTiledMap+Utils.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -913,6 +916,8 @@
 				16D29AB816CF0D0F00C73947 /* HandNode.m */,
 				16D29AB916CF0D0F00C73947 /* PipeNode.h */,
 				16D29ABA16CF0D0F00C73947 /* PipeNode.m */,
+				16D29B9916D0021200C73947 /* CCTMXTiledMap+Utils.h */,
+				16D29B9A16D0021200C73947 /* CCTMXTiledMap+Utils.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -1213,6 +1218,7 @@
 				16D29B9316CF0D0F00C73947 /* GridUtils.m in Sources */,
 				16D29B9416CF0D0F00C73947 /* SpriteUtils.m in Sources */,
 				16D29B9516CF0D0F00C73947 /* TextureUtils.m in Sources */,
+				16D29B9B16D0021200C73947 /* CCTMXTiledMap+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

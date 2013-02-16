@@ -131,10 +131,21 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tile Layer 1" width="8" height="4">
+ <layer name="pipes1" width="8" height="4">
   <data encoding="base64" compression="zlib">
    eJxjYEAAViCWAGIONJoPivmBWB6IxdAwshoFIOZFkxdAkkc2C6QWAHq8Aho=
   </data>
  </layer>
- <objectgroup name="Object Layer 1" width="8" height="4"/>
+ <objectgroup color="#a41821" name="meta" width="8" height="4">
+  <object name="spawn" x="31" y="683" width="96" height="88">
+   <properties>
+    <property name="facing" value="0"/>
+   </properties>
+  </object>
+  <object name="testing" x="1386" y="126" width="96" height="88">
+   <properties>
+    <property name="facing" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

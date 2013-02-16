@@ -45,13 +45,13 @@
 
 # pragma mark - tiled map editor 
 
-
+// translate a standard gridcoord [(1,1) == bottom left] to tiled grid coord [(0,0) == top left]
 + (GridCoord)tiledGridCoordForGameGridCoord:(GridCoord)coord tileMapHeight:(CGFloat)height
 {
     return GridCoordMake(coord.x - 1, height - coord.y);
 }
 
-// translate position to tiled grid coordinate, with origin in top left and 0 based indexing
+// translate cocos2d position [(0.0, 0.0) == bottom left] to tiled grid coord [(0,0) == top left];
 + (GridCoord)tiledGridCoordForPosition:(CGPoint)position tileMap:(CCTMXTiledMap *)tileMap origin:(CGPoint)origin
 {
     if (tileMap.tileSize.width != tileMap.tileSize.height) {
@@ -61,7 +61,7 @@
     return [self tiledGridCoordForGameGridCoord:coord tileMapHeight:tileMap.mapSize.height];
 }
 
-// cocos2d tiled extension objects take coords in CGPoint form
+// translate cocos2d position [(0.0, 0.0) == bottom left] to a tiled format coord [(0.0, 0.0) == top left]
 + (CGPoint)tiledCoordForPosition:(CGPoint)position tileMap:(CCTMXTiledMap *)tileMap origin:(CGPoint)origin
 {
     GridCoord coord = [GridUtils tiledGridCoordForPosition:position tileMap:tileMap origin:origin];
