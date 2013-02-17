@@ -42,6 +42,11 @@
     return CGPointMake(x + unitSize/2, y + unitSize/2);
 }
 
++ (GridCoord)gridCoordFromSize:(CGSize)size
+{
+    return GridCoordMake((int)size.width, (int)size.height);
+}
+
 
 # pragma mark - tiled map editor 
 

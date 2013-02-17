@@ -42,6 +42,8 @@ GridCoordMake(const int x, const int y)
 // absolute position made for sprite (anchor point middle) on a grid for grid coordinate
 + (CGPoint) absoluteSpritePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
 
++ (GridCoord)gridCoordFromSize:(CGSize)size;
+
 #pragma mark - tiled map editor
 
 // translate a standard gridcoord [(1,1) == bottom left] to tiled grid coord [(0,0) == top left]

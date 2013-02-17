@@ -39,23 +39,33 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
         [self setIsTouchEnabled:YES];
         
-        _gridSize = [DataUtils puzzleSize:puzzle];
+        // tile map
+        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"map1.tmx"];
+        [self addChild:_tileMap];
+
+        _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
+        
+        
+//        _gridSize = [DataUtils puzzleSize:puzzle];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
         
-        // tile map
-        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"pipeTileset1.tmx"];
-        [self addChild:_tileMap];
+        
         
         // cell object library
         _cellObjectLibrary = [[CellObjectLibrary alloc] initWithGridSize:_gridSize];
         
         // hand
         _handNode = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
-        _handEntryCoord = [DataUtils puzzleEntryCoord:puzzle];
+//        _handEntryCoord = [DataUtils puzzleEntryCoord:puzzle];
+//        _handEntryCoord = [self.tileMap gridCoordForObjectNamed:@"spawn" groupName:@"meta"];
+        _handEntryCoord = GridCoordMake(1, 4);
+        
+        
         _handNode.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
         [self addChild:_handNode];
         
-        kDirection entryDirection = [DataUtils puzzleEntryDirection:puzzle];
+//        kDirection entryDirection = [DataUtils puzzleEntryDirection:puzzle];
+        kDirection entryDirection = kDirectionRight;
         [_handNode setDirectionFacing:entryDirection];
         _lastHandCell = _handEntryCoord;
         
@@ -67,7 +77,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         
         
         
-        [self findMetaObjects];
+//        [self findMetaObjects];
         
     }
     return self;

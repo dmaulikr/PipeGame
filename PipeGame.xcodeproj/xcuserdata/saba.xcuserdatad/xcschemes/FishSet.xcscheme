@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "16CAF26E16AA1264001E3266"
-               BuildableName = "FishSet.app"
+               BuildableName = "PipeGame.app"
                BlueprintName = "PipeGame"
                ReferencedContainer = "container:PipeGame.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "16CAF26E16AA1264001E3266"
-            BuildableName = "FishSet.app"
+            BuildableName = "PipeGame.app"
             BlueprintName = "PipeGame"
             ReferencedContainer = "container:PipeGame.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "16CAF26E16AA1264001E3266"
-            BuildableName = "FishSet.app"
+            BuildableName = "PipeGame.app"
             BlueprintName = "PipeGame"
             ReferencedContainer = "container:PipeGame.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "16CAF26E16AA1264001E3266"
-            BuildableName = "FishSet.app"
+            BuildableName = "PipeGame.app"
             BlueprintName = "PipeGame"
             ReferencedContainer = "container:PipeGame.xcodeproj">
          </BuildableReference>
