@@ -164,7 +164,6 @@
 		16D29B8716CF0D0F00C73947 /* pipe_straight_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D29ADF16CF0D0F00C73947 /* pipe_straight_horizontal.png */; };
 		16D29B8816CF0D0F00C73947 /* pipe_straight_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D29AE016CF0D0F00C73947 /* pipe_straight_vertical.png */; };
 		16D29B8B16CF0D0F00C73947 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 16D29AE316CF0D0F00C73947 /* iTunesArtwork */; };
-		16D29B8E16CF0D0F00C73947 /* Puzzles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16D29AE616CF0D0F00C73947 /* Puzzles.plist */; };
 		16D29B8F16CF0D0F00C73947 /* CellObjectLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AE916CF0D0F00C73947 /* CellObjectLibrary.m */; };
 		16D29B9016CF0D0F00C73947 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AEB16CF0D0F00C73947 /* ColorUtils.m */; };
 		16D29B9116CF0D0F00C73947 /* DataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AED16CF0D0F00C73947 /* DataUtils.m */; };
@@ -172,9 +171,9 @@
 		16D29B9316CF0D0F00C73947 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF116CF0D0F00C73947 /* GridUtils.m */; };
 		16D29B9416CF0D0F00C73947 /* SpriteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF316CF0D0F00C73947 /* SpriteUtils.m */; };
 		16D29B9516CF0D0F00C73947 /* TextureUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF516CF0D0F00C73947 /* TextureUtils.m */; };
-		16D29B9B16D0021200C73947 /* CCTMXTiledMap+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29B9A16D0021200C73947 /* CCTMXTiledMap+Utils.m */; };
+		16E46F9C16D30D1A004BEC70 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16E46F9B16D30D1A004BEC70 /* map1.tmx */; };
 		16FE9BB916D1463A0014918D /* pipeTileset1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FE9BB716D1463A0014918D /* pipeTileset1.png */; };
-		16FE9BC316D17B4C0014918D /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16FE9BC216D17B4C0014918D /* map1.tmx */; };
+		16FE9BC616D1B93E0014918D /* CCTMXTiledMap+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FE9BC516D1B93E0014918D /* CCTMXTiledMap+Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -470,7 +469,6 @@
 		16D29AE016CF0D0F00C73947 /* pipe_straight_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipe_straight_vertical.png; sourceTree = "<group>"; };
 		16D29AE216CF0D0F00C73947 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16D29AE316CF0D0F00C73947 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
-		16D29AE616CF0D0F00C73947 /* Puzzles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Puzzles.plist; sourceTree = "<group>"; };
 		16D29AE816CF0D0F00C73947 /* CellObjectLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellObjectLibrary.h; sourceTree = "<group>"; };
 		16D29AE916CF0D0F00C73947 /* CellObjectLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellObjectLibrary.m; sourceTree = "<group>"; };
 		16D29AEA16CF0D0F00C73947 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
@@ -485,10 +483,10 @@
 		16D29AF316CF0D0F00C73947 /* SpriteUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteUtils.m; sourceTree = "<group>"; };
 		16D29AF416CF0D0F00C73947 /* TextureUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureUtils.h; sourceTree = "<group>"; };
 		16D29AF516CF0D0F00C73947 /* TextureUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureUtils.m; sourceTree = "<group>"; };
-		16D29B9916D0021200C73947 /* CCTMXTiledMap+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCTMXTiledMap+Utils.h"; sourceTree = "<group>"; };
-		16D29B9A16D0021200C73947 /* CCTMXTiledMap+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCTMXTiledMap+Utils.m"; sourceTree = "<group>"; };
+		16E46F9B16D30D1A004BEC70 /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
 		16FE9BB716D1463A0014918D /* pipeTileset1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipeTileset1.png; sourceTree = "<group>"; };
-		16FE9BC216D17B4C0014918D /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
+		16FE9BC416D1B93D0014918D /* CCTMXTiledMap+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCTMXTiledMap+Utils.h"; sourceTree = "<group>"; };
+		16FE9BC516D1B93E0014918D /* CCTMXTiledMap+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCTMXTiledMap+Utils.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -914,8 +912,6 @@
 				16D29AB816CF0D0F00C73947 /* HandNode.m */,
 				16D29AB916CF0D0F00C73947 /* PipeNode.h */,
 				16D29ABA16CF0D0F00C73947 /* PipeNode.m */,
-				16D29B9916D0021200C73947 /* CCTMXTiledMap+Utils.h */,
-				16D29B9A16D0021200C73947 /* CCTMXTiledMap+Utils.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -925,7 +921,6 @@
 			children = (
 				16D29AE316CF0D0F00C73947 /* iTunesArtwork */,
 				16D29AE216CF0D0F00C73947 /* Info.plist */,
-				16D29AE616CF0D0F00C73947 /* Puzzles.plist */,
 				16D29ABD16CF0D0F00C73947 /* armUnit.png */,
 				16D29ABE16CF0D0F00C73947 /* Default-Landscape~ipad.png */,
 				16D29ABF16CF0D0F00C73947 /* Default.png */,
@@ -977,6 +972,8 @@
 		16D29AE716CF0D0F00C73947 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				16FE9BC416D1B93D0014918D /* CCTMXTiledMap+Utils.h */,
+				16FE9BC516D1B93E0014918D /* CCTMXTiledMap+Utils.m */,
 				16D29AE816CF0D0F00C73947 /* CellObjectLibrary.h */,
 				16D29AE916CF0D0F00C73947 /* CellObjectLibrary.m */,
 				16D29AEA16CF0D0F00C73947 /* ColorUtils.h */,
@@ -998,7 +995,7 @@
 		16FE9BB516D1463A0014918D /* tilesets */ = {
 			isa = PBXGroup;
 			children = (
-				16FE9BC216D17B4C0014918D /* map1.tmx */,
+				16E46F9B16D30D1A004BEC70 /* map1.tmx */,
 				16FE9BB716D1463A0014918D /* pipeTileset1.png */,
 			);
 			path = tilesets;
@@ -1095,9 +1092,8 @@
 				16D29B8716CF0D0F00C73947 /* pipe_straight_horizontal.png in Resources */,
 				16D29B8816CF0D0F00C73947 /* pipe_straight_vertical.png in Resources */,
 				16D29B8B16CF0D0F00C73947 /* iTunesArtwork in Resources */,
-				16D29B8E16CF0D0F00C73947 /* Puzzles.plist in Resources */,
 				16FE9BB916D1463A0014918D /* pipeTileset1.png in Resources */,
-				16FE9BC316D17B4C0014918D /* map1.tmx in Resources */,
+				16E46F9C16D30D1A004BEC70 /* map1.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1222,7 +1218,7 @@
 				16D29B9316CF0D0F00C73947 /* GridUtils.m in Sources */,
 				16D29B9416CF0D0F00C73947 /* SpriteUtils.m in Sources */,
 				16D29B9516CF0D0F00C73947 /* TextureUtils.m in Sources */,
-				16D29B9B16D0021200C73947 /* CCTMXTiledMap+Utils.m in Sources */,
+				16FE9BC616D1B93E0014918D /* CCTMXTiledMap+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

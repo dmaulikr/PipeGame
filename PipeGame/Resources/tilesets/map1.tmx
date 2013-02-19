@@ -248,5 +248,11 @@
    eJxjZ2Bg4EPCHEAsDqVBQAKIFaBibFBxMSBmhdIgLACVU4Cy+aFmKUDNAABKIAGA
   </data>
  </layer>
- <objectgroup name="Object Layer 1" width="5" height="5"/>
+ <objectgroup name="meta" width="5" height="5">
+  <object name="entry" x="47" y="72" width="104" height="100">
+   <properties>
+    <property name="direction" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

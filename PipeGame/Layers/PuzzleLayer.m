@@ -32,11 +32,14 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     return scene;
 }
 
+
+// - (id)initWithTileMap:(NSString *)tileMap
+
 - (id)initWithPuzzle:(int)puzzle 
 {
     self = [super init];
     if (self) {
-
+        
         [self setIsTouchEnabled:YES];
         
         // tile map
@@ -44,28 +47,22 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         [self addChild:_tileMap];
 
         _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
-        
-        
-//        _gridSize = [DataUtils puzzleSize:puzzle];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
-        
-        
         
         // cell object library
         _cellObjectLibrary = [[CellObjectLibrary alloc] initWithGridSize:_gridSize];
         
         // hand
         _handNode = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
-//        _handEntryCoord = [DataUtils puzzleEntryCoord:puzzle];
-//        _handEntryCoord = [self.tileMap gridCoordForObjectNamed:@"spawn" groupName:@"meta"];
-        _handEntryCoord = GridCoordMake(1, 4);
+        _handEntryCoord = [self.tileMap gridCoordForObjectNamed:@"entry" groupNamed:@"meta"];
         
         
         _handNode.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
         [self addChild:_handNode];
         
-//        kDirection entryDirection = [DataUtils puzzleEntryDirection:puzzle];
-        kDirection entryDirection = kDirectionRight;
+        NSNumber *entryDir = [self.tileMap objectPropertyNamed:kTLDPropertyDirection objectNamed:kTLDObjectEntry groupNamed:kTLDGroupMeta];
+        int entryDirection = [entryDir intValue];
+    
         [_handNode setDirectionFacing:entryDirection];
         _lastHandCell = _handEntryCoord;
         
@@ -74,10 +71,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         
         // stack of arm nodes
         _armNodes = [NSMutableArray array];
-        
-        
-        
-//        [self findMetaObjects];
         
     }
     return self;
@@ -301,15 +294,6 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     }
 
     return NO;
-}
-
-- (void)findMetaObjects
-{
-    GridCoord spawnCoord = [self.tileMap gridCoordForObjectNamed:@"spawn" groupName:@"meta"];
-    NSLog(@"spawnCoord: %i, %i", spawnCoord.x, spawnCoord.y);
-    
-    GridCoord testingCoord = [self.tileMap gridCoordForObjectNamed:@"testing" groupName:@"meta"];
-    NSLog(@"testingCoord: %i, %i", testingCoord.x, testingCoord.y);
 }
 
 - (BOOL)isCellBlocked:(GridCoord)cell
