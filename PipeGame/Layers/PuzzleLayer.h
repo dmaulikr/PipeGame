@@ -31,6 +31,7 @@
 @property (assign) GridCoord lastHandCell;
 @property (assign) kDirection handEntersFrom;
 @property (assign) BOOL isHandNodeSelected;
+@property (assign) int currentPipeLayer;
 
 // touch
 @property (assign) GridCoord cellFromLastTouch;

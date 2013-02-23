@@ -34,16 +34,18 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 
 // - (id)initWithTileMap:(NSString *)tileMap
-
-- (id)initWithPuzzle:(int)puzzle 
+- (id)initWithPuzzle:(int)puzzle
 {
     self = [super init];
     if (self) {
         
         [self setIsTouchEnabled:YES];
+
+        _currentPipeLayer = 1;
         
         // tile map
-        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"map1.tmx"];
+        NSString *tileMap = @"map1.tmx";
+        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMap];
         [self addChild:_tileMap];
 
         _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
@@ -54,7 +56,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         
         // hand
         _handNode = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
-        _handEntryCoord = [self.tileMap gridCoordForObjectNamed:@"entry" groupNamed:@"meta"];
+        _handEntryCoord = [_tileMap gridCoordForObjectNamed:@"entry" groupNamed:@"meta"];
         
         
         _handNode.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
@@ -69,7 +71,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         _handEntersFrom = [GridUtils oppositeDirection:entryDirection];
         _isHandNodeSelected = NO;
         
-        // stack of arm nodes
+        // arm
         _armNodes = [NSMutableArray array];
         
     }
@@ -276,7 +278,7 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 
 - (BOOL)canExitCell:(GridCoord)cell movingDirection:(kDirection)direction
 {
-    CCTMXLayer *tileLayer1 = [self.tileMap layerNamed:@"pipes1"];
+    CCTMXLayer *tileLayer1 = [self.tileMap layerNamed:[self pipeLayerName:self.currentPipeLayer]];
     
     GridCoord tileCoord = [GridUtils tiledGridCoordForGameGridCoord:cell tileMapHeight:self.tileMap.mapSize.height];
     
@@ -305,6 +307,11 @@ static NSString *const kImageArmUnit = @"armUnit.png";
         }
     }
     return NO;
+}
+
+- (NSString *)pipeLayerName:(int)layer
+{
+    return [NSString stringWithFormat:@"pipes%i", layer];
 }
 
 
