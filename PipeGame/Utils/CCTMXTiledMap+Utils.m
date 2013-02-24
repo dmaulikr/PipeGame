@@ -70,9 +70,29 @@ NSString *const kTLDPropertyDirection = @"direction";
 - (GridCoord)gridCoordForCocos2dPosition:(CGPoint)position
 {
     return [GridUtils gridCoordForAbsolutePosition:position unitSize:self.tileSize.width origin:ccp(0, 0)];
+} 
+
++ (void)performBlockForTilesInLayer:(CCTMXLayer *)layer perform:(void (^)(CCSprite *tile))perform;
+{
+    for( int x = 0; x < layer.layerSize.width; x++) {
+        for( int y = 0; y < layer.layerSize.height; y++ ) {
+            CCSprite *tile = [layer tileAt:ccp(x, y)];
+            perform(tile);
+        }
+    }
 }
 
-     
+- (void)performBlockForAllTiles:(void (^)(CCTMXLayer *layer, CCSprite *tile))perform;
+{
+    for (CCTMXLayer *layer in self.children) {
+        [CCTMXTiledMap performBlockForTilesInLayer:layer perform:^(CCSprite *tile) {
+            perform(layer, tile);
+        }];
+    }
+}
+
+
+
 
 
 @end

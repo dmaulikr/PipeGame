@@ -25,4 +25,7 @@ FOUNDATION_EXPORT NSString *const kTLDPropertyDirection;
 - (GridCoord)gridCoordForObjectNamed:(NSString *)objectName groupNamed:(NSString *)groupName;
 - (id)objectPropertyNamed:(NSString *)propertyName objectNamed:(NSString *)objectName groupNamed:(NSString *)groupName;
 
++ (void)performBlockForTilesInLayer:(CCTMXLayer *)layer perform:(void (^)(CCSprite *tile))perform;
+- (void)performBlockForAllTiles:(void (^)(CCTMXLayer *layer, CCSprite *tile))perform;
+
 @end

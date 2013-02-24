@@ -19,6 +19,8 @@
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 
+static GLubyte const kBackgroundTileLayerOpacity = 100;
+
 
 @implementation PuzzleLayer
 
@@ -33,20 +35,26 @@ static NSString *const kImageArmUnit = @"armUnit.png";
 }
 
 
-// - (id)initWithTileMap:(NSString *)tileMap
+// - (id)initWithTileMap:(NSString *)tileMapName
 - (id)initWithPuzzle:(int)puzzle
 {
+    NSString *tileMapName = @"map1.tmx";
+    
+    
     self = [super init];
     if (self) {
         
         [self setIsTouchEnabled:YES];
 
-        _currentPipeLayer = 1;
         
         // tile map
-        NSString *tileMap = @"map1.tmx";
-        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMap];
+        _mapInfo = [CCTMXMapInfo formatWithTMXFile:tileMapName];
+        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMapName];
         [self addChild:_tileMap];
+        
+        
+        [self moveToLayer:2];
+        
 
         _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
@@ -91,6 +99,24 @@ static NSString *const kImageArmUnit = @"armUnit.png";
     return CGPointMake(0, 0);
 }
 
+- (void)moveToLayer:(NSUInteger)layerNumber
+{
+    NSUInteger layersCount = [self.tileMap.children count];
+    NSLog(@"layer count: %i", layersCount);
+    
+    if (layerNumber <= layersCount) {
+        _currentPipeLayer = layerNumber;
+        [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
+            NSUInteger z = [[layer.properties objectForKey:@"z"] intValue];
+            if (z == _currentPipeLayer) {
+                tile.opacity = 255;
+            }
+            else {
+                tile.opacity = kBackgroundTileLayerOpacity;
+            }
+        }];
+    }
+}
 
 #pragma mark - scene management
 
