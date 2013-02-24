@@ -91,6 +91,30 @@ NSString *const kTLDPropertyDirection = @"direction";
     }
 }
 
+// cell is standard game GridCoord
+- (void)performBlockForTileAtCell:(GridCoord)cell layer:(CCTMXLayer *)layer perform:(void (^)(CCSprite *tile, NSDictionary *tileProperties))perform;
+{
+    GridCoord tileCoord = [GridUtils tiledGridCoordForGameGridCoord:cell tileMapHeight:self.mapSize.height];
+    int tileGid = [layer tileGIDAt:CGPointMake(tileCoord.x, tileCoord.y)];
+    if (tileGid) {
+        CCSprite *tile = [layer tileAt:CGPointMake(tileCoord.x, tileCoord.y)];
+        NSDictionary *properties = [self propertiesForGID:tileGid];
+        perform(tile, properties);
+    }
+}
+
+- (BOOL)testConditionForTileAtCell:(GridCoord)cell layer:(CCTMXLayer *)layer condition:(BOOL (^)(CCSprite *tile, NSDictionary *tileProperties))condition
+{
+    GridCoord tileCoord = [GridUtils tiledGridCoordForGameGridCoord:cell tileMapHeight:self.mapSize.height];
+    int tileGid = [layer tileGIDAt:CGPointMake(tileCoord.x, tileCoord.y)];
+    if (tileGid) {
+        CCSprite *tile = [layer tileAt:CGPointMake(tileCoord.x, tileCoord.y)];
+        NSDictionary *properties = [self propertiesForGID:tileGid];
+        return condition(tile, properties);
+    }
+    NSLog(@"warning: tile does not exist, returning condition NO");
+    return NO;
+}
 
 
 
