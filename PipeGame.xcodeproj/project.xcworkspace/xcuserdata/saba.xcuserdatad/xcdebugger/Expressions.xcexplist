@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[CellNode isAtPipeLayer:]:CellNode.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[PuzzleLayer initWithPuzzle:]:PuzzleLayer.m">
+      </ContextState>
+      <ContextState
+         contextName = "__26-[CellNode isAtPipeLayer:]_block_invoke:CellNode.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

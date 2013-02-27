@@ -7,19 +7,32 @@
 //
 
 #import "ConnectionNode.h"
+#import "CCTMXTiledMap+Utils.h"
+#import "PuzzleLayer.h"
+
+NSString *const kTLDPropertyConnectionA = @"a";
+NSString *const kTLDPropertyConnectionB = @"b";
+
 
 @implementation ConnectionNode
 
-+ (id)nodeWithConnectionToLayerA:(int)layerA layerB:(int)layerB gridCoord:(GridCoord)gridCoord
++ (id)nodeWithConnection:(NSMutableDictionary *)connection tileMap:(CCTMXTiledMap *)tileMap
 {
+    NSString *a= [connection objectForKey:kTLDPropertyConnectionA];
+    NSString *b = [connection objectForKey:kTLDPropertyConnectionB];
+    GridCoord gridCoord = [tileMap gridCoordForObject:connection groupName:kTLDGroupMeta];
+    NSNumber *layerA = [NSNumber numberWithInt:[a intValue]];
+    NSNumber *layerB = [NSNumber numberWithInt:[b intValue]];
+    
     return [[ConnectionNode alloc] initWithConnectionToLayerA:layerA layerB:layerB gridCoord:gridCoord];
 }
 
-- (id)initWithConnectionToLayerA:(int)layerA layerB:(int)layerB gridCoord:(GridCoord)gridCoord
+- (id)initWithConnectionToLayerA:(NSNumber *)layerA layerB:(NSNumber *)layerB gridCoord:(GridCoord)gridCoord
 {
     self = [super init];
     if (self) {
-        
+        self.position = [GridUtils absolutePositionForGridCoord:gridCoord unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+        self.pipeLayers = [NSMutableArray arrayWithObjects:layerA, layerB, nil];
     }
     return self;
 }

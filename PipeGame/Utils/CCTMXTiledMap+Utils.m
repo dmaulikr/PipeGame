@@ -20,7 +20,6 @@ NSString *const kTLDObjectConnection = @"connection";
 // tiled object properties
 NSString *const kTLDPropertyDirection = @"direction";
 
-
 @implementation CCTMXTiledMap (Utils)
 
 - (NSMutableDictionary *)objectNamed:(NSString *)objectName groupNamed:(NSString *)groupName

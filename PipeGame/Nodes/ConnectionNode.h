@@ -10,6 +10,6 @@
 
 @interface ConnectionNode : CellNode
 
-+ (id)nodeWithConnectionToLayerA:(int)layerA layerB:(int)layerB gridCoord:(GridCoord)gridCoord;
++ (id)nodeWithConnection:(NSMutableDictionary *)connection tileMap:(CCTMXTiledMap *)tileMap;
 
 @end

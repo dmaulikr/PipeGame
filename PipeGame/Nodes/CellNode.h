@@ -18,7 +18,6 @@
 
 - (GridCoord)cell;
 - (BOOL)shouldBlockMovement;
-- (void)setPipeLayersWithLayers:(NSNumber *)layer, ...;
 - (BOOL)isAtPipeLayer:(NSNumber *)layer;
 - (NSNumber *)firstPipeLayer;
 
