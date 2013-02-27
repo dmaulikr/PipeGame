@@ -7,6 +7,7 @@
 //
 
 #import "CellObjectLibrary.h"
+#import "CellNode.h"
 
 static NSString *const kLibKeyHand = @"hand";
 static NSString *const kLibKeyArm = @"arm";
@@ -33,21 +34,31 @@ static NSString *const kLibKeyPipe = @"pipe";
     return [NSString stringWithFormat:@"%i%i", cell.x, cell.y];
 }
 
-- (void)addObjectToLibrary:(id)object cell:(GridCoord)cell
+- (void)addObjectToLibrary:(CellNode *)object cell:(GridCoord)cell
 {
-    NSMutableArray *objects = [self objectsForCell:cell];
-    if ([objects containsObject:object] == NO) {
-        [objects addObject:object];
-        [self.objectLibrary setObject:objects forKey:[self objectKeyForCell:cell]];
+    if ([object isKindOfClass:[CellNode class]]) {
+        NSMutableArray *objects = [self objectsForCell:cell];
+        if ([objects containsObject:object] == NO) {
+            [objects addObject:object];
+            [self.objectLibrary setObject:objects forKey:[self objectKeyForCell:cell]];
+        }
+    }
+    else {
+        NSLog(@"warning: cell object library only takes objects of type CellNode");
     }
 }
 
-- (void)removeObjectFromLibrary:(id)object cell:(GridCoord)cell
+- (void)removeObjectFromLibrary:(CellNode *)object cell:(GridCoord)cell
 {
-    NSMutableArray *objects = [self objectsForCell:cell];
-    if ([objects containsObject:object]) {
-        [objects removeObject:object];
-        [self.objectLibrary setObject:objects forKey:[self objectKeyForCell:cell]];
+    if ([object isKindOfClass:[CellNode class]]) {
+        NSMutableArray *objects = [self objectsForCell:cell];
+        if ([objects containsObject:object]) {
+            [objects removeObject:object];
+            [self.objectLibrary setObject:objects forKey:[self objectKeyForCell:cell]];
+        }
+    }
+    else {
+        NSLog(@"warning: cell object library only takes objects of type CellNode");
     }
 }
 

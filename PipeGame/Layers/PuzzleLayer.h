@@ -20,7 +20,6 @@
 
 // tilemap
 @property (nonatomic, strong) CCTMXTiledMap *tileMap;
-@property (nonatomic, strong) CCTMXMapInfo *mapInfo;
 
 // list of game objects at each cell
 @property (nonatomic, strong) CellObjectLibrary *cellObjectLibrary;
@@ -42,6 +41,8 @@
 
 // absolute position where the bottom left  of the grid begins
 + (CGPoint)sharedGridOrigin;
+
+
 
 
 

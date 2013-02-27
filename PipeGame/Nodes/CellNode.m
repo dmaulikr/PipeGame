@@ -33,6 +33,33 @@
 }
 
 
+#pragma mark - pipe layers
+
+- (void)setPipeLayersWithLayers:(NSNumber *)layer, ...
+{
+    _pipeLayers = [NSMutableArray array];
+    va_list args;
+    va_start(args, layer);
+    for (NSNumber *arg = layer; arg != nil; arg = va_arg(args, NSNumber *))
+    {
+        [_pipeLayers addObject:arg];
+    }
+    va_end(args);
+}
+
+- (BOOL)isAtPipeLayer:(NSNumber *)layer
+{    
+    NSUInteger result = [self.pipeLayers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return [layer isEqualToNumber:obj];
+    }];
+    return (result != NSNotFound);
+}
+
+- (NSNumber *)firstPipeLayer
+{
+    return [self.pipeLayers objectAtIndex:0];
+}
+
 #pragma mark - setup / teardown
 
 - (void)onEnter

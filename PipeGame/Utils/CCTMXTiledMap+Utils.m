@@ -15,6 +15,7 @@ NSString *const kTLDGroupMeta = @"meta";
 
 // tiled objects
 NSString *const kTLDObjectEntry = @"entry";
+NSString *const kTLDObjectConnection = @"connection";
 
 // tiled object properties
 NSString *const kTLDPropertyDirection = @"direction";
@@ -40,9 +41,28 @@ NSString *const kTLDPropertyDirection = @"direction";
     return nil;
 }
 
+- (NSMutableArray *)objectsWithName:(NSString *)objectName groupName:(NSString *)groupName
+{
+    NSMutableArray *result = [NSMutableArray array];
+    CCTMXObjectGroup *objectGroup = [self objectGroupNamed:groupName];
+    if (objectGroup != nil) {
+        for (NSMutableDictionary *object in objectGroup.objects) {
+            if( [[object valueForKey:@"name"] isEqualToString:objectName] ) {
+                [result addObject:object];
+            }
+        }
+    }
+    return result;
+}
+
 - (GridCoord)gridCoordForObjectNamed:(NSString *)objectName groupNamed:(NSString *)groupName
 {
     NSMutableDictionary *object = [self objectNamed:objectName groupNamed:groupName];
+    return [self gridCoordForObject:object groupName:groupName];
+}
+
+- (GridCoord)gridCoordForObject:(NSMutableDictionary *)object groupName:(NSString *)groupName
+{
     if (object != nil) {
         NSNumber *x = [object objectForKey:@"x"];
         NSNumber *y = [object objectForKey:@"y"];
@@ -101,8 +121,12 @@ NSString *const kTLDPropertyDirection = @"direction";
         NSDictionary *properties = [self propertiesForGID:tileGid];
         perform(tile, properties);
     }
+    else {
+        NSLog(@"warning: tile does not exist");
+    }
 }
 
+// cell is standard game GridCoord
 - (BOOL)testConditionForTileAtCell:(GridCoord)cell layer:(CCTMXLayer *)layer condition:(BOOL (^)(CCSprite *tile, NSDictionary *tileProperties))condition
 {
     GridCoord tileCoord = [GridUtils tiledGridCoordForGameGridCoord:cell tileMapHeight:self.mapSize.height];
@@ -112,7 +136,7 @@ NSString *const kTLDPropertyDirection = @"direction";
         NSDictionary *properties = [self propertiesForGID:tileGid];
         return condition(tile, properties);
     }
-    NSLog(@"warning: tile does not exist, returning condition NO");
+    NSLog(@"warning: tile does not exist, returning NO");
     return NO;
 }
 

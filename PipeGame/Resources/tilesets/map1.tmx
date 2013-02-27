@@ -529,7 +529,7 @@
    <property name="z" value="2"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZWBgEGOAAEEg5oDyYWIMSHxxIOYDYkkoXwCI5dHUMUDF+aBYAYgBRvwBcg==
+   eJyTYGBgYANiWSAWBGIOIBaDYhiA8cWBmA+IJaF8ASCWR1PHABXng2IFIAYAUtQBkg==
   </data>
  </layer>
  <objectgroup name="meta" width="5" height="5">
@@ -537,6 +537,20 @@
    <properties>
     <property name="direction" value="3"/>
    </properties>
+  </object>
+  <object name="connection" x="643" y="446" width="117" height="108">
+   <properties>
+    <property name="a" value="1"/>
+    <property name="b" value="2"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="connection" x="643" y="38" width="117" height="108">
+   <properties>
+    <property name="a" value="1"/>
+    <property name="b" value="2"/>
+   </properties>
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

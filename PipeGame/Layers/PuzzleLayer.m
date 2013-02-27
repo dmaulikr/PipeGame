@@ -34,24 +34,18 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
     return scene;
 }
 
-
-// - (id)initWithTileMap:(NSString *)tileMapName
 - (id)initWithPuzzle:(int)puzzle
-{
-    NSString *tileMapName = @"map1.tmx";
-    
+{    
     self = [super init];
     if (self) {
+        NSString *tileMapName = [PuzzleLayer tiledMapNameForPuzzle:puzzle];
         
         [self setIsTouchEnabled:YES];
 
         // tile map
-        _mapInfo = [CCTMXMapInfo formatWithTMXFile:tileMapName];
         _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMapName];
         [self addChild:_tileMap];
-        
-        [self moveToLayer:2];
-        
+                
         _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
         
@@ -77,8 +71,24 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
         // arm
         _armNodes = [NSMutableArray array];
         
+        // move to layer
+        [self moveToLayer:2];
+
+        
+        NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
+        for (NSMutableDictionary *connection in connections) {
+            GridCoord connectionCoord = [_tileMap gridCoordForObject:connection groupName:kTLDGroupMeta];
+            
+        }
+        
+        
     }
     return self;
+}
+
++ (NSString *)tiledMapNameForPuzzle:(int)puzzle
+{
+    return [NSString stringWithFormat:@"map%i.tmx", puzzle];
 }
 
 - (void)registerWithNotifications
@@ -94,14 +104,23 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
     return CGPointMake(0, 0);
 }
 
-- (void)moveToLayer:(NSUInteger)layerNumber
+- (void)moveToLayer:(int)layerNumber
 {
-    NSUInteger layersCount = [self.tileMap.children count];    
+    if (self.handNode == nil) {
+        NSLog(@"warning: can't use moveToLayer before hand node has been created");
+        return;
+    }
+    
+    int layersCount = [self.tileMap.children count];
     if (layerNumber <= layersCount) {
-        self.currentPipeLayerNumber = layerNumber;
+        [self.handNode setPipeLayersWithLayers:[NSNumber numberWithInt:layerNumber], nil];
+//        self.handNode.pipeLayer = layerNumber;
+        
         [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
-            NSUInteger z = [[layer.properties objectForKey:@"z"] intValue];
-            if (z == self.currentPipeLayerNumber) {
+            int z = [[layer.properties objectForKey:@"z"] intValue];
+//            if (z == self.handNode.pipeLayer) {
+//            if ([self.handNode.firstPipeLayer intValue] == z) {
+            if ([self.handNode isAtPipeLayer:[NSNumber numberWithInt:z]]) {
                 tile.opacity = 255;
             }
             else {
@@ -113,7 +132,8 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
 
 - (CCTMXLayer *)currentPipeLayer
 {
-    return [self.tileMap layerNamed:[self pipeLayerName:self.currentPipeLayerNumber]];
+//    return [self.tileMap layerNamed:[self pipeLayerName:self.handNode.pipeLayer]];
+    return [self.tileMap layerNamed:[self pipeLayerName:[self.handNode.firstPipeLayer intValue]]];
 }
 
 - (NSString *)pipeLayerName:(int)layer
@@ -176,10 +196,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
             
             NSNumber *connectsToLayer = [tileProperties objectForKey:@"connectsToLayer"];
             if (connectsToLayer != nil) {
-                NSLog(@"connects to layer %@", connectsToLayer);
-            }
-            else {
-                NSLog(@"no connection");
+                [self moveToLayer:[connectsToLayer intValue]];
             }
         }];
     }
@@ -323,10 +340,8 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
         
         NSString *directionString = [GridUtils directionStringForDirection:direction];
         NSNumber *canMove = [tileProperties objectForKey:directionString];
-        if (canMove) {
-            if ([canMove boolValue]) {
-                return YES;
-            }
+        if ([canMove boolValue]) {
+            return YES;
         }
         return NO;
     }];    
@@ -336,8 +351,10 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
 {
     NSMutableArray *objects = [self.cellObjectLibrary objectsForCell:cell];
     for (CellNode *node in objects) {
-        if (node.shouldBlockMovement) {
-            return YES;
+        if ([node isAtPipeLayer:[NSNumber numberWithInt:self.currentPipeLayerNumber]]) {
+            if (node.shouldBlockMovement) {
+                return YES;
+            }
         }
     }
     return NO;

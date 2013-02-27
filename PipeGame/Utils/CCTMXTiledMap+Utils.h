@@ -14,6 +14,7 @@ FOUNDATION_EXPORT NSString *const kTLDGroupMeta;
 
 // tiled objects
 FOUNDATION_EXPORT NSString *const kTLDObjectEntry;
+FOUNDATION_EXPORT NSString *const kTLDObjectConnection;
 
 // tiled object properties
 FOUNDATION_EXPORT NSString *const kTLDPropertyDirection;
@@ -22,7 +23,10 @@ FOUNDATION_EXPORT NSString *const kTLDPropertyDirection;
 @interface CCTMXTiledMap (Utils)
 
 - (NSMutableDictionary *)objectNamed:(NSString *)objectName groupNamed:(NSString *)groupName;
+- (NSMutableArray *)objectsWithName:(NSString *)objectName groupName:(NSString *)groupName;
+
 - (GridCoord)gridCoordForObjectNamed:(NSString *)objectName groupNamed:(NSString *)groupName;
+- (GridCoord)gridCoordForObject:(NSMutableDictionary *)object groupName:(NSString *)groupName;
 - (id)objectPropertyNamed:(NSString *)propertyName objectNamed:(NSString *)objectName groupNamed:(NSString *)groupName;
 
 + (void)performBlockForTilesInLayer:(CCTMXLayer *)layer perform:(void (^)(CCSprite *tile))perform;
