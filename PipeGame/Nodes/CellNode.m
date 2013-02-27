@@ -35,21 +35,17 @@
 
 #pragma mark - pipe layers
 
-- (BOOL)isAtPipeLayer:(NSNumber *)layer
+- (BOOL)isAtPipeLayer:(NSString *)layer
 {
-    NSLog(@"self.pipeLayers: %@", self.pipeLayers);
     NSUInteger result = [self.pipeLayers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        NSNumber *isAtLayer = (NSNumber *)obj;
-        if ([isAtLayer isKindOfClass:[NSNumber class]] == NO) {
-            NSLog(@"warning: pipeLayers contains a non-NSNumber object: %@", [isAtLayer class]);
-        }
-        return [layer isEqualToNumber:isAtLayer];
+        NSString *isAtLayer = (NSString *)obj;
+        return [layer isEqualToString:isAtLayer];
     }];
     return (result != NSNotFound);
 }
 
 // use this if we only expect a cell node to belong to 1 layer at a time
-- (NSNumber *)firstPipeLayer
+- (NSString *)firstPipeLayer
 {
     return [self.pipeLayers objectAtIndex:0];
 }

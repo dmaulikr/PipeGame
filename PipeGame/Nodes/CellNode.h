@@ -18,7 +18,7 @@
 
 - (GridCoord)cell;
 - (BOOL)shouldBlockMovement;
-- (BOOL)isAtPipeLayer:(NSNumber *)layer;
-- (NSNumber *)firstPipeLayer;
+- (BOOL)isAtPipeLayer:(NSString *)pipeLayer;
+- (NSString *)firstPipeLayer;
 
 @end

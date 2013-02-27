@@ -73,16 +73,14 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
         _armNodes = [NSMutableArray array];
         
         // move to layer
-        [self moveToLayer:2];
+        [self moveToLayer:@"pipes2"];
 
-        
+        // connections
         NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
         for (NSMutableDictionary *connection in connections) {
             ConnectionNode *connectionNode = [ConnectionNode nodeWithConnection:connection tileMap:self.tileMap];
             [self.cellObjectLibrary addObjectToLibrary:connectionNode cell:connectionNode.cell];
         }
-        
-        
     }
     return self;
 }
@@ -105,40 +103,40 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
     return CGPointMake(0, 0);
 }
 
-- (void)moveToLayer:(int)layerNumber
+- (void)moveToLayer:(NSString *)layerName
 {
     if (self.handNode == nil) {
         NSLog(@"warning: can't use moveToLayer before hand node has been created");
         return;
     }
+    self.handNode.pipeLayers = [NSMutableArray arrayWithObject:layerName];
     
-    int layersCount = [self.tileMap.children count];
-    if (layerNumber <= layersCount) {
-        
-        self.handNode.pipeLayers = [NSMutableArray arrayWithObject:[NSNumber numberWithInt:layerNumber]];
-                
-        [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
-            
-            int z = [[layer.properties objectForKey:@"z"] intValue];
-            if ([self.handNode isAtPipeLayer:[NSNumber numberWithInt:z]]) {
-                tile.opacity = 255;
-            }
-            else {
-                tile.opacity = kBackgroundTileLayerOpacity;
-            }
-        }];
-    }
+    // tile opacity
+    [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
+        if ([self.handNode isAtPipeLayer:layer.layerName]) {
+            tile.opacity = 255;
+        }
+        else {
+            tile.opacity = kBackgroundTileLayerOpacity;
+        }
+    }];
+    
+    // arm opacity
+    for (ArmNode *node in self.armNodes) {
+        if ([node isAtPipeLayer:layerName]) {
+            node.sprite.opacity = 255;
+        }
+        else {
+            node.sprite.opacity = kBackgroundTileLayerOpacity;
+        }
+    }    
 }
 
 - (CCTMXLayer *)currentPipeLayer
 {
-    return [self.tileMap layerNamed:[self pipeLayerName:[self.handNode.firstPipeLayer intValue]]];
+    return [self.tileMap layerNamed:self.handNode.firstPipeLayer];
 }
 
-- (NSString *)pipeLayerName:(int)layer
-{
-    return [NSString stringWithFormat:@"pipes%i", layer];
-}
 
 #pragma mark - scene management
 
@@ -205,9 +203,9 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
     if ([object isKindOfClass:[ConnectionNode class]]) {
         ConnectionNode *connectionNode = (ConnectionNode *)object;
         if ([connectionNode isAtPipeLayer:self.handNode.firstPipeLayer]) {
-            for (NSNumber *pipeLayer in connectionNode.pipeLayers) {
-                if ([pipeLayer isEqualToNumber:self.handNode.firstPipeLayer] == NO) {
-                    [self moveToLayer:[pipeLayer intValue]];
+            for (NSString *pipeLayer in connectionNode.pipeLayers) {
+                if ([pipeLayer isEqualToString:self.handNode.firstPipeLayer] == NO) {
+                    [self moveToLayer:pipeLayer];
                     return YES;
                 }
             }
@@ -297,10 +295,10 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
     if ([self.armNodes count] > 0) {
         ArmNode *lastArmNode = [self.armNodes lastObject];
         kDirection firstExit = [GridUtils directionFromStart:cell end:[lastArmNode cell]];
-        newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction];
+        newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction pipeLayer:self.handNode.firstPipeLayer ];
     }
     else {
-        newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction];
+        newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction pipeLayer:self.handNode.firstPipeLayer];
     }
     
     if (self.isHandNodeSelected) {
@@ -373,8 +371,5 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
     }
     return NO;
 }
-
-
-
 
 @end

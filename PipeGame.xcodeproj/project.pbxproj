@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16141F1D16DD98F0000DB458 /* ConnectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 16141F1C16DD98EF000DB458 /* ConnectionNode.m */; };
-		16141F1F16DDA4D3000DB458 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16141F1E16DDA4D3000DB458 /* map1.tmx */; };
+		16141F2116DDE54F000DB458 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16141F2016DDE54F000DB458 /* map1.tmx */; };
 		161D60AD16D92F6D0030D6A6 /* pipeTilesetBase1.png in Resources */ = {isa = PBXBuildFile; fileRef = 161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */; };
 		161D60AE16D92F6D0030D6A6 /* pipeTilesetBase2.png in Resources */ = {isa = PBXBuildFile; fileRef = 161D60AB16D92F6D0030D6A6 /* pipeTilesetBase2.png */; };
 		161D60C116DAD2280030D6A6 /* PGPopUpMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 161D60C016DAD2280030D6A6 /* PGPopUpMenu.m */; };
@@ -182,7 +182,7 @@
 /* Begin PBXFileReference section */
 		16141F1B16DD98EF000DB458 /* ConnectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionNode.h; sourceTree = "<group>"; };
 		16141F1C16DD98EF000DB458 /* ConnectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionNode.m; sourceTree = "<group>"; };
-		16141F1E16DDA4D3000DB458 /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
+		16141F2016DDE54F000DB458 /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
 		161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipeTilesetBase1.png; sourceTree = "<group>"; };
 		161D60AB16D92F6D0030D6A6 /* pipeTilesetBase2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipeTilesetBase2.png; sourceTree = "<group>"; };
 		161D60BF16DAD2280030D6A6 /* PGPopUpMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPopUpMenu.h; sourceTree = "<group>"; };
@@ -1007,7 +1007,7 @@
 		16FE9BB516D1463A0014918D /* tilesets */ = {
 			isa = PBXGroup;
 			children = (
-				16141F1E16DDA4D3000DB458 /* map1.tmx */,
+				16141F2016DDE54F000DB458 /* map1.tmx */,
 				161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */,
 				161D60AB16D92F6D0030D6A6 /* pipeTilesetBase2.png */,
 			);
@@ -1107,7 +1107,7 @@
 				16D29B8B16CF0D0F00C73947 /* iTunesArtwork in Resources */,
 				161D60AD16D92F6D0030D6A6 /* pipeTilesetBase1.png in Resources */,
 				161D60AE16D92F6D0030D6A6 /* pipeTilesetBase2.png in Resources */,
-				16141F1F16DDA4D3000DB458 /* map1.tmx in Resources */,
+				16141F2116DDE54F000DB458 /* map1.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

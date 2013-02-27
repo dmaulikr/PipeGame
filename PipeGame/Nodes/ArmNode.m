@@ -16,10 +16,12 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
 
 @implementation ArmNode
 
-- (id)initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit
+- (id)initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit pipeLayer:(NSString *)pipeLayer
 {
     self = [super init];
     if (self) {
+        
+        self.pipeLayers = [NSMutableArray arrayWithObject:pipeLayer];
         
         // size, position
         self.contentSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);

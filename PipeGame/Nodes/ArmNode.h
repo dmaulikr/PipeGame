@@ -28,6 +28,6 @@ FOUNDATION_EXPORT NSString *const kPGNotificationArmNodeTouched;
 
 @property (nonatomic, strong) CCSprite *sprite;
     
-- (id)initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit;
+- (id)initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit pipeLayer:(NSString *)pipeLayer;
 
 @end

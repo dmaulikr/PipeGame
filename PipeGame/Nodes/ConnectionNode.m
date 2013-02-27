@@ -18,16 +18,14 @@ NSString *const kTLDPropertyConnectionB = @"b";
 
 + (id)nodeWithConnection:(NSMutableDictionary *)connection tileMap:(CCTMXTiledMap *)tileMap
 {
-    NSString *a= [connection objectForKey:kTLDPropertyConnectionA];
-    NSString *b = [connection objectForKey:kTLDPropertyConnectionB];
+    NSString *layerA= [connection objectForKey:kTLDPropertyConnectionA];
+    NSString *layerB = [connection objectForKey:kTLDPropertyConnectionB];
     GridCoord gridCoord = [tileMap gridCoordForObject:connection groupName:kTLDGroupMeta];
-    NSNumber *layerA = [NSNumber numberWithInt:[a intValue]];
-    NSNumber *layerB = [NSNumber numberWithInt:[b intValue]];
-    
+        
     return [[ConnectionNode alloc] initWithConnectionToLayerA:layerA layerB:layerB gridCoord:gridCoord];
 }
 
-- (id)initWithConnectionToLayerA:(NSNumber *)layerA layerB:(NSNumber *)layerB gridCoord:(GridCoord)gridCoord
+- (id)initWithConnectionToLayerA:(NSString *)layerA layerB:(NSString *)layerB gridCoord:(GridCoord)gridCoord
 {
     self = [super init];
     if (self) {

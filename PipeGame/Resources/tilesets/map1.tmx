@@ -540,15 +540,15 @@
   </object>
   <object name="connection" x="643" y="446" width="117" height="108">
    <properties>
-    <property name="a" value="1"/>
-    <property name="b" value="2"/>
+    <property name="a" value="pipes1"/>
+    <property name="b" value="pipes2"/>
    </properties>
    <ellipse/>
   </object>
-  <object name="connection" x="643" y="38" width="117" height="108">
+  <object name="connection" x="638" y="41" width="117" height="108">
    <properties>
-    <property name="a" value="1"/>
-    <property name="b" value="2"/>
+    <property name="a" value="pipes1"/>
+    <property name="b" value="pipes2"/>
    </properties>
    <ellipse/>
   </object>
