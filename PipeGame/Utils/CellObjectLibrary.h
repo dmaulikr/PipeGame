@@ -18,5 +18,7 @@
 - (void)addObjectToLibrary:(CellNode *)object cell:(GridCoord)cell;
 - (void)removeObjectFromLibrary:(CellNode *)object cell:(GridCoord)cell;
 - (NSMutableArray *)objectsForCell:(GridCoord)cell;
+- (BOOL)libraryContainsObject:(CellNode *)object atCell:(GridCoord)cell;
+- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell;
 
 @end

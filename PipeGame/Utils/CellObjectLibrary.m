@@ -9,9 +9,6 @@
 #import "CellObjectLibrary.h"
 #import "CellNode.h"
 
-static NSString *const kLibKeyHand = @"hand";
-static NSString *const kLibKeyArm = @"arm";
-static NSString *const kLibKeyPipe = @"pipe";
 
 @implementation CellObjectLibrary
 
@@ -50,21 +47,40 @@ static NSString *const kLibKeyPipe = @"pipe";
 
 - (void)removeObjectFromLibrary:(CellNode *)object cell:(GridCoord)cell
 {
-    if ([object isKindOfClass:[CellNode class]]) {
+    if ([self libraryContainsObject:object atCell:cell]) {
         NSMutableArray *objects = [self objectsForCell:cell];
-        if ([objects containsObject:object]) {
-            [objects removeObject:object];
-            [self.objectLibrary setObject:objects forKey:[self objectKeyForCell:cell]];
-        }
+        [objects removeObject:object];
+        [self.objectLibrary setObject:objects forKey:[self objectKeyForCell:cell]];
     }
     else {
-        NSLog(@"warning: cell object library only takes objects of type CellNode");
+        NSLog(@"warning: cell object library does not contain object: %@", object);
     }
 }
 
 - (NSMutableArray *)objectsForCell:(GridCoord)cell
 {
     return [self.objectLibrary objectForKey:[self objectKeyForCell:cell]];
+}
+
+- (BOOL)libraryContainsObject:(CellNode *)object atCell:(GridCoord)cell
+{
+    if ([object isKindOfClass:[CellNode class]] == NO) {
+        NSLog(@"warning: cell object library only contains objects of kind CellNode, kind given: %@", [object class]);
+    }
+    NSMutableArray *objects = [self objectsForCell:cell];
+    return ([objects containsObject:object]);
+}
+
+- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell
+{
+    NSMutableArray *nodes = [self objectsForCell:cell];
+    for (id node in nodes) {
+        if ([node isKindOfClass:class]) {
+            return node;
+        }
+    }
+    NSLog(@"warning, node of kind: %@, not found at cell %i, %i", class, cell.x, cell.y);
+    return nil;
 }
 
 @end

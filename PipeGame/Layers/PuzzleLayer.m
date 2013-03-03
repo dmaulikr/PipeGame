@@ -170,12 +170,12 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
 
 # pragma mark - draw grid
 
-//- (void)draw
-//{
-//    // grid
-//    ccDrawColor4F(0.5f, 0.5f, 0.5f, 1.0f);
-//    [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:_gridOrigin];
-//}
+- (void)draw
+{
+    // grid
+    ccDrawColor4F(0.5f, 0.5f, 0.5f, 1.0f);
+    [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:_gridOrigin];
+}
 
 # pragma mark - targeted touch delegate
 
@@ -267,29 +267,47 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
 
 - (BOOL)tryGridTouchAtPosition:(CGPoint)touchPosition cell:(GridCoord)touchCell
 {
+    NSLog(@"\n\n");
+    NSLog(@"touch cell: %i, %i", touchCell.x, touchCell.y);
+    
     // handle for touch within grid
     if ([GridUtils isCellInBounds:touchCell gridSize:self.gridSize]) {
         
-        // touch a cell to move to its position if path is free and in a line
-        GridCoord moveToCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
-        
-        if ([GridUtils isCell:moveToCell equalToCell:self.handNode.cell] == NO) {
-            if ([self isLinearPathFreeBetweenStart:self.handNode.cell end:moveToCell]) {
-                
-                // arm units
-                [GridUtils performBlockBetweenFirstCell:self.handNode.cell secondCell:moveToCell block:^(GridCoord cell, kDirection direction) {
+        // if we are touching a new cell
+        if ([GridUtils isCell:touchCell equalToCell:self.handNode.cell] == NO) {
+            
+            // handle touch in cell with no arm unit
+            if ([self isArmNodeAtCell:touchCell] == NO) {
+            
+                if ([self isLinearPathFreeBetweenStart:self.handNode.cell end:touchCell]) {
                     
-                    if ([GridUtils isCell:cell equalToCell:moveToCell] == NO) {
-                        [self addArmNodeAtCell:cell movingDirection:direction];
-                    }
-                }];
-                
-                // hand sprite
-                kDirection shouldFace = [GridUtils directionFromStart:self.handNode.cell end:moveToCell];
-                [self.handNode setDirectionFacing:shouldFace];
-                self.handNode.position = [GridUtils absolutePositionForGridCoord:moveToCell unitSize:kSizeGridUnit origin:self.gridOrigin];
-                
-                return YES;
+                    // arm units
+                    [GridUtils performBlockBetweenFirstCell:self.handNode.cell secondCell:touchCell block:^(GridCoord cell, kDirection direction) {
+                        
+                        if ([GridUtils isCell:cell equalToCell:touchCell] == NO) {
+                            [self addArmNodeAtCell:cell movingDirection:direction];
+                        }
+                    }];
+                    
+                    // hand sprite
+                    kDirection shouldFace = [GridUtils directionFromStart:self.handNode.cell end:touchCell];
+                    [self.handNode setDirectionFacing:shouldFace];
+                    self.handNode.position = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                    
+                    return YES;
+                }
+            }
+            // handle touch in a cell with an arm unit (rewind)
+            else {
+                ArmNode *armNodeTouched = [self.cellObjectLibrary firstNodeOfKind:[ArmNode class] atCell:touchCell];
+                if ([armNodeTouched isEqual:self.armNodes.lastObject]) {
+                    [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
+                    
+                    ArmNode *newLastArmNode = (ArmNode *)self.armNodes.lastObject;
+                    kDirection shouldFace = [GridUtils directionFromStart:newLastArmNode.cell end:touchCell];
+                    [self.handNode setDirectionFacing:shouldFace];
+                    self.handNode.position = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                }
             }
         }
     }
@@ -340,6 +358,19 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         [self.armNodes removeLastObject];
         [self.tileMap removeChild:removeArmNode cleanup:YES];
     }
+}
+
+- (BOOL)isArmNodeAtCell:(GridCoord)cell
+{
+    NSMutableArray *cellNodes = [self.cellObjectLibrary objectsForCell:cell];
+    for (CellNode *node in cellNodes ) {
+        if ([node isKindOfClass:[ArmNode class]]) {
+            if ([node isAtPipeLayer:[self currentPipeLayerName]]) {
+                return YES;
+            }   
+        }
+    }
+    return NO;
 }
 
 
