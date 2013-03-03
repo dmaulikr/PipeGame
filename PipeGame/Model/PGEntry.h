@@ -11,7 +11,7 @@
 
 @interface PGEntry : PGTiledObject
 
-@property (nonatomic, copy) NSString *direction;
+@property (assign) int direction;
 @property (nonatomic, copy) NSString *pipeLayer;
 
 - (id)initWithEntry:(NSMutableDictionary *)entry tileMap:(CCTMXTiledMap *)tileMap;

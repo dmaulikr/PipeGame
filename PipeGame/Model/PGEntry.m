@@ -18,7 +18,7 @@ static NSString *const kEntryLayer = @"layer";
 {
     self = [super initWithTiledObject:entry tileMap:tileMap];
     if (self) {
-        _direction = [CCTMXTiledMap objectPropertyNamed:kEntryDirection object:entry];
+        _direction = [[CCTMXTiledMap objectPropertyNamed:kEntryDirection object:entry] intValue];
         _pipeLayer = [CCTMXTiledMap objectPropertyNamed:kEntryLayer object:entry];
     }
     return self;

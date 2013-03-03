@@ -66,10 +66,9 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         _handNode.pipeLayers = @[_entry.pipeLayer];
         [_tileMap addChild:_handNode z:[_tileMap layerNamed:_entry.pipeLayer].zOrder];
 
-        int entryDirection = [_entry.direction intValue];
-        [_handNode setDirectionFacing:entryDirection];
+        [_handNode setDirectionFacing:_entry.direction];
         
-        _handEntersFrom = [GridUtils oppositeDirection:entryDirection];
+        _handEntersFrom = [GridUtils oppositeDirection:_entry.direction];
         _isHandNodeSelected = NO;
         
         // layer color
@@ -304,7 +303,13 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
                     [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
                     
                     ArmNode *newLastArmNode = (ArmNode *)self.armNodes.lastObject;
-                    kDirection shouldFace = [GridUtils directionFromStart:newLastArmNode.cell end:touchCell];
+                    kDirection shouldFace;
+                    if (newLastArmNode != nil) {
+                        shouldFace = [GridUtils directionFromStart:newLastArmNode.cell end:touchCell];
+                    }
+                    else {
+                        shouldFace = self.entry.direction;
+                    }
                     [self.handNode setDirectionFacing:shouldFace];
                     self.handNode.position = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
                 }
