@@ -7,6 +7,7 @@
 //
 
 #import "PGTiledUtils.h"
+#import "ColorUtils.h"
 
 // tiled object groups
 NSString *const kTLDGroupMeta = @"meta";
@@ -24,5 +25,17 @@ NSString *const kTLDLayerPipes2 = @"pipes2";
 
 
 @implementation PGTiledUtils
+
++ (ccColor3B)pipeColorAtLayer:(NSString *)layer
+{
+    if ([layer isEqualToString:kTLDLayerPipes1]) {
+        return [ColorUtils pipeLayer1Color];
+    }
+    else if ([layer isEqualToString:kTLDLayerPipes2]) {
+        return [ColorUtils pipeLayer2Color];
+    }
+    NSLog(@"layer: %@ is not supported with a color, returning white", layer);
+    return ccWHITE;
+}
 
 @end

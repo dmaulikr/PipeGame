@@ -12,5 +12,7 @@
 @interface ColorUtils : NSObject
 
 + (ccColor3B)tintArmSelected;
++ (ccColor3B)pipeLayer1Color;
++ (ccColor3B)pipeLayer2Color;
 
 @end

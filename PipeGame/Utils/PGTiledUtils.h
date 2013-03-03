@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
 
 
 // tiled object groups
@@ -25,5 +26,7 @@ FOUNDATION_EXPORT NSString *const kTLDLayerPipes2;
 
 
 @interface PGTiledUtils : NSObject
+
++ (ccColor3B)pipeColorAtLayer:(NSString *)layer;
 
 @end

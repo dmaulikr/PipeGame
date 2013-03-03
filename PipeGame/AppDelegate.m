@@ -74,8 +74,6 @@
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
     
 
-    
-    
     // load textures
     [TextureUtils loadTextures];
 
@@ -83,10 +81,6 @@
 	[director_ pushScene: [PuzzleLayer sceneWithPuzzle:1]];
     
     
-    
-    
-
-	
 	// Create a Navigation Controller with the Director
 	navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
 	navController_.navigationBarHidden = YES;

@@ -21,7 +21,7 @@
 #import "PGTiledUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
-static GLubyte const kBackgroundTileLayerOpacity = 50;
+static GLubyte const kBackgroundTileLayerOpacity = 80;
 
 
 @implementation PuzzleLayer
@@ -30,7 +30,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 50;
 {
     CCScene *scene = [CCScene node];
     
-    PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithColor:ccc4(50, 60, 70, 255) puzzle:puzzle];
+    PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithColor:ccc4(0, 0, 0, 255) puzzle:puzzle];
     
     [scene addChild:puzzleLayer];
        
@@ -64,13 +64,16 @@ static GLubyte const kBackgroundTileLayerOpacity = 50;
         
         _handNode.position = [GridUtils absolutePositionForGridCoord:_entry.cell unitSize:kSizeGridUnit origin:_gridOrigin];
         _handNode.pipeLayers = @[_entry.pipeLayer];
-        [_tileMap addChild:_handNode z:[_tileMap layerNamed:kTLDLayerPipes2].zOrder];
+        [_tileMap addChild:_handNode z:[_tileMap layerNamed:_entry.pipeLayer].zOrder];
 
         int entryDirection = [_entry.direction intValue];
         [_handNode setDirectionFacing:entryDirection];
         
         _handEntersFrom = [GridUtils oppositeDirection:entryDirection];
         _isHandNodeSelected = NO;
+        
+        // layer color
+        self.color = [PGTiledUtils pipeColorAtLayer:_entry.pipeLayer];
         
         // arm
         _armNodes = [NSMutableArray array];
@@ -134,6 +137,10 @@ static GLubyte const kBackgroundTileLayerOpacity = 50;
             node.sprite.opacity = kBackgroundTileLayerOpacity;
         }
     }
+    
+    // layer color
+    self.color = [PGTiledUtils pipeColorAtLayer:layerName];
+
 }
 
 - (CCTMXLayer *)currentPipeLayer
@@ -309,7 +316,6 @@ static GLubyte const kBackgroundTileLayerOpacity = 50;
     }
     
     // need to add as child, to the armNodes stack and to the cell object library
-//    [self addChild:newArmNode];
     [self.tileMap addChild:newArmNode z:[self.tileMap layerNamed:[self.handNode.pipeLayers objectAtIndex:0]].zOrder];
     
     [self.armNodes addObject:newArmNode];
@@ -324,7 +330,6 @@ static GLubyte const kBackgroundTileLayerOpacity = 50;
         GridCoord removeArmCell = [removeArmNode cell];
         [self.cellObjectLibrary removeObjectFromLibrary:removeArmNode cell:removeArmCell];
         [self.armNodes removeLastObject];
-//        [self removeChild:removeArmNode cleanup:YES];
         [self.tileMap removeChild:removeArmNode cleanup:YES];
     }
 }
