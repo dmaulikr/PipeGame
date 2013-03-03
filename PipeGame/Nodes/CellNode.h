@@ -14,7 +14,7 @@
 
 @property (assign) BOOL shouldSendPGTouchNotifications;
 @property (copy) NSString *pgTouchNotification;
-@property (strong, nonatomic) NSMutableArray *pipeLayers;
+@property (strong, nonatomic) NSArray *pipeLayers;
 
 - (GridCoord)cell;
 - (BOOL)shouldBlockMovement;

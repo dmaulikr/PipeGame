@@ -21,7 +21,7 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
     self = [super init];
     if (self) {
         
-        self.pipeLayers = [NSMutableArray arrayWithObject:pipeLayer];
+        self.pipeLayers = @[pipeLayer];
         
         // size, position
         self.contentSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);

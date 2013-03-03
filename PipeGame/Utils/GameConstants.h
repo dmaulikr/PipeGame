@@ -10,7 +10,7 @@
 
 typedef enum
 {
-    kDirectionNone,
+    kDirectionNone = 0,
     kDirectionUp,
     kDirectionRight,
     kDirectionDown,

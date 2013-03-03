@@ -10,15 +10,6 @@
 
 #import "CCTMXTiledMap+Utils.h"
 
-// tiled object groups
-NSString *const kTLDGroupMeta = @"meta";
-
-// tiled objects
-NSString *const kTLDObjectEntry = @"entry";
-NSString *const kTLDObjectConnection = @"connection";
-
-// tiled object properties
-NSString *const kTLDPropertyDirection = @"direction";
 
 @implementation CCTMXTiledMap (Utils)
 
@@ -57,10 +48,10 @@ NSString *const kTLDPropertyDirection = @"direction";
 - (GridCoord)gridCoordForObjectNamed:(NSString *)objectName groupNamed:(NSString *)groupName
 {
     NSMutableDictionary *object = [self objectNamed:objectName groupNamed:groupName];
-    return [self gridCoordForObject:object groupName:groupName];
+    return [self gridCoordForObject:object];
 }
 
-- (GridCoord)gridCoordForObject:(NSMutableDictionary *)object groupName:(NSString *)groupName
+- (GridCoord)gridCoordForObject:(NSMutableDictionary *)object 
 {
     if (object != nil) {
         NSNumber *x = [object objectForKey:@"x"];
@@ -74,6 +65,11 @@ NSString *const kTLDPropertyDirection = @"direction";
 - (id)objectPropertyNamed:(NSString *)propertyName objectNamed:(NSString *)objectName groupNamed:(NSString *)groupName
 {
     NSMutableDictionary *object = [self objectNamed:objectName groupNamed:groupName];
+    return [CCTMXTiledMap objectPropertyNamed:propertyName object:object];
+}
+
++ (id)objectPropertyNamed:(NSString *)propertyName object:(NSMutableDictionary *)object
+{
     if (object != nil) {
         id property = [object objectForKey:propertyName];
         if (property != nil) {
@@ -84,6 +80,7 @@ NSString *const kTLDPropertyDirection = @"direction";
         }
     }
     return nil;
+
 }
 
 - (GridCoord)gridCoordForCocos2dPosition:(CGPoint)position
@@ -101,12 +98,24 @@ NSString *const kTLDPropertyDirection = @"direction";
     }
 }
 
+//- (void)performBlockForAllTiles:(void (^)(CCTMXLayer *layer, CCSprite *tile))perform;
+//{
+//    for (CCTMXLayer *layer in self.children) {
+//        [CCTMXTiledMap performBlockForTilesInLayer:layer perform:^(CCSprite *tile) {
+//            perform(layer, tile);
+//        }];
+//    }
+//}
+
 - (void)performBlockForAllTiles:(void (^)(CCTMXLayer *layer, CCSprite *tile))perform;
 {
-    for (CCTMXLayer *layer in self.children) {
-        [CCTMXTiledMap performBlockForTilesInLayer:layer perform:^(CCSprite *tile) {
-            perform(layer, tile);
-        }];
+    for (id node in self.children) {
+        if ([node isKindOfClass:[CCTMXLayer class]]) {
+            CCTMXLayer *layer = (CCTMXLayer *)node;
+            [CCTMXTiledMap performBlockForTilesInLayer:layer perform:^(CCSprite *tile) {
+                perform(layer, tile);
+            }];
+        }
     }
 }
 

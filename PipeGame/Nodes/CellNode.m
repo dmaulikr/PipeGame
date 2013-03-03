@@ -69,7 +69,7 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    if ([self containsTouch:touch] && self.shouldSendPGTouchNotifications) {
+    if (self.shouldSendPGTouchNotifications && [self containsTouch:touch]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:self.pgTouchNotification object:self];
         return YES;
     }

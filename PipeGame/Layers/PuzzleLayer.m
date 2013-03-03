@@ -17,10 +17,11 @@
 #import "ColorUtils.h"
 #import "CCTMXTiledMap+Utils.h"
 #import "ConnectionNode.h"
+#import "PGEntry.h"
+#import "PGTiledUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
-
-static GLubyte const kBackgroundTileLayerOpacity = 100;
+static GLubyte const kBackgroundTileLayerOpacity = 50;
 
 
 @implementation PuzzleLayer
@@ -29,15 +30,18 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
 {
     CCScene *scene = [CCScene node];
     
-    PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithPuzzle:puzzle];
+    PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithColor:ccc4(50, 60, 70, 255) puzzle:puzzle];
+    
     [scene addChild:puzzleLayer];
        
     return scene;
 }
 
-- (id)initWithPuzzle:(int)puzzle
-{    
-    self = [super init];
+//- (id)initWithPuzzle:(int)puzzle
+- (id)initWithColor:(ccColor4B)color puzzle:(int)puzzle
+{
+//    self = [super init];
+    self = [super initWithColor:color];
     if (self) {
         NSString *tileMapName = [PuzzleLayer tiledMapNameForPuzzle:puzzle];
         
@@ -46,7 +50,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
         // tile map
         _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMapName];
         [self addChild:_tileMap];
-                
+        
         _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
         
@@ -54,17 +58,16 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
         _cellObjectLibrary = [[CellObjectLibrary alloc] initWithGridSize:_gridSize];
         
         // hand
+        NSMutableDictionary *entryData = [_tileMap objectNamed:kTLDObjectEntry groupNamed:kTLDGroupMeta];
+        _entry = [[PGEntry alloc] initWithEntry:entryData tileMap:_tileMap];
         _handNode = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
-        _handEntryCoord = [_tileMap gridCoordForObjectNamed:@"entry" groupNamed:@"meta"];
         
-        _handNode.position = [GridUtils absolutePositionForGridCoord:_handEntryCoord unitSize:kSizeGridUnit origin:_gridOrigin];
-        [self addChild:_handNode];
-        
-        NSString *entryDir = [self.tileMap objectPropertyNamed:kTLDPropertyDirection objectNamed:kTLDObjectEntry groupNamed:kTLDGroupMeta];
-        int entryDirection = [entryDir intValue];
-    
+        _handNode.position = [GridUtils absolutePositionForGridCoord:_entry.cell unitSize:kSizeGridUnit origin:_gridOrigin];
+        _handNode.pipeLayers = @[_entry.pipeLayer];
+        [_tileMap addChild:_handNode z:[_tileMap layerNamed:kTLDLayerPipes2].zOrder];
+
+        int entryDirection = [_entry.direction intValue];
         [_handNode setDirectionFacing:entryDirection];
-        _lastHandCell = _handEntryCoord;
         
         _handEntersFrom = [GridUtils oppositeDirection:entryDirection];
         _isHandNodeSelected = NO;
@@ -73,7 +76,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
         _armNodes = [NSMutableArray array];
         
         // move to layer
-        [self moveToLayer:@"pipes2"];
+        [self moveToLayer:_entry.pipeLayer];
 
         // connections
         NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
@@ -105,23 +108,24 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
 
 - (void)moveToLayer:(NSString *)layerName
 {
+    // hand 
     if (self.handNode == nil) {
         NSLog(@"warning: can't use moveToLayer before hand node has been created");
         return;
     }
-    self.handNode.pipeLayers = [NSMutableArray arrayWithObject:layerName];
+    self.handNode.pipeLayers = @[layerName];
+    [self.tileMap reorderChild:self.handNode z:[self.tileMap layerNamed:layerName].zOrder];
     
-    // tile opacity
+    // tiles
     [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
         if ([self.handNode isAtPipeLayer:layer.layerName]) {
             tile.opacity = 255;
-        }
-        else {
+        }         else {
             tile.opacity = kBackgroundTileLayerOpacity;
         }
     }];
     
-    // arm opacity
+    // arms
     for (ArmNode *node in self.armNodes) {
         if ([node isAtPipeLayer:layerName]) {
             node.sprite.opacity = 255;
@@ -129,7 +133,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
         else {
             node.sprite.opacity = kBackgroundTileLayerOpacity;
         }
-    }    
+    }
 }
 
 - (CCTMXLayer *)currentPipeLayer
@@ -152,15 +156,14 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
 }
 
 
-# pragma mark - draw
+# pragma mark - draw grid
 
-- (void)draw
-{
-    // grid
-    ccDrawColor4F(0.5f, 0.5f, 0.5f, 1.0f);
-    [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:_gridOrigin];
-}
-
+//- (void)draw
+//{
+//    // grid
+//    ccDrawColor4F(0.5f, 0.5f, 0.5f, 1.0f);
+//    [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:_gridOrigin];
+//}
 
 # pragma mark - targeted touch delegate
 
@@ -306,7 +309,9 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
     }
     
     // need to add as child, to the armNodes stack and to the cell object library
-    [self addChild:newArmNode];
+//    [self addChild:newArmNode];
+    [self.tileMap addChild:newArmNode z:[self.tileMap layerNamed:[self.handNode.pipeLayers objectAtIndex:0]].zOrder];
+    
     [self.armNodes addObject:newArmNode];
     [self.cellObjectLibrary addObjectToLibrary:newArmNode cell:cell];
 }
@@ -319,7 +324,8 @@ static GLubyte const kBackgroundTileLayerOpacity = 100;
         GridCoord removeArmCell = [removeArmNode cell];
         [self.cellObjectLibrary removeObjectFromLibrary:removeArmNode cell:removeArmCell];
         [self.armNodes removeLastObject];
-        [self removeChild:removeArmNode cleanup:YES];
+//        [self removeChild:removeArmNode cleanup:YES];
+        [self.tileMap removeChild:removeArmNode cleanup:YES];
     }
 }
 

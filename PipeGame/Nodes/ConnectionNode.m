@@ -20,7 +20,7 @@ NSString *const kTLDPropertyConnectionB = @"b";
 {
     NSString *layerA= [connection objectForKey:kTLDPropertyConnectionA];
     NSString *layerB = [connection objectForKey:kTLDPropertyConnectionB];
-    GridCoord gridCoord = [tileMap gridCoordForObject:connection groupName:kTLDGroupMeta];
+    GridCoord gridCoord = [tileMap gridCoordForObject:connection];
         
     return [[ConnectionNode alloc] initWithConnectionToLayerA:layerA layerB:layerB gridCoord:gridCoord];
 }
@@ -30,7 +30,7 @@ NSString *const kTLDPropertyConnectionB = @"b";
     self = [super init];
     if (self) {
         self.position = [GridUtils absolutePositionForGridCoord:gridCoord unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
-        self.pipeLayers = [NSMutableArray arrayWithObjects:layerA, layerB, nil];
+        self.pipeLayers = @[layerA, layerB];
     }
     return self;
 }

@@ -536,6 +536,7 @@
   <object name="entry" x="248" y="60" width="104" height="100">
    <properties>
     <property name="direction" value="3"/>
+    <property name="layer" value="pipes2"/>
    </properties>
   </object>
   <object name="connection" x="643" y="446" width="117" height="108">

@@ -11,8 +11,10 @@
 @class HandNode;
 @class ArmController;
 @class CellObjectLibrary;
+@class PGEntry;
 
-@interface PuzzleLayer : CCLayer
+
+@interface PuzzleLayer : CCLayerColor
 
 // grid
 @property (assign) GridCoord gridSize;
@@ -20,6 +22,10 @@
 
 // tilemap
 @property (nonatomic, strong) CCTMXTiledMap *tileMap;
+@property (nonatomic, strong) NSArray *tiledLayers;
+
+// tiled objects
+@property (nonatomic, strong) PGEntry *entry;
 
 // list of game objects at each cell
 @property (nonatomic, strong) CellObjectLibrary *cellObjectLibrary;
@@ -27,8 +33,6 @@
 // hand and arm 
 @property (nonatomic, strong) HandNode *handNode;
 @property (nonatomic, strong) NSMutableArray *armNodes;
-@property (assign) GridCoord handEntryCoord;
-@property (assign) GridCoord lastHandCell;
 @property (assign) kDirection handEntersFrom;
 @property (assign) BOOL isHandNodeSelected;
 

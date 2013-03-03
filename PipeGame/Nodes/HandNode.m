@@ -23,6 +23,10 @@ NSString *const kPGNotificationHandNodeTouched = @"HandNodeTouched";
 {
     self = [super init];
     if (self) {
+        
+        // test vertex
+        self.sprite.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureColorAlphaTest];
+        
         self.contentSize = size;
         
         _sprite = [SpriteUtils spriteWithTextureKey:kImageNameHand];

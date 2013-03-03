@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		16141F1D16DD98F0000DB458 /* ConnectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 16141F1C16DD98EF000DB458 /* ConnectionNode.m */; };
-		16141F2116DDE54F000DB458 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16141F2016DDE54F000DB458 /* map1.tmx */; };
 		161D60AD16D92F6D0030D6A6 /* pipeTilesetBase1.png in Resources */ = {isa = PBXBuildFile; fileRef = 161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */; };
 		161D60AE16D92F6D0030D6A6 /* pipeTilesetBase2.png in Resources */ = {isa = PBXBuildFile; fileRef = 161D60AB16D92F6D0030D6A6 /* pipeTilesetBase2.png */; };
 		161D60C116DAD2280030D6A6 /* PGPopUpMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 161D60C016DAD2280030D6A6 /* PGPopUpMenu.m */; };
+		16B22F3C16E1826E00FD3409 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16B22F3B16E1826E00FD3409 /* map1.tmx */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -176,17 +176,20 @@
 		16D29B9316CF0D0F00C73947 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF116CF0D0F00C73947 /* GridUtils.m */; };
 		16D29B9416CF0D0F00C73947 /* SpriteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF316CF0D0F00C73947 /* SpriteUtils.m */; };
 		16D29B9516CF0D0F00C73947 /* TextureUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF516CF0D0F00C73947 /* TextureUtils.m */; };
+		16E813FC16E2673300088EC6 /* PGTiledUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E813FB16E2673300088EC6 /* PGTiledUtils.m */; };
+		16ED863D16DEFBA000800D45 /* PGEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 16ED863C16DEFBA000800D45 /* PGEntry.m */; };
+		16ED864016DEFBFB00800D45 /* PGTiledObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16ED863F16DEFBFB00800D45 /* PGTiledObject.m */; };
 		16FE9BC616D1B93E0014918D /* CCTMXTiledMap+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FE9BC516D1B93E0014918D /* CCTMXTiledMap+Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		16141F1B16DD98EF000DB458 /* ConnectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionNode.h; sourceTree = "<group>"; };
 		16141F1C16DD98EF000DB458 /* ConnectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionNode.m; sourceTree = "<group>"; };
-		16141F2016DDE54F000DB458 /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
 		161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipeTilesetBase1.png; sourceTree = "<group>"; };
 		161D60AB16D92F6D0030D6A6 /* pipeTilesetBase2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pipeTilesetBase2.png; sourceTree = "<group>"; };
 		161D60BF16DAD2280030D6A6 /* PGPopUpMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPopUpMenu.h; sourceTree = "<group>"; };
 		161D60C016DAD2280030D6A6 /* PGPopUpMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPopUpMenu.m; sourceTree = "<group>"; };
+		16B22F3B16E1826E00FD3409 /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* PipeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PipeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -493,6 +496,12 @@
 		16D29AF316CF0D0F00C73947 /* SpriteUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteUtils.m; sourceTree = "<group>"; };
 		16D29AF416CF0D0F00C73947 /* TextureUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureUtils.h; sourceTree = "<group>"; };
 		16D29AF516CF0D0F00C73947 /* TextureUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureUtils.m; sourceTree = "<group>"; };
+		16E813FA16E2673300088EC6 /* PGTiledUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGTiledUtils.h; sourceTree = "<group>"; };
+		16E813FB16E2673300088EC6 /* PGTiledUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGTiledUtils.m; sourceTree = "<group>"; };
+		16ED863B16DEFBA000800D45 /* PGEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PGEntry.h; path = Model/PGEntry.h; sourceTree = "<group>"; };
+		16ED863C16DEFBA000800D45 /* PGEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PGEntry.m; path = Model/PGEntry.m; sourceTree = "<group>"; };
+		16ED863E16DEFBFB00800D45 /* PGTiledObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PGTiledObject.h; path = Model/PGTiledObject.h; sourceTree = "<group>"; };
+		16ED863F16DEFBFB00800D45 /* PGTiledObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PGTiledObject.m; path = Model/PGTiledObject.m; sourceTree = "<group>"; };
 		16FE9BC416D1B93D0014918D /* CCTMXTiledMap+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCTMXTiledMap+Utils.h"; sourceTree = "<group>"; };
 		16FE9BC516D1B93E0014918D /* CCTMXTiledMap+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCTMXTiledMap+Utils.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -557,6 +566,7 @@
 				16D299B916CF0D0F00C73947 /* AppDelegate.m */,
 				16D29AB116CF0D0F00C73947 /* main.m */,
 				16D29ABB16CF0D0F00C73947 /* Prefix.pch */,
+				16ED863A16DEFB4B00800D45 /* Model */,
 				16D299BA16CF0D0F00C73947 /* Layers */,
 				16D299BD16CF0D0F00C73947 /* libs */,
 				16D29AB216CF0D0F00C73947 /* Nodes */,
@@ -1000,14 +1010,27 @@
 				16D29AF316CF0D0F00C73947 /* SpriteUtils.m */,
 				16D29AF416CF0D0F00C73947 /* TextureUtils.h */,
 				16D29AF516CF0D0F00C73947 /* TextureUtils.m */,
+				16E813FA16E2673300088EC6 /* PGTiledUtils.h */,
+				16E813FB16E2673300088EC6 /* PGTiledUtils.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		16ED863A16DEFB4B00800D45 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				16ED863B16DEFBA000800D45 /* PGEntry.h */,
+				16ED863C16DEFBA000800D45 /* PGEntry.m */,
+				16ED863E16DEFBFB00800D45 /* PGTiledObject.h */,
+				16ED863F16DEFBFB00800D45 /* PGTiledObject.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		16FE9BB516D1463A0014918D /* tilesets */ = {
 			isa = PBXGroup;
 			children = (
-				16141F2016DDE54F000DB458 /* map1.tmx */,
+				16B22F3B16E1826E00FD3409 /* map1.tmx */,
 				161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */,
 				161D60AB16D92F6D0030D6A6 /* pipeTilesetBase2.png */,
 			);
@@ -1107,7 +1130,7 @@
 				16D29B8B16CF0D0F00C73947 /* iTunesArtwork in Resources */,
 				161D60AD16D92F6D0030D6A6 /* pipeTilesetBase1.png in Resources */,
 				161D60AE16D92F6D0030D6A6 /* pipeTilesetBase2.png in Resources */,
-				16141F2116DDE54F000DB458 /* map1.tmx in Resources */,
+				16B22F3C16E1826E00FD3409 /* map1.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1235,6 +1258,9 @@
 				16FE9BC616D1B93E0014918D /* CCTMXTiledMap+Utils.m in Sources */,
 				161D60C116DAD2280030D6A6 /* PGPopUpMenu.m in Sources */,
 				16141F1D16DD98F0000DB458 /* ConnectionNode.m in Sources */,
+				16ED863D16DEFBA000800D45 /* PGEntry.m in Sources */,
+				16ED864016DEFBFB00800D45 /* PGTiledObject.m in Sources */,
+				16E813FC16E2673300088EC6 /* PGTiledUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
