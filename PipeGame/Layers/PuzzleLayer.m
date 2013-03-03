@@ -145,7 +145,12 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
 
 - (CCTMXLayer *)currentPipeLayer
 {
-    return [self.tileMap layerNamed:self.handNode.firstPipeLayer];
+    return [self.tileMap layerNamed:[self currentPipeLayerName]];
+}
+
+- (NSString *)currentPipeLayerName
+{
+    return self.handNode.firstPipeLayer;
 }
 
 
@@ -235,23 +240,26 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
 - (void)handleArmNodeTouched:(NSNotification *)notification
 {
     ArmNode *nodeTouched = (ArmNode *)notification.object;
-    CGPoint nodePosition = nodeTouched.position;
-    int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
     
-    // move hand and rotate to correct direction
-    self.handNode.position = nodePosition;
-    kDirection shouldFace;
-    if (touchedIndex > 0) {
-        ArmNode *newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 1];
-        shouldFace = [GridUtils directionFromStart:[newLastArmNode cell] end:[nodeTouched cell]];
+    if ([nodeTouched isAtPipeLayer:[self currentPipeLayerName]]) {
+        CGPoint nodePosition = nodeTouched.position;
+        int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
+        
+        // move hand and rotate to correct direction
+        self.handNode.position = nodePosition;
+        kDirection shouldFace;
+        if (touchedIndex > 0) {
+            ArmNode *newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 1];
+            shouldFace = [GridUtils directionFromStart:[newLastArmNode cell] end:[nodeTouched cell]];
+        }
+        else {
+            shouldFace = [GridUtils oppositeDirection:self.handEntersFrom];
+        }
+        [self.handNode setDirectionFacing:shouldFace];
+        
+        // remove arm nodes
+        [self removeArmNodesFromIndex:touchedIndex];
     }
-    else {
-        shouldFace = [GridUtils oppositeDirection:self.handEntersFrom];
-    }
-    [self.handNode setDirectionFacing:shouldFace];
-    
-    // remove arm nodes
-    [self removeArmNodesFromIndex:touchedIndex];
 }
 
 
