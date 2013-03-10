@@ -19,6 +19,10 @@ typedef enum
     kArmExitsUpRight,
     kArmExitsDownUp,
     kArmExitsLeftRight,
+    kArmExitsDownThrough,
+    kArmExitsUpThrough,
+    kArmExitsLeftThrough,
+    kArmExitsRightThrough
 } kArmExits;
 
 FOUNDATION_EXPORT NSString *const kPGNotificationArmNodeTouched;
@@ -28,6 +32,7 @@ FOUNDATION_EXPORT NSString *const kPGNotificationArmNodeTouched;
 
 @property (nonatomic, strong) CCSprite *sprite;
     
-- (id)initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit pipeLayer:(NSString *)pipeLayer;
+-(id) initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit pipeLayer:(NSString *)pipeLayer;
+-(id) initForLayerConnectionInCell:(GridCoord)cell exit:(kDirection)exit pipeLayer:(NSString *)pipeLayer;
 
 @end

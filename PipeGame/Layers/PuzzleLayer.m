@@ -219,6 +219,13 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         if ([connectionNode isAtPipeLayer:self.handNode.firstPipeLayer]) {
             for (NSString *pipeLayer in connectionNode.pipeLayers) {
                 if ([pipeLayer isEqualToString:self.handNode.firstPipeLayer] == NO) {
+                    
+                    // TODO: working on creating arm through graphic
+                    if (![GridUtils isCell:self.handNode.cell equalToCell:[self lastArmNode].cell]) {
+                        [self addArmNodeAtCell:self.handNode.cell movingDirection:kDirectionThrough];
+                    }
+                    /////////
+                    
                     [self moveToLayer:pipeLayer];
                     return YES;
                 }
@@ -266,9 +273,6 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
 
 - (BOOL)tryGridTouchAtPosition:(CGPoint)touchPosition cell:(GridCoord)touchCell
 {
-    NSLog(@"\n\n");
-    NSLog(@"touch cell: %i, %i", touchCell.x, touchCell.y);
-    
     // handle for touch within grid
     if ([GridUtils isCellInBounds:touchCell gridSize:self.gridSize]) {
         
@@ -300,12 +304,12 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
             else {
                 ArmNode *armNodeTouched = [self.cellObjectLibrary firstNodeOfKind:[ArmNode class] atCell:touchCell];
                 if ([armNodeTouched isEqual:self.armNodes.lastObject]) {
+                    
                     [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
                     
-                    ArmNode *newLastArmNode = (ArmNode *)self.armNodes.lastObject;
                     kDirection shouldFace;
-                    if (newLastArmNode != nil) {
-                        shouldFace = [GridUtils directionFromStart:newLastArmNode.cell end:touchCell];
+                    if ([self lastArmNode] != nil) {
+                        shouldFace = [GridUtils directionFromStart:[self lastArmNode].cell end:touchCell];
                     }
                     else {
                         shouldFace = self.entry.direction;
@@ -335,11 +339,26 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
     ArmNode *newArmNode;
     if ([self.armNodes count] > 0) {
         ArmNode *lastArmNode = [self.armNodes lastObject];
-        kDirection firstExit = [GridUtils directionFromStart:cell end:[lastArmNode cell]];
-        newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction pipeLayer:self.handNode.firstPipeLayer ];
+        
+        // standard arm node
+        BOOL armOverlapsLastArm = [GridUtils isCell:cell equalToCell:[lastArmNode cell]];
+        if (direction != kDirectionThrough && !armOverlapsLastArm) {
+            kDirection firstExit = [GridUtils directionFromStart:cell end:[lastArmNode cell]];
+            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction pipeLayer:self.handNode.firstPipeLayer ];
+        }
+        // arm node moving though layer
+        else {
+            kDirection exit = [GridUtils directionFromStart:self.handNode.cell end:[lastArmNode cell]];
+            newArmNode = [[ArmNode alloc] initForLayerConnectionInCell:cell exit:exit pipeLayer:self.handNode.firstPipeLayer];
+        }
     }
     else {
-        newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction pipeLayer:self.handNode.firstPipeLayer];
+        if (direction != kDirectionThrough) {
+            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction pipeLayer:self.handNode.firstPipeLayer];
+        }
+        else {
+            NSLog(@"warning: moving through on first cell needs implementation");
+        }
     }
     
     if (self.isHandNodeSelected) {
@@ -376,6 +395,15 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         }
     }
     return NO;
+}
+
+-(ArmNode *)lastArmNode
+{
+    if ([self.armNodes count] < 1) {
+        NSLog(@"warning: no arm nodes in self.armNodes");
+    }
+    ArmNode *armNode = self.armNodes.lastObject;
+    return armNode;
 }
 
 

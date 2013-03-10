@@ -128,6 +128,9 @@
 + (kDirection)directionFromStart:(GridCoord)start end:(GridCoord)end
 {
     // y movement
+    if ((start.x == end.x) && (start.y == end.y)) {
+        NSLog(@"warning: starting point is same as ending point, returning kDirectionNone");
+    }
     if (start.x == end.x) {
         if (start.y > end.y) {
             return kDirectionDown;
@@ -135,7 +138,7 @@
         else if (start.y < end.y) {
             return kDirectionUp;
         }
-    }
+     }
     // x movement
     else if (start.y == end.y) {
         if (start.x > end.x) {
@@ -145,7 +148,9 @@
             return kDirectionRight;
         }
     }
-    
+    else {
+        NSLog(@"warning: diagnol directions not supported, returning kDirectionNone");
+    }
     return kDirectionNone;
 }
 

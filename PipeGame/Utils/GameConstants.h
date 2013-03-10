@@ -14,7 +14,8 @@ typedef enum
     kDirectionUp,
     kDirectionRight,
     kDirectionDown,
-    kDirectionLeft
+    kDirectionLeft,
+    kDirectionThrough,
 } kDirection;
 
 FOUNDATION_EXPORT CGFloat const kSizeGridUnit;

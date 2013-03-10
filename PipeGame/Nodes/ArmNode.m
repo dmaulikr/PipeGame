@@ -16,11 +16,10 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
 
 @implementation ArmNode
 
-- (id)initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit pipeLayer:(NSString *)pipeLayer
+-(id) initInCell:(GridCoord)cell pipeLayer:(NSString *)pipeLayer
 {
     self = [super init];
     if (self) {
-        
         self.pipeLayers = @[pipeLayer];
         
         // size, position
@@ -30,27 +29,48 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
         // setup for sending notifications
         self.shouldSendPGTouchNotifications = YES;
         self.pgTouchNotification = kPGNotificationArmNodeTouched;
-        
-        // setup sprite with correct image 
-        kArmExits exits = [self armExitsTypeForFirstExit:firstExit secondExit:secondExit];
-        NSString *textureKey = [self textureKeyForArmExits:exits];
-        _sprite = [SpriteUtils spriteWithTextureKey:textureKey];
-        _sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
-        [self addChild:_sprite];
     }
     return self;
 }
 
-#pragma mark - CCNode+Utils
+-(id) initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit pipeLayer:(NSString *)pipeLayer
+{
+    self = [self initInCell:cell pipeLayer:pipeLayer];
+    if (self) {
+        // setup sprite with correct image 
+        kArmExits exits = [self armExitsTypeForFirstExit:firstExit secondExit:secondExit];
+        NSString *textureKey = [self textureKeyForArmExits:exits];
+        _sprite = [SpriteUtils spriteWithTextureKey:textureKey];
+        [self positionAndAddSprite];
+    }
+    return self;
+}
 
-- (BOOL)shouldBlockMovement
+-(id) initForLayerConnectionInCell:(GridCoord)cell exit:(kDirection)exit pipeLayer:(NSString *)pipeLayer
+{
+    self = [self initInCell:cell pipeLayer:pipeLayer];
+    if (self) {
+        _sprite = [SpriteUtils spriteWithTextureKey:kImageNameArmThrough];
+        _sprite.rotation = [SpriteUtils degreesForDirection:exit];
+        [self positionAndAddSprite];
+    }
+    return self;
+}
+
+-(void) positionAndAddSprite
+{
+    _sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
+    [self addChild:_sprite];
+}
+
+-(BOOL) shouldBlockMovement
 {
     return YES;
 }
 
 #pragma mark - image key
 
-- (NSString *)textureKeyForArmExits:(kArmExits)exits
+-(NSString *) textureKeyForArmExits:(kArmExits)exits
 {
     switch (exits) {
         case kArmExitsDownLeft:

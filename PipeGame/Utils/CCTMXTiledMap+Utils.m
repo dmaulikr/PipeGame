@@ -98,15 +98,6 @@
     }
 }
 
-//- (void)performBlockForAllTiles:(void (^)(CCTMXLayer *layer, CCSprite *tile))perform;
-//{
-//    for (CCTMXLayer *layer in self.children) {
-//        [CCTMXTiledMap performBlockForTilesInLayer:layer perform:^(CCSprite *tile) {
-//            perform(layer, tile);
-//        }];
-//    }
-//}
-
 - (void)performBlockForAllTiles:(void (^)(CCTMXLayer *layer, CCSprite *tile))perform;
 {
     for (id node in self.children) {
