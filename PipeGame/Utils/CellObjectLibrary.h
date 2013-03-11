@@ -14,11 +14,18 @@
 
 @property (nonatomic, strong) NSMutableDictionary *objectLibrary;
 
-- (id)initWithGridSize:(GridCoord)size;
-- (void)addObjectToLibrary:(CellNode *)object cell:(GridCoord)cell;
-- (void)removeObjectFromLibrary:(CellNode *)object cell:(GridCoord)cell;
-- (NSMutableArray *)objectsForCell:(GridCoord)cell;
-- (BOOL)libraryContainsObject:(CellNode *)object atCell:(GridCoord)cell;
+-(id )initWithGridSize:(GridCoord)size;
+
+- (void)addNodeToLibrary:(CellNode *)node cell:(GridCoord)cell;
+- (void)removeNodeFromLibrary:(CellNode *)node cell:(GridCoord)cell;
+
+- (NSMutableArray *)nodesForCell:(GridCoord)cell;
+- (NSMutableArray *)nodesForCell:(GridCoord)cell atPipeLayer:(NSString *)pipeLayer;     
+- (BOOL)libraryContainsNode:(CellNode *)node atCell:(GridCoord)cell;
+- (BOOL)libraryContainsNodestOfKind:(Class)class atPipeLayer:(NSString *)pipeLayer atCell:(GridCoord)cell;
+- (NSMutableArray *)nodesOfKind:(Class)class atCell:(GridCoord)cell;
 - (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell;
+- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell atPipeLayer:(NSString *)pipeLayer ;
+
 
 @end

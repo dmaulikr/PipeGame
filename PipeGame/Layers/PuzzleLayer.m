@@ -84,7 +84,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
         for (NSMutableDictionary *connection in connections) {
             ConnectionNode *connectionNode = [ConnectionNode nodeWithConnection:connection tileMap:self.tileMap];
-            [self.cellObjectLibrary addObjectToLibrary:connectionNode cell:connectionNode.cell];
+            [self.cellObjectLibrary addNodeToLibrary:connectionNode cell:connectionNode.cell];
         }
     }
     return self;
@@ -202,7 +202,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         self.isHandNodeSelected = NO;
         [self tintHandAndArm:ccWHITE];
         
-        NSMutableArray *cellObjects = [self.cellObjectLibrary objectsForCell:self.handNode.cell];
+        NSMutableArray *cellObjects = [self.cellObjectLibrary nodesForCell:self.handNode.cell];
         NSUInteger connectionIndex = [cellObjects indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
             return [obj isKindOfClass:[ConnectionNode class]];
         }];
@@ -302,7 +302,8 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
             }
             // handle touch in a cell with an arm unit (rewind)
             else {
-                ArmNode *armNodeTouched = [self.cellObjectLibrary firstNodeOfKind:[ArmNode class] atCell:touchCell];
+                ArmNode *armNodeTouched = [self.cellObjectLibrary firstNodeOfKind:[ArmNode class] atCell:touchCell atPipeLayer:[self currentPipeLayerName]];
+                
                 if ([armNodeTouched isEqual:self.armNodes.lastObject]) {
                     
                     [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
@@ -375,7 +376,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
     [self.tileMap addChild:newArmNode z:[self.tileMap layerNamed:[self.handNode.pipeLayers objectAtIndex:0]].zOrder];
     
     [self.armNodes addObject:newArmNode];
-    [self.cellObjectLibrary addObjectToLibrary:newArmNode cell:cell];
+    [self.cellObjectLibrary addNodeToLibrary:newArmNode cell:cell];
 }
 
 - (void)removeArmNodesFromIndex:(int)removeFromIndex
@@ -384,7 +385,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
     for (int i = lastIndex; i >= removeFromIndex; i--) {
         ArmNode *removeArmNode = (ArmNode *)[self.armNodes objectAtIndex:i];
         GridCoord removeArmCell = [removeArmNode cell];
-        [self.cellObjectLibrary removeObjectFromLibrary:removeArmNode cell:removeArmCell];
+        [self.cellObjectLibrary removeNodeFromLibrary:removeArmNode cell:removeArmCell];
         [self.armNodes removeLastObject];
         [self.tileMap removeChild:removeArmNode cleanup:YES];
     }
@@ -392,7 +393,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
 
 - (BOOL)isArmNodeAtCell:(GridCoord)cell
 {
-    NSMutableArray *cellNodes = [self.cellObjectLibrary objectsForCell:cell];
+    NSMutableArray *cellNodes = [self.cellObjectLibrary nodesForCell:cell];
     for (CellNode *node in cellNodes ) {
         if ([node isKindOfClass:[ArmNode class]]) {
             if ([node isAtPipeLayer:[self currentPipeLayerName]]) {
@@ -450,7 +451,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
 
 - (BOOL)isCellBlocked:(GridCoord)cell
 {
-    NSMutableArray *objects = [self.cellObjectLibrary objectsForCell:cell];
+    NSMutableArray *objects = [self.cellObjectLibrary nodesForCell:cell];
     for (CellNode *node in objects) {
         if ([node isAtPipeLayer:self.handNode.firstPipeLayer]) {
             if (node.shouldBlockMovement) {
