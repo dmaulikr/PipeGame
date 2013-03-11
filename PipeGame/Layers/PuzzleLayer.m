@@ -203,32 +203,32 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         [self tintHandAndArm:ccWHITE];
         
         NSMutableArray *cellObjects = [self.cellObjectLibrary objectsForCell:self.handNode.cell];
-        [cellObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            if ([self tryConnection:obj]) {
-                return;
-            }
+        NSUInteger connectionIndex = [cellObjects indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            return [obj isKindOfClass:[ConnectionNode class]];
         }];
+        if (connectionIndex != NSNotFound) {
+            ConnectionNode *connectionNode = [cellObjects objectAtIndex:connectionIndex];
+            [self tryConnection:connectionNode];
+        }
     }
 }
 
-- (BOOL)tryConnection:(id)object
+- (BOOL)tryConnection:(ConnectionNode *)connectionNode
 {
-    if ([object isKindOfClass:[ConnectionNode class]]) {
-        ConnectionNode *connectionNode = (ConnectionNode *)object;
-        if ([connectionNode isAtPipeLayer:self.handNode.firstPipeLayer]) {
-            for (NSString *pipeLayer in connectionNode.pipeLayers) {
-                if ([pipeLayer isEqualToString:self.handNode.firstPipeLayer] == NO) {
-                    
-                    // TODO: working on creating arm through graphic
-                    if (![GridUtils isCell:self.handNode.cell equalToCell:[self lastArmNode].cell]) {
-                        [self addArmNodeAtCell:self.handNode.cell movingDirection:kDirectionThrough];
-                    }
-                    /////////
-                    
-                    [self moveToLayer:pipeLayer];
-                    return YES;
+    if ([connectionNode isAtPipeLayer:self.handNode.firstPipeLayer]) {
+        for (NSString *pipeLayer in connectionNode.pipeLayers) {
+            if ([pipeLayer isEqualToString:self.handNode.firstPipeLayer] == NO) {
+                
+                // TODO: working on creating arm through graphic
+                if ([GridUtils isCell:self.handNode.cell equalToCell:[self lastArmNode].cell] == NO) {
+                    [self addArmNodeAtCell:self.handNode.cell movingDirection:kDirectionThrough];
                 }
+                else {
+                    [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
+                }
+                
+                [self moveToLayer:pipeLayer];
+                return YES;
             }
         }
     }
@@ -348,7 +348,13 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         }
         // arm node moving though layer
         else {
-            kDirection exit = [GridUtils directionFromStart:self.handNode.cell end:[lastArmNode cell]];
+            kDirection exit;
+            if (armOverlapsLastArm) {
+                exit = direction;
+            }
+            else {
+                exit = [GridUtils directionFromStart:self.handNode.cell end:[lastArmNode cell]];
+            }
             newArmNode = [[ArmNode alloc] initForLayerConnectionInCell:cell exit:exit pipeLayer:self.handNode.firstPipeLayer];
         }
     }
