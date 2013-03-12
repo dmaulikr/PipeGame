@@ -255,7 +255,13 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         self.handNode.position = nodePosition;
         kDirection shouldFace;
         if (touchedIndex > 0) {
-            ArmNode *newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 1];
+            ArmNode *newLastArmNode;
+            if ([self isArmAtConnection]) {
+                newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 2];
+            }
+            else {
+                newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 1];
+            }
             shouldFace = [GridUtils directionFromStart:[newLastArmNode cell] end:[nodeTouched cell]];
         }
         else {
@@ -281,7 +287,6 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
             
             // handle touch in cell with no arm unit
             if ([self isArmNodeAtCell:touchCell] == NO) {
-            
                 if ([self isLinearPathFreeBetweenStart:self.handNode.cell end:touchCell]) {
                     
                     // arm units
@@ -310,7 +315,13 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
                     
                     kDirection shouldFace;
                     if ([self lastArmNode] != nil) {
-                        shouldFace = [GridUtils directionFromStart:[self lastArmNode].cell end:touchCell];
+                        if ([GridUtils isCell:[self lastArmNode].cell equalToCell:touchCell]) {
+                            ArmNode *secondTolastArmNode = [self.armNodes objectAtIndex:self.armNodes.count - 2];
+                            shouldFace = [GridUtils directionFromStart: secondTolastArmNode.cell end:touchCell];
+                        }
+                        else {
+                            shouldFace = [GridUtils directionFromStart:[self lastArmNode].cell end:touchCell];
+                        }
                     }
                     else {
                         shouldFace = self.entry.direction;
@@ -411,6 +422,12 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
     }
     ArmNode *armNode = self.armNodes.lastObject;
     return armNode;
+}
+
+-(BOOL) isArmAtConnection
+{
+    ArmNode *secondToLast = [self.armNodes objectAtIndex:self.armNodes.count - 2];
+    return [GridUtils isCell:secondToLast.cell equalToCell:[self lastArmNode].cell];
 }
 
 
