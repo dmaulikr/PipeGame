@@ -256,7 +256,8 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         kDirection shouldFace;
         if (touchedIndex > 0) {
             ArmNode *newLastArmNode;
-            if ([self isArmAtConnection]) {
+                        
+            if (nodeTouched.isAtConnection) {
                 newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 2];
             }
             else {
@@ -422,12 +423,6 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
     }
     ArmNode *armNode = self.armNodes.lastObject;
     return armNode;
-}
-
--(BOOL) isArmAtConnection
-{
-    ArmNode *secondToLast = [self.armNodes objectAtIndex:self.armNodes.count - 2];
-    return [GridUtils isCell:secondToLast.cell equalToCell:[self lastArmNode].cell];
 }
 
 

@@ -37,7 +37,10 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
 {
     self = [self initInCell:cell pipeLayer:pipeLayer];
     if (self) {
-        // setup sprite with correct image 
+        // add exits
+        self.exits = [NSMutableArray array];
+        [self.exits addObjectsFromArray:@[[ArmNode exitForDirection:firstExit], [ArmNode exitForDirection:secondExit]]];
+        
         kArmExits exits = [self armExitsTypeForFirstExit:firstExit secondExit:secondExit];
         NSString *textureKey = [self textureKeyForArmExits:exits];
         _sprite = [SpriteUtils spriteWithTextureKey:textureKey];
@@ -50,6 +53,10 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
 {
     self = [self initInCell:cell pipeLayer:pipeLayer];
     if (self) {
+        // add exits
+        self.exits = [NSMutableArray array];
+        [self.exits addObjectsFromArray:@[[ArmNode exitForDirection:exit], [ArmNode exitForDirection:kDirectionThrough]]];
+        
         _sprite = [SpriteUtils spriteWithTextureKey:kImageNameArmThrough];
         _sprite.rotation = [SpriteUtils degreesForDirection:exit];
         [self positionAndAddSprite];
@@ -141,6 +148,37 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
     return kArmExitsNone;
 }
 
+
+#pragma mark - exits
+
+-(BOOL) isAtConnection
+{
+    for (NSString *exit in self.exits) {
+        if ([exit isEqualToString:@"through"]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
++(NSString *) exitForDirection:(kDirection)direction
+{
+    switch (direction) {
+        case kDirectionUp:
+            return @"up";
+        case kDirectionDown:
+            return @"down";
+        case kDirectionLeft:
+            return @"left";
+        case kDirectionRight:
+            return @"right";
+        case kDirectionThrough:
+            return @"through";
+        default:
+            NSLog(@"warning: invalid direction provided");
+            return nil;
+    }
+}
 
 
 @end
