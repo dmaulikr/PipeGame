@@ -16,6 +16,10 @@
 
 @interface PuzzleLayer : CCLayerColor
 
+// pipe layers
+@property (nonatomic, strong) CCLayerColor *layer1;
+@property (nonatomic, strong) CCLayerColor *layer2;
+
 // grid
 @property (assign) GridCoord gridSize;
 @property (assign) CGPoint gridOrigin;

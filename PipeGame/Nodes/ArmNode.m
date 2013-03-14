@@ -77,6 +77,58 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
 
 #pragma mark - image key
 
+-(NSString *) imageForExits:(NSArray *)exits
+{
+    BOOL up;
+    BOOL down;
+    BOOL left;
+    BOOL right;
+    BOOL through;
+    for (NSString *exit in exits) {
+        if ([exit isEqualToString:@"up"]) {
+            up = YES;
+        }
+        if ([exit isEqualToString:@"down"]) {
+            down = YES;
+        }
+        if ([exit isEqualToString:@"left"]) {
+            left = YES;
+        }
+        if ([exit isEqualToString:@"right"]) {
+            right = YES;
+        }
+        if ([exit isEqualToString:@"through"]) {
+            through = YES;
+        }
+    }
+    if (up && down) {
+        return kImageNameArmDownUp;
+    }
+    if (left && right) {
+        return kImageNameArmLeftRight;
+    }
+    if (up && right) {
+        return kImageNameArmUpRight;
+    }
+    if (up && left) {   
+        return kImageNameArmUpLeft;
+    }
+    if (down && right) {
+        return kImageNameArmDownRight;
+    }
+    if (down && left) {
+        return kImageNameArmDownLeft;
+    }
+    // currently being rotated outside of this method, might be better to do it here
+    if (through) {
+        return kImageNameArmThrough;
+    }
+    else {
+        NSLog(@"warning: no matching image type for exits: %@", exits);
+        return nil;
+    }
+}
+
 -(NSString *) textureKeyForArmExits:(kArmExits)exits
 {
     switch (exits) {

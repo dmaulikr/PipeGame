@@ -21,7 +21,7 @@
 #import "PGTiledUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
-static GLubyte const kBackgroundTileLayerOpacity = 80;
+static GLubyte const kBackgroundTileLayerOpacity = 170;
 
 
 @implementation PuzzleLayer
@@ -50,6 +50,12 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         // tile map
         _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMapName];
         [self addChild:_tileMap];
+//        self.layer1 = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
+//        self.layer2 = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
+//        [self.layer1 addChild:[_tileMap.children objectAtIndex:0]];
+//        [self.layer2 addChild:[_tileMap.children objectAtIndex:1]];
+//        [self addChild:self.layer1];
+//        [self addChild:self.layer2];
         
         _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
@@ -120,10 +126,14 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
     
     // tiles
     [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
-        if ([self.handNode isAtPipeLayer:layer.layerName]) {
-            tile.opacity = 255;
-        }         else {
-            tile.opacity = kBackgroundTileLayerOpacity;
+        if (tile != nil) {
+            if ([self.handNode isAtPipeLayer:layer.layerName]) {
+                tile.opacity = 255;
+            }         else {
+                tile.opacity = kBackgroundTileLayerOpacity;
+                // TODO: z order
+    //            [self.tileMap addChild:newArmNode z:[self.tileMap layerNamed:[self.handNode.pipeLayers objectAtIndex:0]].zOrder];
+            }
         }
     }];
     
@@ -219,7 +229,6 @@ static GLubyte const kBackgroundTileLayerOpacity = 80;
         for (NSString *pipeLayer in connectionNode.pipeLayers) {
             if ([pipeLayer isEqualToString:self.handNode.firstPipeLayer] == NO) {
                 
-                // TODO: working on creating arm through graphic
                 if ([GridUtils isCell:self.handNode.cell equalToCell:[self lastArmNode].cell] == NO) {
                     [self addArmNodeAtCell:self.handNode.cell movingDirection:kDirectionThrough];
                 }
