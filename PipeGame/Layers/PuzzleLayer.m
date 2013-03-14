@@ -21,7 +21,7 @@
 #import "PGTiledUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
-static GLubyte const kBackgroundTileLayerOpacity = 170;
+static GLubyte const kBackgroundTileLayerOpacity = 200;
 
 
 @implementation PuzzleLayer
@@ -30,8 +30,9 @@ static GLubyte const kBackgroundTileLayerOpacity = 170;
 {
     CCScene *scene = [CCScene node];
     
-    PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithColor:ccc4(0, 0, 0, 255) puzzle:puzzle];
-    
+    // TODO: color doesn't work
+    PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithColor:ccc4(100, 120, 130, 255) puzzle:puzzle];
+
     [scene addChild:puzzleLayer];
        
     return scene;
@@ -50,12 +51,6 @@ static GLubyte const kBackgroundTileLayerOpacity = 170;
         // tile map
         _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMapName];
         [self addChild:_tileMap];
-//        self.layer1 = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
-//        self.layer2 = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
-//        [self.layer1 addChild:[_tileMap.children objectAtIndex:0]];
-//        [self.layer2 addChild:[_tileMap.children objectAtIndex:1]];
-//        [self addChild:self.layer1];
-//        [self addChild:self.layer2];
         
         _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
         _gridOrigin = [PuzzleLayer sharedGridOrigin];
@@ -121,31 +116,36 @@ static GLubyte const kBackgroundTileLayerOpacity = 170;
         NSLog(@"warning: can't use moveToLayer before hand node has been created");
         return;
     }
+    CCTMXLayer *moveFromLayer = [self.tileMap layerNamed:self.handNode.firstPipeLayer];
+    CCTMXLayer *moveToLayer = [self.tileMap layerNamed:layerName];
+
     self.handNode.pipeLayers = @[layerName];
-    [self.tileMap reorderChild:self.handNode z:[self.tileMap layerNamed:layerName].zOrder];
+    [self.tileMap reorderChild:moveToLayer z:moveFromLayer.zOrder];
+    [self.tileMap reorderChild:self.handNode z:moveToLayer.zOrder];
+
     
+    // arms
+    for (ArmNode *armNode in self.armNodes) {
+        if ([armNode isAtPipeLayer:layerName]) {
+            [self.tileMap reorderChild:armNode z:moveToLayer.zOrder];
+            armNode.sprite.opacity = 255;
+        }
+        else {
+            armNode.sprite.opacity = kBackgroundTileLayerOpacity;
+        }
+    }
+
     // tiles
     [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
         if (tile != nil) {
             if ([self.handNode isAtPipeLayer:layer.layerName]) {
                 tile.opacity = 255;
-            }         else {
+            }
+            else {
                 tile.opacity = kBackgroundTileLayerOpacity;
-                // TODO: z order
-    //            [self.tileMap addChild:newArmNode z:[self.tileMap layerNamed:[self.handNode.pipeLayers objectAtIndex:0]].zOrder];
             }
         }
     }];
-    
-    // arms
-    for (ArmNode *node in self.armNodes) {
-        if ([node isAtPipeLayer:layerName]) {
-            node.sprite.opacity = 255;
-        }
-        else {
-            node.sprite.opacity = kBackgroundTileLayerOpacity;
-        }
-    }
     
     // layer color
     self.color = [PGTiledUtils pipeColorAtLayer:layerName];
@@ -394,8 +394,7 @@ static GLubyte const kBackgroundTileLayerOpacity = 170;
     }
     
     // need to add as child, to the armNodes stack and to the cell object library
-    [self.tileMap addChild:newArmNode z:[self.tileMap layerNamed:[self.handNode.pipeLayers objectAtIndex:0]].zOrder];
-    
+    [self.tileMap addChild:newArmNode z:[self currentPipeLayer].zOrder];
     [self.armNodes addObject:newArmNode];
     [self.cellObjectLibrary addNodeToLibrary:newArmNode cell:cell];
 }
