@@ -13,6 +13,8 @@
 @class CellObjectLibrary;
 @class PGEntry;
 
+FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
+
 
 @interface PuzzleLayer : CCLayerColor
 

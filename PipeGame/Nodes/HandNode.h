@@ -15,6 +15,7 @@ FOUNDATION_EXPORT NSString *const kPGNotificationHandNodeTouched;
 @interface HandNode : CellNode
 
 @property (nonatomic, strong) CCSprite *sprite;
+@property (nonatomic, strong) CCSprite *connectionSprite;
 @property (assign) kDirection facing;
 
 - (id)initWithContentSize:(CGSize)size;

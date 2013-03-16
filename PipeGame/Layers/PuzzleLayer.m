@@ -23,6 +23,8 @@
 static NSString *const kImageArmUnit = @"armUnit.png";
 static GLubyte const kBackgroundTileLayerOpacity = 200;
 
+NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
+
 
 @implementation PuzzleLayer
 
@@ -149,7 +151,8 @@ static GLubyte const kBackgroundTileLayerOpacity = 200;
     
     // layer color
     self.color = [PGTiledUtils pipeColorAtLayer:layerName];
-
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationArmStackChanged object:self.armNodes];
 }
 
 - (CCTMXLayer *)currentPipeLayer
@@ -397,6 +400,8 @@ static GLubyte const kBackgroundTileLayerOpacity = 200;
     [self.tileMap addChild:newArmNode z:[self currentPipeLayer].zOrder];
     [self.armNodes addObject:newArmNode];
     [self.cellObjectLibrary addNodeToLibrary:newArmNode cell:cell];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationArmStackChanged object:self.armNodes];
 }
 
 - (void)removeArmNodesFromIndex:(int)removeFromIndex
@@ -409,6 +414,8 @@ static GLubyte const kBackgroundTileLayerOpacity = 200;
         [self.armNodes removeLastObject];
         [self.tileMap removeChild:removeArmNode cleanup:YES];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationArmStackChanged object:self.armNodes];
 }
 
 - (BOOL)isArmNodeAtCell:(GridCoord)cell
