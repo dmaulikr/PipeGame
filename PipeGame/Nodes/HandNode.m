@@ -73,9 +73,12 @@ NSString *const kPGNotificationHandNodeTouched = @"HandNodeTouched";
 - (void)handleArmStackChanged:(NSNotification *)notification
 {
     NSMutableArray *armStack = (NSMutableArray *)notification.object;
-    ArmNode *lastArmNode = [armStack lastObject];
-    BOOL isEmerging = (![lastArmNode.firstPipeLayer isEqualToString:self.firstPipeLayer]);
-    [self setAtConnection:isEmerging];
+    
+    if (armStack.count > 0) {
+        ArmNode *lastArmNode = [armStack lastObject];
+        BOOL isEmerging = (![lastArmNode.firstPipeLayer isEqualToString:self.firstPipeLayer]);
+        [self setAtConnection:isEmerging];
+    }
 }
 
 @end
