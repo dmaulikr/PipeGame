@@ -19,9 +19,12 @@
 #import "ConnectionNode.h"
 #import "PGEntry.h"
 #import "PGTiledUtils.h"
+#import "BackgroundLayer.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
-static GLubyte const kBackgroundTileLayerOpacity = 200;
+static GLubyte const kBackgroundTileLayerOpacity = 190;
+static ccTime const kMoveToDuration = 0.4;
+static CGFloat const kLayerScale = 0.05;
 
 NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
@@ -32,23 +35,24 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 {
     CCScene *scene = [CCScene node];
     
-    // TODO: color doesn't work
-    PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithColor:ccc4(100, 120, 130, 255) puzzle:puzzle];
-
+    PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithPuzzle:puzzle];
     [scene addChild:puzzleLayer];
        
     return scene;
 }
 
 //- (id)initWithPuzzle:(int)puzzle
-- (id)initWithColor:(ccColor4B)color puzzle:(int)puzzle
+- (id)initWithPuzzle:(int)puzzle
 {
 //    self = [super init];
-    self = [super initWithColor:color];
+    self = [super init];
     if (self) {
         NSString *tileMapName = [PuzzleLayer tiledMapNameForPuzzle:puzzle];
         
         [self setIsTouchEnabled:YES];
+        
+        _backgroundLayer = [[BackgroundLayer alloc] initWithColor:ccc4(0, 0, 0, 255)];
+        [self addChild:_backgroundLayer];
 
         // tile map
         _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMapName];
@@ -74,14 +78,11 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         _handEntersFrom = [GridUtils oppositeDirection:_entry.direction];
         _isHandNodeSelected = NO;
         
-        // layer color
-        self.color = [PGTiledUtils pipeColorAtLayer:_entry.pipeLayer];
-        
         // arm
         _armNodes = [NSMutableArray array];
         
         // move to layer
-        [self moveToLayer:_entry.pipeLayer];
+        [self moveToLayer:_entry.pipeLayer fromLayer:[PGTiledUtils oppositeLayer:_entry.pipeLayer]];
 
         // connections
         NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
@@ -111,29 +112,32 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     return CGPointMake(0, 0);
 }
 
-- (void)moveToLayer:(NSString *)layerName
+- (void)moveToLayer:(NSString *)toLayerName fromLayer:(NSString *)fromLayerName
 {
+    [self.backgroundLayer tintToColor:[PGTiledUtils pipeColorAtLayer:toLayerName] duration:kMoveToDuration];
+    
     // hand 
     if (self.handNode == nil) {
         NSLog(@"warning: can't use moveToLayer before hand node has been created");
         return;
     }
-    CCTMXLayer *moveFromLayer = [self.tileMap layerNamed:self.handNode.firstPipeLayer];
-    CCTMXLayer *moveToLayer = [self.tileMap layerNamed:layerName];
+    CCTMXLayer *moveFromLayer = [self.tileMap layerNamed:fromLayerName];
+    CCTMXLayer *moveToLayer = [self.tileMap layerNamed:toLayerName];
 
-    self.handNode.pipeLayers = @[layerName];
+    self.handNode.pipeLayers = @[toLayerName];
     [self.tileMap reorderChild:moveToLayer z:moveFromLayer.zOrder];
     [self.tileMap reorderChild:self.handNode z:moveToLayer.zOrder];
-
     
     // arms
     for (ArmNode *armNode in self.armNodes) {
-        if ([armNode isAtPipeLayer:layerName]) {
+        if ([armNode isAtPipeLayer:toLayerName]) {
             [self.tileMap reorderChild:armNode z:moveToLayer.zOrder];
-            armNode.sprite.opacity = 255;
+            CCFadeTo *brighten = [CCFadeTo actionWithDuration:kMoveToDuration opacity:255];
+            [armNode.sprite runAction:brighten];
         }
         else {
-            armNode.sprite.opacity = kBackgroundTileLayerOpacity;
+            CCFadeTo *darken = [CCFadeTo actionWithDuration:kMoveToDuration opacity:kBackgroundTileLayerOpacity];
+            [armNode.sprite runAction:darken];
         }
     }
 
@@ -141,17 +145,15 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
         if (tile != nil) {
             if ([self.handNode isAtPipeLayer:layer.layerName]) {
-                tile.opacity = 255;
+                CCFadeTo *brighten = [CCFadeTo actionWithDuration:kMoveToDuration opacity:255];
+                [tile runAction:brighten];
             }
             else {
-                tile.opacity = kBackgroundTileLayerOpacity;
+                CCFadeTo *darken = [CCFadeTo actionWithDuration:kMoveToDuration opacity:kBackgroundTileLayerOpacity];
+                [tile runAction:darken];
             }
         }
     }];
-    
-    // layer color
-    self.color = [PGTiledUtils pipeColorAtLayer:layerName];
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationArmStackChanged object:self.armNodes];
 }
 
@@ -182,12 +184,12 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 # pragma mark - draw grid
 
-- (void)draw
-{
-    // grid
-    ccDrawColor4F(0.5f, 0.5f, 0.5f, 1.0f);
-    [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:_gridOrigin];
-}
+//- (void)draw
+//{
+//    // grid
+//    ccDrawColor4F(0.5f, 0.5f, 0.5f, 1.0f);
+//    [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:_gridOrigin];
+//}
 
 # pragma mark - targeted touch delegate
 
@@ -239,7 +241,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
                     [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
                 }
                 
-                [self moveToLayer:pipeLayer];
+                [self moveToLayer:pipeLayer fromLayer:self.handNode.firstPipeLayer];
                 return YES;
             }
         }

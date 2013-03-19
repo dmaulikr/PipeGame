@@ -12,11 +12,15 @@
 @class ArmController;
 @class CellObjectLibrary;
 @class PGEntry;
+@class BackgroundLayer;
 
 FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
 
 
 @interface PuzzleLayer : CCLayerColor
+
+// background
+@property (nonatomic, strong) BackgroundLayer *backgroundLayer;
 
 // pipe layers
 @property (nonatomic, strong) CCLayerColor *layer1;

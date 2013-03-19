@@ -38,4 +38,13 @@ NSString *const kTLDLayerPipes2 = @"pipes2";
     return ccWHITE;
 }
 
+// only works for 2 layers
++ (NSString *)oppositeLayer:(NSString *)layer
+{
+    if ([layer isEqualToString:kTLDLayerPipes1]) {
+        return kTLDLayerPipes2;
+    }
+    return kTLDLayerPipes1;
+}
+
 @end

@@ -29,4 +29,7 @@ FOUNDATION_EXPORT NSString *const kTLDLayerPipes2;
 
 + (ccColor3B)pipeColorAtLayer:(NSString *)layer;
 
+// only works for 2 layers
++ (NSString *)oppositeLayer:(NSString *)layer;
+
 @end
