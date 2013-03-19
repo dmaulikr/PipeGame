@@ -84,12 +84,7 @@
     // instead of bounding box we must use custom rect w/ origin (0, 0) because the touch is relative to our node origin
     CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
     CGRect rect = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
-    if (CGRectContainsPoint(rect, touchPosition)) {
-        return YES;
-    }
-    else {
-        return NO;
-    }
+    return (CGRectContainsPoint(rect, touchPosition));
 }
 
 
