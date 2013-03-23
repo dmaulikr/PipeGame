@@ -22,10 +22,12 @@ FOUNDATION_EXPORT NSString *const kImageNameArmDownUp;
 FOUNDATION_EXPORT NSString *const kImageNameArmLeftRight;
 FOUNDATION_EXPORT NSString *const kImageNameArmThrough;
 
-
 // hand
 FOUNDATION_EXPORT NSString *const kImageNameHand;
 FOUNDATION_EXPORT NSString *const kImageNameHandThrough;
+
+// rat
+FOUNDATION_EXPORT NSString *const kImageNameRat;
 
 
 #pragma mark - methods

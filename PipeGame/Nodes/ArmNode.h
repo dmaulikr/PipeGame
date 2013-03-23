@@ -30,7 +30,6 @@ FOUNDATION_EXPORT NSString *const kPGNotificationArmNodeTouched;
 
 @interface ArmNode : CellNode
 
-@property (nonatomic, strong) CCSprite *sprite;
 @property (nonatomic, strong) NSMutableArray *exits;
     
 -(id) initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit pipeLayer:(NSString *)pipeLayer;

@@ -9,29 +9,37 @@
 #import "CellNode.h"
 #import "GameConstants.h"
 #import "PuzzleLayer.h"
+#import "SpriteUtils.h"
 
 @implementation CellNode
 
 
-- (id)init
+-(id) init
 {
     self = [super init];
     if (self) {
         _shouldSendPGTouchNotifications = NO;
+        self.contentSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
     }
     return self;
 }
 
-- (GridCoord)cell
+-(GridCoord) cell
 {
     return [GridUtils gridCoordForAbsolutePosition:self.position unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
 }
 
-- (BOOL)shouldBlockMovement
+-(BOOL) shouldBlockMovement
 {
     return NO;
 }
 
+-(CCSprite *) createAndCenterSpriteNamed:(NSString *)name
+{
+    CCSprite *sprite = [SpriteUtils spriteWithTextureKey:name];
+    sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
+    return sprite;
+}
 
 #pragma mark - pipe layers
 
@@ -50,7 +58,7 @@
     return [self.pipeLayers objectAtIndex:0];
 }
 
-#pragma mark - setup / teardown
+#pragma mark - scene management
 
 - (void)onEnter
 {

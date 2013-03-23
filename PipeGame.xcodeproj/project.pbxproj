@@ -15,6 +15,8 @@
 		164AC39416EB9D130008E11C /* arm_through.png in Resources */ = {isa = PBXBuildFile; fileRef = 164AC39216EB9D130008E11C /* arm_through.png */; };
 		164AC39516EB9D130008E11C /* hand_through.png in Resources */ = {isa = PBXBuildFile; fileRef = 164AC39316EB9D130008E11C /* hand_through.png */; };
 		1698A3C016F4C6D2009A1CDB /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 1698A3BF16F4C6D2009A1CDB /* map1.tmx */; };
+		16BE3BA516FE2A2C003B2EEB /* CoverPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */; };
+		16BE3BA716FE2B99003B2EEB /* rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BE3BA616FE2B99003B2EEB /* rat.png */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
 		16CAF27616AA1265001E3266 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27516AA1265001E3266 /* OpenGLES.framework */; };
 		16CAF27816AA1265001E3266 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27716AA1265001E3266 /* OpenAL.framework */; };
@@ -197,6 +199,9 @@
 		164AC39216EB9D130008E11C /* arm_through.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_through.png; sourceTree = "<group>"; };
 		164AC39316EB9D130008E11C /* hand_through.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hand_through.png; sourceTree = "<group>"; };
 		1698A3BF16F4C6D2009A1CDB /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
+		16BE3BA316FE2A2B003B2EEB /* CoverPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverPoint.h; sourceTree = "<group>"; };
+		16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverPoint.m; sourceTree = "<group>"; };
+		16BE3BA616FE2B99003B2EEB /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
 		16CAF26F16AA1264001E3266 /* PipeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PipeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CAF27316AA1265001E3266 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		16CAF27516AA1265001E3266 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -943,6 +948,8 @@
 				161D60C016DAD2280030D6A6 /* PGPopUpMenu.m */,
 				16141F1B16DD98EF000DB458 /* ConnectionNode.h */,
 				16141F1C16DD98EF000DB458 /* ConnectionNode.m */,
+				16BE3BA316FE2A2B003B2EEB /* CoverPoint.h */,
+				16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -974,6 +981,7 @@
 		16D29ACA16CF0D0F00C73947 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				16BE3BA616FE2B99003B2EEB /* rat.png */,
 				164AC39216EB9D130008E11C /* arm_through.png */,
 				164AC39316EB9D130008E11C /* hand_through.png */,
 				16D29ACB16CF0D0F00C73947 /* arm_corner_NE.png */,
@@ -1144,6 +1152,7 @@
 				164AC39416EB9D130008E11C /* arm_through.png in Resources */,
 				164AC39516EB9D130008E11C /* hand_through.png in Resources */,
 				1698A3C016F4C6D2009A1CDB /* map1.tmx in Resources */,
+				16BE3BA716FE2B99003B2EEB /* rat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,6 +1284,7 @@
 				16ED864016DEFBFB00800D45 /* PGTiledObject.m in Sources */,
 				16E813FC16E2673300088EC6 /* PGTiledUtils.m in Sources */,
 				163296C416F7F9510042005F /* BackgroundLayer.m in Sources */,
+				16BE3BA516FE2A2C003B2EEB /* CoverPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

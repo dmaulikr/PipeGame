@@ -67,7 +67,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         // hand
         NSMutableDictionary *entryData = [_tileMap objectNamed:kTLDObjectEntry groupNamed:kTLDGroupMeta];
         _entry = [[PGEntry alloc] initWithEntry:entryData tileMap:_tileMap];
-        _handNode = [[HandNode alloc] initWithContentSize:CGSizeMake(kSizeGridUnit, kSizeGridUnit)];
+        _handNode = [[HandNode alloc] init];
         
         _handNode.position = [GridUtils absolutePositionForGridCoord:_entry.cell unitSize:kSizeGridUnit origin:_gridOrigin];
         _handNode.pipeLayers = @[_entry.pipeLayer];

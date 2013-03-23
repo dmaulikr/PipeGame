@@ -36,7 +36,12 @@
 
 + (CCSprite *)spriteWithTextureKey:(NSString *)key
 {
-    return [CCSprite spriteWithTexture:[[CCTextureCache sharedTextureCache] textureForKey:key]];
+    CCTexture2D *texture = [[CCTextureCache sharedTextureCache] textureForKey:key];
+    CCSprite *sprite = [CCSprite spriteWithTexture:texture];
+    if (sprite == nil) {
+        NSLog(@"warning: sprite with texture key '%@' not found", key);
+    }
+    return sprite;
 }
 
 

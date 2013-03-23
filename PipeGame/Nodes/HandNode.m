@@ -20,19 +20,15 @@ NSString *const kPGNotificationHandNodeTouched = @"HandNodeTouched";
 
 @implementation HandNode
 
-- (id)initWithContentSize:(CGSize)size
+- (id)init
 {
     self = [super init];
     if (self) {
+        // add sprites
+        self.sprite = [self createAndCenterSpriteNamed:kImageNameHand];
+        [self addChild:self.sprite];
         
-        self.contentSize = size;
-        
-        _sprite = [SpriteUtils spriteWithTextureKey:kImageNameHand];
-        _sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
-        [self addChild:_sprite];
-        
-        _connectionSprite = [SpriteUtils spriteWithTextureKey:kImageNameHandThrough];
-        _connectionSprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
+        _connectionSprite = [self createAndCenterSpriteNamed:kImageNameHandThrough];
         _connectionSprite.visible = NO;
         [self addChild:_connectionSprite];
         

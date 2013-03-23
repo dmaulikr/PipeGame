@@ -27,6 +27,10 @@ NSString *const kImageNameArmThrough = @"arm_through.png";
 NSString *const kImageNameHand = @"arm_hand_S.png";
 NSString *const kImageNameHandThrough = @"hand_through.png";
 
+// rat
+NSString *const kImageNameRat = @"rat.png";
+
+
 #pragma mark - methods
 
 + (void)loadTextures
@@ -43,6 +47,9 @@ NSString *const kImageNameHandThrough = @"hand_through.png";
     // hand
     [[CCTextureCache sharedTextureCache] addImage:kImageNameHand];
     [[CCTextureCache sharedTextureCache] addImage:kImageNameHandThrough];
+    
+    // rat
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameRat];
 }
 
 @end

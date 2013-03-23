@@ -23,8 +23,7 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
     if (self) {
         self.pipeLayers = @[pipeLayer];
         
-        // size, position
-        self.contentSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
+        // position
         self.position = [GridUtils absolutePositionForGridCoord:cell unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
         
         // setup for sending notifications
@@ -44,7 +43,7 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
         
         kArmExits exits = [self armExitsTypeForFirstExit:firstExit secondExit:secondExit];
         NSString *textureKey = [self textureKeyForArmExits:exits];
-        _sprite = [SpriteUtils spriteWithTextureKey:textureKey];
+        self.sprite = [SpriteUtils spriteWithTextureKey:textureKey];
         [self positionAndAddSprite];
     }
     return self;
@@ -58,8 +57,8 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
         self.exits = [NSMutableArray array];
         [self.exits addObjectsFromArray:@[[ArmNode exitForDirection:exit], [ArmNode exitForDirection:kDirectionThrough]]];
         
-        _sprite = [SpriteUtils spriteWithTextureKey:kImageNameArmThrough];
-        _sprite.rotation = [SpriteUtils degreesForDirection:exit];
+        self.sprite = [SpriteUtils spriteWithTextureKey:kImageNameArmThrough];
+        self.sprite.rotation = [SpriteUtils degreesForDirection:exit];
         [self positionAndAddSprite];
     }
     return self;
@@ -67,8 +66,8 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
 
 -(void) positionAndAddSprite
 {
-    _sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
-    [self addChild:_sprite];
+    self.sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
+    [self addChild:self.sprite];
 }
 
 -(BOOL) shouldBlockMovement
