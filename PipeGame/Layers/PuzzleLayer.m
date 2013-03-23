@@ -471,10 +471,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         
         NSString *directionString = [GridUtils directionStringForDirection:direction];
         NSNumber *canMove = [tileProperties objectForKey:directionString];
-        if ([canMove boolValue]) {
-            return YES;
-        }
-        return NO;
+        return ([canMove boolValue]);
     }];    
 }
 

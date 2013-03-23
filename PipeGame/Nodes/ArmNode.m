@@ -86,21 +86,11 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
     BOOL right;
     BOOL through;
     for (NSString *exit in exits) {
-        if ([exit isEqualToString:@"up"]) {
-            up = YES;
-        }
-        if ([exit isEqualToString:@"down"]) {
-            down = YES;
-        }
-        if ([exit isEqualToString:@"left"]) {
-            left = YES;
-        }
-        if ([exit isEqualToString:@"right"]) {
-            right = YES;
-        }
-        if ([exit isEqualToString:@"through"]) {
-            through = YES;
-        }
+        up =[exit isEqualToString:@"up"];
+        down = [exit isEqualToString:@"down"];
+        left = [exit isEqualToString:@"left"];
+        right = [exit isEqualToString:@"right"];
+        through = [exit isEqualToString:@"through"];
     }
     if (up && down) {
         return kImageNameArmDownUp;
