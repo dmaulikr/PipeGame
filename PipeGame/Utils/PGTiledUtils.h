@@ -25,7 +25,7 @@ FOUNDATION_EXPORT NSString *const kTLDObjectEntry;
 FOUNDATION_EXPORT NSString *const kTLDObjectConnection;
 
 // tiled object properties
-//FOUNDATION_EXPORT NSString *const kTLDPropertyDirection;
+FOUNDATION_EXPORT NSString *const kTLDPropertyLayer;
 
 // tiled tile layers
 FOUNDATION_EXPORT NSString *const kTLDLayerPipes1;

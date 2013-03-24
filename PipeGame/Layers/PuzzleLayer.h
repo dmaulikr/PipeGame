@@ -46,6 +46,9 @@ FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
 @property (assign) kDirection handEntersFrom;
 @property (assign) BOOL isHandNodeSelected;
 
+// rats (cover points)
+@property (nonatomic, strong) NSMutableArray *rats;
+
 // touch
 @property (assign) GridCoord cellFromLastTouch;
 

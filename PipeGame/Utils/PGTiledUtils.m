@@ -17,7 +17,7 @@ NSString *const kTLDObjectEntry = @"entry";
 NSString *const kTLDObjectConnection = @"connection";
 
 // tiled object properties
-//NSString *const kTLDPropertyDirection = @"direction";
+NSString *const kTLDPropertyLayer = @"layer";
 
 // tiled tile layers
 NSString *const kTLDLayerPipes1 = @"pipes1";

@@ -47,22 +47,6 @@
     return sprite;
 }
 
-#pragma mark - pipe layers
-
-//- (BOOL)isAtPipeLayer:(NSString *)layer
-//{
-//    NSUInteger result = [self.pipeLayers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-//        NSString *isAtLayer = (NSString *)obj;
-//        return [layer isEqualToString:isAtLayer];
-//    }];
-//    return (result != NSNotFound);
-//}
-
-// use this if we only expect a cell node to belong to 1 layer at a time
-//- (NSString *)firstPipeLayer
-//{
-//    return [self.pipeLayers objectAtIndex:0];
-//}
 
 #pragma mark - scene management
 

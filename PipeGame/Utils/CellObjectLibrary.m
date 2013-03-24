@@ -33,7 +33,7 @@
 
 
 #pragma mark - add and remove objects
-
+// TODO: if each cell object is expected to have a cell, then we dont' need to pass in cell
 - (void)addNodeToLibrary:(CellNode *)node cell:(GridCoord)cell
 {
     if ([node isKindOfClass:[CellNode class]]) {

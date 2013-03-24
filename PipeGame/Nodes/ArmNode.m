@@ -21,7 +21,6 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
 {
     self = [super init];
     if (self) {
-//        self.pipeLayers = @[pipeLayer];
         self.layer = layer;
         
         // position

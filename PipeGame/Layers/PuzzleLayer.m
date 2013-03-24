@@ -20,6 +20,7 @@
 #import "PGEntry.h"
 #import "PGTiledUtils.h"
 #import "BackgroundLayer.h"
+#import "CoverPoint.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 static GLubyte const kBackgroundTileLayerOpacity = 190;
@@ -81,15 +82,26 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         // arm
         _armNodes = [NSMutableArray array];
         
-        // move to layer
-        [self moveToLayer:_entry.layer fromLayer:[PGTiledUtils oppositeLayer:_entry.layer]];
-
         // connections
         NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
         for (NSMutableDictionary *connection in connections) {
-            ConnectionNode *connectionNode = [[ConnectionNode alloc] initWithConnection:connection tiledMap:self.tileMap];
+            ConnectionNode *connectionNode = [[ConnectionNode alloc] initWithConnection:connection tiledMap:_tileMap];
             [self.cellObjectLibrary addNodeToLibrary:connectionNode cell:connectionNode.cell];
         }
+        
+        // rats (cover point)
+        _rats = [NSMutableArray array];
+        NSMutableArray *rats = [_tileMap objectsWithName:kTLDObjectCoverPoint groupName:kTLDGroupMeta];
+        for (NSMutableDictionary *rat in rats) {
+            CoverPoint *ratNode = [[CoverPoint alloc] initWithCoverPoint:rat tiledMap:_tileMap];
+            [self.rats addObject:ratNode];
+            [_tileMap addChild:ratNode z:[_tileMap layerNamed:[PGTiledUtils layerName:ratNode.layer]].zOrder];
+            [self.cellObjectLibrary addNodeToLibrary:ratNode cell:ratNode.cell];
+        }
+        
+        
+        // move to layer
+        [self moveToLayer:_entry.layer fromLayer:[PGTiledUtils oppositeLayer:_entry.layer]];
     }
     return self;
 }
@@ -128,16 +140,18 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     [self.tileMap reorderChild:moveToLayer z:moveFromLayer.zOrder];
     [self.tileMap reorderChild:self.handNode z:moveToLayer.zOrder];
     
-    // arms
-    for (ArmNode *armNode in self.armNodes) {
-        if (armNode.layer == toLayer) {
-            [self.tileMap reorderChild:armNode z:moveToLayer.zOrder];
+    // arm and rats
+    NSLog(@"self.rats: %@", self.rats);
+    for (CellNode *node in [self.armNodes arrayByAddingObjectsFromArray:self.rats]) {
+               
+        if (node.layer == toLayer) {
+            [self.tileMap reorderChild:node z:moveToLayer.zOrder];
             CCFadeTo *brighten = [CCFadeTo actionWithDuration:kMoveToDuration opacity:255];
-            [armNode.sprite runAction:brighten];
+            [node.sprite runAction:brighten];
         }
         else {
             CCFadeTo *darken = [CCFadeTo actionWithDuration:kMoveToDuration opacity:kBackgroundTileLayerOpacity];
-            [armNode.sprite runAction:darken];
+            [node.sprite runAction:darken];
         }
     }
 

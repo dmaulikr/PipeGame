@@ -14,7 +14,6 @@
 
 @property (assign) BOOL shouldSendPGTouchNotifications;
 @property (copy) NSString *pgTouchNotification;
-//@property (strong, nonatomic) NSArray *pipeLayers;
 @property (assign) int layer;
 @property (strong, nonatomic) CCSprite *sprite;
 
@@ -24,7 +23,5 @@
 -(GridCoord) cell;
 -(BOOL) shouldBlockMovement;
 -(NSString *) layerName;
-//-(BOOL) isAtPipeLayer:(NSString *)pipeLayer;
-//-(NSString *) firstPipeLayer;
 
 @end
