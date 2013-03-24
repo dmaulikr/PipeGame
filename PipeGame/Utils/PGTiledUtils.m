@@ -26,25 +26,57 @@ NSString *const kTLDLayerPipes2 = @"pipes2";
 
 @implementation PGTiledUtils
 
-+ (ccColor3B)pipeColorAtLayer:(NSString *)layer
++ (ccColor3B)pipeColorAtLayer:(int)layer
 {
-    if ([layer isEqualToString:kTLDLayerPipes1]) {
+    if (layer == kPipeLayer1) {
         return [ColorUtils pipeLayer1Color];
     }
-    else if ([layer isEqualToString:kTLDLayerPipes2]) {
-        return [ColorUtils pipeLayer2Color];
-    }
-    NSLog(@"layer: %@ is not supported with a color, returning white", layer);
-    return ccWHITE;
+    return [ColorUtils pipeLayer2Color];
+
 }
 
-// only works for 2 layers
-+ (NSString *)oppositeLayer:(NSString *)layer
++ (int)oppositeLayer:(int)layer
 {
-    if ([layer isEqualToString:kTLDLayerPipes1]) {
-        return kTLDLayerPipes2;
+    if (layer == kPipeLayer1) {
+        return kPipeLayer2;
     }
-    return kTLDLayerPipes1;
+    return kPipeLayer1;
 }
+
++(NSString *) layerName:(int)layer
+{
+    switch (layer) {
+        case kPipeLayer1:
+            return kTLDLayerPipes1;
+        case kPipeLayer2:
+            return kTLDLayerPipes2;
+        default:
+            NSLog(@"warning: %i is an unrecognized layer", layer);
+            return nil;
+    }
+}
+
++(kDirection) directionNamed:(NSString *)direction
+{
+    if ([direction isEqualToString:@"up"]) {
+        return kDirectionUp;
+    }
+    else if ([direction isEqualToString:@"down"]) {
+        return kDirectionDown;
+    }
+    else if ([direction isEqualToString:@"left"]) {
+        return kDirectionLeft;
+    }
+    else if ([direction isEqualToString:@"right"]) {
+        return kDirectionRight;
+    }
+    else if ([direction isEqualToString:@"through"]) {
+        return kDirectionThrough;
+    }
+    else {
+        return kDirectionNone;
+    }
+}
+
 
 @end

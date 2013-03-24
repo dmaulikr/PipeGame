@@ -8,8 +8,9 @@
 
 #import "PGEntry.h"
 #import "CCTMXTiledMap+Utils.h"
+#import "PGTiledUtils.h"
 
-static NSString *const kEntryDirection = @"direction";
+static NSString *const kEntryFacing = @"facing";
 static NSString *const kEntryLayer = @"layer";
 
 @implementation PGEntry
@@ -18,8 +19,9 @@ static NSString *const kEntryLayer = @"layer";
 {
     self = [super initWithTiledObject:entry tileMap:tileMap];
     if (self) {
-        _direction = [[CCTMXTiledMap objectPropertyNamed:kEntryDirection object:entry] intValue];
-        _pipeLayer = [CCTMXTiledMap objectPropertyNamed:kEntryLayer object:entry];
+        NSString *direction = [CCTMXTiledMap objectPropertyNamed:kEntryFacing object:entry];
+        _direction = [PGTiledUtils directionNamed:direction];
+        _layer = [[CCTMXTiledMap objectPropertyNamed:kEntryLayer object:entry] intValue];
     }
     return self;
 }

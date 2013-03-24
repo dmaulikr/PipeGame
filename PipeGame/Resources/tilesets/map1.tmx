@@ -505,32 +505,24 @@
  <objectgroup name="meta" width="5" height="2">
   <object name="entry" x="50" y="67" width="104" height="100">
    <properties>
-    <property name="direction" value="3"/>
-    <property name="layer" value="pipes2"/>
+    <property name="facing" value="down"/>
+    <property name="layer" value="2"/>
    </properties>
   </object>
   <object name="connection" x="438" y="48" width="117" height="108">
-   <properties>
-    <property name="a" value="pipes1"/>
-    <property name="b" value="pipes2"/>
-   </properties>
    <ellipse/>
   </object>
   <object name="connection" x="642" y="250" width="117" height="108">
-   <properties>
-    <property name="a" value="pipes1"/>
-    <property name="b" value="pipes2"/>
-   </properties>
    <ellipse/>
   </object>
   <object name="rat" x="219" y="81" width="161" height="59">
    <properties>
-    <property name="layer" value="pipes2"/>
+    <property name="layer" value="2"/>
    </properties>
   </object>
   <object name="rat" x="623" y="77" width="161" height="59">
    <properties>
-    <property name="layer" value="pipes1"/>
+    <property name="layer" value="1"/>
    </properties>
   </object>
  </objectgroup>

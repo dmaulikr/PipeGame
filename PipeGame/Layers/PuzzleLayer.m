@@ -70,8 +70,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         _handNode = [[HandNode alloc] init];
         
         _handNode.position = [GridUtils absolutePositionForGridCoord:_entry.cell unitSize:kSizeGridUnit origin:_gridOrigin];
-        _handNode.pipeLayers = @[_entry.pipeLayer];
-        [_tileMap addChild:_handNode z:[_tileMap layerNamed:_entry.pipeLayer].zOrder];
+        _handNode.layer = _entry.layer;
+        [_tileMap addChild:_handNode z:[_tileMap layerNamed:[PGTiledUtils layerName:_entry.layer]].zOrder];
 
         [_handNode setDirectionFacing:_entry.direction];
         
@@ -82,12 +82,12 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         _armNodes = [NSMutableArray array];
         
         // move to layer
-        [self moveToLayer:_entry.pipeLayer fromLayer:[PGTiledUtils oppositeLayer:_entry.pipeLayer]];
+        [self moveToLayer:_entry.layer fromLayer:[PGTiledUtils oppositeLayer:_entry.layer]];
 
         // connections
         NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
         for (NSMutableDictionary *connection in connections) {
-            ConnectionNode *connectionNode = [ConnectionNode nodeWithConnection:connection tileMap:self.tileMap];
+            ConnectionNode *connectionNode = [[ConnectionNode alloc] initWithConnection:connection tiledMap:self.tileMap];
             [self.cellObjectLibrary addNodeToLibrary:connectionNode cell:connectionNode.cell];
         }
     }
@@ -112,25 +112,25 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     return CGPointMake(0, 0);
 }
 
-- (void)moveToLayer:(NSString *)toLayerName fromLayer:(NSString *)fromLayerName
+- (void)moveToLayer:(int)toLayer fromLayer:(int)fromLayer
 {
-    [self.backgroundLayer tintToColor:[PGTiledUtils pipeColorAtLayer:toLayerName] duration:kMoveToDuration];
+    [self.backgroundLayer tintToColor:[PGTiledUtils pipeColorAtLayer:toLayer] duration:kMoveToDuration];
     
     // hand 
     if (self.handNode == nil) {
         NSLog(@"warning: can't use moveToLayer before hand node has been created");
         return;
     }
-    CCTMXLayer *moveFromLayer = [self.tileMap layerNamed:fromLayerName];
-    CCTMXLayer *moveToLayer = [self.tileMap layerNamed:toLayerName];
+    CCTMXLayer *moveFromLayer = [self.tileMap layerNamed:[PGTiledUtils layerName:fromLayer]];
+    CCTMXLayer *moveToLayer = [self.tileMap layerNamed:[PGTiledUtils layerName:toLayer]];
 
-    self.handNode.pipeLayers = @[toLayerName];
+    self.handNode.layer = toLayer;
     [self.tileMap reorderChild:moveToLayer z:moveFromLayer.zOrder];
     [self.tileMap reorderChild:self.handNode z:moveToLayer.zOrder];
     
     // arms
     for (ArmNode *armNode in self.armNodes) {
-        if ([armNode isAtPipeLayer:toLayerName]) {
+        if (armNode.layer == toLayer) {
             [self.tileMap reorderChild:armNode z:moveToLayer.zOrder];
             CCFadeTo *brighten = [CCFadeTo actionWithDuration:kMoveToDuration opacity:255];
             [armNode.sprite runAction:brighten];
@@ -144,7 +144,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     // tiles
     [self.tileMap performBlockForAllTiles:^(CCTMXLayer *layer, CCSprite *tile) {
         if (tile != nil) {
-            if ([self.handNode isAtPipeLayer:layer.layerName]) {
+            if ([self.handNode.layerName isEqualToString:layer.layerName]) {
                 CCFadeTo *brighten = [CCFadeTo actionWithDuration:kMoveToDuration opacity:255];
                 [tile runAction:brighten];
             }
@@ -157,14 +157,19 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationArmStackChanged object:self.armNodes];
 }
 
-- (CCTMXLayer *)currentPipeLayer
+- (CCTMXLayer *)currentTMXLayer
 {
     return [self.tileMap layerNamed:[self currentPipeLayerName]];
 }
 
 - (NSString *)currentPipeLayerName
 {
-    return self.handNode.firstPipeLayer;
+    return self.handNode.layerName;
+}
+
+-(int) currentLayer
+{
+    return self.handNode.layer;
 }
 
 
@@ -217,6 +222,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         self.isHandNodeSelected = NO;
         [self tintHandAndArm:ccWHITE];
         
+        // try a connection if we overlap one
         NSMutableArray *cellObjects = [self.cellObjectLibrary nodesForCell:self.handNode.cell];
         NSUInteger connectionIndex = [cellObjects indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
             return [obj isKindOfClass:[ConnectionNode class]];
@@ -230,23 +236,17 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 - (BOOL)tryConnection:(ConnectionNode *)connectionNode
 {
-    if ([connectionNode isAtPipeLayer:self.handNode.firstPipeLayer]) {
-        for (NSString *pipeLayer in connectionNode.pipeLayers) {
-            if ([pipeLayer isEqualToString:self.handNode.firstPipeLayer] == NO) {
-                
-                if ([GridUtils isCell:self.handNode.cell equalToCell:[self lastArmNode].cell] == NO) {
-                    [self addArmNodeAtCell:self.handNode.cell movingDirection:kDirectionThrough];
-                }
-                else {
-                    [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
-                }
-                
-                [self moveToLayer:pipeLayer fromLayer:self.handNode.firstPipeLayer];
-                return YES;
-            }
-        }
+                    
+    if (![GridUtils isCell:self.handNode.cell equalToCell:[self lastArmNode].cell]) {
+        [self addArmNodeAtCell:self.handNode.cell movingDirection:kDirectionThrough];
     }
-    return NO;
+    else {
+        [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
+    }
+    
+    // TODO: will need to check if opposite layer is occupied
+    [self moveToLayer:[PGTiledUtils oppositeLayer:self.currentLayer] fromLayer:self.currentLayer];
+    return YES;    
 }
 
 #pragma mark - cell node touches
@@ -261,7 +261,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 {
     ArmNode *nodeTouched = (ArmNode *)notification.object;
     
-    if ([nodeTouched isAtPipeLayer:[self currentPipeLayerName]]) {
+    if (nodeTouched.layer == self.currentLayer) {
         CGPoint nodePosition = nodeTouched.position;
         int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
         
@@ -322,8 +322,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
             }
             // handle touch in a cell with an arm unit (rewind)
             else {
-                ArmNode *armNodeTouched = [self.cellObjectLibrary firstNodeOfKind:[ArmNode class] atCell:touchCell atPipeLayer:[self currentPipeLayerName]];
-                
+                ArmNode *armNodeTouched = [self.cellObjectLibrary firstNodeOfKind:[ArmNode class] atCell:touchCell layer:self.currentLayer];
                 if ([armNodeTouched isEqual:self.armNodes.lastObject]) {
                     
                     [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
@@ -371,7 +370,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         BOOL armOverlapsLastArm = [GridUtils isCell:cell equalToCell:[lastArmNode cell]];
         if (direction != kDirectionThrough && !armOverlapsLastArm) {
             kDirection firstExit = [GridUtils directionFromStart:cell end:[lastArmNode cell]];
-            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction pipeLayer:self.handNode.firstPipeLayer ];
+            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction layer:self.handNode.layer ];
         }
         // arm node moving though layer
         else {
@@ -382,12 +381,12 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
             else {
                 exit = [GridUtils directionFromStart:self.handNode.cell end:[lastArmNode cell]];
             }
-            newArmNode = [[ArmNode alloc] initForLayerConnectionInCell:cell exit:exit pipeLayer:self.handNode.firstPipeLayer];
+            newArmNode = [[ArmNode alloc] initForLayerConnectionInCell:cell exit:exit layer:self.handNode.layer];
         }
     }
     else {
         if (direction != kDirectionThrough) {
-            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction pipeLayer:self.handNode.firstPipeLayer];
+            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction layer:self.handNode.layer];
         }
         else {
             NSLog(@"warning: moving through on first cell needs implementation");
@@ -399,7 +398,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     }
     
     // need to add as child, to the armNodes stack and to the cell object library
-    [self.tileMap addChild:newArmNode z:[self currentPipeLayer].zOrder];
+    [self.tileMap addChild:newArmNode z:[self currentTMXLayer].zOrder];
     [self.armNodes addObject:newArmNode];
     [self.cellObjectLibrary addNodeToLibrary:newArmNode cell:cell];
     
@@ -425,7 +424,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     NSMutableArray *cellNodes = [self.cellObjectLibrary nodesForCell:cell];
     for (CellNode *node in cellNodes ) {
         if ([node isKindOfClass:[ArmNode class]]) {
-            if ([node isAtPipeLayer:[self currentPipeLayerName]]) {
+            if (node.layer == self.currentLayer) {
                 return YES;
             }   
         }
@@ -467,7 +466,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 - (BOOL)canExitCell:(GridCoord)cell movingDirection:(kDirection)direction
 {
-    return [self.tileMap testConditionForTileAtCell:cell layer:[self currentPipeLayer] condition:^BOOL(CCSprite *tile, NSDictionary *tileProperties) {
+    return [self.tileMap testConditionForTileAtCell:cell layer:[self currentTMXLayer] condition:^BOOL(CCSprite *tile, NSDictionary *tileProperties) {
         
         NSString *directionString = [GridUtils directionStringForDirection:direction];
         NSNumber *canMove = [tileProperties objectForKey:directionString];
@@ -479,7 +478,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 {
     NSMutableArray *objects = [self.cellObjectLibrary nodesForCell:cell];
     for (CellNode *node in objects) {
-        if ([node isAtPipeLayer:self.handNode.firstPipeLayer]) {
+        if (node.layer == self.handNode.layer) {
             if (node.shouldBlockMovement) {
                 return YES;
             }

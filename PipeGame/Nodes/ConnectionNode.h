@@ -10,6 +10,8 @@
 
 @interface ConnectionNode : CellNode
 
-+ (id)nodeWithConnection:(NSMutableDictionary *)connection tileMap:(CCTMXTiledMap *)tileMap;
+@property (assign) int layerConnection;
+
+- (id)initWithConnection:(NSMutableDictionary *)connection tiledMap:(CCTMXTiledMap *)tiledMap;
 
 @end

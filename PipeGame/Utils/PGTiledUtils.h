@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "GameConstants.h"
 
+typedef enum
+{
+    kPipeLayerAny = 0,
+    kPipeLayer1,
+    kPipeLayer2,
+} kPipeLayer;
 
 // tiled object groups
 FOUNDATION_EXPORT NSString *const kTLDGroupMeta;
@@ -27,9 +34,13 @@ FOUNDATION_EXPORT NSString *const kTLDLayerPipes2;
 
 @interface PGTiledUtils : NSObject
 
-+ (ccColor3B)pipeColorAtLayer:(NSString *)layer;
++ (ccColor3B)pipeColorAtLayer:(int)layer;
 
 // only works for 2 layers
-+ (NSString *)oppositeLayer:(NSString *)layer;
++ (int)oppositeLayer:(int)layer;
+
++(NSString *) layerName:(int)layer;
+
++(kDirection) directionNamed:(NSString *)direction;
 
 @end

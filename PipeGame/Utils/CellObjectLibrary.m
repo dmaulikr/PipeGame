@@ -68,12 +68,12 @@
     return [self.objectLibrary objectForKey:[self objectKeyForCell:cell]];
 }
 
-- (NSMutableArray *)nodesForCell:(GridCoord)cell atPipeLayer:(NSString *)pipeLayer
+- (NSMutableArray *)nodesForCell:(GridCoord)cell layer:(int)layer
 {
     NSMutableArray *nodes= [self nodesForCell:cell];
     NSMutableArray *nodesAtLayer = [NSMutableArray array];
     for (CellNode *node in nodes) {
-        if ([node.firstPipeLayer isEqualToString:pipeLayer]) {
+        if (node.layer == layer) {
             [nodesAtLayer addObject:node];
         }
     }
@@ -95,11 +95,11 @@
     return (results.count > 0);
 }
 
-- (BOOL)libraryContainsNodestOfKind:(Class)class atPipeLayer:(NSString *)pipeLayer atCell:(GridCoord)cell
+- (BOOL)libraryContainsNodestOfKind:(Class)class layer:(int)layer atCell:(GridCoord)cell
 {
     NSMutableArray *matchingKind = [self nodesOfKind:class atCell:cell];
     for (CellNode *node in matchingKind) {
-        if ([node.firstPipeLayer isEqualToString:pipeLayer]) {
+        if (node.layer == layer) {
             return YES;
         }
     }
@@ -119,12 +119,12 @@
     return results;
 }
 
-- (NSMutableArray *)nodesOfKind:(Class)class atCell:(GridCoord)cell atPipeLayer:(NSString *)pipeLayer
+- (NSMutableArray *)nodesOfKind:(Class)class atCell:(GridCoord)cell layer:(int)layer
 {
     NSMutableArray *nodes = [self nodesOfKind:class atCell:cell];
     NSMutableArray *results = [NSMutableArray array];
     for (CellNode *node in nodes) {
-        if ([node isAtPipeLayer:pipeLayer]) {
+        if (node.layer == layer) {
             [results addObject:node];
         }
     }
@@ -143,20 +143,18 @@
     return nil;
 }
 
-- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell atPipeLayer:(NSString *)pipeLayer
+- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell layer:(int)layer
 {
     NSMutableArray *results = [self nodesOfKind:class atCell:cell];
     if (results.count > 0) {
         for (CellNode *r in results) {
-            if ([r isAtPipeLayer:pipeLayer]) {
+            if (r.layer == layer) {
                 return r;
             }
         }
     }
-    NSLog(@"warning: node of kind: %@, with firstPipeLayer: %@, not found at cell %i, %i", class, pipeLayer, cell.x, cell.y);
+    NSLog(@"warning: node of kind: %@, with firstPipeLayer: %i, not found at cell %i, %i", class, layer, cell.x, cell.y);
     return nil;
 }
-
-
 
 @end

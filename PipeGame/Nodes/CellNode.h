@@ -14,7 +14,8 @@
 
 @property (assign) BOOL shouldSendPGTouchNotifications;
 @property (copy) NSString *pgTouchNotification;
-@property (strong, nonatomic) NSArray *pipeLayers;
+//@property (strong, nonatomic) NSArray *pipeLayers;
+@property (assign) int layer;
 @property (strong, nonatomic) CCSprite *sprite;
 
 // returns sprite with image name, centered in content bounds
@@ -22,7 +23,8 @@
 
 -(GridCoord) cell;
 -(BOOL) shouldBlockMovement;
--(BOOL) isAtPipeLayer:(NSString *)pipeLayer;
--(NSString *) firstPipeLayer;
+-(NSString *) layerName;
+//-(BOOL) isAtPipeLayer:(NSString *)pipeLayer;
+//-(NSString *) firstPipeLayer;
 
 @end

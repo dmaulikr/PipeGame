@@ -20,12 +20,12 @@
 - (void)removeNodeFromLibrary:(CellNode *)node cell:(GridCoord)cell;
 
 - (NSMutableArray *)nodesForCell:(GridCoord)cell;
-- (NSMutableArray *)nodesForCell:(GridCoord)cell atPipeLayer:(NSString *)pipeLayer;     
+- (NSMutableArray *)nodesForCell:(GridCoord)cell layer:(int)layer;
 - (BOOL)libraryContainsNode:(CellNode *)node atCell:(GridCoord)cell;
-- (BOOL)libraryContainsNodestOfKind:(Class)class atPipeLayer:(NSString *)pipeLayer atCell:(GridCoord)cell;
+- (BOOL)libraryContainsNodestOfKind:(Class)class layer:(int)layer atCell:(GridCoord)cell;
 - (NSMutableArray *)nodesOfKind:(Class)class atCell:(GridCoord)cell;
 - (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell;
-- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell atPipeLayer:(NSString *)pipeLayer ;
+- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell layer:(int)layer;
 
 
 @end

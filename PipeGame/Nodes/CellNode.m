@@ -10,6 +10,7 @@
 #import "GameConstants.h"
 #import "PuzzleLayer.h"
 #import "SpriteUtils.h"
+#import "PGTiledUtils.h"
 
 @implementation CellNode
 
@@ -34,6 +35,11 @@
     return NO;
 }
 
+-(NSString *) layerName
+{
+    return [PGTiledUtils layerName:self.layer];
+}
+
 -(CCSprite *) createAndCenterSpriteNamed:(NSString *)name
 {
     CCSprite *sprite = [SpriteUtils spriteWithTextureKey:name];
@@ -43,20 +49,20 @@
 
 #pragma mark - pipe layers
 
-- (BOOL)isAtPipeLayer:(NSString *)layer
-{
-    NSUInteger result = [self.pipeLayers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *isAtLayer = (NSString *)obj;
-        return [layer isEqualToString:isAtLayer];
-    }];
-    return (result != NSNotFound);
-}
+//- (BOOL)isAtPipeLayer:(NSString *)layer
+//{
+//    NSUInteger result = [self.pipeLayers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+//        NSString *isAtLayer = (NSString *)obj;
+//        return [layer isEqualToString:isAtLayer];
+//    }];
+//    return (result != NSNotFound);
+//}
 
 // use this if we only expect a cell node to belong to 1 layer at a time
-- (NSString *)firstPipeLayer
-{
-    return [self.pipeLayers objectAtIndex:0];
-}
+//- (NSString *)firstPipeLayer
+//{
+//    return [self.pipeLayers objectAtIndex:0];
+//}
 
 #pragma mark - scene management
 
