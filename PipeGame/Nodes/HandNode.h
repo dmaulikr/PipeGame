@@ -10,13 +10,17 @@
 #import "GridUtils.h"
 
 FOUNDATION_EXPORT NSString *const kPGNotificationHandNodeTouched;
+FOUNDATION_EXPORT NSString *const kPGNotificationHandNodeMoved;
 
 
-@interface HandNode : CellNode
+@interface HandNode : CellNode 
 
-@property (nonatomic, strong) CCSprite *connectionSprite;
+@property (strong, nonatomic) CCSprite *connectionSprite;
 @property (assign) kDirection facing;
 
-- (void)setDirectionFacing:(kDirection)direction;
+@property (strong, nonatomic) id<TransferResponder>transferResponder;
+
+-(void) setDirectionFacing:(kDirection)direction;
+-(void) moveTo:(CGPoint)position;
 
 @end

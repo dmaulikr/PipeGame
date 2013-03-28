@@ -11,6 +11,10 @@
 #import "PGTiledUtils.h"
 #import "CCTMXTiledMap+Utils.h"
 #import "PuzzleLayer.h"
+#import "GridUtils.h"
+#import "CellObjectLibrary.h"
+#import "HandNode.h"
+#import "ArmNode.h"
 
 NSString *const kTLDObjectCoverPoint = @"rat";
 
@@ -32,9 +36,42 @@ NSString *const kTLDObjectCoverPoint = @"rat";
         // TODO: same code as in connection node
         GridCoord gridCoord = [tiledMap gridCoordForObject:coverPoint];
         self.position = [GridUtils absolutePositionForGridCoord:gridCoord unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+        
+        _isCovered = NO;
+        
+        [self registerNotifications];
     }
     return self;
 
+}
+
+-(void) registerNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCellNodeLibraryChangedContents:) name:kPGNotificationCellNodeLibraryChangedContents object:nil];
+}
+
+-(void) handleCellNodeLibraryChangedContents:(NSNotification *)notification
+{
+    CellObjectLibrary *library = notification.object;
+    BOOL collision = [library containsAnyNodeOfKinds:@[[HandNode class], [ArmNode class]] layer:self.layer cell:self.cell];
+    if (collision && !self.isCovered) {
+        [self cover];
+    }
+    else if (!collision && self.isCovered) {
+        [self uncover];
+    }
+}
+
+-(void) cover
+{
+    self.sprite.rotation = 180;
+    self.isCovered = YES;
+}
+
+-(void) uncover
+{
+    self.sprite.rotation = 180;
+    self.isCovered = NO;
 }
 
 @end

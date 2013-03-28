@@ -8,7 +8,7 @@
 
 #import "cocos2d.h"
 #import "GridUtils.h"
-@class HandNode;
+#import "HandNode.h"
 @class ArmController;
 @class CellObjectLibrary;
 @class PGEntry;
@@ -17,7 +17,7 @@
 FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
 
 
-@interface PuzzleLayer : CCLayerColor
+@interface PuzzleLayer : CCLayerColor <TransferResponder>
 
 // background
 @property (nonatomic, strong) BackgroundLayer *backgroundLayer;

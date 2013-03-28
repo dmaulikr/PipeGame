@@ -17,12 +17,12 @@
 
 + (ccColor3B)pipeLayer1Color
 {
-    return ccc3(130, 50, 50);
+    return ccc3(50, 110, 150);
 }
 
 + (ccColor3B)pipeLayer2Color
 {
-    return ccc3(50, 110, 150);
+    return ccc3(130, 50, 50);
 }
 
 @end

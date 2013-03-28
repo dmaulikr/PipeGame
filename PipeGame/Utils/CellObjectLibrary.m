@@ -9,6 +9,8 @@
 #import "CellObjectLibrary.h"
 #import "CellNode.h"
 
+NSString *const kPGNotificationCellNodeLibraryChangedContents = @"CellNodeLibraryChangedContents";
+
 
 @implementation CellObjectLibrary
 
@@ -32,15 +34,16 @@
 }
 
 
-#pragma mark - add and remove objects
+#pragma mark - add, remove, shift objects
 // TODO: if each cell object is expected to have a cell, then we dont' need to pass in cell
-- (void)addNodeToLibrary:(CellNode *)node cell:(GridCoord)cell
+- (void)addNode:(CellNode *)node cell:(GridCoord)cell
 {
     if ([node isKindOfClass:[CellNode class]]) {
         NSMutableArray *nodes = [self nodesForCell:cell];
         if ([nodes containsObject:node] == NO) {
             [nodes addObject:node];
             [self.objectLibrary setObject:nodes forKey:[self objectKeyForCell:cell]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationCellNodeLibraryChangedContents object:self];
         }
     }
     else {
@@ -48,16 +51,23 @@
     }
 }
 
-- (void)removeNodeFromLibrary:(CellNode *)node cell:(GridCoord)cell
+- (void)removeNode:(CellNode *)node cell:(GridCoord)cell
 {
-    if ([self libraryContainsNode:node atCell:cell]) {
+    if ([self containsNode:node cell:cell]) {
         NSMutableArray *nodes = [self nodesForCell:cell];
         [nodes removeObject:node];
         [self.objectLibrary setObject:nodes forKey:[self objectKeyForCell:cell]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationCellNodeLibraryChangedContents object:self];
     }
     else {
         NSLog(@"warning: cell object library does not contain object: %@", node);
     }
+}
+
+-(void) transferNode:(CellNode *)node toCell:(GridCoord)moveTo fromCell:(GridCoord)moveFrom
+{
+    [self removeNode:node cell:moveFrom];
+    [self addNode:node cell:moveTo];
 }
 
 
@@ -80,7 +90,7 @@
     return nodesAtLayer;
 }
 
-- (BOOL)libraryContainsNode:(CellNode *)node atCell:(GridCoord)cell
+- (BOOL)containsNode:(CellNode *)node cell:(GridCoord)cell
 {
     if ([node isKindOfClass:[CellNode class]] == NO) {
         NSLog(@"warning: cell object library only contains objects of kind CellNode, kind given: %@", [node class]);
@@ -89,17 +99,27 @@
     return ([nodes containsObject:node]);
 }
 
-- (BOOL)libraryContainsNodesOfKind:(Class)class atCell:(GridCoord)cell
+- (BOOL)containsNodeOfKind:(Class)class cell:(GridCoord)cell
 {
     NSMutableArray *results = [self nodesOfKind:class atCell:cell];
     return (results.count > 0);
 }
 
-- (BOOL)libraryContainsNodestOfKind:(Class)class layer:(int)layer atCell:(GridCoord)cell
+- (BOOL)containsNodeOfKind:(Class)class layer:(int)layer cell:(GridCoord)cell
 {
     NSMutableArray *matchingKind = [self nodesOfKind:class atCell:cell];
     for (CellNode *node in matchingKind) {
         if (node.layer == layer) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)containsAnyNodeOfKinds:(NSArray *)kinds layer:(int)layer cell:(GridCoord)cell
+{
+    for (Class class in kinds) {
+        if ([self containsNodeOfKind:class layer:layer cell:cell]) {
             return YES;
         }
     }

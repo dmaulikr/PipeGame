@@ -79,6 +79,10 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         _handEntersFrom = [GridUtils oppositeDirection:_entry.direction];
         _isHandNodeSelected = NO;
         
+        _handNode.transferResponder = self;
+        
+        [_cellObjectLibrary addNode:_handNode cell:_handNode.cell];
+        
         // arm
         _armNodes = [NSMutableArray array];
         
@@ -86,7 +90,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
         for (NSMutableDictionary *connection in connections) {
             ConnectionNode *connectionNode = [[ConnectionNode alloc] initWithConnection:connection tiledMap:_tileMap];
-            [self.cellObjectLibrary addNodeToLibrary:connectionNode cell:connectionNode.cell];
+            [self.cellObjectLibrary addNode:connectionNode cell:connectionNode.cell];
         }
         
         // rats (cover point)
@@ -96,9 +100,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
             CoverPoint *ratNode = [[CoverPoint alloc] initWithCoverPoint:rat tiledMap:_tileMap];
             [self.rats addObject:ratNode];
             [_tileMap addChild:ratNode z:[_tileMap layerNamed:[PGTiledUtils layerName:ratNode.layer]].zOrder];
-            [self.cellObjectLibrary addNodeToLibrary:ratNode cell:ratNode.cell];
+            [self.cellObjectLibrary addNode:ratNode cell:ratNode.cell];
         }
-        
         
         // move to layer
         [self moveToLayer:_entry.layer fromLayer:[PGTiledUtils oppositeLayer:_entry.layer]];
@@ -111,12 +114,13 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     return [NSString stringWithFormat:@"map%i.tmx", puzzle];
 }
 
-- (void)registerWithNotifications
+- (void)registerNotifications
 {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
     [notificationCenter addObserver:self selector:@selector(handleArmNodeTouched:) name:kPGNotificationArmNodeTouched object:nil];
     [notificationCenter addObserver:self selector:@selector(handleHandNodeTouched:) name:kPGNotificationHandNodeTouched object:nil];
+    [notificationCenter addObserver:self selector:@selector(handleHandNodeMoved) name:kPGNotificationHandNodeMoved object:nil];
 }
 
 + (CGPoint)sharedGridOrigin
@@ -192,7 +196,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 -(void) onEnterTransitionDidFinish
 {
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
-    [self registerWithNotifications];
+    [self registerNotifications];
 }
 -(void) onExit
 {
@@ -280,7 +284,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
         
         // move hand and rotate to correct direction
-        self.handNode.position = nodePosition;
+        [self.handNode moveTo:nodePosition];
+        
         kDirection shouldFace;
         if (touchedIndex > 0) {
             ArmNode *newLastArmNode;
@@ -329,7 +334,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
                     // hand sprite
                     kDirection shouldFace = [GridUtils directionFromStart:self.handNode.cell end:touchCell];
                     [self.handNode setDirectionFacing:shouldFace];
-                    self.handNode.position = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                    CGPoint moveTo = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                    [self.handNode moveTo:moveTo];
                     
                     return YES;
                 }
@@ -355,7 +361,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
                         shouldFace = self.entry.direction;
                     }
                     [self.handNode setDirectionFacing:shouldFace];
-                    self.handNode.position = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                    CGPoint moveTo = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
+                    [self.handNode moveTo:moveTo];
                 }
             }
         }
@@ -363,12 +370,20 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     return NO;
 }
 
-- (void)tintHandAndArm:(ccColor3B)color
+-(void) tintHandAndArm:(ccColor3B)color
 {
     self.handNode.sprite.color = color;
     for (ArmNode *arm in self.armNodes) {
         arm.sprite.color = color;
     }
+}
+
+-(void) handleHandNodeMoved
+{
+    // change key in cell object library
+    
+//    [self.cellObjectLibrary transferNode:self.handNode toCell:self.h
+//    self.handNode.cell;
 }
 
 
@@ -414,7 +429,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     // need to add as child, to the armNodes stack and to the cell object library
     [self.tileMap addChild:newArmNode z:[self currentTMXLayer].zOrder];
     [self.armNodes addObject:newArmNode];
-    [self.cellObjectLibrary addNodeToLibrary:newArmNode cell:cell];
+    [self.cellObjectLibrary addNode:newArmNode cell:cell];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationArmStackChanged object:self.armNodes];
 }
@@ -425,7 +440,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     for (int i = lastIndex; i >= removeFromIndex; i--) {
         ArmNode *removeArmNode = (ArmNode *)[self.armNodes objectAtIndex:i];
         GridCoord removeArmCell = [removeArmNode cell];
-        [self.cellObjectLibrary removeNodeFromLibrary:removeArmNode cell:removeArmCell];
+        [self.cellObjectLibrary removeNode:removeArmNode cell:removeArmCell];
         [self.armNodes removeLastObject];
         [self.tileMap removeChild:removeArmNode cleanup:YES];
     }
@@ -453,6 +468,14 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     }
     ArmNode *armNode = self.armNodes.lastObject;
     return armNode;
+}
+
+
+#pragma mark - transfer responder
+
+-(void) transferNode:(CellNode *)node toCell:(GridCoord)moveTo fromCell:(GridCoord)moveFrom
+{
+    [self.cellObjectLibrary transferNode:node toCell:moveTo fromCell:moveFrom];
 }
 
 

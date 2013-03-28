@@ -11,6 +11,7 @@
 #import "PuzzleLayer.h"
 #import "SpriteUtils.h"
 #import "PGTiledUtils.h"
+#import "CellObjectLibrary.h"
 
 @implementation CellNode
 
@@ -84,6 +85,5 @@
     CGRect rect = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
     return (CGRectContainsPoint(rect, touchPosition));
 }
-
 
 @end

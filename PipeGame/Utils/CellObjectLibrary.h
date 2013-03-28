@@ -8,24 +8,31 @@
 
 #import <Foundation/Foundation.h>
 #import "GridUtils.h"
+
 @class CellNode;
+
+FOUNDATION_EXPORT NSString *const kPGNotificationCellNodeLibraryChangedContents;
+
 
 @interface CellObjectLibrary : NSObject
 
 @property (nonatomic, strong) NSMutableDictionary *objectLibrary;
 
--(id )initWithGridSize:(GridCoord)size;
+-(id) initWithGridSize:(GridCoord)size;
 
-- (void)addNodeToLibrary:(CellNode *)node cell:(GridCoord)cell;
-- (void)removeNodeFromLibrary:(CellNode *)node cell:(GridCoord)cell;
+-(void) addNode:(CellNode *)node cell:(GridCoord)cell;
+-(void) removeNode:(CellNode *)node cell:(GridCoord)cell;
+-(void) transferNode:(CellNode *)node toCell:(GridCoord)cell fromCell:(GridCoord)moveFrom;
 
-- (NSMutableArray *)nodesForCell:(GridCoord)cell;
-- (NSMutableArray *)nodesForCell:(GridCoord)cell layer:(int)layer;
-- (BOOL)libraryContainsNode:(CellNode *)node atCell:(GridCoord)cell;
-- (BOOL)libraryContainsNodestOfKind:(Class)class layer:(int)layer atCell:(GridCoord)cell;
-- (NSMutableArray *)nodesOfKind:(Class)class atCell:(GridCoord)cell;
-- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell;
-- (id)firstNodeOfKind:(Class)class atCell:(GridCoord)cell layer:(int)layer;
+-(NSMutableArray *) nodesForCell:(GridCoord)cell;
+-(NSMutableArray *) nodesForCell:(GridCoord)cell layer:(int)layer;
 
+-(BOOL) containsNode:(CellNode *)node cell:(GridCoord)cell;
+-(BOOL) containsNodeOfKind:(Class)class layer:(int)layer cell:(GridCoord)cell;
+-(BOOL) containsAnyNodeOfKinds:(NSArray *)kinds layer:(int)layer cell:(GridCoord)cell;
+
+-(NSMutableArray *) nodesOfKind:(Class)class atCell:(GridCoord)cell;
+-(id) firstNodeOfKind:(Class)class atCell:(GridCoord)cell;
+-(id) firstNodeOfKind:(Class)class atCell:(GridCoord)cell layer:(int)layer;
 
 @end

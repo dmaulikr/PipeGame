@@ -16,11 +16,12 @@
 #import "ArmNode.h"
 
 NSString *const kPGNotificationHandNodeTouched = @"HandNodeTouched";
+NSString *const kPGNotificationHandNodeMoved = @"HandNodeMoved";
 
 
 @implementation HandNode
 
-- (id)init
+-(id) init
 {
     self = [super init];
     if (self) {
@@ -43,30 +44,39 @@ NSString *const kPGNotificationHandNodeTouched = @"HandNodeTouched";
     return self;
 }
 
-- (void)registerNotifications
+-(void) registerNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleArmStackChanged:) name:kPGNotificationArmStackChanged object:nil];
 }
 
-- (void)onExit
+-(void) onExit
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setDirectionFacing:(kDirection)direction
+-(void) moveTo:(CGPoint)position
+{
+    GridCoord moveFrom = self.cell;
+    self.position = position;
+    [self.transferResponder transferNode:self toCell:self.cell fromCell:moveFrom];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationHandNodeMoved object:self];
+}
+
+-(void) setDirectionFacing:(kDirection)direction
 {
     self.sprite.rotation = [SpriteUtils degreesForDirection:direction];
     self.connectionSprite.rotation = [SpriteUtils degreesForDirection:direction];
     self.facing = direction;
 }
 
-- (void)setAtConnection:(BOOL)atConnection
+-(void) setAtConnection:(BOOL)atConnection
 {
     self.sprite.visible = !atConnection;
     self.connectionSprite.visible = atConnection;
 }
 
-- (void)handleArmStackChanged:(NSNotification *)notification
+-(void) handleArmStackChanged:(NSNotification *)notification
 {
     NSMutableArray *armStack = (NSMutableArray *)notification.object;
     
