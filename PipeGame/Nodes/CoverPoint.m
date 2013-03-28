@@ -64,13 +64,15 @@ NSString *const kTLDObjectCoverPoint = @"rat";
 
 -(void) cover
 {
+    NSLog(@"+ cover");
     self.sprite.rotation = 180;
     self.isCovered = YES;
 }
 
 -(void) uncover
 {
-    self.sprite.rotation = 180;
+    NSLog(@"* uncover");
+    self.sprite.rotation = 0;
     self.isCovered = NO;
 }
 
