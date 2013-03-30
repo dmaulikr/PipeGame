@@ -15,6 +15,7 @@
 		164AC39416EB9D130008E11C /* arm_through.png in Resources */ = {isa = PBXBuildFile; fileRef = 164AC39216EB9D130008E11C /* arm_through.png */; };
 		164AC39516EB9D130008E11C /* hand_through.png in Resources */ = {isa = PBXBuildFile; fileRef = 164AC39316EB9D130008E11C /* hand_through.png */; };
 		1698A3C016F4C6D2009A1CDB /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 1698A3BF16F4C6D2009A1CDB /* map1.tmx */; };
+		16A83C6B1705567200C8532B /* map2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16A83C6A1705567200C8532B /* map2.tmx */; };
 		16BE3BA516FE2A2C003B2EEB /* CoverPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */; };
 		16BE3BA716FE2B99003B2EEB /* rat.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BE3BA616FE2B99003B2EEB /* rat.png */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
@@ -199,6 +200,7 @@
 		164AC39216EB9D130008E11C /* arm_through.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_through.png; sourceTree = "<group>"; };
 		164AC39316EB9D130008E11C /* hand_through.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hand_through.png; sourceTree = "<group>"; };
 		1698A3BF16F4C6D2009A1CDB /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
+		16A83C6A1705567200C8532B /* map2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map2.tmx; sourceTree = "<group>"; };
 		16BE3BA316FE2A2B003B2EEB /* CoverPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverPoint.h; sourceTree = "<group>"; };
 		16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverPoint.m; sourceTree = "<group>"; };
 		16BE3BA616FE2B99003B2EEB /* rat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rat.png; sourceTree = "<group>"; };
@@ -1049,6 +1051,7 @@
 		16FE9BB516D1463A0014918D /* tilesets */ = {
 			isa = PBXGroup;
 			children = (
+				16A83C6A1705567200C8532B /* map2.tmx */,
 				1698A3BF16F4C6D2009A1CDB /* map1.tmx */,
 				161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */,
 				161D60AB16D92F6D0030D6A6 /* pipeTilesetBase2.png */,
@@ -1153,6 +1156,7 @@
 				164AC39516EB9D130008E11C /* hand_through.png in Resources */,
 				1698A3C016F4C6D2009A1CDB /* map1.tmx in Resources */,
 				16BE3BA716FE2B99003B2EEB /* rat.png in Resources */,
+				16A83C6B1705567200C8532B /* map2.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
