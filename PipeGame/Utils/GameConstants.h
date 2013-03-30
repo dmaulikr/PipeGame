@@ -19,3 +19,10 @@ typedef enum
 } kDirection;
 
 FOUNDATION_EXPORT CGFloat const kSizeGridUnit;
+
+@interface GameConstants : NSObject
+
++(CGSize)landscapeScreenSize;
+
+@end
+

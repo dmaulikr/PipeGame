@@ -48,14 +48,17 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 //    self = [super init];
     self = [super init];
     if (self) {
-        NSString *tileMapName = [PuzzleLayer tiledMapNameForPuzzle:puzzle];
-        
         [self setIsTouchEnabled:YES];
         
-        _backgroundLayer = [[BackgroundLayer alloc] initWithColor:ccc4(0, 0, 0, 255)];
+        // background
+        CGSize landscape = [GameConstants landscapeScreenSize];
+        
+        _backgroundLayer = [[BackgroundLayer alloc] initWithColor:ccc4(0, 0, 0, 255) width:landscape.width height:landscape.height];
         [self addChild:_backgroundLayer];
 
         // tile map
+        NSString *tileMapName = [PuzzleLayer tiledMapNameForPuzzle:puzzle];
+        
         _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:tileMapName];
         [self addChild:_tileMap];
         
