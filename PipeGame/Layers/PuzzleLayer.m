@@ -23,7 +23,7 @@
 #import "CoverPoint.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
-static GLubyte const kBackgroundTileLayerOpacity = 190;
+static GLubyte const kBackgroundTileLayerOpacity = 170;
 static ccTime const kMoveToDuration = 0.4;
 static CGFloat const kLayerScale = 0.05;
 
@@ -75,7 +75,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         
         _handNode.position = [GridUtils absolutePositionForGridCoord:_entry.cell unitSize:kSizeGridUnit origin:_gridOrigin];
         _handNode.layer = _entry.layer;
-        [_tileMap addChild:_handNode z:[_tileMap layerNamed:[PGTiledUtils layerName:_entry.layer]].zOrder];
+        [_tileMap addChild:_handNode z:kLayerHand2];
 
         [_handNode setDirectionFacing:_entry.direction];
         
@@ -102,12 +102,13 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         for (NSMutableDictionary *rat in rats) {
             CoverPoint *ratNode = [[CoverPoint alloc] initWithCoverPoint:rat tiledMap:_tileMap];
             [self.rats addObject:ratNode];
-            [_tileMap addChild:ratNode z:[_tileMap layerNamed:[PGTiledUtils layerName:ratNode.layer]].zOrder];
+//            [_tileMap addChild:ratNode z:[_tileMap layerNamed:[PGTiledUtils layerName:ratNode.layer]].zOrder];
+            [_tileMap addChild:ratNode];
             [self.cellObjectLibrary addNode:ratNode cell:ratNode.cell];
         }
         
         // move to layer
-        [self moveToLayer:_entry.layer fromLayer:[PGTiledUtils oppositeLayer:_entry.layer]];
+        [self moveToLayer:_entry.layer];
     }
     return self;
 }
@@ -131,7 +132,85 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     return CGPointMake(0, 0);
 }
 
-- (void)moveToLayer:(int)toLayer fromLayer:(int)fromLayer
+// use this for individual reordering, for example adding an arm unit
+- (int)zOrderForChild:(id)child topLayer:(int)topLayer
+{
+    BOOL reverse = topLayer == 1;
+    
+    if ([child isKindOfClass:[CCTMXLayer class]]) {
+        CCTMXLayer *layer = (CCTMXLayer *)child;
+        if ([layer.layerName isEqualToString:@"pipes1"]) {
+            if (reverse) {
+                return kLayerPipe2;
+            }
+            else {
+                return kLayerPipe1;
+            }
+        }
+        else {
+            if (reverse) {
+                return kLayerPipe1;
+            }
+            else {
+                return kLayerPipe2;
+            }
+        }
+    }
+    else if ([child isKindOfClass:[HandNode class]]) {
+        return kLayerHand2;
+    }
+    else if ([child isKindOfClass:[ArmNode class]]) {
+        ArmNode *arm = (ArmNode *)child;
+        if (arm.layer == 1) {
+            if (reverse) {
+                return kLayerHand2;
+            }
+            else {
+                return kLayerHand1;
+            }
+        }
+        else {
+            if (reverse) {
+                return kLayerHand1;
+            }
+            else {
+                return kLayerHand2;
+            }
+        }
+    }
+    else if ([child isKindOfClass:[CoverPoint class]]) {
+        CoverPoint *rat = (CoverPoint *)child;
+        if (rat.layer == 1) {
+            if (reverse) {
+                return kLayerOver2;
+            }
+            else {
+                return kLayerOver1;
+            }
+        }
+        else {
+            if (reverse) {
+                return kLayerOver1;
+            }
+            else {
+                return kLayerOver2;
+            }
+        }
+    }
+    NSLog(@"warning: child not recognized");
+    return -1;
+}
+
+// order all children, for example when moving layers
+- (void)orderChildren:(int)topLayer
+{
+    for (id child in self.tileMap.children) {
+        int z = [self zOrderForChild:child topLayer:topLayer];
+        [self.tileMap reorderChild:child z:z];
+    }
+}
+
+- (void)moveToLayer:(int)toLayer 
 {
     [self.backgroundLayer tintToColor:[PGTiledUtils pipeColorAtLayer:toLayer] duration:kMoveToDuration];
     
@@ -140,19 +219,14 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         NSLog(@"warning: can't use moveToLayer before hand node has been created");
         return;
     }
-    CCTMXLayer *moveFromLayer = [self.tileMap layerNamed:[PGTiledUtils layerName:fromLayer]];
-    CCTMXLayer *moveToLayer = [self.tileMap layerNamed:[PGTiledUtils layerName:toLayer]];
 
     self.handNode.layer = toLayer;
-    [self.tileMap reorderChild:moveToLayer z:moveFromLayer.zOrder];
-    [self.tileMap reorderChild:self.handNode z:moveToLayer.zOrder];
     
     // arm and rats
     NSLog(@"self.rats: %@", self.rats);
     for (CellNode *node in [self.armNodes arrayByAddingObjectsFromArray:self.rats]) {
                
         if (node.layer == toLayer) {
-            [self.tileMap reorderChild:node z:moveToLayer.zOrder];
             CCFadeTo *brighten = [CCFadeTo actionWithDuration:kMoveToDuration opacity:255];
             [node.sprite runAction:brighten];
         }
@@ -176,6 +250,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         }
     }];
     [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationArmStackChanged object:self.armNodes];
+    
+    [self orderChildren:toLayer];
 }
 
 - (CCTMXLayer *)currentTMXLayer
@@ -266,7 +342,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     }
     
     // TODO: will need to check if opposite layer is occupied
-    [self moveToLayer:[PGTiledUtils oppositeLayer:self.currentLayer] fromLayer:self.currentLayer];
+    [self moveToLayer:[PGTiledUtils oppositeLayer:self.currentLayer]];
     return YES;    
 }
 
@@ -430,7 +506,9 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     }
     
     // need to add as child, to the armNodes stack and to the cell object library
-    [self.tileMap addChild:newArmNode z:[self currentTMXLayer].zOrder];
+//    [self.tileMap addChild:newArmNode z:[self currentTMXLayer].zOrder];
+    [self.tileMap addChild:newArmNode z:[self zOrderForChild:newArmNode topLayer:[self currentLayer]]];
+    
     [self.armNodes addObject:newArmNode];
     [self.cellObjectLibrary addNode:newArmNode cell:cell];
     

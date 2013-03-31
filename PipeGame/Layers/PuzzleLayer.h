@@ -14,6 +14,20 @@
 @class PGEntry;
 @class BackgroundLayer;
 
+typedef enum
+{
+    kLayerBackground = 0,
+    kLayerPipe1,
+    kLayerUnder1,
+    kLayerHand1,
+    kLayerOver1,
+    kLayerPipe2,
+    kLayerUnder2,
+    kLayerHand2,
+    kLayerOver2,
+    kLayerHud
+} kLayer;
+
 FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
 
 
