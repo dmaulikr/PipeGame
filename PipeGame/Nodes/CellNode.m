@@ -26,11 +26,6 @@
     return self;
 }
 
--(GridCoord) cell
-{
-    return [GridUtils gridCoordForAbsolutePosition:self.position unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
-}
-
 -(BOOL) shouldBlockMovement
 {
     return NO;
@@ -46,6 +41,14 @@
     CCSprite *sprite = [SpriteUtils spriteWithTextureKey:name];
     sprite.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
     return sprite;
+}
+
+-(void) moveTo:(GridCoord)cell puzzleOrigin:(CGPoint)origin
+{
+    GridCoord moveFrom = self.cell;
+    self.cell = cell;
+    self.position = [GridUtils relativePositionForGridCoord:cell unitSize:kSizeGridUnit];
+    [self.transferResponder transferNode:self toCell:cell fromCell:moveFrom];
 }
 
 

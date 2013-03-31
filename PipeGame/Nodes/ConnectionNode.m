@@ -17,13 +17,13 @@ NSString *const kTLDPropertyConnectionB = @"b";
 
 @implementation ConnectionNode
 
-- (id)initWithConnection:(NSMutableDictionary *)connection tiledMap:(CCTMXTiledMap *)tiledMap
+- (id)initWithConnection:(NSMutableDictionary *)connection tiledMap:(CCTMXTiledMap *)tiledMap puzzleOrigin:(CGPoint)origin
 {
     self = [super init];
     if (self) {
         // position
-        GridCoord gridCoord = [tiledMap gridCoordForObject:connection];
-        self.position = [GridUtils absolutePositionForGridCoord:gridCoord unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+        self.cell = [tiledMap gridCoordForObject:connection];
+        self.position = [GridUtils absolutePositionForGridCoord:self.cell unitSize:kSizeGridUnit origin:origin];
         
         // doesn't belong to a specific layer
         self.layer = kPipeLayerAny;

@@ -21,7 +21,7 @@ NSString *const kTLDObjectCoverPoint = @"rat";
 @implementation CoverPoint
 
 // TODO: does this need tiled map?
--(id) initWithCoverPoint:(NSMutableDictionary *)coverPoint tiledMap:(CCTMXTiledMap *)tiledMap
+-(id) initWithCoverPoint:(NSMutableDictionary *)coverPoint tiledMap:(CCTMXTiledMap *)tiledMap puzzleOrigin:(CGPoint)origin
 {
     self = [super init];
     if (self) {
@@ -33,9 +33,8 @@ NSString *const kTLDObjectCoverPoint = @"rat";
         self.layer = [[coverPoint valueForKey:kTLDPropertyLayer] intValue];
         
         // position
-        // TODO: same code as in connection node
-        GridCoord gridCoord = [tiledMap gridCoordForObject:coverPoint];
-        self.position = [GridUtils absolutePositionForGridCoord:gridCoord unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
+        self.cell = [tiledMap gridCoordForObject:coverPoint];
+        self.position = [GridUtils absolutePositionForGridCoord:self.cell unitSize:kSizeGridUnit origin:origin];
         
         _isCovered = NO;
         

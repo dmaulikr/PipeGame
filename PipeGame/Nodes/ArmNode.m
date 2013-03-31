@@ -17,15 +17,16 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
 
 @implementation ArmNode
 
--(id) initInCell:(GridCoord)cell layer:(int)layer
+-(id) initInCell:(GridCoord)cell layer:(int)layer puzzleOrigin:(CGPoint)origin
 {
     self = [super init];
     if (self) {
         self.layer = layer;
         
         // position
-        self.position = [GridUtils absolutePositionForGridCoord:cell unitSize:kSizeGridUnit origin:[PuzzleLayer sharedGridOrigin]];
-        
+        self.cell = cell;
+        self.position = [GridUtils relativePositionForGridCoord:cell unitSize:kSizeGridUnit];
+                
         // setup for sending notifications
         self.shouldSendPGTouchNotifications = YES;
         self.pgTouchNotification = kPGNotificationArmNodeTouched;
@@ -33,9 +34,9 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
     return self;
 }
 
--(id) initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit layer:(int)layer
+-(id) initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit layer:(int)layer puzzleOrigin:(CGPoint)origin
 {
-    self = [self initInCell:cell layer:layer];
+    self = [self initInCell:cell layer:layer puzzleOrigin:origin];
     if (self) {
         // add exits
         self.exits = [NSMutableArray array];
@@ -49,9 +50,9 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
     return self;
 }
 
--(id) initForLayerConnectionInCell:(GridCoord)cell exit:(kDirection)exit layer:(int)layer
+-(id) initForLayerConnectionInCell:(GridCoord)cell exit:(kDirection)exit layer:(int)layer puzzleOrigin:(CGPoint)origin
 {
-    self = [self initInCell:cell layer:layer];
+    self = [self initInCell:cell layer:layer puzzleOrigin:origin];
     if (self) {
         // add exits
         self.exits = [NSMutableArray array];

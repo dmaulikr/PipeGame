@@ -18,9 +18,6 @@ FOUNDATION_EXPORT NSString *const kPGNotificationHandNodeMoved;
 @property (strong, nonatomic) CCSprite *connectionSprite;
 @property (assign) kDirection facing;
 
-@property (strong, nonatomic) id<TransferResponder>transferResponder;
-
 -(void) setDirectionFacing:(kDirection)direction;
--(void) moveTo:(CGPoint)position;
 
 @end

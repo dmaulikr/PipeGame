@@ -138,7 +138,6 @@
 		16D29B6216CF0D0F00C73947 /* ArmNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AB416CF0D0F00C73947 /* ArmNode.m */; };
 		16D29B6316CF0D0F00C73947 /* CellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AB616CF0D0F00C73947 /* CellNode.m */; };
 		16D29B6416CF0D0F00C73947 /* HandNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AB816CF0D0F00C73947 /* HandNode.m */; };
-		16D29B6516CF0D0F00C73947 /* PipeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29ABA16CF0D0F00C73947 /* PipeNode.m */; };
 		16D29B6616CF0D0F00C73947 /* armUnit.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D29ABD16CF0D0F00C73947 /* armUnit.png */; };
 		16D29B6716CF0D0F00C73947 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D29ABE16CF0D0F00C73947 /* Default-Landscape~ipad.png */; };
 		16D29B6816CF0D0F00C73947 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D29ABF16CF0D0F00C73947 /* Default.png */; };
@@ -456,8 +455,6 @@
 		16D29AB616CF0D0F00C73947 /* CellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellNode.m; sourceTree = "<group>"; };
 		16D29AB716CF0D0F00C73947 /* HandNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandNode.h; sourceTree = "<group>"; };
 		16D29AB816CF0D0F00C73947 /* HandNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandNode.m; sourceTree = "<group>"; };
-		16D29AB916CF0D0F00C73947 /* PipeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeNode.h; sourceTree = "<group>"; };
-		16D29ABA16CF0D0F00C73947 /* PipeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeNode.m; sourceTree = "<group>"; };
 		16D29ABB16CF0D0F00C73947 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		16D29ABD16CF0D0F00C73947 /* armUnit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = armUnit.png; sourceTree = "<group>"; };
 		16D29ABE16CF0D0F00C73947 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -944,8 +941,6 @@
 				16D29AB616CF0D0F00C73947 /* CellNode.m */,
 				16D29AB716CF0D0F00C73947 /* HandNode.h */,
 				16D29AB816CF0D0F00C73947 /* HandNode.m */,
-				16D29AB916CF0D0F00C73947 /* PipeNode.h */,
-				16D29ABA16CF0D0F00C73947 /* PipeNode.m */,
 				161D60BF16DAD2280030D6A6 /* PGPopUpMenu.h */,
 				161D60C016DAD2280030D6A6 /* PGPopUpMenu.m */,
 				16141F1B16DD98EF000DB458 /* ConnectionNode.h */,
@@ -1273,7 +1268,6 @@
 				16D29B6216CF0D0F00C73947 /* ArmNode.m in Sources */,
 				16D29B6316CF0D0F00C73947 /* CellNode.m in Sources */,
 				16D29B6416CF0D0F00C73947 /* HandNode.m in Sources */,
-				16D29B6516CF0D0F00C73947 /* PipeNode.m in Sources */,
 				16D29B8F16CF0D0F00C73947 /* CellObjectLibrary.m in Sources */,
 				16D29B9016CF0D0F00C73947 /* ColorUtils.m in Sources */,
 				16D29B9116CF0D0F00C73947 /* DataUtils.m in Sources */,

@@ -25,16 +25,15 @@
 @property (copy) NSString *pgTouchNotification;
 
 @property (strong, nonatomic) CCSprite *sprite;
-
 @property (assign) int layer;
+@property (assign) GridCoord cell;
 
-// returns sprite with image name, centered in content bounds
--(CCSprite *) createAndCenterSpriteNamed:(NSString *)name;
+@property (strong, nonatomic) id<TransferResponder>transferResponder;
 
--(GridCoord) cell;
 
--(BOOL) shouldBlockMovement;
-
--(NSString *) layerName;
+-(CCSprite *) createAndCenterSpriteNamed:(NSString *)name; // returns sprite with image name, centered in content bounds
+-(void) moveTo:(GridCoord)cell puzzleOrigin:(CGPoint)origin;
+- (BOOL)shouldBlockMovement;
+- (NSString *)layerName;
 
 @end

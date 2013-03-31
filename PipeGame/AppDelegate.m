@@ -91,6 +91,9 @@
 	
 	// make main window visible
 	[window_ makeKeyAndVisible];
+    
+    // enable multiple touches
+    [glView setMultipleTouchEnabled:YES];
 	
 	return YES;
 }

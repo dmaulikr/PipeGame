@@ -54,12 +54,9 @@ NSString *const kPGNotificationHandNodeMoved = @"HandNodeMoved";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void) moveTo:(CGPoint)position
+-(void) moveTo:(GridCoord)cell puzzleOrigin:(CGPoint)origin
 {
-    GridCoord moveFrom = self.cell;
-    self.position = position;
-    [self.transferResponder transferNode:self toCell:self.cell fromCell:moveFrom];
-    
+    [super moveTo:cell puzzleOrigin:origin];
     [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationHandNodeMoved object:self];
 }
 

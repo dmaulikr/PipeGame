@@ -37,9 +37,21 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     CCScene *scene = [CCScene node];
     
     PuzzleLayer *puzzleLayer = [[PuzzleLayer alloc] initWithPuzzle:puzzle];
+    
+    // background
+    CGSize landscape = [GameConstants landscapeScreenSize];
+    puzzleLayer.backgroundLayer = [[BackgroundLayer alloc] initWithColor:ccc4(0, 0, 0, 255) width:landscape.width height:landscape.height];
+    [puzzleLayer.backgroundLayer tintToColor:[PGTiledUtils pipeColorAtLayer:[puzzleLayer currentLayer]] duration:kMoveToDuration];
+    
+    [scene addChild:puzzleLayer.backgroundLayer];
     [scene addChild:puzzleLayer];
-       
+    
     return scene;
+}
+
+- (CGPoint)convertTouchToPuzzleSpace:(CGPoint)touchPosition
+{
+    return ccp(touchPosition.x - self.position.x, touchPosition.y - self.position.y);
 }
 
 //- (id)initWithPuzzle:(int)puzzle
@@ -50,12 +62,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     if (self) {
         [self setIsTouchEnabled:YES];
         
-        // background
-        CGSize landscape = [GameConstants landscapeScreenSize];
-        
-        _backgroundLayer = [[BackgroundLayer alloc] initWithColor:ccc4(0, 0, 0, 255) width:landscape.width height:landscape.height];
-        [self addChild:_backgroundLayer];
-
         // tile map
         NSString *tileMapName = [PuzzleLayer tiledMapNameForPuzzle:puzzle];
         
@@ -63,7 +69,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         [self addChild:_tileMap];
         
         _gridSize = [GridUtils gridCoordFromSize:_tileMap.mapSize];
-        _gridOrigin = [PuzzleLayer sharedGridOrigin];
         
         // cell object library
         _cellObjectLibrary = [[CellObjectLibrary alloc] initWithGridSize:_gridSize];
@@ -73,7 +78,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         _entry = [[PGEntry alloc] initWithEntry:entryData tileMap:_tileMap];
         _handNode = [[HandNode alloc] init];
         
-        _handNode.position = [GridUtils absolutePositionForGridCoord:_entry.cell unitSize:kSizeGridUnit origin:_gridOrigin];
+        _handNode.position = [GridUtils absolutePositionForGridCoord:_entry.cell unitSize:kSizeGridUnit origin:self.position ];
+        self.handNode.cell = _entry.cell; // TODO: hand node should have an initializer
         _handNode.layer = _entry.layer;
         [_tileMap addChild:_handNode z:kLayerHand2];
 
@@ -92,7 +98,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         // connections
         NSMutableArray *connections = [_tileMap objectsWithName:kTLDObjectConnection groupName:kTLDGroupMeta];
         for (NSMutableDictionary *connection in connections) {
-            ConnectionNode *connectionNode = [[ConnectionNode alloc] initWithConnection:connection tiledMap:_tileMap];
+            ConnectionNode *connectionNode = [[ConnectionNode alloc] initWithConnection:connection tiledMap:_tileMap puzzleOrigin:self.position];
             [self.cellObjectLibrary addNode:connectionNode cell:connectionNode.cell];
         }
         
@@ -100,9 +106,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         _rats = [NSMutableArray array];
         NSMutableArray *rats = [_tileMap objectsWithName:kTLDObjectCoverPoint groupName:kTLDGroupMeta];
         for (NSMutableDictionary *rat in rats) {
-            CoverPoint *ratNode = [[CoverPoint alloc] initWithCoverPoint:rat tiledMap:_tileMap];
+            CoverPoint *ratNode = [[CoverPoint alloc] initWithCoverPoint:rat tiledMap:_tileMap puzzleOrigin:self.position];
             [self.rats addObject:ratNode];
-//            [_tileMap addChild:ratNode z:[_tileMap layerNamed:[PGTiledUtils layerName:ratNode.layer]].zOrder];
             [_tileMap addChild:ratNode];
             [self.cellObjectLibrary addNode:ratNode cell:ratNode.cell];
         }
@@ -125,11 +130,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     [notificationCenter addObserver:self selector:@selector(handleArmNodeTouched:) name:kPGNotificationArmNodeTouched object:nil];
     [notificationCenter addObserver:self selector:@selector(handleHandNodeTouched:) name:kPGNotificationHandNodeTouched object:nil];
     [notificationCenter addObserver:self selector:@selector(handleHandNodeMoved) name:kPGNotificationHandNodeMoved object:nil];
-}
-
-+ (CGPoint)sharedGridOrigin
-{
-    return CGPointMake(0, 0);
 }
 
 // use this for individual reordering, for example adding an arm unit
@@ -223,7 +223,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     self.handNode.layer = toLayer;
     
     // arm and rats
-    NSLog(@"self.rats: %@", self.rats);
     for (CellNode *node in [self.armNodes arrayByAddingObjectsFromArray:self.rats]) {
                
         if (node.layer == toLayer) {
@@ -274,12 +273,10 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 -(void) onEnterTransitionDidFinish
 {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
     [self registerNotifications];
 }
 -(void) onExit
 {
-    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -290,30 +287,46 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 //{
 //    // grid
 //    ccDrawColor4F(0.5f, 0.5f, 0.5f, 1.0f);
-//    [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:_gridOrigin];
+//    [GridUtils drawGridWithSize:self.gridSize unitSize:kSizeGridUnit origin:self.position];
 //}
 
-# pragma mark - targeted touch delegate
+# pragma mark - touch delegate
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    return YES;
-}
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 
-- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
-    GridCoord touchCell = [GridUtils gridCoordForAbsolutePosition:touchPosition unitSize:kSizeGridUnit origin:self.gridOrigin];
-    
-    if (self.isHandNodeSelected) {
-        if ([GridUtils isCell:self.cellFromLastTouch equalToCell:touchCell] == NO) {
-            self.cellFromLastTouch = touchCell;
-            [self tryGridTouchAtPosition:touchPosition cell:touchCell];
+    if (touches.count == 1) {
+        UITouch *touch = [touches anyObject];
+        CGPoint touchPosition = [self convertTouchToNodeSpace:touch];        
+        GridCoord touchCell = [GridUtils gridCoordForRelativePosition:touchPosition unitSize:kSizeGridUnit origin:self.position];
+
+        if (self.isHandNodeSelected) {
+            if ([GridUtils isCell:self.cellFromLastTouch equalToCell:touchCell] == NO) {
+                self.cellFromLastTouch = touchCell;
+                [self tryGridTouchAtCell:touchCell];
+            }
         }
+    }
+    
+    // pan
+    else {
+        UITouch *touch = [touches anyObject];
+        
+        CGPoint previousPosition = [touch previousLocationInView:touch.view];
+        previousPosition = [[CCDirector sharedDirector] convertToGL:previousPosition];
+        previousPosition = [self convertToNodeSpace:previousPosition];
+        
+        CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
+        CGPoint translation = ccpSub(touchPosition, previousPosition);
+        [self panWithTranslation:translation];
     }
 }
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)panWithTranslation:(CGPoint)translation {
+    self.position = ccpAdd(self.position, translation);
+}
+
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (self.isHandNodeSelected == YES) {
         self.isHandNodeSelected = NO;
@@ -359,11 +372,10 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     ArmNode *nodeTouched = (ArmNode *)notification.object;
     
     if (nodeTouched.layer == self.currentLayer) {
-        CGPoint nodePosition = nodeTouched.position;
         int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
         
         // move hand and rotate to correct direction
-        [self.handNode moveTo:nodePosition];
+        [self.handNode moveTo:nodeTouched.cell puzzleOrigin:self.position];
         
         kDirection shouldFace;
         if (touchedIndex > 0) {
@@ -390,7 +402,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 #pragma mark - hand
 
-- (BOOL)tryGridTouchAtPosition:(CGPoint)touchPosition cell:(GridCoord)touchCell
+- (BOOL)tryGridTouchAtCell:(GridCoord)touchCell
 {
     // handle for touch within grid
     if ([GridUtils isCellInBounds:touchCell gridSize:self.gridSize]) {
@@ -413,8 +425,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
                     // hand sprite
                     kDirection shouldFace = [GridUtils directionFromStart:self.handNode.cell end:touchCell];
                     [self.handNode setDirectionFacing:shouldFace];
-                    CGPoint moveTo = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
-                    [self.handNode moveTo:moveTo];
+                    [self.handNode moveTo:touchCell puzzleOrigin:self.position];
                     
                     return YES;
                 }
@@ -440,8 +451,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
                         shouldFace = self.entry.direction;
                     }
                     [self.handNode setDirectionFacing:shouldFace];
-                    CGPoint moveTo = [GridUtils absolutePositionForGridCoord:touchCell unitSize:kSizeGridUnit origin:self.gridOrigin];
-                    [self.handNode moveTo:moveTo];
+                    [self.handNode moveTo:touchCell puzzleOrigin:self.position];
                 }
             }
         }
@@ -459,12 +469,8 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 -(void) handleHandNodeMoved
 {
-    // change key in cell object library
-    
-//    [self.cellObjectLibrary transferNode:self.handNode toCell:self.h
-//    self.handNode.cell;
-}
 
+}
 
 #pragma mark - arm
 
@@ -478,7 +484,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         BOOL armOverlapsLastArm = [GridUtils isCell:cell equalToCell:[lastArmNode cell]];
         if (direction != kDirectionThrough && !armOverlapsLastArm) {
             kDirection firstExit = [GridUtils directionFromStart:cell end:[lastArmNode cell]];
-            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction layer:self.handNode.layer ];
+            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:firstExit secondExit:direction layer:self.handNode.layer puzzleOrigin:self.position];
         }
         // arm node moving though layer
         else {
@@ -489,12 +495,12 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
             else {
                 exit = [GridUtils directionFromStart:self.handNode.cell end:[lastArmNode cell]];
             }
-            newArmNode = [[ArmNode alloc] initForLayerConnectionInCell:cell exit:exit layer:self.handNode.layer];
+            newArmNode = [[ArmNode alloc] initForLayerConnectionInCell:cell exit:exit layer:self.handNode.layer puzzleOrigin:self.position];
         }
     }
     else {
         if (direction != kDirectionThrough) {
-            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction layer:self.handNode.layer];
+            newArmNode = [[ArmNode alloc] initInCell:cell firstExit:self.handEntersFrom secondExit:direction layer:self.handNode.layer puzzleOrigin:self.position];
         }
         else {
             NSLog(@"warning: moving through on first cell needs implementation");
@@ -506,7 +512,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     }
     
     // need to add as child, to the armNodes stack and to the cell object library
-//    [self.tileMap addChild:newArmNode z:[self currentTMXLayer].zOrder];
     [self.tileMap addChild:newArmNode z:[self zOrderForChild:newArmNode topLayer:[self currentLayer]]];
     
     [self.armNodes addObject:newArmNode];

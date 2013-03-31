@@ -15,6 +15,6 @@ FOUNDATION_EXPORT NSString *const kTLDObjectCoverPoint;
 @property (strong, nonatomic) CCSprite *sprite;
 @property (assign) BOOL isCovered;
 
--(id) initWithCoverPoint:(NSMutableDictionary *)coverPoint tiledMap:(CCTMXTiledMap *)tiledMap;
+-(id) initWithCoverPoint:(NSMutableDictionary *)coverPoint tiledMap:(CCTMXTiledMap *)tiledMap puzzleOrigin:(CGPoint)origin;
 
 @end

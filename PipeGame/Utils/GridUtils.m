@@ -26,6 +26,13 @@
     return CGPointMake(x, y);
 }
 
++ (CGPoint)relativePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize 
+{
+    CGFloat x = ((coord.x - 1) * unitSize);
+    CGFloat y = ((coord.y - 1) * unitSize);
+    return CGPointMake(x, y);
+}
+
 // grid coordinate for absolute position on a grid
 + (GridCoord)gridCoordForAbsolutePosition:(CGPoint)position unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
 {
@@ -33,6 +40,15 @@
     int y = floorf((position.y - origin.y) / unitSize) + 1;
     return GridCoordMake(x, y);
 }
+
+// grid coordinate for relative position on a grid
++ (GridCoord)gridCoordForRelativePosition:(CGPoint)position unitSize:(CGFloat)unitSize origin:(CGPoint)origin;
+{
+    int x = floorf(position.x / unitSize) + 1;
+    int y = floorf(position.y / unitSize) + 1;
+    return GridCoordMake(x, y);
+}
+
 
 // absolute position made for sprite (anchor point middle) on a grid for grid coordinate
 + (CGPoint)absoluteSpritePositionForGridCoord:(GridCoord)coord unitSize:(CGFloat)unitSize origin:(CGPoint)origin
@@ -121,7 +137,6 @@
     }
 }
 
-
 #pragma mark - directions
 
 // direction by comparing starting coord and ending coord, no diagonal path allowed
@@ -147,9 +162,6 @@
         else if (start.x < end.x) {
             return kDirectionRight;
         }
-    }
-    else {
-        NSLog(@"warning: diagnol directions not supported, returning kDirectionNone");
     }
     return kDirectionNone;
 }

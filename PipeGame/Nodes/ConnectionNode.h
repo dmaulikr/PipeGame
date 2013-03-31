@@ -12,6 +12,6 @@
 
 @property (assign) int layerConnection;
 
-- (id)initWithConnection:(NSMutableDictionary *)connection tiledMap:(CCTMXTiledMap *)tiledMap;
+- (id)initWithConnection:(NSMutableDictionary *)connection tiledMap:(CCTMXTiledMap *)tiledMap puzzleOrigin:(CGPoint)origin;
 
 @end

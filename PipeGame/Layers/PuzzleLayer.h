@@ -42,7 +42,6 @@ FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
 
 // grid
 @property (assign) GridCoord gridSize;
-@property (assign) CGPoint gridOrigin;
 
 // tilemap
 @property (nonatomic, strong) CCTMXTiledMap *tileMap;
@@ -68,9 +67,6 @@ FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
 
 // puzzles defined in Puzzles.plist
 + (CCScene *)sceneWithPuzzle:(int)puzzle;
-
-// absolute position where the bottom left  of the grid begins
-+ (CGPoint)sharedGridOrigin;
 
 
 

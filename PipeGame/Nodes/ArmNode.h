@@ -32,8 +32,8 @@ FOUNDATION_EXPORT NSString *const kPGNotificationArmNodeTouched;
 
 @property (nonatomic, strong) NSMutableArray *exits;
     
--(id) initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit layer:(int)layer;
--(id) initForLayerConnectionInCell:(GridCoord)cell exit:(kDirection)exit layer:(int)layer;
+-(id) initInCell:(GridCoord)cell firstExit:(kDirection)firstExit secondExit:(kDirection)secondExit layer:(int)layer puzzleOrigin:(CGPoint)origin;
+-(id) initForLayerConnectionInCell:(GridCoord)cell exit:(kDirection)exit layer:(int)layer puzzleOrigin:(CGPoint)origin;
 -(BOOL) isAtConnection;
 
 @end
