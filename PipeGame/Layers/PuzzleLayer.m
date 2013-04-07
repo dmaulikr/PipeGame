@@ -127,7 +127,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
-    [notificationCenter addObserver:self selector:@selector(handleArmNodeTouchEnded:) name:kPGNotificationArmNodeTouchEnded object:nil];
     [notificationCenter addObserver:self selector:@selector(handleHandNodeTouched:) name:kPGNotificationHandNodeTouched object:nil];
     [notificationCenter addObserver:self selector:@selector(handleHandNodeMoved) name:kPGNotificationHandNodeMoved object:nil];
 }
@@ -367,39 +366,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     [self tintHandAndArm:[ColorUtils tintArmSelected]];
 }
 
-- (void)handleArmNodeTouchEnded:(NSNotification *)notification
-{
-    ArmNode *nodeTouched = (ArmNode *)notification.object;
-    
-    if (nodeTouched.layer == self.currentLayer) {
-        int touchedIndex = [self.armNodes indexOfObject:nodeTouched];
-        
-        // move hand and rotate to correct direction
-        [self.handNode moveTo:nodeTouched.cell puzzleOrigin:self.position];
-        
-        kDirection shouldFace;
-        if (touchedIndex > 0) {
-            ArmNode *newLastArmNode;
-                        
-            if (nodeTouched.isAtConnection) {
-                newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 2];
-            }
-            else {
-                newLastArmNode = [self.armNodes objectAtIndex:touchedIndex - 1];
-            }
-            shouldFace = [GridUtils directionFromStart:[newLastArmNode cell] end:[nodeTouched cell]];
-        }
-        else {
-            shouldFace = [GridUtils oppositeDirection:self.handEntersFrom];
-        }
-        [self.handNode setDirectionFacing:shouldFace];
-        
-        // remove arm nodes
-        [self removeArmNodesFromIndex:touchedIndex];
-    }
-}
-
-
 #pragma mark - hand
 
 - (BOOL)tryGridTouchAtCell:(GridCoord)touchCell
@@ -458,31 +424,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     }
     return NO;
 }
-
-//- (void)rewindArm:(ArmNode *)nodeTouched
-//{
-//    if ([nodeTouched isEqual:self.armNodes.lastObject]) {
-//        
-//        [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
-//        
-//        kDirection shouldFace;
-//        if ([self lastArmNode] != nil) {
-//            if ([GridUtils isCell:[self lastArmNode].cell equalToCell:touchCell]) {
-//                ArmNode *secondTolastArmNode = [self.armNodes objectAtIndex:self.armNodes.count - 2];
-//                shouldFace = [GridUtils directionFromStart: secondTolastArmNode.cell end:touchCell];
-//            }
-//            else {
-//                shouldFace = [GridUtils directionFromStart:[self lastArmNode].cell end:touchCell];
-//            }
-//        }
-//        else {
-//            shouldFace = self.entry.direction;
-//        }
-//        [self.handNode setDirectionFacing:shouldFace];
-//        [self.handNode moveTo:touchCell puzzleOrigin:self.position];
-//    }
-//
-//}
 
 -(void) tintHandAndArm:(ccColor3B)color
 {

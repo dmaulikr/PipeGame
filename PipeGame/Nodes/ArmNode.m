@@ -26,9 +26,6 @@ NSString *const kPGNotificationArmNodeTouchEnded = @"ArmNodeTouchEnded";
         // position
         self.cell = cell;
         self.position = [GridUtils relativePositionForGridCoord:cell unitSize:kSizeGridUnit];
-                
-        // setup for sending notifications
-        self.pgNotificationTouchEnded = kPGNotificationArmNodeTouchEnded;
     }
     return self;
 }
