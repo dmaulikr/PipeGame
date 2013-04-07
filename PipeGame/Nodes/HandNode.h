@@ -9,9 +9,7 @@
 #import "CellNode.h"
 #import "GridUtils.h"
 
-FOUNDATION_EXPORT NSString *const kPGNotificationHandNodeTouched;
-FOUNDATION_EXPORT NSString *const kPGNotificationHandNodeMoved;
-
+FOUNDATION_EXPORT NSString *const kPGNotificationHandNodeTouchBegan;
 
 @interface HandNode : CellNode 
 

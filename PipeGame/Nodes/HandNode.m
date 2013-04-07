@@ -15,9 +15,7 @@
 #import "TextureUtils.h"
 #import "ArmNode.h"
 
-NSString *const kPGNotificationHandNodeTouched = @"HandNodeTouched";
-NSString *const kPGNotificationHandNodeMoved = @"HandNodeMoved";
-
+NSString *const kPGNotificationHandNodeTouchBegan = @"HandNodeTouched";
 
 @implementation HandNode
 
@@ -34,7 +32,7 @@ NSString *const kPGNotificationHandNodeMoved = @"HandNodeMoved";
         [self addChild:_connectionSprite];
         
         // setup for sending notifications
-        self.pgNotificationTouchBegan = kPGNotificationHandNodeTouched;
+        self.pgNotificationTouchBegan = kPGNotificationHandNodeTouchBegan;
         
         _facing = kDirectionNone;
         
@@ -52,12 +50,6 @@ NSString *const kPGNotificationHandNodeMoved = @"HandNodeMoved";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super onExit];
-}
-
--(void) moveTo:(GridCoord)cell puzzleOrigin:(CGPoint)origin
-{
-    [super moveTo:cell puzzleOrigin:origin];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kPGNotificationHandNodeMoved object:self];
 }
 
 -(void) setDirectionFacing:(kDirection)direction

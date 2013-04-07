@@ -127,8 +127,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
-    [notificationCenter addObserver:self selector:@selector(handleHandNodeTouched:) name:kPGNotificationHandNodeTouched object:nil];
-    [notificationCenter addObserver:self selector:@selector(handleHandNodeMoved) name:kPGNotificationHandNodeMoved object:nil];
+    [notificationCenter addObserver:self selector:@selector(handleHandNodeTouched:) name:kPGNotificationHandNodeTouchBegan object:nil];
 }
 
 // use this for individual reordering, for example adding an arm unit
@@ -358,15 +357,14 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     return YES;    
 }
 
-#pragma mark - cell node touches
+
+#pragma mark - hand
 
 - (void)handleHandNodeTouched:(NSNotification *)notification
 {
     self.isHandNodeSelected = YES;
     [self tintHandAndArm:[ColorUtils tintArmSelected]];
 }
-
-#pragma mark - hand
 
 - (BOOL)tryGridTouchAtCell:(GridCoord)touchCell
 {
@@ -431,11 +429,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     for (ArmNode *arm in self.armNodes) {
         arm.sprite.color = color;
     }
-}
-
--(void) handleHandNodeMoved
-{
-
 }
 
 #pragma mark - arm
