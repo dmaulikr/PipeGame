@@ -127,7 +127,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
-    [notificationCenter addObserver:self selector:@selector(handleArmNodeTouched:) name:kPGNotificationArmNodeTouched object:nil];
+    [notificationCenter addObserver:self selector:@selector(handleArmNodeTouchEnded:) name:kPGNotificationArmNodeTouchEnded object:nil];
     [notificationCenter addObserver:self selector:@selector(handleHandNodeTouched:) name:kPGNotificationHandNodeTouched object:nil];
     [notificationCenter addObserver:self selector:@selector(handleHandNodeMoved) name:kPGNotificationHandNodeMoved object:nil];
 }
@@ -367,7 +367,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     [self tintHandAndArm:[ColorUtils tintArmSelected]];
 }
 
-- (void)handleArmNodeTouched:(NSNotification *)notification
+- (void)handleArmNodeTouchEnded:(NSNotification *)notification
 {
     ArmNode *nodeTouched = (ArmNode *)notification.object;
     
@@ -458,6 +458,31 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     }
     return NO;
 }
+
+//- (void)rewindArm:(ArmNode *)nodeTouched
+//{
+//    if ([nodeTouched isEqual:self.armNodes.lastObject]) {
+//        
+//        [self removeArmNodesFromIndex:(self.armNodes.count - 1)];
+//        
+//        kDirection shouldFace;
+//        if ([self lastArmNode] != nil) {
+//            if ([GridUtils isCell:[self lastArmNode].cell equalToCell:touchCell]) {
+//                ArmNode *secondTolastArmNode = [self.armNodes objectAtIndex:self.armNodes.count - 2];
+//                shouldFace = [GridUtils directionFromStart: secondTolastArmNode.cell end:touchCell];
+//            }
+//            else {
+//                shouldFace = [GridUtils directionFromStart:[self lastArmNode].cell end:touchCell];
+//            }
+//        }
+//        else {
+//            shouldFace = self.entry.direction;
+//        }
+//        [self.handNode setDirectionFacing:shouldFace];
+//        [self.handNode moveTo:touchCell puzzleOrigin:self.position];
+//    }
+//
+//}
 
 -(void) tintHandAndArm:(ccColor3B)color
 {

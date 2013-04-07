@@ -21,15 +21,15 @@
 
 @interface CellNode : CCNode <CCTargetedTouchDelegate>
 
-@property (assign) BOOL shouldSendPGTouchNotifications;
-@property (copy) NSString *pgTouchNotification;
+@property (copy, nonatomic) NSString *pgNotificationTouchBegan;
+@property (copy, nonatomic) NSString *pgNotificationTouchMoved;
+@property (copy, nonatomic) NSString *pgNotificationTouchEnded;
 
 @property (strong, nonatomic) CCSprite *sprite;
 @property (assign) int layer;
 @property (assign) GridCoord cell;
 
 @property (strong, nonatomic) id<TransferResponder>transferResponder;
-
 
 -(CCSprite *) createAndCenterSpriteNamed:(NSString *)name; // returns sprite with image name, centered in content bounds
 -(void) moveTo:(GridCoord)cell puzzleOrigin:(CGPoint)origin;

@@ -25,7 +25,7 @@ typedef enum
     kArmExitsRightThrough
 } kArmExits;
 
-FOUNDATION_EXPORT NSString *const kPGNotificationArmNodeTouched;
+FOUNDATION_EXPORT NSString *const kPGNotificationArmNodeTouchEnded;
 
 
 @interface ArmNode : CellNode

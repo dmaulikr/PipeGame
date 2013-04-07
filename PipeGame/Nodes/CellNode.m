@@ -13,14 +13,13 @@
 #import "PGTiledUtils.h"
 #import "CellObjectLibrary.h"
 
-@implementation CellNode
 
+@implementation CellNode
 
 -(id) init
 {
     self = [super init];
     if (self) {
-        _shouldSendPGTouchNotifications = NO;
         self.contentSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
     }
     return self;
@@ -56,30 +55,52 @@
 
 - (void)onEnter
 {
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
+    if ([self needsTouchDelegate]) {        
+        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
+    }
 	[super onEnter];
 }
 
 - (void)onExit
 {
-	[[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+    if ([self needsTouchDelegate]) {
+        [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+    }
 	[super onExit];
 }
 
 
-#pragma mark - targeted touch delegate
+#pragma mark - standard touch delegate
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    if (self.shouldSendPGTouchNotifications && [self containsTouch:touch]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:self.pgTouchNotification object:self];
+    if ((self.pgNotificationTouchBegan != nil) && [self containsTouch:touch]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.pgNotificationTouchBegan object:self];
         return YES;
     }
     return NO;
 }
 
+- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if ((self.pgNotificationTouchMoved != nil) && [self containsTouch:touch]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.pgNotificationTouchMoved object:self];
+    }
+}
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if ((self.pgNotificationTouchEnded != nil) && [self containsTouch:touch]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.pgNotificationTouchEnded object:self];
+    }
+}
 
 #pragma mark - touch utils
+
+- (BOOL)needsTouchDelegate
+{
+    return ((self.pgNotificationTouchBegan != nil) || (self.pgNotificationTouchEnded != nil) || (self.pgNotificationTouchMoved != nil));
+}
 
 - (BOOL)containsTouch:(UITouch *)touch
 {

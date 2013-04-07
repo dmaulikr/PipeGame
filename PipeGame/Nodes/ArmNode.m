@@ -12,7 +12,7 @@
 #import "SpriteUtils.h"
 #import "PuzzleLayer.h"
 
-NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
+NSString *const kPGNotificationArmNodeTouchEnded = @"ArmNodeTouchEnded";
 
 
 @implementation ArmNode
@@ -28,8 +28,7 @@ NSString *const kPGNotificationArmNodeTouched = @"ArmNodeTouched";
         self.position = [GridUtils relativePositionForGridCoord:cell unitSize:kSizeGridUnit];
                 
         // setup for sending notifications
-        self.shouldSendPGTouchNotifications = YES;
-        self.pgTouchNotification = kPGNotificationArmNodeTouched;
+        self.pgNotificationTouchEnded = kPGNotificationArmNodeTouchEnded;
     }
     return self;
 }

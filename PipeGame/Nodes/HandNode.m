@@ -34,8 +34,7 @@ NSString *const kPGNotificationHandNodeMoved = @"HandNodeMoved";
         [self addChild:_connectionSprite];
         
         // setup for sending notifications
-        self.shouldSendPGTouchNotifications = YES;
-        self.pgTouchNotification = kPGNotificationHandNodeTouched;
+        self.pgNotificationTouchBegan = kPGNotificationHandNodeTouched;
         
         _facing = kDirectionNone;
         
@@ -52,6 +51,7 @@ NSString *const kPGNotificationHandNodeMoved = @"HandNodeMoved";
 -(void) onExit
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super onExit];
 }
 
 -(void) moveTo:(GridCoord)cell puzzleOrigin:(CGPoint)origin
