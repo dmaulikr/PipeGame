@@ -10,9 +10,6 @@
 
 @interface TextureUtils : NSObject
 
-
-#pragma mark - image names
-
 // arm
 FOUNDATION_EXPORT NSString *const kImageNameArmDownLeft;
 FOUNDATION_EXPORT NSString *const kImageNameArmDownRight;
@@ -26,11 +23,13 @@ FOUNDATION_EXPORT NSString *const kImageNameArmThrough;
 FOUNDATION_EXPORT NSString *const kImageNameHand;
 FOUNDATION_EXPORT NSString *const kImageNameHandThrough;
 
-// rat
-FOUNDATION_EXPORT NSString *const kImageNameRat;
+// rats
+FOUNDATION_EXPORT NSString *const kImageNameRatPurple;
+FOUNDATION_EXPORT NSString *const kImageNameRatRed;
 
-
-#pragma mark - methods
+// door
+FOUNDATION_EXPORT NSString *const kImageNameDoorPurple;
+FOUNDATION_EXPORT NSString *const kImageNameDoorRed;
 
 + (void)loadTextures;
 

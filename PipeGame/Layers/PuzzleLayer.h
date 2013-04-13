@@ -9,6 +9,7 @@
 #import "cocos2d.h"
 #import "GridUtils.h"
 #import "HandNode.h"
+#import "CoverPoint.h"
 @class ArmController;
 @class CellObjectLibrary;
 @class PGEntry;
@@ -31,7 +32,7 @@ typedef enum
 FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
 
 
-@interface PuzzleLayer : CCLayerColor <TransferResponder>
+@interface PuzzleLayer : CCLayerColor <TransferResponder, CoverPointDelegate>
 
 // background
 @property (nonatomic, strong) BackgroundLayer *backgroundLayer;
@@ -61,6 +62,9 @@ FOUNDATION_EXPORT NSString *const kPGNotificationArmStackChanged;
 
 // rats (cover points)
 @property (nonatomic, strong) NSMutableArray *rats;
+
+// doors
+@property (strong, nonatomic) NSArray *doors;
 
 // touch
 @property (assign) GridCoord cellFromLastTouch;

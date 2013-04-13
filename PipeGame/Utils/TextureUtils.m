@@ -11,9 +11,6 @@
 
 @implementation TextureUtils
 
-
-#pragma mark - image names
-
 // arm 
 NSString *const kImageNameArmDownLeft = @"arm_corner_SW.png";
 NSString *const kImageNameArmDownRight = @"arm_corner_SE.png";
@@ -28,10 +25,12 @@ NSString *const kImageNameHand = @"arm_hand_S.png";
 NSString *const kImageNameHandThrough = @"hand_through.png";
 
 // rat
-NSString *const kImageNameRat = @"rat.png";
+NSString *const kImageNameRatPurple = @"ratPurple.png";
+NSString *const kImageNameRatRed = @"ratRed.png";
 
-
-#pragma mark - methods
+// door
+NSString *const kImageNameDoorPurple = @"doorPurple.png";
+NSString *const kImageNameDoorRed = @"doorRed.png";
 
 + (void)loadTextures
 {
@@ -49,7 +48,12 @@ NSString *const kImageNameRat = @"rat.png";
     [[CCTextureCache sharedTextureCache] addImage:kImageNameHandThrough];
     
     // rat
-    [[CCTextureCache sharedTextureCache] addImage:kImageNameRat];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameRatPurple];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameRatRed];
+    
+    // door
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorPurple];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorRed];
 }
 
 @end

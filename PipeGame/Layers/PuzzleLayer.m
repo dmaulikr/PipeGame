@@ -21,6 +21,7 @@
 #import "PGTiledUtils.h"
 #import "BackgroundLayer.h"
 #import "CoverPoint.h"
+#import "DoorNode.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 static GLubyte const kBackgroundTileLayerOpacity = 170;
@@ -107,10 +108,22 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         NSMutableArray *rats = [_tileMap objectsWithName:kTLDObjectCoverPoint groupName:kTLDGroupMeta];
         for (NSMutableDictionary *rat in rats) {
             CoverPoint *ratNode = [[CoverPoint alloc] initWithCoverPoint:rat tiledMap:_tileMap puzzleOrigin:self.position];
+            ratNode.delegate = self;
             [self.rats addObject:ratNode];
             [_tileMap addChild:ratNode];
             [self.cellObjectLibrary addNode:ratNode cell:ratNode.cell];
         }
+        
+        // doors
+        NSMutableArray *doors = [_tileMap objectsWithName:kTLDObjectDoor groupName:kTLDGroupMeta];
+        NSMutableArray *tempDoors = [NSMutableArray array];
+        for (NSMutableDictionary *door in doors) {
+            DoorNode *doorNode = [[DoorNode alloc] initWithDoor:door tiledMap:_tileMap puzzleOrigin:self.position];
+            [tempDoors addObject:doorNode];
+            [_tileMap addChild:doorNode];
+            [self.cellObjectLibrary addNode:doorNode cell:doorNode.cell];
+        }
+        self.doors = [NSArray arrayWithArray:tempDoors];
         
         // move to layer
         [self moveToLayer:_entry.layer];
@@ -176,9 +189,10 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
             }
         }
     }
-    else if ([child isKindOfClass:[CoverPoint class]]) {
-        CoverPoint *rat = (CoverPoint *)child;
-        if (rat.layer == 1) {
+    else if ([child isKindOfClass:[CoverPoint class]] || [child isKindOfClass:[DoorNode class]]) {
+//        CoverPoint *rat = (CoverPoint *)child;
+        CellNode *node = (CellNode *)child;
+        if (node.layer == 1) {
             if (reverse) {
                 return kLayerOver2;
             }
@@ -220,8 +234,9 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
     self.handNode.layer = toLayer;
     
-    // arm and rats
-    for (CellNode *node in [self.armNodes arrayByAddingObjectsFromArray:self.rats]) {
+    // arm, rats, doors
+    NSArray *objects = [[self.armNodes arrayByAddingObjectsFromArray:self.rats] arrayByAddingObjectsFromArray:self.doors];
+    for (CellNode *node in objects) {
                
         if (node.layer == toLayer) {
             CCFadeTo *brighten = [CCFadeTo actionWithDuration:kMoveToDuration opacity:255];
@@ -515,6 +530,12 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     return armNode;
 }
 
+#pragma mark - cover point delegate
+
+- (void)coverPointTouched:(CoverPoint *)coverPoint
+{
+    [self checkDoors:coverPoint.colorGroup];
+}
 
 #pragma mark - transfer responder
 
@@ -525,6 +546,22 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 
 #pragma mark - helpers
+
+- (void)checkDoors:(NSString *)colorGroup
+{
+    NSUInteger result = [self.rats indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        CoverPoint *rat = (CoverPoint *)obj;
+        return ([rat.colorGroup isEqualToString:colorGroup] && !rat.isCovered);
+    }];
+    // open doors
+    if (result == NSNotFound) {
+        NSLog(@"open doors");
+    }
+    // close doors
+    else {
+        NSLog(@"close doors");
+    }
+}
 
 - (BOOL)isLinearPathFreeBetweenStart:(GridCoord)start end:(GridCoord)end
 {

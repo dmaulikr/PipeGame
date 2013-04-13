@@ -515,14 +515,23 @@
   <object name="connection" x="642" y="250" width="117" height="108">
    <ellipse/>
   </object>
-  <object name="rat" x="219" y="81" width="161" height="59">
+  <object name="rat" x="23" y="254" width="161" height="59">
    <properties>
+    <property name="color" value="purple"/>
     <property name="layer" value="2"/>
    </properties>
   </object>
-  <object name="rat" x="623" y="77" width="161" height="59">
+  <object name="rat" x="214" y="262" width="161" height="59">
    <properties>
-    <property name="layer" value="1"/>
+    <property name="color" value="purple"/>
+    <property name="layer" value="2"/>
+   </properties>
+  </object>
+  <object name="door" x="467" y="262" width="69" height="66">
+   <properties>
+    <property name="color" value="purple"/>
+    <property name="edge" value="right"/>
+    <property name="layer" value="2"/>
    </properties>
   </object>
  </objectgroup>

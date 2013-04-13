@@ -29,7 +29,7 @@
 @property (assign) int layer;
 @property (assign) GridCoord cell;
 
-@property (strong, nonatomic) id<TransferResponder>transferResponder;
+@property (weak, nonatomic) id<TransferResponder>transferResponder;
 
 -(CCSprite *) createAndCenterSpriteNamed:(NSString *)name; // returns sprite with image name, centered in content bounds
 -(void) moveTo:(GridCoord)cell puzzleOrigin:(CGPoint)origin;

@@ -18,25 +18,30 @@
 
 NSString *const kTLDObjectCoverPoint = @"rat";
 
+NSString *const kTLDPropertyColorGroup = @"color";
+
+NSString *const kCoverPointColorGroupPurple = @"purple";
+NSString *const kCoverPointColorGroupRed = @"red";
+
 @implementation CoverPoint
 
 // TODO: does this need tiled map?
--(id) initWithCoverPoint:(NSMutableDictionary *)coverPoint tiledMap:(CCTMXTiledMap *)tiledMap puzzleOrigin:(CGPoint)origin
+- (id)initWithCoverPoint:(NSMutableDictionary *)coverPoint tiledMap:(CCTMXTiledMap *)tiledMap puzzleOrigin:(CGPoint)origin
 {
     self = [super init];
     if (self) {
-        // add sprites
-        self.sprite = [self createAndCenterSpriteNamed:kImageNameRat];
+        self.colorGroup = [coverPoint valueForKey:kTLDPropertyColorGroup];
+        
+        NSString *imageName = [self imageNameForColorGroup:_colorGroup];
+        self.sprite = [self createAndCenterSpriteNamed:imageName];
         [self addChild:self.sprite];
         
-        // layer
         self.layer = [[coverPoint valueForKey:kTLDPropertyLayer] intValue];
         
-        // position
         self.cell = [tiledMap gridCoordForObject:coverPoint];
         self.position = [GridUtils absolutePositionForGridCoord:self.cell unitSize:kSizeGridUnit origin:origin];
         
-        _isCovered = NO;
+        self.isCovered = NO;
         
         [self registerNotifications];
     }
@@ -44,12 +49,24 @@ NSString *const kTLDObjectCoverPoint = @"rat";
 
 }
 
--(void) registerNotifications
+- (NSString *)imageNameForColorGroup:(NSString *)colorGroup
+{
+    if ([colorGroup isEqualToString:kCoverPointColorGroupPurple]) {
+        return kImageNameRatPurple;
+    }
+    else if ([colorGroup isEqualToString:kCoverPointColorGroupRed]) {
+        return kImageNameRatRed;
+    }
+    NSLog(@"WARNING: color group '%@' not supported", colorGroup);
+    return nil;
+}
+
+- (void)registerNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCellNodeLibraryChangedContents:) name:kPGNotificationCellNodeLibraryChangedContents object:nil];
 }
 
--(void) handleCellNodeLibraryChangedContents:(NSNotification *)notification
+- (void)handleCellNodeLibraryChangedContents:(NSNotification *)notification
 {
     CellObjectLibrary *library = notification.object;
     BOOL collision = [library containsAnyNodeOfKinds:@[[HandNode class], [ArmNode class]] layer:self.layer cell:self.cell];
@@ -61,16 +78,20 @@ NSString *const kTLDObjectCoverPoint = @"rat";
     }
 }
 
--(void) cover
+- (void)cover
 {
     self.sprite.rotation = 180;
     self.isCovered = YES;
+    
+    [self.delegate coverPointTouched:self];
 }
 
--(void) uncover
+- (void)uncover
 {
     self.sprite.rotation = 0;
     self.isCovered = NO;
+    
+    [self.delegate coverPointTouched:self];
 }
 
 @end

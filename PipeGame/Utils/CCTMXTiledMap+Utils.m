@@ -139,6 +139,17 @@
     return NO;
 }
 
+- (NSDictionary *)propertiesForTileAtCell:(GridCoord)cell layer:(CCTMXLayer *)layer
+{
+    GridCoord tileCoord = [GridUtils tiledGridCoordForGameGridCoord:cell tileMapHeight:self.mapSize.height];
+    int tileGid = [layer tileGIDAt:CGPointMake(tileCoord.x, tileCoord.y)];
+    if (tileGid) {
+        return [self propertiesForGID:tileGid];
+    }
+    NSLog(@"warning: tile does not exist, returning nil");
+    return nil;
+}
+
 
 
 
