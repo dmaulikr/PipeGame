@@ -26,7 +26,7 @@ NSString *const kTLDPropertyEdge = @"edge";
         self.colorGroup = [door valueForKey:kTLDPropertyColorGroup];
         self.edge = [PGTiledUtils directionNamed:[door valueForKey:kTLDPropertyEdge]];
         
-        NSString *imageName = [self imageNameForColorGroup:_colorGroup];
+        NSString *imageName = [self imageNameForColorGroup:_colorGroup open:NO];
         self.sprite = [SpriteUtils spriteWithTextureKey:imageName];
         [self rotateAndPosition:self.sprite edge:self.edge];
         [self addChild:self.sprite];
@@ -38,7 +38,7 @@ NSString *const kTLDPropertyEdge = @"edge";
         
         self.isOpen = NO;
         
-        [self registerNotifications];
+        [self registerNotifications];        
     }
     return self;
 }
@@ -65,18 +65,31 @@ NSString *const kTLDPropertyEdge = @"edge";
     }
 }
 
-- (NSString *)imageNameForColorGroup:(NSString *)colorGroup
+- (NSString *)imageNameForColorGroup:(NSString *)colorGroup open:(BOOL)open
 {
     if ([colorGroup isEqualToString:kCoverPointColorGroupPurple]) {
-        return kImageNameDoorPurple;
+        if (open) {
+            return kImageNameDoorPurpleOpen;
+        }
+        return kImageNameDoorPurple;        
     }
     else if ([colorGroup isEqualToString:kCoverPointColorGroupRed]) {
+        if (open) {
+            return kImageNameDoorRedOpen;
+        }
         return kImageNameDoorRed;
     }
     NSLog(@"WARNING: color group '%@' not supported", colorGroup);
     return nil;
 }
 
+- (void)open:(BOOL)open
+{
+    self.isOpen = open;
+    NSString *imageName = [self imageNameForColorGroup:_colorGroup open:open];
+    [SpriteUtils switchImageForSprite:self.sprite textureKey:imageName];
+    [self rotateAndPosition:self.sprite edge:self.edge];
+}
 
 - (void)registerNotifications
 {

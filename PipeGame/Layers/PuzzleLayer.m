@@ -555,11 +555,19 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     }];
     // open doors
     if (result == NSNotFound) {
-        NSLog(@"open doors");
+        for (DoorNode *door in self.doors) {
+            if ([door.colorGroup isEqualToString:colorGroup] && !door.isOpen) {
+                [door open:YES];
+            }
+        }
     }
     // close doors
     else {
-        NSLog(@"close doors");
+        for (DoorNode *door in self.doors) {
+            if ([door.colorGroup isEqualToString:colorGroup] && door.isOpen) {
+                [door open:NO];
+            }
+        }
     }
 }
 

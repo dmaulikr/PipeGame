@@ -30,7 +30,9 @@ NSString *const kImageNameRatRed = @"ratRed.png";
 
 // door
 NSString *const kImageNameDoorPurple = @"doorPurple.png";
+NSString *const kImageNameDoorPurpleOpen = @"doorPurpleOpen.png";
 NSString *const kImageNameDoorRed = @"doorRed.png";
+NSString *const kImageNameDoorRedOpen = @"doorRedOpen.png";
 
 + (void)loadTextures
 {
@@ -53,7 +55,9 @@ NSString *const kImageNameDoorRed = @"doorRed.png";
     
     // door
     [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorPurple];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorPurpleOpen];
     [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorRed];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorRedOpen];
 }
 
 @end

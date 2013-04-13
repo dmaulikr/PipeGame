@@ -29,7 +29,9 @@ FOUNDATION_EXPORT NSString *const kImageNameRatRed;
 
 // door
 FOUNDATION_EXPORT NSString *const kImageNameDoorPurple;
+FOUNDATION_EXPORT NSString *const kImageNameDoorPurpleOpen;
 FOUNDATION_EXPORT NSString *const kImageNameDoorRed;
+FOUNDATION_EXPORT NSString *const kImageNameDoorRedOpen;
 
 + (void)loadTextures;
 

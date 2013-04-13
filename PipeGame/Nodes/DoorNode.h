@@ -19,5 +19,6 @@ FOUNDATION_EXPORT NSString *const kTLDPropertyEdge;
 @property (assign) kDirection edge;
 
 - (id)initWithDoor:(NSMutableDictionary *)door tiledMap:(CCTMXTiledMap *)tiledMap puzzleOrigin:(CGPoint)origin;
+- (void)open:(BOOL)open;
 
 @end

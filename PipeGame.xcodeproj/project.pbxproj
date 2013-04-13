@@ -14,6 +14,8 @@
 		163296C416F7F9510042005F /* BackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 163296C316F7F9510042005F /* BackgroundLayer.m */; };
 		164AC39416EB9D130008E11C /* arm_through.png in Resources */ = {isa = PBXBuildFile; fileRef = 164AC39216EB9D130008E11C /* arm_through.png */; };
 		164AC39516EB9D130008E11C /* hand_through.png in Resources */ = {isa = PBXBuildFile; fileRef = 164AC39316EB9D130008E11C /* hand_through.png */; };
+		166A13001719BF9100F2860C /* doorPurpleOpen.png in Resources */ = {isa = PBXBuildFile; fileRef = 166A12FE1719BF9100F2860C /* doorPurpleOpen.png */; };
+		166A13011719BF9100F2860C /* doorRedOpen.png in Resources */ = {isa = PBXBuildFile; fileRef = 166A12FF1719BF9100F2860C /* doorRedOpen.png */; };
 		1697C2EC171754B500D83456 /* DoorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1697C2EB171754B500D83456 /* DoorNode.m */; };
 		1697C2EF171774E700D83456 /* doorPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 1697C2ED171774E700D83456 /* doorPurple.png */; };
 		1697C2F0171774E700D83456 /* doorRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1697C2EE171774E700D83456 /* doorRed.png */; };
@@ -201,6 +203,8 @@
 		163296C316F7F9510042005F /* BackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundLayer.m; sourceTree = "<group>"; };
 		164AC39216EB9D130008E11C /* arm_through.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_through.png; sourceTree = "<group>"; };
 		164AC39316EB9D130008E11C /* hand_through.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hand_through.png; sourceTree = "<group>"; };
+		166A12FE1719BF9100F2860C /* doorPurpleOpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorPurpleOpen.png; path = images/doorPurpleOpen.png; sourceTree = "<group>"; };
+		166A12FF1719BF9100F2860C /* doorRedOpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorRedOpen.png; path = images/doorRedOpen.png; sourceTree = "<group>"; };
 		1697C2EA171754B500D83456 /* DoorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoorNode.h; sourceTree = "<group>"; };
 		1697C2EB171754B500D83456 /* DoorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorNode.m; sourceTree = "<group>"; };
 		1697C2ED171774E700D83456 /* doorPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorPurple.png; path = images/doorPurple.png; sourceTree = "<group>"; };
@@ -963,6 +967,8 @@
 		16D29ABC16CF0D0F00C73947 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				166A12FE1719BF9100F2860C /* doorPurpleOpen.png */,
+				166A12FF1719BF9100F2860C /* doorRedOpen.png */,
 				1697C2ED171774E700D83456 /* doorPurple.png */,
 				1697C2EE171774E700D83456 /* doorRed.png */,
 				16D29AE316CF0D0F00C73947 /* iTunesArtwork */,
@@ -1165,6 +1171,8 @@
 				16E0CB871711B8D200DA3ADA /* ratRed.png in Resources */,
 				1697C2EF171774E700D83456 /* doorPurple.png in Resources */,
 				1697C2F0171774E700D83456 /* doorRed.png in Resources */,
+				166A13001719BF9100F2860C /* doorPurpleOpen.png in Resources */,
+				166A13011719BF9100F2860C /* doorRedOpen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
