@@ -49,13 +49,13 @@ NSString *const kTLDPropertyEdge = @"edge";
     
     switch (edge) {
         case kDirectionUp:
-            sprite.position = ccp(self.contentSize.width/2, sprite.boundingBox.size.height/2);
+            sprite.position = ccp(self.contentSize.width/2, self.contentSize.height - sprite.boundingBox.size.height/2);
             break;
         case kDirectionRight:
             sprite.position = ccp(self.contentSize.width - sprite.boundingBox.size.width/2, self.contentSize.height/2);
             break;
         case kDirectionDown:
-            sprite.position = ccp(self.contentSize.width/2, self.contentSize.height - sprite.boundingBox.size.height/2);
+            sprite.position = ccp(self.contentSize.width/2, sprite.boundingBox.size.height/2);
             break;
         case kDirectionLeft:
             sprite.position = ccp(sprite.boundingBox.size.width/2, self.contentSize.height/2);
@@ -67,11 +67,11 @@ NSString *const kTLDPropertyEdge = @"edge";
 
 - (NSString *)imageNameForColorGroup:(NSString *)colorGroup open:(BOOL)open
 {
-    if ([colorGroup isEqualToString:kCoverPointColorGroupPurple]) {
+    if ([colorGroup isEqualToString:kCoverPointColorGroupYellow]) {
         if (open) {
-            return kImageNameDoorPurpleOpen;
+            return kImageNameDoorYellowOpen;
         }
-        return kImageNameDoorPurple;        
+        return kImageNameDoorYellow;
     }
     else if ([colorGroup isEqualToString:kCoverPointColorGroupRed]) {
         if (open) {

@@ -593,12 +593,20 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 - (BOOL)canExitCell:(GridCoord)cell movingDirection:(kDirection)direction
 {
-    return [self.tileMap testConditionForTileAtCell:cell layer:[self currentTMXLayer] condition:^BOOL(CCSprite *tile, NSDictionary *tileProperties) {
-        
+
+    BOOL pipeContainsExit = [self.tileMap testConditionForTileAtCell:cell layer:[self currentTMXLayer] condition:^BOOL(CCSprite *tile, NSDictionary *tileProperties) {
         NSString *directionString = [GridUtils directionStringForDirection:direction];
         NSNumber *canMove = [tileProperties objectForKey:directionString];
         return ([canMove boolValue]);
-    }];    
+    }];
+    
+    NSMutableArray *doors = [self.cellObjectLibrary nodesOfKind:[DoorNode class] atCell:cell];
+    NSUInteger closedDoor = [doors indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        DoorNode *door = (DoorNode *)obj;
+        return ((door.edge == direction) && !door.isOpen);
+    }];
+    
+    return (pipeContainsExit && (closedDoor == NSNotFound));
 }
 
 - (BOOL)isCellBlocked:(GridCoord)cell

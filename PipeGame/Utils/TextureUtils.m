@@ -24,15 +24,20 @@ NSString *const kImageNameArmThrough = @"arm_through.png";
 NSString *const kImageNameHand = @"arm_hand_S.png";
 NSString *const kImageNameHandThrough = @"hand_through.png";
 
-// rat
-NSString *const kImageNameRatPurple = @"ratPurple.png";
-NSString *const kImageNameRatRed = @"ratRed.png";
+// switches
+NSString *const kImageNameSwitchYellowOff = @"switchOffYellow.png";
+NSString *const kImageNameSwitchYellowOn = @"switchOnYellow.png";
+NSString *const kImageNameSwitchRedOff = @"switchOffRed.png";
+NSString *const kImageNameSwitchRedOn = @"switchOnRed.png";
 
 // door
-NSString *const kImageNameDoorPurple = @"doorPurple.png";
-NSString *const kImageNameDoorPurpleOpen = @"doorPurpleOpen.png";
+NSString *const kImageNameDoorYellow = @"doorYellow.png";
+NSString *const kImageNameDoorYellowOpen = @"doorYellowOpen.png";
 NSString *const kImageNameDoorRed = @"doorRed.png";
 NSString *const kImageNameDoorRedOpen = @"doorRedOpen.png";
+
+// goal
+NSString *const kImageNameGoal = @"goal.png";
 
 + (void)loadTextures
 {
@@ -49,15 +54,21 @@ NSString *const kImageNameDoorRedOpen = @"doorRedOpen.png";
     [[CCTextureCache sharedTextureCache] addImage:kImageNameHand];
     [[CCTextureCache sharedTextureCache] addImage:kImageNameHandThrough];
     
-    // rat
-    [[CCTextureCache sharedTextureCache] addImage:kImageNameRatPurple];
-    [[CCTextureCache sharedTextureCache] addImage:kImageNameRatRed];
+    // switches
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameSwitchYellowOff];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameSwitchYellowOn];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameSwitchRedOff];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameSwitchRedOn];
     
     // door
-    [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorPurple];
-    [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorPurpleOpen];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorYellow];
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorYellowOpen];
     [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorRed];
     [[CCTextureCache sharedTextureCache] addImage:kImageNameDoorRedOpen];
+    
+    // goal
+    [[CCTextureCache sharedTextureCache] addImage:kImageNameGoal];
+
 }
 
 @end

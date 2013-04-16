@@ -10,19 +10,38 @@
 
 @implementation ColorUtils
 
-+ (ccColor3B)tintArmSelected
+#pragma mark - color 
+
++ (ccColor3B)darkBlue
+{
+    return ccc3(20, 50, 60);
+}
+
++ (ccColor3B)darkRed
+{
+    return ccc3(45, 15, 20);
+}
+
++ (ccColor3B)brightGreen;
 {
     return ccc3(175, 255, 175);
 }
 
+#pragma mark - context
+
++ (ccColor3B)tintArmSelected
+{
+    return [self brightGreen];
+}
+
 + (ccColor3B)pipeLayer1Color
 {
-    return ccc3(50, 110, 150);
+    return [self darkBlue];
 }
 
 + (ccColor3B)pipeLayer2Color
 {
-    return ccc3(130, 50, 50);
+    return [self darkRed];
 }
 
 @end

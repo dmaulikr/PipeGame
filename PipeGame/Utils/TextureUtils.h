@@ -23,15 +23,20 @@ FOUNDATION_EXPORT NSString *const kImageNameArmThrough;
 FOUNDATION_EXPORT NSString *const kImageNameHand;
 FOUNDATION_EXPORT NSString *const kImageNameHandThrough;
 
-// rats
-FOUNDATION_EXPORT NSString *const kImageNameRatPurple;
-FOUNDATION_EXPORT NSString *const kImageNameRatRed;
+// switches
+FOUNDATION_EXPORT NSString *const kImageNameSwitchYellowOff;
+FOUNDATION_EXPORT NSString *const kImageNameSwitchYellowOn;
+FOUNDATION_EXPORT NSString *const kImageNameSwitchRedOff;
+FOUNDATION_EXPORT NSString *const kImageNameSwitchRedOn;
 
 // door
-FOUNDATION_EXPORT NSString *const kImageNameDoorPurple;
-FOUNDATION_EXPORT NSString *const kImageNameDoorPurpleOpen;
+FOUNDATION_EXPORT NSString *const kImageNameDoorYellow;
+FOUNDATION_EXPORT NSString *const kImageNameDoorYellowOpen;
 FOUNDATION_EXPORT NSString *const kImageNameDoorRed;
 FOUNDATION_EXPORT NSString *const kImageNameDoorRedOpen;
+
+// goal
+FOUNDATION_EXPORT NSString *const kImageNameGoal;
 
 + (void)loadTextures;
 

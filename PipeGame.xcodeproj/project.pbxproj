@@ -14,10 +14,9 @@
 		163296C416F7F9510042005F /* BackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 163296C316F7F9510042005F /* BackgroundLayer.m */; };
 		164AC39416EB9D130008E11C /* arm_through.png in Resources */ = {isa = PBXBuildFile; fileRef = 164AC39216EB9D130008E11C /* arm_through.png */; };
 		164AC39516EB9D130008E11C /* hand_through.png in Resources */ = {isa = PBXBuildFile; fileRef = 164AC39316EB9D130008E11C /* hand_through.png */; };
-		166A13001719BF9100F2860C /* doorPurpleOpen.png in Resources */ = {isa = PBXBuildFile; fileRef = 166A12FE1719BF9100F2860C /* doorPurpleOpen.png */; };
 		166A13011719BF9100F2860C /* doorRedOpen.png in Resources */ = {isa = PBXBuildFile; fileRef = 166A12FF1719BF9100F2860C /* doorRedOpen.png */; };
+		166A1304171B65AA00F2860C /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = 166A1303171B65A900F2860C /* Goal.m */; };
 		1697C2EC171754B500D83456 /* DoorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1697C2EB171754B500D83456 /* DoorNode.m */; };
-		1697C2EF171774E700D83456 /* doorPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 1697C2ED171774E700D83456 /* doorPurple.png */; };
 		1697C2F0171774E700D83456 /* doorRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1697C2EE171774E700D83456 /* doorRed.png */; };
 		1698A3C016F4C6D2009A1CDB /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 1698A3BF16F4C6D2009A1CDB /* map1.tmx */; };
 		16BE3BA516FE2A2C003B2EEB /* CoverPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */; };
@@ -184,6 +183,12 @@
 		16D29B9316CF0D0F00C73947 /* GridUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF116CF0D0F00C73947 /* GridUtils.m */; };
 		16D29B9416CF0D0F00C73947 /* SpriteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF316CF0D0F00C73947 /* SpriteUtils.m */; };
 		16D29B9516CF0D0F00C73947 /* TextureUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D29AF516CF0D0F00C73947 /* TextureUtils.m */; };
+		16D63A17171CDD4C0048F2AF /* doorYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A11171CDD4B0048F2AF /* doorYellow.png */; };
+		16D63A18171CDD4C0048F2AF /* doorYellowOpen.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A12171CDD4C0048F2AF /* doorYellowOpen.png */; };
+		16D63A19171CDD4C0048F2AF /* switchOffRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A13171CDD4C0048F2AF /* switchOffRed.png */; };
+		16D63A1A171CDD4C0048F2AF /* switchOffYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A14171CDD4C0048F2AF /* switchOffYellow.png */; };
+		16D63A1B171CDD4C0048F2AF /* switchOnRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A15171CDD4C0048F2AF /* switchOnRed.png */; };
+		16D63A1C171CDD4C0048F2AF /* switchOnYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A16171CDD4C0048F2AF /* switchOnYellow.png */; };
 		16E0CB861711B8D200DA3ADA /* ratPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E0CB841711B8D200DA3ADA /* ratPurple.png */; };
 		16E0CB871711B8D200DA3ADA /* ratRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E0CB851711B8D200DA3ADA /* ratRed.png */; };
 		16E813FC16E2673300088EC6 /* PGTiledUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E813FB16E2673300088EC6 /* PGTiledUtils.m */; };
@@ -203,12 +208,12 @@
 		163296C316F7F9510042005F /* BackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundLayer.m; sourceTree = "<group>"; };
 		164AC39216EB9D130008E11C /* arm_through.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arm_through.png; sourceTree = "<group>"; };
 		164AC39316EB9D130008E11C /* hand_through.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hand_through.png; sourceTree = "<group>"; };
-		166A12FE1719BF9100F2860C /* doorPurpleOpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorPurpleOpen.png; path = images/doorPurpleOpen.png; sourceTree = "<group>"; };
-		166A12FF1719BF9100F2860C /* doorRedOpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorRedOpen.png; path = images/doorRedOpen.png; sourceTree = "<group>"; };
+		166A12FF1719BF9100F2860C /* doorRedOpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doorRedOpen.png; sourceTree = "<group>"; };
+		166A1302171B65A900F2860C /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		166A1303171B65A900F2860C /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		1697C2EA171754B500D83456 /* DoorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoorNode.h; sourceTree = "<group>"; };
 		1697C2EB171754B500D83456 /* DoorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorNode.m; sourceTree = "<group>"; };
-		1697C2ED171774E700D83456 /* doorPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorPurple.png; path = images/doorPurple.png; sourceTree = "<group>"; };
-		1697C2EE171774E700D83456 /* doorRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorRed.png; path = images/doorRed.png; sourceTree = "<group>"; };
+		1697C2EE171774E700D83456 /* doorRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doorRed.png; sourceTree = "<group>"; };
 		1698A3BF16F4C6D2009A1CDB /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
 		16BE3BA316FE2A2B003B2EEB /* CoverPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverPoint.h; sourceTree = "<group>"; };
 		16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverPoint.m; sourceTree = "<group>"; };
@@ -516,6 +521,12 @@
 		16D29AF316CF0D0F00C73947 /* SpriteUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteUtils.m; sourceTree = "<group>"; };
 		16D29AF416CF0D0F00C73947 /* TextureUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureUtils.h; sourceTree = "<group>"; };
 		16D29AF516CF0D0F00C73947 /* TextureUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureUtils.m; sourceTree = "<group>"; };
+		16D63A11171CDD4B0048F2AF /* doorYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doorYellow.png; sourceTree = "<group>"; };
+		16D63A12171CDD4C0048F2AF /* doorYellowOpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doorYellowOpen.png; sourceTree = "<group>"; };
+		16D63A13171CDD4C0048F2AF /* switchOffRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOffRed.png; sourceTree = "<group>"; };
+		16D63A14171CDD4C0048F2AF /* switchOffYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOffYellow.png; sourceTree = "<group>"; };
+		16D63A15171CDD4C0048F2AF /* switchOnRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOnRed.png; sourceTree = "<group>"; };
+		16D63A16171CDD4C0048F2AF /* switchOnYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOnYellow.png; sourceTree = "<group>"; };
 		16E0CB841711B8D200DA3ADA /* ratPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ratPurple.png; sourceTree = "<group>"; };
 		16E0CB851711B8D200DA3ADA /* ratRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ratRed.png; sourceTree = "<group>"; };
 		16E813FA16E2673300088EC6 /* PGTiledUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGTiledUtils.h; sourceTree = "<group>"; };
@@ -960,6 +971,8 @@
 				16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */,
 				1697C2EA171754B500D83456 /* DoorNode.h */,
 				1697C2EB171754B500D83456 /* DoorNode.m */,
+				166A1302171B65A900F2860C /* Goal.h */,
+				166A1303171B65A900F2860C /* Goal.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -967,10 +980,6 @@
 		16D29ABC16CF0D0F00C73947 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				166A12FE1719BF9100F2860C /* doorPurpleOpen.png */,
-				166A12FF1719BF9100F2860C /* doorRedOpen.png */,
-				1697C2ED171774E700D83456 /* doorPurple.png */,
-				1697C2EE171774E700D83456 /* doorRed.png */,
 				16D29AE316CF0D0F00C73947 /* iTunesArtwork */,
 				16D29AE216CF0D0F00C73947 /* Info.plist */,
 				16D29ABD16CF0D0F00C73947 /* armUnit.png */,
@@ -995,6 +1004,14 @@
 		16D29ACA16CF0D0F00C73947 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				16D63A11171CDD4B0048F2AF /* doorYellow.png */,
+				16D63A12171CDD4C0048F2AF /* doorYellowOpen.png */,
+				16D63A13171CDD4C0048F2AF /* switchOffRed.png */,
+				16D63A14171CDD4C0048F2AF /* switchOffYellow.png */,
+				16D63A15171CDD4C0048F2AF /* switchOnRed.png */,
+				16D63A16171CDD4C0048F2AF /* switchOnYellow.png */,
+				166A12FF1719BF9100F2860C /* doorRedOpen.png */,
+				1697C2EE171774E700D83456 /* doorRed.png */,
 				16E0CB841711B8D200DA3ADA /* ratPurple.png */,
 				16E0CB851711B8D200DA3ADA /* ratRed.png */,
 				164AC39216EB9D130008E11C /* arm_through.png */,
@@ -1169,10 +1186,14 @@
 				1698A3C016F4C6D2009A1CDB /* map1.tmx in Resources */,
 				16E0CB861711B8D200DA3ADA /* ratPurple.png in Resources */,
 				16E0CB871711B8D200DA3ADA /* ratRed.png in Resources */,
-				1697C2EF171774E700D83456 /* doorPurple.png in Resources */,
 				1697C2F0171774E700D83456 /* doorRed.png in Resources */,
-				166A13001719BF9100F2860C /* doorPurpleOpen.png in Resources */,
 				166A13011719BF9100F2860C /* doorRedOpen.png in Resources */,
+				16D63A17171CDD4C0048F2AF /* doorYellow.png in Resources */,
+				16D63A18171CDD4C0048F2AF /* doorYellowOpen.png in Resources */,
+				16D63A19171CDD4C0048F2AF /* switchOffRed.png in Resources */,
+				16D63A1A171CDD4C0048F2AF /* switchOffYellow.png in Resources */,
+				16D63A1B171CDD4C0048F2AF /* switchOnRed.png in Resources */,
+				16D63A1C171CDD4C0048F2AF /* switchOnYellow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1305,6 +1326,7 @@
 				163296C416F7F9510042005F /* BackgroundLayer.m in Sources */,
 				16BE3BA516FE2A2C003B2EEB /* CoverPoint.m in Sources */,
 				1697C2EC171754B500D83456 /* DoorNode.m in Sources */,
+				166A1304171B65AA00F2860C /* Goal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

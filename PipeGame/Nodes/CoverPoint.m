@@ -20,7 +20,7 @@ NSString *const kTLDObjectCoverPoint = @"rat";
 
 NSString *const kTLDPropertyColorGroup = @"color";
 
-NSString *const kCoverPointColorGroupPurple = @"purple";
+NSString *const kCoverPointColorGroupYellow = @"purple";
 NSString *const kCoverPointColorGroupRed = @"red";
 
 @implementation CoverPoint
@@ -32,7 +32,7 @@ NSString *const kCoverPointColorGroupRed = @"red";
     if (self) {
         self.colorGroup = [coverPoint valueForKey:kTLDPropertyColorGroup];
         
-        NSString *imageName = [self imageNameForColorGroup:_colorGroup];
+        NSString *imageName = [self imageNameForColorGroup:_colorGroup on:NO];
         self.sprite = [self createAndCenterSpriteNamed:imageName];
         [self addChild:self.sprite];
         
@@ -49,13 +49,19 @@ NSString *const kCoverPointColorGroupRed = @"red";
 
 }
 
-- (NSString *)imageNameForColorGroup:(NSString *)colorGroup
+- (NSString *)imageNameForColorGroup:(NSString *)colorGroup on:(BOOL)isOn
 {
-    if ([colorGroup isEqualToString:kCoverPointColorGroupPurple]) {
-        return kImageNameRatPurple;
+    if ([colorGroup isEqualToString:kCoverPointColorGroupYellow]) {
+        if (isOn) {
+            return kImageNameSwitchYellowOn;
+        }
+        return kImageNameSwitchYellowOff;
     }
     else if ([colorGroup isEqualToString:kCoverPointColorGroupRed]) {
-        return kImageNameRatRed;
+        if (isOn) {
+            return kImageNameSwitchRedOn;
+        }
+        return kImageNameSwitchRedOff;
     }
     NSLog(@"WARNING: color group '%@' not supported", colorGroup);
     return nil;
@@ -80,17 +86,21 @@ NSString *const kCoverPointColorGroupRed = @"red";
 
 - (void)cover
 {
-    self.sprite.rotation = 180;
     self.isCovered = YES;
+
+    NSString *imageName = [self imageNameForColorGroup:self.colorGroup on:YES];
+    [SpriteUtils switchImageForSprite:self.sprite textureKey:imageName];
     
     [self.delegate coverPointTouched:self];
 }
 
 - (void)uncover
 {
-    self.sprite.rotation = 0;
     self.isCovered = NO;
-    
+
+    NSString *imageName = [self imageNameForColorGroup:self.colorGroup on:NO];
+    [SpriteUtils switchImageForSprite:self.sprite textureKey:imageName];
+
     [self.delegate coverPointTouched:self];
 }
 

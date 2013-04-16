@@ -14,7 +14,7 @@ FOUNDATION_EXPORT NSString *const kTLDObjectCoverPoint;
 
 FOUNDATION_EXPORT NSString *const kTLDPropertyColorGroup;
 
-FOUNDATION_EXPORT NSString *const kCoverPointColorGroupPurple;
+FOUNDATION_EXPORT NSString *const kCoverPointColorGroupYellow;
 FOUNDATION_EXPORT NSString *const kCoverPointColorGroupRed;
 
 @protocol CoverPointDelegate <NSObject>
