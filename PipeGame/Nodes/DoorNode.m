@@ -59,6 +59,7 @@ NSString *const kTLDPropertyEdge = @"edge";
             break;
         case kDirectionLeft:
             sprite.position = ccp(sprite.boundingBox.size.width/2, self.contentSize.height/2);
+            break;
         default:
             NSLog(@"WARNING: edge '%i', not supported", edge);
             break;

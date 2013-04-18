@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="5" height="5" tilewidth="200" tileheight="200">
+<map version="1.0" orientation="orthogonal" width="3" height="4" tilewidth="200" tileheight="200">
  <tileset firstgid="1" name="pipeTilesetBase1" tilewidth="200" tileheight="200" spacing="1" margin="1">
   <image source="pipeTilesetBase1.png" width="1609" height="805"/>
   <tile id="0">
@@ -486,60 +486,66 @@
    </properties>
   </tile>
  </tileset>
- <layer name="pipes1" width="5" height="5">
+ <layer name="pipes1" width="3" height="4">
   <properties>
    <property name="z" value="1"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYGBgEARiPijmYMAEYkjy7FBaHionAcT8aGKcSHp5gRgAMugBBg==
+   eJxjYIAARiDmA2J2IJYHYkEg5oeyYYAXiAELfACC
   </data>
  </layer>
- <layer name="pipes2" width="5" height="5">
+ <layer name="pipes2" width="3" height="4">
   <properties>
    <property name="z" value="2"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJyzYGBgsGRABWYMmIBYMQMs5gEAWOwBfQ==
+   eJyzYGBg0ANiSyA2Y0AATQbsAAAm8AD/
   </data>
  </layer>
- <objectgroup name="meta" width="5" height="5">
-  <object name="entry" x="42" y="453" width="104" height="100">
+ <objectgroup name="meta" width="3" height="4">
+  <object name="entry" x="37" y="246" width="104" height="100">
    <properties>
     <property name="facing" value="right"/>
     <property name="layer" value="1"/>
    </properties>
   </object>
-  <object name="connection" x="233" y="46" width="117" height="108">
+  <object name="connection" x="440" y="49" width="117" height="108">
    <ellipse/>
   </object>
-  <object name="connection" x="236" y="840" width="117" height="108">
+  <object name="connection" x="35" y="446" width="117" height="108">
    <ellipse/>
   </object>
-  <object name="rat" x="23" y="254" width="161" height="59">
+  <object name="rat" x="222" y="67" width="161" height="59">
    <properties>
-    <property name="color" value="purple"/>
+    <property name="color" value="yellow"/>
     <property name="layer" value="2"/>
    </properties>
   </object>
-  <object name="rat" x="623" y="479" width="161" height="59">
+  <object name="rat" x="403" y="278" width="161" height="59">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="1"/>
    </properties>
   </object>
-  <object name="door" x="461" y="660" width="69" height="66">
+  <object name="door" x="210" y="465" width="69" height="66">
    <properties>
     <property name="color" value="red"/>
     <property name="edge" value="left"/>
     <property name="layer" value="1"/>
    </properties>
   </object>
-  <object name="door" x="862" y="663" width="69" height="66">
+  <object name="door" x="470" y="522" width="69" height="66">
    <properties>
-    <property name="color" value="purple"/>
+    <property name="color" value="yellow"/>
     <property name="edge" value="down"/>
     <property name="layer" value="1"/>
    </properties>
+  </object>
+  <object name="goal" x="459" y="658" width="74" height="71">
+   <properties>
+    <property name="layer" value="1"/>
+   </properties>
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

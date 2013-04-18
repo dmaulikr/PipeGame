@@ -78,7 +78,7 @@
     [TextureUtils loadTextures];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-	[director_ pushScene: [PuzzleLayer sceneWithPuzzle:1]];
+	[director_ pushScene: [PuzzleLayer sceneWithPuzzle:2]];
     
     
 	// Create a Navigation Controller with the Director

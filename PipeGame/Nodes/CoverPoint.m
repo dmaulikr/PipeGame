@@ -20,7 +20,7 @@ NSString *const kTLDObjectCoverPoint = @"rat";
 
 NSString *const kTLDPropertyColorGroup = @"color";
 
-NSString *const kCoverPointColorGroupYellow = @"purple";
+NSString *const kCoverPointColorGroupYellow = @"yellow";
 NSString *const kCoverPointColorGroupRed = @"red";
 
 @implementation CoverPoint

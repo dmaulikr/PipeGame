@@ -37,7 +37,7 @@ NSString *const kImageNameDoorRed = @"doorRed.png";
 NSString *const kImageNameDoorRedOpen = @"doorRedOpen.png";
 
 // goal
-NSString *const kImageNameGoal = @"goal.png";
+NSString *const kImageNameGoal = @"exit.png";
 
 + (void)loadTextures
 {

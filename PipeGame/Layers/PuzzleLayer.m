@@ -22,6 +22,7 @@
 #import "BackgroundLayer.h"
 #import "CoverPoint.h"
 #import "DoorNode.h"
+#import "Goal.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 static GLubyte const kBackgroundTileLayerOpacity = 170;
@@ -125,6 +126,17 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         }
         self.doors = [NSArray arrayWithArray:tempDoors];
         
+        // goals
+        NSMutableArray *goals = [_tileMap objectsWithName:kTLDObjectGoal groupName:kTLDGroupMeta];
+        NSMutableArray *tempGoals = [NSMutableArray array];
+        for (NSMutableDictionary *goal in goals) {
+            Goal *goalNode = [[Goal alloc] initWithGoal:goal tiledMap:_tileMap puzzleOrigin:self.position];
+            [tempGoals addObject:goalNode];
+            [_tileMap addChild:goalNode];
+            [self.cellObjectLibrary addNode:goalNode cell:goalNode.cell];
+        }
+        self.goals = [NSArray arrayWithArray:tempGoals];
+        
         // move to layer
         [self moveToLayer:_entry.layer];
     }
@@ -144,6 +156,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 }
 
 // use this for individual reordering, for example adding an arm unit
+// TODO: should probably be a method of standard cell nodes -- set in tiled if possible
 - (int)zOrderForChild:(id)child topLayer:(int)topLayer
 {
     BOOL reverse = topLayer == 1;
@@ -190,7 +203,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
         }
     }
     else if ([child isKindOfClass:[CoverPoint class]] || [child isKindOfClass:[DoorNode class]]) {
-//        CoverPoint *rat = (CoverPoint *)child;
         CellNode *node = (CellNode *)child;
         if (node.layer == 1) {
             if (reverse) {
@@ -206,6 +218,25 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
             }
             else {
                 return kLayerOver2;
+            }
+        }
+    }
+    else if ([child isKindOfClass:[Goal class]]) {
+        CellNode *node = (CellNode *)child;
+        if (node.layer == 1) {
+            if (reverse) {
+                return kLayerUnder2;
+            }
+            else {
+                return kLayerUnder1;
+            }
+        }
+        else {
+            if (reverse) {
+                return kLayerUnder1;
+            }
+            else {
+                return kLayerUnder2;
             }
         }
     }
@@ -234,9 +265,11 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
     self.handNode.layer = toLayer;
     
-    // arm, rats, doors
-    NSArray *objects = [[self.armNodes arrayByAddingObjectsFromArray:self.rats] arrayByAddingObjectsFromArray:self.doors];
+    // arm, rats, doors, goals
+    NSArray *objects = [[[self.armNodes arrayByAddingObjectsFromArray:self.rats] arrayByAddingObjectsFromArray:self.doors] arrayByAddingObjectsFromArray:self.goals];
     for (CellNode *node in objects) {
+        
+        NSLog(@"node: %@", node);
                
         if (node.layer == toLayer) {
             CCFadeTo *brighten = [CCFadeTo actionWithDuration:kMoveToDuration opacity:255];
