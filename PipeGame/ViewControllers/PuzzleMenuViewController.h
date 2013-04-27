@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PuzzleViewController.h"
 
-@interface PuzzleMenuViewController : UICollectionViewController
+@interface PuzzleMenuViewController : UICollectionViewController <PuzzleViewControllerDelegate>
 
 @end

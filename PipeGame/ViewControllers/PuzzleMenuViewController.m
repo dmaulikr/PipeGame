@@ -7,7 +7,6 @@
 //
 
 #import "PuzzleMenuViewController.h"
-#import "PuzzleViewController.h"
 #import "PathUtils.h"
 
 @interface PuzzleMenuViewController ()
@@ -60,7 +59,19 @@
 {
     PuzzleViewController *puzzleViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Puzzle"];
     puzzleViewController.puzzle = indexPath.row;
-    [self presentModalViewController:puzzleViewController animated:YES];
+    puzzleViewController.delegate = self;
+    [self presentViewController:puzzleViewController animated:YES completion:^{
+        // completion
+    }];
+}
+
+#pragma mark - PuzzleViewControllerDelegate
+
+- (void)pressedBack
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        // completion
+    }];
 }
 
 @end

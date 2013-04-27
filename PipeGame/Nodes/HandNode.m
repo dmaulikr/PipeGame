@@ -46,11 +46,11 @@ NSString *const kPGNotificationHandNodeTouchBegan = @"HandNodeTouched";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleArmStackChanged:) name:kPGNotificationArmStackChanged object:nil];
 }
 
--(void) onExit
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super onExit];
-}
+//-(void) onExit
+//{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [super onExit];
+//}
 
 -(void) setDirectionFacing:(kDirection)direction
 {

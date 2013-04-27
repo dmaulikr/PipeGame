@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "PuzzleLayer.h"
 #import "TextureUtils.h"
-#import "PuzzleMenuLayer.h"
 
 @implementation AppController
 

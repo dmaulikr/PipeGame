@@ -321,9 +321,9 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 }
 -(void) onExit
 {
-    [super onExit];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super onExit];    
 }
 
 

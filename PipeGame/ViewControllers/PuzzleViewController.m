@@ -54,4 +54,8 @@
     }
 }
 
+- (IBAction)pressedBack:(id)sender
+{
+    [self.delegate pressedBack];
+}
 @end

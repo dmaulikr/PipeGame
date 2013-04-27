@@ -63,6 +63,7 @@
 
 - (void)onExit
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     if ([self needsTouchDelegate]) {
         [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     }
