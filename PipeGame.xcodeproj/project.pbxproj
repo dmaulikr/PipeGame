@@ -24,7 +24,6 @@
 		16918C2C172C57EB00566A17 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16918C2B172C57EB00566A17 /* map1.tmx */; };
 		1697C2EC171754B500D83456 /* DoorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1697C2EB171754B500D83456 /* DoorNode.m */; };
 		1697C2F0171774E700D83456 /* doorRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1697C2EE171774E700D83456 /* doorRed.png */; };
-		16981791171F9F5700EC2437 /* PuzzleMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16981790171F9F5700EC2437 /* PuzzleMenuLayer.m */; };
 		16981794171FA58B00EC2437 /* PathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16981793171FA58B00EC2437 /* PathUtils.m */; };
 		16BE3BA516FE2A2C003B2EEB /* CoverPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE3BA416FE2A2B003B2EEB /* CoverPoint.m */; };
 		16CAF27416AA1265001E3266 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CAF27316AA1265001E3266 /* QuartzCore.framework */; };
@@ -229,8 +228,6 @@
 		1697C2EA171754B500D83456 /* DoorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoorNode.h; sourceTree = "<group>"; };
 		1697C2EB171754B500D83456 /* DoorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorNode.m; sourceTree = "<group>"; };
 		1697C2EE171774E700D83456 /* doorRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doorRed.png; sourceTree = "<group>"; };
-		1698178F171F9F5700EC2437 /* PuzzleMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleMenuLayer.h; sourceTree = "<group>"; };
-		16981790171F9F5700EC2437 /* PuzzleMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PuzzleMenuLayer.m; sourceTree = "<group>"; };
 		16981792171FA58B00EC2437 /* PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtils.h; sourceTree = "<group>"; };
 		16981793171FA58B00EC2437 /* PathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtils.m; sourceTree = "<group>"; };
 		16BE3BA316FE2A2B003B2EEB /* CoverPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverPoint.h; sourceTree = "<group>"; };
@@ -655,8 +652,6 @@
 				16D299BC16CF0D0F00C73947 /* PuzzleLayer.m */,
 				163296C216F7F9510042005F /* BackgroundLayer.h */,
 				163296C316F7F9510042005F /* BackgroundLayer.m */,
-				1698178F171F9F5700EC2437 /* PuzzleMenuLayer.h */,
-				16981790171F9F5700EC2437 /* PuzzleMenuLayer.m */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -1372,7 +1367,6 @@
 				16BE3BA516FE2A2C003B2EEB /* CoverPoint.m in Sources */,
 				1697C2EC171754B500D83456 /* DoorNode.m in Sources */,
 				166A1304171B65AA00F2860C /* Goal.m in Sources */,
-				16981791171F9F5700EC2437 /* PuzzleMenuLayer.m in Sources */,
 				16981794171FA58B00EC2437 /* PathUtils.m in Sources */,
 				16918C17172C273300566A17 /* CCViewController.m in Sources */,
 				16918C20172C36E900566A17 /* PuzzleViewController.m in Sources */,
