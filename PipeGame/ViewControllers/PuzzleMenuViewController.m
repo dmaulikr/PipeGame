@@ -8,6 +8,7 @@
 
 #import "PuzzleMenuViewController.h"
 #import "PathUtils.h"
+#import "PuzzleMenuCell.h"
 
 @interface PuzzleMenuViewController ()
 
@@ -24,13 +25,11 @@
     return self;
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+//    [self.collectionView registerClass:[PuzzleMenuCell class] forCellWithReuseIdentifier:@"PuzzleMenuCell"];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -47,9 +46,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    PuzzleMenuCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"PuzzleMenuCell" forIndexPath:indexPath];
+    [cell configureWithIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor redColor];
     return cell;
 }
 
