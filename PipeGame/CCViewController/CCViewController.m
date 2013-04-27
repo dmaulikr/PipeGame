@@ -137,6 +137,9 @@
                                  multiSampling:NO
                                numberOfSamples:0];
     
+    // Added this to PipeGame so we can pan with 2 touches
+    [glView setMultipleTouchEnabled:YES];
+    
     return glView;
 }
 
