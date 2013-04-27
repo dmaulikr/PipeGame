@@ -23,6 +23,7 @@
 #import "CoverPoint.h"
 #import "DoorNode.h"
 #import "Goal.h"
+#import "PathUtils.h"
 
 static NSString *const kImageArmUnit = @"armUnit.png";
 static GLubyte const kBackgroundTileLayerOpacity = 170;
@@ -49,11 +50,6 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     [scene addChild:puzzleLayer];
     
     return scene;
-}
-
-- (CGPoint)convertTouchToPuzzleSpace:(CGPoint)touchPosition
-{
-    return ccp(touchPosition.x - self.position.x, touchPosition.y - self.position.y);
 }
 
 //- (id)initWithPuzzle:(int)puzzle

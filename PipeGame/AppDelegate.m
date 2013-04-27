@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "PuzzleLayer.h"
 #import "TextureUtils.h"
+#import "PuzzleMenuLayer.h"
 
 @implementation AppController
 
@@ -73,12 +74,12 @@
 	// Assume that PVR images have premultiplied alpha
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
     
-
     // load textures
     [TextureUtils loadTextures];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [PuzzleLayer sceneWithPuzzle:2]];
+//    [director_ pushScene:[PuzzleMenuLayer scene]];
     
     
 	// Create a Navigation Controller with the Director
