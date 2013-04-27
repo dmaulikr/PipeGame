@@ -8,6 +8,7 @@
 
 #import "PuzzleMenuViewController.h"
 #import "PuzzleViewController.h"
+#import "PathUtils.h"
 
 @interface PuzzleMenuViewController ()
 
@@ -24,21 +25,42 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return 1;
 }
 
-- (IBAction)buttonPressed:(id)sender
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
+{
+    return [PathUtils tileMapNames].count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    cell.backgroundColor = [UIColor redColor];
+    return cell;
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PuzzleViewController *puzzleViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Puzzle"];
+    puzzleViewController.puzzle = indexPath.row;
     [self presentModalViewController:puzzleViewController animated:YES];
 }
+
 @end

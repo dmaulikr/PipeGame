@@ -28,19 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    CCDirector *director = [CCDirector sharedDirector];
     
     // load our textures
-    [TextureUtils loadTextures];
-    
-    // Run whatever scene we'd like to run here.
-    if(director.runningScene) {
-        [director replaceScene:[PuzzleLayer sceneWithPuzzle:2]];
-    }
-    else {
-        [director runWithScene:[PuzzleLayer sceneWithPuzzle:2]];
-    }
+    [TextureUtils loadTextures];    
 }
 
 - (void)viewDidUnload
@@ -48,6 +38,20 @@
     [super viewDidUnload];
     
     [[CCDirector sharedDirector] setDelegate:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // run cocos2d scene
+    CCDirector *director = [CCDirector sharedDirector];
+    if(director.runningScene) {
+        [director replaceScene:[PuzzleLayer sceneWithPuzzle:self.puzzle]];
+    }
+    else {
+        [director runWithScene:[PuzzleLayer sceneWithPuzzle:self.puzzle]];
+    }
 }
 
 @end

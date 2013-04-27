@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PuzzleMenuViewController : UIViewController
-
-- (IBAction)buttonPressed:(id)sender;
+@interface PuzzleMenuViewController : UICollectionViewController
 
 @end

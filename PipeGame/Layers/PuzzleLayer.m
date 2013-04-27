@@ -35,7 +35,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 
 @implementation PuzzleLayer
 
-+ (CCScene *)sceneWithPuzzle:(int)puzzle
++ (CCScene *)sceneWithPuzzle:(NSInteger)puzzle
 {
     CCScene *scene = [CCScene node];
     
@@ -53,7 +53,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
 }
 
 //- (id)initWithPuzzle:(int)puzzle
-- (id)initWithPuzzle:(int)puzzle
+- (id)initWithPuzzle:(NSInteger)puzzle
 {
 //    self = [super init];
     self = [super init];
@@ -139,7 +139,7 @@ NSString *const kPGNotificationArmStackChanged = @"ArmStackChanged";
     return self;
 }
 
-+ (NSString *)tiledMapNameForPuzzle:(int)puzzle
++ (NSString *)tiledMapNameForPuzzle:(NSInteger)puzzle
 {
     return [NSString stringWithFormat:@"map%i.tmx", puzzle];
 }

@@ -10,4 +10,6 @@
 
 @interface PuzzleViewController : CCViewController <CCStandardTouchDelegate>
 
+@property (assign) NSInteger puzzle;
+
 @end

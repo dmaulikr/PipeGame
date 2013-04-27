@@ -19,7 +19,9 @@
 		16918C17172C273300566A17 /* CCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16918C16172C273300566A17 /* CCViewController.m */; };
 		16918C19172C2A0700566A17 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16918C18172C2A0700566A17 /* Storyboard.storyboard */; };
 		16918C20172C36E900566A17 /* PuzzleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16918C1F172C36E900566A17 /* PuzzleViewController.m */; };
-		16918C23172C378100566A17 /* PuzzleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16918C22172C378100566A17 /* PuzzleMenuViewController.m */; };
+		16918C26172C460500566A17 /* PuzzleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16918C25172C460500566A17 /* PuzzleMenuViewController.m */; };
+		16918C2A172C52E600566A17 /* map0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16918C29172C52E600566A17 /* map0.tmx */; };
+		16918C2C172C57EB00566A17 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16918C2B172C57EB00566A17 /* map1.tmx */; };
 		1697C2EC171754B500D83456 /* DoorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1697C2EB171754B500D83456 /* DoorNode.m */; };
 		1697C2F0171774E700D83456 /* doorRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1697C2EE171774E700D83456 /* doorRed.png */; };
 		16981791171F9F5700EC2437 /* PuzzleMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16981790171F9F5700EC2437 /* PuzzleMenuLayer.m */; };
@@ -193,7 +195,6 @@
 		16D63A1B171CDD4C0048F2AF /* switchOnRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A15171CDD4C0048F2AF /* switchOnRed.png */; };
 		16D63A1C171CDD4C0048F2AF /* switchOnYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A16171CDD4C0048F2AF /* switchOnYellow.png */; };
 		16D63A21171E4B330048F2AF /* exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A20171E4B330048F2AF /* exit.png */; };
-		16D63A23171E51050048F2AF /* map2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16D63A22171E51050048F2AF /* map2.tmx */; };
 		16E0CB861711B8D200DA3ADA /* ratPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E0CB841711B8D200DA3ADA /* ratPurple.png */; };
 		16E0CB871711B8D200DA3ADA /* ratRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E0CB851711B8D200DA3ADA /* ratRed.png */; };
 		16E813FC16E2673300088EC6 /* PGTiledUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E813FB16E2673300088EC6 /* PGTiledUtils.m */; };
@@ -221,8 +222,10 @@
 		16918C18172C2A0700566A17 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		16918C1E172C36E900566A17 /* PuzzleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PuzzleViewController.h; path = ViewControllers/PuzzleViewController.h; sourceTree = "<group>"; };
 		16918C1F172C36E900566A17 /* PuzzleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PuzzleViewController.m; path = ViewControllers/PuzzleViewController.m; sourceTree = "<group>"; };
-		16918C21172C378100566A17 /* PuzzleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PuzzleMenuViewController.h; path = ViewControllers/PuzzleMenuViewController.h; sourceTree = "<group>"; };
-		16918C22172C378100566A17 /* PuzzleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PuzzleMenuViewController.m; path = ViewControllers/PuzzleMenuViewController.m; sourceTree = "<group>"; };
+		16918C24172C460500566A17 /* PuzzleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PuzzleMenuViewController.h; path = ViewControllers/PuzzleMenuViewController.h; sourceTree = "<group>"; };
+		16918C25172C460500566A17 /* PuzzleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PuzzleMenuViewController.m; path = ViewControllers/PuzzleMenuViewController.m; sourceTree = "<group>"; };
+		16918C29172C52E600566A17 /* map0.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map0.tmx; sourceTree = "<group>"; };
+		16918C2B172C57EB00566A17 /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
 		1697C2EA171754B500D83456 /* DoorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoorNode.h; sourceTree = "<group>"; };
 		1697C2EB171754B500D83456 /* DoorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorNode.m; sourceTree = "<group>"; };
 		1697C2EE171774E700D83456 /* doorRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doorRed.png; sourceTree = "<group>"; };
@@ -541,7 +544,6 @@
 		16D63A15171CDD4C0048F2AF /* switchOnRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOnRed.png; sourceTree = "<group>"; };
 		16D63A16171CDD4C0048F2AF /* switchOnYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOnYellow.png; sourceTree = "<group>"; };
 		16D63A20171E4B330048F2AF /* exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exit.png; sourceTree = "<group>"; };
-		16D63A22171E51050048F2AF /* map2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map2.tmx; sourceTree = "<group>"; };
 		16E0CB841711B8D200DA3ADA /* ratPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ratPurple.png; sourceTree = "<group>"; };
 		16E0CB851711B8D200DA3ADA /* ratRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ratRed.png; sourceTree = "<group>"; };
 		16E813FA16E2673300088EC6 /* PGTiledUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGTiledUtils.h; sourceTree = "<group>"; };
@@ -588,8 +590,8 @@
 			children = (
 				16918C1E172C36E900566A17 /* PuzzleViewController.h */,
 				16918C1F172C36E900566A17 /* PuzzleViewController.m */,
-				16918C21172C378100566A17 /* PuzzleMenuViewController.h */,
-				16918C22172C378100566A17 /* PuzzleMenuViewController.m */,
+				16918C24172C460500566A17 /* PuzzleMenuViewController.h */,
+				16918C25172C460500566A17 /* PuzzleMenuViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1122,7 +1124,8 @@
 		16FE9BB516D1463A0014918D /* tilesets */ = {
 			isa = PBXGroup;
 			children = (
-				16D63A22171E51050048F2AF /* map2.tmx */,
+				16918C2B172C57EB00566A17 /* map1.tmx */,
+				16918C29172C52E600566A17 /* map0.tmx */,
 				161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */,
 				161D60AB16D92F6D0030D6A6 /* pipeTilesetBase2.png */,
 			);
@@ -1233,8 +1236,9 @@
 				16D63A1B171CDD4C0048F2AF /* switchOnRed.png in Resources */,
 				16D63A1C171CDD4C0048F2AF /* switchOnYellow.png in Resources */,
 				16D63A21171E4B330048F2AF /* exit.png in Resources */,
-				16D63A23171E51050048F2AF /* map2.tmx in Resources */,
 				16918C19172C2A0700566A17 /* Storyboard.storyboard in Resources */,
+				16918C2A172C52E600566A17 /* map0.tmx in Resources */,
+				16918C2C172C57EB00566A17 /* map1.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1372,7 +1376,7 @@
 				16981794171FA58B00EC2437 /* PathUtils.m in Sources */,
 				16918C17172C273300566A17 /* CCViewController.m in Sources */,
 				16918C20172C36E900566A17 /* PuzzleViewController.m in Sources */,
-				16918C23172C378100566A17 /* PuzzleMenuViewController.m in Sources */,
+				16918C26172C460500566A17 /* PuzzleMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
