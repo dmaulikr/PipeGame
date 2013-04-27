@@ -58,10 +58,10 @@ NSString *const kTLDLayerPipes2 = @"pipes2";
 
 +(kDirection) directionNamed:(NSString *)direction
 {
-    if ([direction isEqualToString:@"up"]) {
+    if ([direction isEqualToString:@"up"] || [direction isEqualToString:@"top"]) {
         return kDirectionUp;
     }
-    else if ([direction isEqualToString:@"down"]) {
+    else if ([direction isEqualToString:@"down"] || [direction isEqualToString:@"bottom"]) {
         return kDirectionDown;
     }
     else if ([direction isEqualToString:@"left"]) {

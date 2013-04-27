@@ -23,6 +23,7 @@
 		16918C2A172C52E600566A17 /* map0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16918C29172C52E600566A17 /* map0.tmx */; };
 		16918C2C172C57EB00566A17 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16918C2B172C57EB00566A17 /* map1.tmx */; };
 		16918C2F172C615100566A17 /* PuzzleMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16918C2E172C615000566A17 /* PuzzleMenuCell.m */; };
+		16918C32172C986000566A17 /* map2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 16918C31172C986000566A17 /* map2.tmx */; };
 		1697C2EC171754B500D83456 /* DoorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1697C2EB171754B500D83456 /* DoorNode.m */; };
 		1697C2F0171774E700D83456 /* doorRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1697C2EE171774E700D83456 /* doorRed.png */; };
 		16981794171FA58B00EC2437 /* PathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 16981793171FA58B00EC2437 /* PathUtils.m */; };
@@ -228,6 +229,7 @@
 		16918C2B172C57EB00566A17 /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
 		16918C2D172C614F00566A17 /* PuzzleMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PuzzleMenuCell.h; path = Views/PuzzleMenuCell.h; sourceTree = "<group>"; };
 		16918C2E172C615000566A17 /* PuzzleMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PuzzleMenuCell.m; path = Views/PuzzleMenuCell.m; sourceTree = "<group>"; };
+		16918C31172C986000566A17 /* map2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map2.tmx; sourceTree = "<group>"; };
 		1697C2EA171754B500D83456 /* DoorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoorNode.h; sourceTree = "<group>"; };
 		1697C2EB171754B500D83456 /* DoorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorNode.m; sourceTree = "<group>"; };
 		1697C2EE171774E700D83456 /* doorRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doorRed.png; sourceTree = "<group>"; };
@@ -1132,6 +1134,7 @@
 		16FE9BB516D1463A0014918D /* tilesets */ = {
 			isa = PBXGroup;
 			children = (
+				16918C31172C986000566A17 /* map2.tmx */,
 				16918C2B172C57EB00566A17 /* map1.tmx */,
 				16918C29172C52E600566A17 /* map0.tmx */,
 				161D60AA16D92F6D0030D6A6 /* pipeTilesetBase1.png */,
@@ -1247,6 +1250,7 @@
 				16918C19172C2A0700566A17 /* Storyboard.storyboard in Resources */,
 				16918C2A172C52E600566A17 /* map0.tmx in Resources */,
 				16918C2C172C57EB00566A17 /* map1.tmx in Resources */,
+				16918C32172C986000566A17 /* map2.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

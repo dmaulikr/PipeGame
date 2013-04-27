@@ -48,7 +48,7 @@
 {
     PuzzleMenuCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"PuzzleMenuCell" forIndexPath:indexPath];
     [cell configureWithIndexPath:indexPath];
-    
+
     return cell;
 }
 

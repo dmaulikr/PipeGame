@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="5" height="5" tilewidth="200" tileheight="200">
+ <tileset firstgid="1" name="pipeTilesetBase1" tilewidth="200" tileheight="200" spacing="1" margin="1">
+  <image source="pipeTilesetBase1.png" width="1609" height="805"/>
+  <tile id="0">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="33" name="pipeTilesetBase2" tilewidth="200" tileheight="200" spacing="1" margin="1">
+  <image source="pipeTilesetBase2.png" width="1609" height="805"/>
+  <tile id="0">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="0"/>
+    <property name="right" value="1"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="0"/>
+   </properties>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="down" value="1"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="down" value="0"/>
+    <property name="left" value="1"/>
+    <property name="right" value="0"/>
+    <property name="up" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="pipes1" width="5" height="5">
+  <properties>
+   <property name="z" value="1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgkABiSQZUIAbEjEAsCMQcUDFOqLg4EMtD5dihbB4gloaK8UOxLBDzAjEAPzgBbg==
+  </data>
+ </layer>
+ <layer name="pipes2" width="5" height="5" opacity="0.44">
+  <properties>
+   <property name="z" value="2"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxTZ2BgUAdiSwYEMAdifaiYIlTMDMq2AGJ7qJgmVBykXhuq3hCIHYDYAMlMAMCEA+o=
+  </data>
+ </layer>
+ <objectgroup name="meta" width="5" height="5">
+  <object name="entry" x="43" y="66" width="104" height="100">
+   <properties>
+    <property name="facing" value="right"/>
+    <property name="layer" value="2"/>
+   </properties>
+  </object>
+  <object name="connection" x="440" y="49" width="117" height="108">
+   <ellipse/>
+  </object>
+  <object name="connection" x="243" y="445" width="117" height="108">
+   <ellipse/>
+  </object>
+  <object name="rat" x="817" y="478" width="161" height="59">
+   <properties>
+    <property name="color" value="yellow"/>
+    <property name="layer" value="1"/>
+   </properties>
+  </object>
+  <object name="door" x="868" y="720" width="69" height="66">
+   <properties>
+    <property name="color" value="yellow"/>
+    <property name="edge" value="bottom"/>
+    <property name="layer" value="1"/>
+   </properties>
+  </object>
+  <object name="goal" x="862" y="859" width="74" height="71">
+   <properties>
+    <property name="layer" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="connection" x="39" y="838" width="117" height="108">
+   <ellipse/>
+  </object>
+  <object name="connection" x="450" y="253" width="117" height="108">
+   <ellipse/>
+  </object>
+  <object name="connection" x="38" y="627" width="117" height="108">
+   <ellipse/>
+  </object>
+  <object name="connection" x="630" y="646" width="117" height="108">
+   <ellipse/>
+  </object>
+  <object name="connection" x="622" y="238" width="117" height="108">
+   <ellipse/>
+  </object>
+  <object name="connection" x="833" y="648" width="117" height="108">
+   <ellipse/>
+  </object>
+  <object name="connection" x="645" y="851" width="117" height="108">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>
